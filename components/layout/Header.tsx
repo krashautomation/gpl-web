@@ -29,11 +29,12 @@ const Header = () => {
             </h1>
           </div>
           <nav className="hidden md:flex items-center gap-6">
-            <button className="text-sm hover:text-yellow-500 transition">CHARTS</button>
             <button className="text-sm hover:text-yellow-500 transition">PRICE OF GOLD</button>
             <button className="text-sm hover:text-yellow-500 transition">GOLD STOCKS</button>
             <Link href="/silver-price" className="text-sm hover:text-yellow-500 transition">SILVER PRICE</Link>
-            <button className="text-sm hover:text-yellow-500 transition">CRYPTO</button>
+             <Link href="/precious-metals" className="text-sm hover:text-yellow-500 transition">PRECIOUS METALS</Link>
+       
+            <button className="text-sm hover:text-yellow-500 transition">BITCOIN PRICE</button>
             <button className="text-sm hover:text-yellow-500 transition">NEWS</button>
           </nav>
         </div>
