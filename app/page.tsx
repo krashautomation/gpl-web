@@ -224,7 +224,7 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className="bg-neutral-900 border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold Price</CardTitle>
+            <CardTitle className="text-yellow-500">Gold Price Live USD</CardTitle>
               <div className="flex items-center gap-2 text-sm text-white">
               <span>1 Year Chart</span>
                      </div>
@@ -342,7 +342,7 @@ export default function Home() {
             <CardTitle className="text-yellow-500">Gold Price Calculator</CardTitle>
              
             <div className="flex items-center gap-2 text-sm text-white">
-              <span>Calculate World Gold Prices in: USD, GBP, CAD, EUR, AUD</span>
+              <span>Calculate World Gold Prices in: USD, GBP, CAD, EUR, AUD in grams or ounces.</span>
             </div>
           </CardHeader>
           <CardContent className="">

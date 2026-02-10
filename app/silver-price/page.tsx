@@ -137,32 +137,36 @@ export default function SilverPrice() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className="bg-neutral-900 border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Si Price</CardTitle>
-              <div className="flex items-center gap-2 text-sm text-white">
-              <span>1 Year Chart</span>
-                     </div>
-            <div className="flex items-center gap-2 text-sm text-white">
-              <span>Current Price: </span><span>USD 5039.72</span>
-              <span className="text-red-500">▼ 15.64 -0.31%</span>
-            </div>
+             <CardTitle className="text-yellow-500">Silver Price</CardTitle>
+               <div className="flex items-center gap-2 text-sm text-white">
+               <span>1 Year Chart</span>
+                      </div>
+             {silverQuote && (
+               <div className="flex items-center gap-2 text-sm text-white">
+                 <span>Current Price: </span><span>USD {silverQuote.price.toFixed(2)}</span>
+                 <span className={silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                   {silverQuote.change < 0 ? '▼' : '▲'} {Math.abs(silverQuote.change).toFixed(2)} {silverQuote.changePercent}%
+                 </span>
+               </div>
+             )}
           </CardHeader>
           <CardContent>
-            {gold12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {gold12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{gold12MError}</div>}
-            {!gold12MLoading && !gold12MError && <LightweightChart data={gold12MData} />}
+            {silver12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
+            {silver12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{silver12MError}</div>}
+            {!silver12MLoading && !silver12MError && <LightweightChart data={silver12MData} />}
           </CardContent>
         </Card>
         
         
         <Card className="bg-neutral-900 border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold Price Performance USD</CardTitle>
+            <CardTitle className="text-yellow-500">Silver Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
-              {goldPerfLoading && <div className="text-center py-8">Loading performance data...</div>}
-              {goldPerfError && <div className="text-center py-8 text-red-500">{goldPerfError}</div>}
-              {!goldPerfLoading && !goldPerfError && goldPerformance && (
+              {silverPerfLoading && <div className="text-center py-8">Loading performance data...</div>}
+              {silverPerfError && <div className="text-center py-8 text-red-500">{silverPerfError}</div>}
+              {!silverPerfLoading && !silverPerfError && silverPerformance && (
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-neutral-700">
@@ -172,69 +176,69 @@ export default function SilverPrice() {
                     </tr>
                   </thead>
                   <tbody className="text-sm">
-                    {goldQuote && (
+                    {silverQuote && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">Today</td>
-                        <td className={`text-right ${goldQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldQuote.change >= 0 ? '+' : ''}{goldQuote.change.toFixed(2)}
+                        <td className={`text-right ${silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverQuote.change >= 0 ? '+' : ''}{silverQuote.change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${Number(goldQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {Number(goldQuote.changePercent) >= 0 ? '+' : ''}{goldQuote.changePercent}%
+                        <td className={`text-right ${Number(silverQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {Number(silverQuote.changePercent) >= 0 ? '+' : ''}{silverQuote.changePercent}%
                         </td>
                       </tr>
                     )}
-                    {goldPerformance.performance && goldPerformance.performance['30D'] && (
+                    {silverPerformance.performance && silverPerformance.performance['30D'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">30 Days</td>
-                        <td className={`text-right ${goldPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['30D'].change >= 0 ? '+' : ''}{goldPerformance.performance['30D'].change.toFixed(2)}
+                        <td className={`text-right ${silverPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['30D'].change >= 0 ? '+' : ''}{silverPerformance.performance['30D'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${goldPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}{goldPerformance.performance['30D'].changePercent}%
+                        <td className={`text-right ${silverPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['30D'].changePercent}%
                         </td>
                       </tr>
                     )}
-                    {goldPerformance.performance && goldPerformance.performance['6M'] && (
+                    {silverPerformance.performance && silverPerformance.performance['6M'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">6 Months</td>
-                        <td className={`text-right ${goldPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['6M'].change >= 0 ? '+' : ''}{goldPerformance.performance['6M'].change.toFixed(2)}
+                        <td className={`text-right ${silverPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['6M'].change >= 0 ? '+' : ''}{silverPerformance.performance['6M'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${goldPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}{goldPerformance.performance['6M'].changePercent}%
+                        <td className={`text-right ${silverPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['6M'].changePercent}%
                         </td>
                       </tr>
                     )}
-                    {goldPerformance.performance && goldPerformance.performance['1Y'] && (
+                    {silverPerformance.performance && silverPerformance.performance['1Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">1 Year</td>
-                        <td className={`text-right ${goldPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['1Y'].change >= 0 ? '+' : ''}{goldPerformance.performance['1Y'].change.toFixed(2)}
+                        <td className={`text-right ${silverPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['1Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['1Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${goldPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}{goldPerformance.performance['1Y'].changePercent}%
+                        <td className={`text-right ${silverPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['1Y'].changePercent}%
                         </td>
                       </tr>
                     )}
-                    {goldPerformance.performance && goldPerformance.performance['5Y'] && (
+                    {silverPerformance.performance && silverPerformance.performance['5Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">5 Year</td>
-                        <td className={`text-right ${goldPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['5Y'].change >= 0 ? '+' : ''}{goldPerformance.performance['5Y'].change.toFixed(2)}
+                        <td className={`text-right ${silverPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['5Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['5Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${goldPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}{goldPerformance.performance['5Y'].changePercent}%
+                        <td className={`text-right ${silverPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['5Y'].changePercent}%
                         </td>
                       </tr>
                     )}
-                    {goldPerformance.performance && goldPerformance.performance['20Y'] && (
+                    {silverPerformance.performance && silverPerformance.performance['20Y'] && (
                       <tr>
                         <td className="py-3">20 Years</td>
-                        <td className={`text-right ${goldPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['20Y'].change >= 0 ? '+' : ''}{goldPerformance.performance['20Y'].change.toFixed(2)}
+                        <td className={`text-right ${silverPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['20Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['20Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${goldPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {goldPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}{goldPerformance.performance['20Y'].changePercent}%
+                        <td className={`text-right ${silverPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                          {silverPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['20Y'].changePercent}%
                         </td>
                       </tr>
                     )}
