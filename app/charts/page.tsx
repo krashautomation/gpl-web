@@ -15,13 +15,7 @@ export const metadata: Metadata = {
 }
 
 const chartTypes = [
-  {
-    title: 'Spot Gold Price',
-    description: 'Real-time gold spot price with live updates',
-    icon: TrendingUp,
-    href: '/#gold-chart',
-    timeframes: ['1D', '1W', '1M', '1Y', '5Y']
-  },
+
   {
     title: 'Historical Gold Prices',
     description: 'Long-term gold price trends and analysis',
@@ -35,13 +29,6 @@ const chartTypes = [
     icon: BarChart3,
     href: '/#metals',
     timeframes: ['1Y', '5Y', '20Y']
-  },
-  {
-    title: 'Live Price Ticker',
-    description: 'Real-time price updates throughout the day',
-    icon: Clock,
-    href: '/',
-    timeframes: ['Real-time']
   },
 ]
 
@@ -104,7 +91,7 @@ export default function ChartsPage() {
             volatility or long-term trends. The charts update automatically to reflect the latest market prices.
           </p>
           <Link 
-            href="/blog/understanding-gold-price-charts"
+            href="/news/understanding-gold-price-charts"
             className="text-yellow-500 hover:underline"
           >
             Learn how to read gold price charts →

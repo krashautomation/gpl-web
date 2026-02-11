@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import BullionVaultChart from '@/components/BullionVaultChart';
 import {
   Select,
   SelectContent,

@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { allArticles } from 'contentlayer/generated'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://goldpricelive.com'

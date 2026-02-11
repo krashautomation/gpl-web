@@ -7,10 +7,10 @@ const Footer = () => {
           <div>
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">WORLD GOLD PRICES</h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#" className="hover:text-yellow-500">🇪🇺 Gold Price Europe</a></li>
-              <li><a href="#" className="hover:text-yellow-500">🇦🇺 Gold Price Australia</a></li>
-<li><a href="#" className="hover:text-yellow-500">🇨🇦 Gold Price Canada</a></li>
-              <li><a href="#" className="hover:text-yellow-500">🇬🇧 Gold Price UK</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇪🇺 Gold Price EUR</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇦🇺 Gold Price AUD</a></li>
+<li><a href="/#foreign-currency" className="hover:text-yellow-500">🇨🇦 Gold Price CAD</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇬🇧 Gold Price GBP</a></li>
             </ul>
           </div>
 
@@ -18,13 +18,15 @@ const Footer = () => {
           <div>
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE NEWS</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">News</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Authors</a></li>
+              <li><a href="/news" className="hover:text-yellow-500">Gold Price News</a></li>
+              <li><a href="/about" className="hover:text-yellow-500">About Us</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE CHARTS</h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#" className="hover:text-yellow-500">Spot Gold</a></li>
+              <li><a href="/charts" className="hover:text-yellow-500">Gold Price Charts</a></li>
+               <li><a href="/historical-gold-price" className="hover:text-yellow-500">Historical Gold Prices</a></li>
+                <li><a href="/gold-silver-ratio" className="hover:text-yellow-500">Gold vs Silver Ratio</a></li>
             </ul>
           </div>
 
@@ -33,14 +35,14 @@ const Footer = () => {
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">PRECIOUS METALS</h4>
             <ul className="space-y-2 text-xs mb-6">
                   <li><a href="/silver-price" className="hover:text-yellow-500">Silver Price</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Platinum Price</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Palladium Price</a></li>
+              <li><a href="/platinum-price" className="hover:text-yellow-500">Platinum Price</a></li>
+              <li><a href="/palladium-price" className="hover:text-yellow-500">Palladium Price</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">BASE METALS</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">Copper Price</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Aluminum Price</a></li>
+              <li><a href="/copper-price" className="hover:text-yellow-500">Copper Price</a></li>
+              <li><a href="/aluminum-price" className="hover:text-yellow-500">Aluminum Price</a></li>
             </ul>
 
           </div>
@@ -49,14 +51,14 @@ const Footer = () => {
           <div>
          <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD STOCKS</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">Gold ETFs</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Silver ETFs</a></li>
+              <li><a href="/gold-etfs" className="hover:text-yellow-500">Gold ETFs</a></li>
+              <li><a href="/silver-etfs" className="hover:text-yellow-500">Silver ETFs</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">CRYPTOCURRENCY</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">Bitcoin Price</a></li>
-              <li><a href="#" className="hover:text-yellow-500">Ethereum Price</a></li>
+              <li><a href="/bitcoin-price" className="hover:text-yellow-500">Bitcoin Price</a></li>
+              <li><a href="/ethereum-price" className="hover:text-yellow-500">Ethereum Price</a></li>
             </ul>
 
      
@@ -66,23 +68,29 @@ const Footer = () => {
           <div>
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">CONTACT</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">Gold Price Live</a></li>
+              <li><a href="/contact" className="hover:text-yellow-500">Contact Us</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">MOBILE APPS</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="#" className="hover:text-yellow-500">📱 Gold Price Live App</a></li>
+              <li><a href="/mobile-app" className="hover:text-yellow-500">📱 Gold Price Live App</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">ADVERTISING</h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#" className="hover:text-yellow-500">Gold Price Live Advertising</a></li>
+              <li><a href="/advertise" className="hover:text-yellow-500">Gold Price Live Advertising</a></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-neutral-800 text-center text-xs text-neutral-500">
           <p>© 2026 Gold Price Live. Gold, Silver and Precious Metals Prices.</p>
+            <p>
+              
+<a href="/terms-of-service" className="hover:text-yellow-500">Terms of Service</a> &nbsp; 
+<a href="/privacy" className="hover:text-yellow-500">Privacy</a>
+
+            </p>
         </div>
       </div>
     </footer>

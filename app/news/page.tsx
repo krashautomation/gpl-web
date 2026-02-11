@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import { allArticles } from 'contentlayer/generated'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
+import Image from 'next/image'
+
+import { getArticles, type Article } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: 'Gold Price News | Market Analysis & Investment Guides',
@@ -18,8 +20,8 @@ export const metadata: Metadata = {
 }
 
 // Get unique categories from articles
-function getCategories() {
-  const categories = new Set(allArticles.map((article) => article.category))
+function getCategories(articles: Article[]) {
+  const categories = new Set(articles.map((article) => article.category))
   return ['All', ...Array.from(categories).sort()]
 }
 
@@ -31,6 +33,8 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const params = await searchParams
   const categoryParam = params.category as string | undefined
   
+  const allArticles = await getArticles()
+  
   // Convert URL param (e.g., "market-analysis") back to category name (e.g., "Market Analysis")
   const activeCategory = categoryParam 
     ? categoryParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
@@ -38,14 +42,14 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   
   // Filter articles by category if one is selected
   let articles = allArticles.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
   
   if (activeCategory !== 'All') {
     articles = articles.filter(article => article.category === activeCategory)
   }
   
-  const categories = getCategories()
+  const categories = getCategories(allArticles)
 
   return (
     <MainLayout>

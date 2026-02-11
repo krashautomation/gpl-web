@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { allArticles } from 'contentlayer/generated'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
 import { marked } from 'marked'
+import { getArticles, type Article } from '@/lib/articles'
+
 
 interface ArticlePageProps {
   params: Promise<{
@@ -15,14 +17,14 @@ interface ArticlePageProps {
 }
 
 // Generate static paths for all articles at build time
-export function generateStaticParams() {
-  return allArticles.map((article) => ({ slug: article.slug }))
-}
+// export function generateStaticParams() {
+//  return allArticles.map((article) => ({ slug: article.slug }))
+// }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  // Next.js 15+ requires awaiting params
   const { slug } = await params
-  const article = allArticles.find((a) => a.slug === slug)
+  const allArticles = await getArticles()
+  const article = allArticles.find((a: Article) => a.slug === slug)
   
   if (!article) {
     return {
@@ -61,17 +63,16 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  // Next.js 15+ requires awaiting params
   const { slug } = await params
-  const article = allArticles.find((a) => a.slug === slug)
+  const allArticles = await getArticles()
+  const article = allArticles.find((a: Article) => a.slug === slug)
   
   if (!article) {
     notFound()
   }
 
-  // Get related articles from the same category
   const relatedArticles = allArticles
-    .filter((a) => a.slug !== slug && a.category === article.category)
+    .filter((a: Article) => a.slug !== slug && a.category === article.category)
     .slice(0, 3)
 
   return (
@@ -98,6 +99,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Article Header */}
         <article className="max-w-4xl mx-auto">
           <header className="mb-8">
+            {article.featuredImage && (
+              <div className="relative w-full h-64 md:h-96 mb-6 rounded-lg overflow-hidden">
+                <Image
+                  src={article.featuredImage}
+                  alt={article.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
             <Badge className="bg-yellow-500 text-black mb-4">
               {article.category}
             </Badge>
@@ -138,13 +149,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
               prose-td:border-neutral-700 prose-td:p-3 prose-td:text-neutral-300"
-            dangerouslySetInnerHTML={{ __html: marked.parse(article.body.raw) as string }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(article.body) as string }}
           />
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-12">
-              {article.tags.map((tag) => (
+              {article.tags.map((tag: string) => (
                 <Badge key={tag} variant="outline" className="border-neutral-700 text-neutral-400">
                   #{tag}
                 </Badge>
@@ -158,7 +169,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <div className="mt-16 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-yellow-500 mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedArticles.map((relatedArticle) => (
+              {relatedArticles.map((relatedArticle: Article) => (
                 <Link key={relatedArticle.slug} href={`/news/${relatedArticle.slug}`}>
                   <Card className="bg-neutral-900 border-neutral-800 hover:border-yellow-500 transition-colors h-full">
                     <CardContent className="p-6">

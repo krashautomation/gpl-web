@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import BullionVaultChart from '@/components/BullionVaultChart';
 import {
   Select,
   SelectContent,
@@ -336,12 +335,12 @@ export default function Home() {
       </div>
 
 
-   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" id="foreign-currency">
         <Card className="bg-neutral-900 border-neutral-800 p-0">
                <CardHeader>
             <CardTitle className="text-yellow-500">Gold Price Calculator</CardTitle>
              
-            <div className="flex items-center gap-2 text-sm text-white">
+            <div className="flex items-center gap-2 text-sm text-white" >
               <span>Calculate World Gold Prices in: USD, GBP, CAD, EUR, AUD in grams or ounces.</span>
             </div>
           </CardHeader>
