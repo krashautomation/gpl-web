@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
- 
+import { allArticles } from 'contentlayer/generated'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://goldpricelive.com'
   
@@ -30,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/news`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 0.8,
@@ -47,13 +48,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily' as const,
       priority: 0.7,
     },
-    {
-      url: `${baseUrl}/news`,
-      lastModified: new Date(),
-      changeFrequency: 'hourly' as const,
-      priority: 0.8,
-    },
   ]
 
-  return mainPages
+  // Individual article pages
+  const articlePages = allArticles.map((article) => ({
+    url: `${baseUrl}/news/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  return [...mainPages, ...articlePages]
 }

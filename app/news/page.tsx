@@ -1,64 +1,52 @@
 import type { Metadata } from 'next'
+import { allArticles } from 'contentlayer/generated'
+import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import Link from 'next/link'
+import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
-import { TrendingUp, TrendingDown, Clock, Newspaper } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Gold Price News | Latest Market Updates & Analysis',
-  description: 'Latest gold price news, market updates, and expert analysis. Stay informed about precious metals market movements and trends.',
-  keywords: ['gold price news', 'gold market updates', 'precious metals news', 'gold analysis'],
+  title: 'Gold Price News | Market Analysis & Investment Guides',
+  description: 'Read the latest gold price news, market analysis, investment guides, and expert insights. Stay informed about precious metals markets.',
+  keywords: ['gold price news', 'gold market analysis', 'gold investment', 'precious metals news'],
   openGraph: {
-    title: 'Gold Price News | Latest Market Updates',
-    description: 'Latest gold price news and market analysis.',
+    title: 'Gold Price News | Market Analysis & Investment Guides',
+    description: 'Latest gold price news, market analysis, and investment guides.',
+    type: 'website',
   },
 }
 
-const newsItems = [
-  {
-    title: 'Gold Prices Reach New Highs Amid Market Uncertainty',
-    excerpt: 'Gold continues its upward trajectory as investors seek safe-haven assets during times of economic uncertainty.',
-    date: '2025-02-10',
-    category: 'Market News',
-    trend: 'up',
-    link: '/blog/central-banks-buying-gold-2025'
-  },
-  {
-    title: 'Central Banks Increase Gold Reserves at Record Pace',
-    excerpt: 'Global central banks are purchasing gold at unprecedented levels, signaling strong institutional demand.',
-    date: '2025-02-08',
-    category: 'Market News',
-    trend: 'up',
-    link: '/blog/central-banks-buying-gold-2025'
-  },
-  {
-    title: 'Silver Outperforms Gold in Q1 2025',
-    excerpt: 'Silver prices surge as industrial demand increases, outperforming gold in percentage terms.',
-    date: '2025-02-05',
-    category: 'Market Analysis',
-    trend: 'up',
-    link: '/blog/silver-vs-gold-investment'
-  },
-  {
-    title: 'Federal Reserve Policy Impact on Gold Prices',
-    excerpt: 'Analysis of how recent Federal Reserve decisions are affecting precious metals markets.',
-    date: '2025-02-03',
-    category: 'Market Analysis',
-    trend: 'neutral',
-    link: '/blog'
-  },
-  {
-    title: 'Best Practices for Gold Investment in 2025',
-    excerpt: 'Expert recommendations for investing in gold during the current market conditions.',
-    date: '2025-02-01',
-    category: 'Investment Guide',
-    trend: 'neutral',
-    link: '/blog/how-to-invest-in-gold-beginners-guide'
-  },
-]
+// Get unique categories from articles
+function getCategories() {
+  const categories = new Set(allArticles.map((article) => article.category))
+  return ['All', ...Array.from(categories).sort()]
+}
 
-export default function NewsPage() {
+interface NewsPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function NewsPage({ searchParams }: NewsPageProps) {
+  const params = await searchParams
+  const categoryParam = params.category as string | undefined
+  
+  // Convert URL param (e.g., "market-analysis") back to category name (e.g., "Market Analysis")
+  const activeCategory = categoryParam 
+    ? categoryParam.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+    : 'All'
+  
+  // Filter articles by category if one is selected
+  let articles = allArticles.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+  
+  if (activeCategory !== 'All') {
+    articles = articles.filter(article => article.category === activeCategory)
+  }
+  
+  const categories = getCategories()
+
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-12">
@@ -67,68 +55,101 @@ export default function NewsPage() {
             Gold Price News
           </h1>
           <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
-            Latest updates, market analysis, and expert insights on gold and precious metals
+            Stay informed with the latest gold price news, market analysis, investment guides, and expert insights.
           </p>
         </div>
 
-        {/* Featured News */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-yellow-500 mb-6">Latest News</h2>
-          <div className="grid grid-cols-1 gap-6">
-            {newsItems.map((news, index) => (
-              <Link key={index} href={news.link}>
-                <Card className="bg-neutral-900 border-neutral-800 hover:border-yellow-500 transition-colors group">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <Badge className="bg-yellow-500 text-black">
-                            {news.category}
-                          </Badge>
-                          <span className="flex items-center gap-1 text-sm text-neutral-500">
-                            <Clock size={14} />
-                            {new Date(news.date).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              year: 'numeric'
-                            })}
-                          </span>
-                          {news.trend === 'up' && (
-                            <TrendingUp size={16} className="text-green-500" />
-                          )}
-                          {news.trend === 'down' && (
-                            <TrendingDown size={16} className="text-red-500" />
-                          )}
-                        </div>
-                        <h3 className="text-xl font-semibold text-white group-hover:text-yellow-500 transition-colors mb-2">
-                          {news.title}
-                        </h3>
-                        <p className="text-neutral-400">
-                          {news.excerpt}
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0">
-                        <div className="p-3 bg-neutral-800 rounded-lg group-hover:bg-neutral-700 transition-colors">
-                          <Newspaper className="h-6 w-6 text-yellow-500" />
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+        {/* Categories */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((category) => {
+            const isActive = category === activeCategory
+            const href = category === 'All' 
+              ? '/news' 
+              : `/news?category=${category.toLowerCase().replace(/ /g, '-')}`
+            
+            return (
+              <Link key={category} href={href}>
+                <Badge 
+                  variant={isActive ? "default" : "outline"}
+                  className={`cursor-pointer transition-colors ${
+                    isActive 
+                      ? "bg-yellow-500 text-black hover:bg-yellow-400" 
+                      : "border-neutral-700 text-white hover:bg-yellow-500 hover:text-black"
+                  }`}
+                >
+                  {category}
+                </Badge>
               </Link>
-            ))}
-          </div>
+            )
+          })}
         </div>
 
-        {/* View All Blog */}
-        <div className="text-center">
-          <Link 
-            href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-500 text-black font-semibold rounded-lg hover:bg-yellow-400 transition-colors"
-          >
-            View All Articles
-          </Link>
+        {/* Active Category Header */}
+        {activeCategory !== 'All' && (
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-yellow-500">
+              {activeCategory}
+            </h2>
+            <p className="text-neutral-400 mt-2">
+              Showing {articles.length} article{articles.length !== 1 ? 's' : ''} in this category
+            </p>
+          </div>
+        )}
+
+        {/* Articles Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <Link key={article.slug} href={`/news/${article.slug}`}>
+              <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+                <CardHeader>
+                  <Badge variant="secondary" className="bg-neutral-800 text-yellow-500 w-fit mb-2">
+                    {article.category}
+                  </Badge>
+                  <CardTitle className="text-yellow-500 group-hover:text-yellow-400 line-clamp-2">
+                    {article.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-neutral-400 text-sm line-clamp-3 mb-4">
+                    {article.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-neutral-500">
+                    <div className="flex items-center gap-4">
+                      <span className="flex items-center gap-1">
+                        <Calendar size={12} />
+                        {new Date(article.date).toLocaleDateString('en-US', { 
+                          month: 'short', 
+                          day: 'numeric', 
+                          year: 'numeric' 
+                        })}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock size={12} />
+                        {article.readingTime} min read
+                      </span>
+                    </div>
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
+
+        {articles.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-neutral-400">
+              {activeCategory !== 'All' 
+                ? `No articles found in "${activeCategory}" category.` 
+                : 'No articles found.'}
+            </p>
+            {activeCategory !== 'All' && (
+              <Link href="/news" className="text-yellow-500 hover:underline mt-4 inline-block">
+                View all articles
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </MainLayout>
   )

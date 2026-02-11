@@ -1,60 +1,78 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPostBySlug, getRelatedPosts } from '@/lib/blog/posts'
+import { allArticles } from 'contentlayer/generated'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
+import { marked } from 'marked'
 
-interface BlogPostPageProps {
-  params: {
+interface ArticlePageProps {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+// Generate static paths for all articles at build time
+export function generateStaticParams() {
+  return allArticles.map((article) => ({ slug: article.slug }))
+}
+
+export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+  // Next.js 15+ requires awaiting params
+  const { slug } = await params
+  const article = allArticles.find((a) => a.slug === slug)
   
-  if (!post) {
+  if (!article) {
     return {
-      title: 'Post Not Found',
+      title: 'Article Not Found',
     }
   }
 
+  const seoTitle = article.seo?.title || article.title
+  const seoDescription = article.seo?.description || article.excerpt
+  const seoKeywords = article.seo?.keywords || article.tags
+
   return {
-    title: post.seo.title,
-    description: post.seo.description,
-    keywords: post.seo.keywords,
-    authors: [{ name: post.author }],
+    title: seoTitle,
+    description: seoDescription,
+    keywords: seoKeywords,
+    authors: [{ name: article.author }],
     openGraph: {
-      title: post.seo.title,
-      description: post.seo.description,
+      title: seoTitle,
+      description: seoDescription,
       type: 'article',
-      publishedTime: post.date,
-      modifiedTime: post.modifiedDate || post.date,
-      authors: [post.author],
-      tags: post.tags,
+      publishedTime: article.date,
+      authors: [article.author],
+      tags: article.tags,
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.seo.title,
-      description: post.seo.description,
+      title: seoTitle,
+      description: seoDescription,
     },
     alternates: {
-      canonical: `https://goldpricelive.com/blog/${post.slug}`,
+      canonical: `https://goldpricelive.com/news/${article.slug}`,
     },
   }
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug)
+
+
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  // Next.js 15+ requires awaiting params
+  const { slug } = await params
+  const article = allArticles.find((a) => a.slug === slug)
   
-  if (!post) {
+  if (!article) {
     notFound()
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, post.category)
+  // Get related articles from the same category
+  const relatedArticles = allArticles
+    .filter((a) => a.slug !== slug && a.category === article.category)
+    .slice(0, 3)
 
   return (
     <MainLayout>
@@ -63,37 +81,37 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <nav className="text-sm text-neutral-400 mb-6">
           <Link href="/" className="hover:text-yellow-500">Home</Link>
           <span className="mx-2">/</span>
-          <Link href="/blog" className="hover:text-yellow-500">Blog</Link>
+          <Link href="/news" className="hover:text-yellow-500">News</Link>
           <span className="mx-2">/</span>
-          <span className="text-neutral-500">{post.title}</span>
+          <span className="text-neutral-500">{article.title}</span>
         </nav>
 
         {/* Back Link */}
         <Link 
-          href="/blog" 
+          href="/news" 
           className="inline-flex items-center gap-2 text-neutral-400 hover:text-yellow-500 mb-8 transition-colors"
         >
           <ArrowLeft size={16} />
-          Back to Blog
+          Back to News
         </Link>
 
         {/* Article Header */}
         <article className="max-w-4xl mx-auto">
           <header className="mb-8">
             <Badge className="bg-yellow-500 text-black mb-4">
-              {post.category}
+              {article.category}
             </Badge>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              {post.title}
+              {article.title}
             </h1>
             <div className="flex flex-wrap items-center gap-6 text-sm text-neutral-400">
               <span className="flex items-center gap-2">
                 <User size={16} />
-                {post.author}
+                {article.author}
               </span>
               <span className="flex items-center gap-2">
                 <Calendar size={16} />
-                {new Date(post.date).toLocaleDateString('en-US', {
+                {new Date(article.date).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
                   year: 'numeric'
@@ -101,7 +119,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={16} />
-                {post.readingTime} min read
+                {article.readingTime} min read
               </span>
             </div>
           </header>
@@ -120,36 +138,38 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
               prose-td:border-neutral-700 prose-td:p-3 prose-td:text-neutral-300"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(article.body.raw) as string }}
           />
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-12">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="border-neutral-700 text-neutral-400">
-                #{tag}
-              </Badge>
-            ))}
-          </div>
+          {article.tags && article.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-12">
+              {article.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="border-neutral-700 text-neutral-400">
+                  #{tag}
+                </Badge>
+              ))}
+            </div>
+          )}
         </article>
 
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
+        {/* Related Articles */}
+        {relatedArticles.length > 0 && (
           <div className="mt-16 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-yellow-500 mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
+              {relatedArticles.map((relatedArticle) => (
+                <Link key={relatedArticle.slug} href={`/news/${relatedArticle.slug}`}>
                   <Card className="bg-neutral-900 border-neutral-800 hover:border-yellow-500 transition-colors h-full">
                     <CardContent className="p-6">
                       <Badge variant="secondary" className="bg-neutral-800 text-yellow-500 mb-3">
-                        {relatedPost.category}
+                        {relatedArticle.category}
                       </Badge>
                       <h3 className="text-white font-semibold mb-2 line-clamp-2 hover:text-yellow-500 transition-colors">
-                        {relatedPost.title}
+                        {relatedArticle.title}
                       </h3>
                       <p className="text-neutral-500 text-sm line-clamp-2">
-                        {relatedPost.excerpt}
+                        {relatedArticle.excerpt}
                       </p>
                     </CardContent>
                   </Card>

@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://goldpricelive.com'),
   title: 'Gold Price Live - Where the World Checks the Gold Price',
   description: 'Track live gold and silver prices with real-time charts, performance statistics, and calculators. Get current precious metal prices in all major currencies.',
   openGraph: {
