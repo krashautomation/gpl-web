@@ -565,7 +565,7 @@ export default function Home() {
               <div className="inline-block bg-green-800 rounded-lg p-6 mb-4">
                 <div className="text-6xl">📱</div>
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-green-300">GOLD PRICE ANDROID APP</h3>
+              <h3 className="text-2xl font-bold mb-2 text-green-300">GOLD PRICE LIVE APP</h3>
             </div>
             <ul className="space-y-2 text-sm">
               <li>• All charts from goldbug.org available on Android.</li>

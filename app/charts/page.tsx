@@ -1,0 +1,116 @@
+import type { Metadata } from 'next'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import Link from 'next/link'
+import MainLayout from '@/components/layout/MainLayout'
+import { TrendingUp, LineChart, BarChart3, Clock } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Gold Price Charts | Live Charts & Historical Data',
+  description: 'View interactive gold price charts with historical data. Track gold price trends over time with daily, weekly, monthly, and yearly charts.',
+  keywords: ['gold price charts', 'gold charts', 'gold price history', 'gold trends', 'gold technical analysis'],
+  openGraph: {
+    title: 'Gold Price Charts | Live Charts & Historical Data',
+    description: 'Interactive gold price charts with historical data and trends.',
+  },
+}
+
+const chartTypes = [
+  {
+    title: 'Spot Gold Price',
+    description: 'Real-time gold spot price with live updates',
+    icon: TrendingUp,
+    href: '/#gold-chart',
+    timeframes: ['1D', '1W', '1M', '1Y', '5Y']
+  },
+  {
+    title: 'Historical Gold Prices',
+    description: 'Long-term gold price trends and analysis',
+    icon: LineChart,
+    href: '/#performance',
+    timeframes: ['20 Years', '10 Years', '5 Years', '1 Year']
+  },
+  {
+    title: 'Gold vs Silver Ratio',
+    description: 'Compare gold and silver price movements',
+    icon: BarChart3,
+    href: '/#metals',
+    timeframes: ['1Y', '5Y', '20Y']
+  },
+  {
+    title: 'Live Price Ticker',
+    description: 'Real-time price updates throughout the day',
+    icon: Clock,
+    href: '/',
+    timeframes: ['Real-time']
+  },
+]
+
+export default function ChartsPage() {
+  return (
+    <MainLayout>
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-4">
+            Gold Price Charts
+          </h1>
+          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+            Interactive charts showing gold price trends, historical data, and live market movements
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {chartTypes.map((chart) => (
+            <Link key={chart.title} href={chart.href}>
+              <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+                <CardHeader>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-neutral-800 rounded-lg group-hover:bg-neutral-700 transition-colors">
+                      <chart.icon className="h-6 w-6 text-yellow-500" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-yellow-500 group-hover:text-yellow-400">
+                        {chart.title}
+                      </CardTitle>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-neutral-400 mb-4">
+                    {chart.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {chart.timeframes.map((timeframe) => (
+                      <span 
+                        key={timeframe}
+                        className="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded"
+                      >
+                        {timeframe}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        {/* Additional Info */}
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-yellow-500 mb-4">
+            Understanding Gold Charts
+          </h2>
+          <p className="text-neutral-400 mb-6">
+            Our charts display real-time data from global markets. Use different timeframes to analyze short-term 
+            volatility or long-term trends. The charts update automatically to reflect the latest market prices.
+          </p>
+          <Link 
+            href="/blog/understanding-gold-price-charts"
+            className="text-yellow-500 hover:underline"
+          >
+            Learn how to read gold price charts →
+          </Link>
+        </div>
+      </div>
+    </MainLayout>
+  )
+}
