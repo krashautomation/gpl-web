@@ -25,8 +25,8 @@ const Footer = () => {
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE CHARTS</h4>
             <ul className="space-y-2 text-xs">
               <li><a href="/charts" className="hover:text-yellow-500">Gold Price Charts</a></li>
-               <li><a href="/historical-gold-price" className="hover:text-yellow-500">Historical Gold Prices</a></li>
-                <li><a href="/gold-silver-ratio" className="hover:text-yellow-500">Gold vs Silver Ratio</a></li>
+               <li><a href="/gold-price-history" className="hover:text-yellow-500">Gold Price History</a></li>
+                <li><a href="/gold-silver-ratio" className="hover:text-yellow-500">Gold Silver Ratio</a></li>
             </ul>
           </div>
 
