@@ -106,10 +106,10 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
             <Link key={article.slug} href={`/news/${article.slug}`}>
               <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
                 <CardHeader>
-                  <Badge variant="secondary" className="bg-neutral-800 text-yellow-500 w-fit mb-2">
+                  <Badge variant="secondary" className="bg-neutral-800 text-white-500 w-fit mb-2">
                     {article.category}
                   </Badge>
-                  <CardTitle className="text-yellow-500 group-hover:text-yellow-400 line-clamp-2">
+                  <CardTitle className="text-white-500 group-hover:text-yellow-400 line-clamp-2">
                     {article.title}
                   </CardTitle>
                 </CardHeader>

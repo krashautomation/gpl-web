@@ -73,7 +73,7 @@ const Footer = () => {
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">MOBILE APPS</h4>
             <ul className="space-y-2 text-xs mb-6">
-              <li><a href="/mobile-app" className="hover:text-yellow-500">📱 Gold Price Live App</a></li>
+              <li><a href="/gold-price-live-app" className="hover:text-yellow-500">📱 Gold Price Live App</a></li>
             </ul>
 
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">ADVERTISING</h4>

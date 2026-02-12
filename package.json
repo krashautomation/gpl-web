@@ -78,5 +78,8 @@
     "vaul": "^0.9.9",
     "yahoo-finance2": "^3.13.0",
     "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19"
   }
 }

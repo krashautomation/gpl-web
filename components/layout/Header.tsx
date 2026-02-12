@@ -87,28 +87,24 @@ const Header = () => {
 
   return (
     <><header className="border-b border-neutral-800 bg-neutral-900 sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-2 py-2 pt-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Coins className="h-8 w-8 text-yellow-500" />
-            <h1 className="text-2xl font-bold">
+          
+         
               <Link href="/">
-                <span className="text-yellow-500">GOLD</span>
-                <span className="text-white">PRICE </span>
-                <span
-                  className="text-white"
-                  style={{
-                    padding: '0px 5px',
-                    backgroundColor: 'red',
-                    borderRadius: '9px',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  LIVE
-                </span>
+                            
+               <Image
+          src="/images/gold-price-live-80.png"
+          alt="Gold Price Live logo"
+          width={337}           // replace with your actual width
+          height={49}          // replace with your actual height (important for layout)
+          priority              // optional: if this is above-the-fold / important image
+          className="drop-shadow-2xl"
+        />
               </Link>
-            </h1>
+        
           </div>
 
           {/* Desktop Navigation */}
@@ -199,8 +195,8 @@ const Header = () => {
         </div>
 
         {/* Tagline */}
-        <p className="text-xs text-neutral-400 mt-2 hidden sm:block">
-          GOLD PRICES LIVE. SILVER PRICE LIVE. GOLD PRICE CHARTS.
+        <p className="text-xs text-neutral-400 mt-0 hidden sm:block px-3">
+          GOLD PRICES LIVE. REALTIME GOLD & SILVER PRICES.
         </p>
       </div>
     </header>  
@@ -230,7 +226,7 @@ const Header = () => {
       href="/about" 
       target="_blank" 
       rel="noopener noreferrer"
-      className="text-amber-400 hover:underline"
+      className="hover:text-amber-400 hover:underline"
     >about</a>) </p>
  <p className="mt-1 text-neutral-400 text-sm">
     I created this site to help gold bugs invest wisely.</p>
@@ -240,12 +236,12 @@ const Header = () => {
     <p className="my-1 text-neutral-400 text-sm">
     You can signup here 👉 &nbsp;
     <a 
-      href="https://davestradebook.substack.com" 
+      href="https://investorsgold.substack.com" 
       target="_blank" 
       rel="noopener noreferrer"
       className="text-amber-400 hover:underline"
     >
-      davestradebook.substack.com
+      investorsgold.substack.com
     </a></p>
     <p className="mt-1 text-neutral-400 text-sm">( Your support is appreciated 😊)
   </p>
@@ -254,39 +250,46 @@ const Header = () => {
       </CardContent>
     </Card>
 
-  <Card className="bg-gradient-to-br from-green-900 to-green-950 border-green-800 h-full">
-  <CardContent className="p-6">
-    <h3 className="text-xl font-bold text-amber-300 mb-1">
-      Dave's Trade Book ⛏️
-    </h3>
+<Card className="bg-[#171720] border-neutral-800 h-full">  <CardContent className="p-3">
+  
+      <div className="flex-shrink-0">
+            <Image
+              src="/images/wordmark-dark.png"
+              alt="Investor's Gold Newsletter"
+              width={330}
+              height={49}
+              priority={false}
+              className="shadow-lg" // rounded-full is nice for profile pics
+            />
+          </div>
     
-       <ul className="space-y-2 text-sm text-gray-200">
+       <ul className="space-y-2 text-sm text-gray-200 pl-3">
       <li>
         <a 
-          href="https://davestradebook.substack.com/p/momentum-stock-play-get-3-5x-returns" 
+          href="https://investorsgold.substack.com/p/momentum-stock-play-get-3-5x-returns" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="hover:text-amber-300 transition-colors"
+          className="hover:text-amber-400 hover:underline"
         >
           Momentum Stock ETF Play: Get 3-5X Returns in 2026
         </a>
       </li>
       <li>
         <a 
-          href="https://davestradebook.substack.com/p/claude-ai-fears-spark-software-stock" 
+          href="https://investorsgold.substack.com/p/claude-ai-fears-spark-software-stock" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="hover:text-amber-300 transition-colors"
+          className="hover:text-amber-400 hover:underline"
         >
           Claude AI Fears Spark Software Stock Sell-Off
         </a>
       </li>
       <li>
         <a 
-          href="https://davestradebook.substack.com/p/the-price-for-gold-how-high-can-it" 
+          href="https://investorsgold.substack.com/p/the-price-for-gold-how-high-can-it" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="hover:text-amber-300 transition-colors"
+          className="hover:text-amber-400 hover:underline"
         >
           The Price for Gold: How High Can It Go?
         </a>
@@ -294,14 +297,14 @@ const Header = () => {
  
     </ul>
 
-    <div className="mt-1">
+    <div className="mt-1 pl-3">
       <a 
-        href="https://davestradebook.substack.com/archive" 
+        href="https://investorsgold.substack.com/archive" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="text-amber-400 hover:underline text-sm font-medium"
+        className="text-sm hover:text-amber-400 hover:underline"
       >
-        View all posts →
+        See more posts from Investor's Gold →
       </a>
     </div>
   </CardContent>
