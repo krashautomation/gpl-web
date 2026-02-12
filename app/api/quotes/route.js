@@ -14,7 +14,7 @@ if (!ALLOWED_KEY) {
   console.error('YAHOO2_API_KEY is not set in environment variables!');
 }
 
-const symbols = ['GC=F', 'SI=F', '^GSPC', '^DJI', 'PA=F', 'PL=F', 'HG=F', 'ALI=F', 'EURUSD=X', 'GBPUSD=X', 'INR=X', 'AUDUSD=X', 'CADUSD=X' ];
+const symbols = ['GC=F', 'SI=F', '^GSPC', '^DJI', 'PA=F', 'PL=F', 'HG=F', 'ALI=F', 'EURUSD=X', 'GBPUSD=X', 'INR=X', 'AUDUSD=X', 'CADUSD=X', 'BTC-USD', 'ETH-USD'  ];
 
 export async function GET(request) {
   // Get the key from query string: ?key=your-secret-value

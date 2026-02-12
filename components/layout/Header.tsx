@@ -62,7 +62,7 @@ const navItems: NavItem[] = [
     href: '/#crypto',
     children: [
       { label: 'Bitcoin Price', href: '/bitcoin-price' },
-      { label: 'Ethereum Price', href: '/platinum-price' },
+      { label: 'Ethereum Price', href: '/ethereum-price' },
     ],
   },
 

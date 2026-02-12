@@ -128,7 +128,7 @@ export default function PlatinumPrice() {
     return () => clearInterval(interval);
   }, []);
 
-  const platinumQuote = quotes.find((q) => q.symbol === 'SI=F');
+  const platinumQuote = quotes.find((q) => q.symbol === 'PL=F');
 
   return (
     <MainLayout>

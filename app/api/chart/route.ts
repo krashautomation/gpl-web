@@ -34,7 +34,8 @@ export async function GET(request: Request) {
       };
 
       // Fetch historical data for each period
-      const performance: Record<string, { price: number; change: number; changePercent: number }> = {};
+      const performance: Record<string, { price: number; change: number; changePercent: number } | null> = {};
+      let earliestDate: string | null = null;
 
       for (const [period, date] of Object.entries(periods)) {
         try {
@@ -77,8 +78,28 @@ export async function GET(request: Request) {
               };
             }
           }
-        } catch (err) {
-          console.error(`Error fetching data for period ${period}:`, err);
+        } catch (err: any) {
+          // Check if this is a BadRequestError for missing data (e.g., Bitcoin 20Y)
+          if (period === '20Y' && err.name === 'BadRequestError') {
+            // Try to fetch earliest available data
+            try {
+              const earliestQuery = {
+                period1: '1970-01-01',
+                period2: now.toISOString().split('T')[0],
+                interval: '1d' as const,
+              };
+              const earliestResult = await yahoo.chart(symbol, earliestQuery);
+              if (earliestResult.quotes && earliestResult.quotes.length > 0) {
+                const firstQuote = earliestResult.quotes[0];
+                earliestDate = firstQuote.date.toISOString().split('T')[0];
+                performance[period] = null; // Mark as unavailable
+              }
+            } catch {
+              performance[period] = null;
+            }
+          } else {
+            console.error(`Error fetching data for period ${period}:`, err);
+          }
           // Continue with other periods even if one fails
         }
       }
@@ -88,6 +109,7 @@ export async function GET(request: Request) {
         symbol,
         currentPrice,
         performance,
+        earliestDate,
       });
     }
 
