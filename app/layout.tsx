@@ -1,4 +1,5 @@
 import './globals.css';
+import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 

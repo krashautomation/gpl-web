@@ -7,10 +7,10 @@ const Footer = () => {
           <div>
             <h4 className="text-yellow-500 font-bold mb-4 text-sm">WORLD GOLD PRICES</h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇪🇺 Gold Price EUR</a></li>
-              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇦🇺 Gold Price AUD</a></li>
-<li><a href="/#foreign-currency" className="hover:text-yellow-500">🇨🇦 Gold Price CAD</a></li>
-              <li><a href="/#foreign-currency" className="hover:text-yellow-500">🇬🇧 Gold Price GBP</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500"><span className="fi fi-eu"></span> Gold Price EUR</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500"><span className="fi fi-au"></span> Gold Price AUD</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500"><span className="fi fi-ca"></span> Gold Price CAD</a></li>
+              <li><a href="/#foreign-currency" className="hover:text-yellow-500"><span className="fi fi-gb"></span> Gold Price GBP</a></li>
             </ul>
           </div>
 
@@ -88,6 +88,8 @@ const Footer = () => {
             <p>
               
 <a href="/terms-of-service" className="hover:text-yellow-500">Terms of Service</a> &nbsp; 
+<a href="/disclaimer" className="hover:text-yellow-500">Disclaimer</a> &nbsp; 
+<a href="/risk-warning" className="hover:text-yellow-500">Risk Warning</a> &nbsp; 
 <a href="/privacy" className="hover:text-yellow-500">Privacy</a>
 
             </p>
