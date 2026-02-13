@@ -136,6 +136,16 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           {articles.map((article) => (
             <Link key={article.slug} href={`/news/${article.slug}`}>
               <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+                {article.featuredImage && (
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <Image
+                      src={article.featuredImage}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <CardHeader>
                   <Badge variant="secondary" className="bg-neutral-800 text-white-500 w-fit mb-2">
                     {article.category}
