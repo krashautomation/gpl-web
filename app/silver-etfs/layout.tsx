@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     url: '/silver-etfs',
     images: [
       {
-        url: '/og-silver-etfs.jpg',
+        url: getOgImage('/images/og-silver-etfs.jpg'),
         width: 1200,
         height: 630,
         alt: 'Silver ETFs Chart and List',
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Silver ETFs | Top Silver Exchange Traded Funds',
     description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
-    images: ['/og-silver-etfs.jpg'],
+    images: [getOgImage('/images/og-silver-etfs.jpg')],
   },
   alternates: {
     canonical: '/silver-etfs',

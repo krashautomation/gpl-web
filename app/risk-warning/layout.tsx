@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -17,11 +18,20 @@ export const metadata: Metadata = {
     description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
     type: 'website',
     url: '/risk-warning',
+    images: [
+      {
+        url: getOgImage('/images/og-risk-warning.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'Gold Price Live - Real-time Gold & Silver Prices',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Risk Warning | Gold Price Live',
     description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
+    images: [getOgImage('/images/og-risk-warning.jpg')],
   },
   alternates: {
     canonical: '/risk-warning',

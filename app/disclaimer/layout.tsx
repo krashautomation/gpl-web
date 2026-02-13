@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -17,11 +18,20 @@ export const metadata: Metadata = {
     description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
     type: 'website',
     url: '/disclaimer',
+    images: [
+      {
+        url: getOgImage('/images/og-disclaimer.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'Gold Price Live - Real-time Gold & Silver Prices',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Disclaimer | Gold Price Live',
     description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
+    images: [getOgImage('/images/og-disclaimer.jpg')],
   },
   alternates: {
     canonical: '/disclaimer',

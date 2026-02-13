@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     url: '/aluminum-price',
     images: [
       {
-        url: '/og-aluminum-price.jpg',
+        url: getOgImage('/images/og-aluminum-price.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Aluminum Price Chart and Spot Price',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Aluminum Price Today | Live Aluminum Spot Price',
     description: 'Track live aluminum prices with real-time charts and market analysis.',
-    images: ['/og-aluminum-price.jpg'],
+    images: [getOgImage('/images/og-aluminum-price.jpg')],
   },
   alternates: {
     canonical: '/aluminum-price',

@@ -3,14 +3,46 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import Link from 'next/link'
 import MainLayout from '@/components/layout/MainLayout'
 import { TrendingUp, LineChart, BarChart3, Clock } from 'lucide-react'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Price Charts | Live Charts & Historical Data',
   description: 'View interactive gold price charts with historical data. Track gold price trends over time with daily, weekly, monthly, and yearly charts.',
   keywords: ['gold price charts', 'gold charts', 'gold price history', 'gold trends', 'gold technical analysis'],
   openGraph: {
     title: 'Gold Price Charts | Live Charts & Historical Data',
     description: 'Interactive gold price charts with historical data and trends.',
+    type: 'website',
+    url: '/charts',
+    images: [
+      {
+        url: getOgImage('/images/og-charts.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'Gold Price Charts - Live & Historical Data',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gold Price Charts | Live Charts & Historical Data',
+    description: 'Interactive gold price charts with historical data and trends.',
+    images: [getOgImage('/images/og-charts.jpg')],
+  },
+  alternates: {
+    canonical: '/charts',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

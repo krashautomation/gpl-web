@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     url: '/gold-etfs',
     images: [
       {
-        url: '/og-gold-etfs.jpg',
+        url: getOgImage('/images/og-gold-etfs.jpg'),
         width: 1200,
         height: 630,
         alt: 'Gold ETFs Chart and List',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Gold ETFs | Top Gold Exchange Traded Funds',
     description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
-    images: ['/og-gold-etfs.jpg'],
+    images: [getOgImage('/images/og-gold-etfs.jpg')],
   },
   alternates: {
     canonical: '/gold-etfs',

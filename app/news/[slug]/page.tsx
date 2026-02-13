@@ -8,6 +8,7 @@ import { Calendar, Clock, ArrowLeft, User } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
 import { marked } from 'marked'
 import { getArticles, type Article } from '@/lib/articles'
+import { getOgImage } from '@/lib/og-utils'
 
 
 interface ArticlePageProps {
@@ -35,8 +36,14 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   const seoTitle = article.seo?.title || article.title
   const seoDescription = article.seo?.description || article.excerpt
   const seoKeywords = article.seo?.keywords || article.tags
+  
+  // Use featured image if available, fallback to default
+  const ogImage = article.featuredImage 
+    ? getOgImage(article.featuredImage)
+    : getOgImage('/images/og-gold-price-live.png')
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
     title: seoTitle,
     description: seoDescription,
     keywords: seoKeywords,
@@ -48,14 +55,24 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       publishedTime: article.date,
       authors: [article.author],
       tags: article.tags,
+      url: `/news/${article.slug}`,
+      images: article.featuredImage ? [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title: seoTitle,
       description: seoDescription,
+      images: article.featuredImage ? [ogImage] : undefined,
     },
     alternates: {
-      canonical: `https://goldpricelive.com/news/${article.slug}`,
+      canonical: `/news/${article.slug}`,
     },
   }
 }

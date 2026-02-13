@@ -1,6 +1,7 @@
 // app/advertise/layout.tsx  (or page.tsx if this is the page file)
 
 import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   // Base URL – resolves relative paths like /og-...png to full https:// URLs
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/og-gold-price-live-advertise.png', // relative – resolved automatically
+        url: getOgImage('/images/og-advertise.jpg'), // absolute URL for social sharing
         width: 1200,
         height: 630,
         alt: 'Advertise on Gold Price Live – Reach gold & silver market enthusiasts',
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     title: 'Advertise on Gold Price Live',
     description:
       'Contact Dave for advertising opportunities on real-time gold & silver prices.',
-    images: ['/og-gold-price-live-advertise.png'], // relative OK
+    images: [getOgImage('/images/og-advertise.jpg')], // absolute URL
     // Optional: your X handle
     // site: '@starter_vibes',
     // creator: '@starter_vibes',

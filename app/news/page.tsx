@@ -5,10 +5,12 @@ import { Badge } from '@/components/ui/badge'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import MainLayout from '@/components/layout/MainLayout'
 import Image from 'next/image'
+import { getOgImage } from '@/lib/og-utils'
 
 import { getArticles, type Article } from '@/lib/articles'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Price News | Market Analysis & Investment Guides',
   description: 'Read the latest gold price news, market analysis, investment guides, and expert insights. Stay informed about precious metals markets.',
   keywords: ['gold price news', 'gold market analysis', 'gold investment', 'precious metals news'],
@@ -16,6 +18,35 @@ export const metadata: Metadata = {
     title: 'Gold Price News | Market Analysis & Investment Guides',
     description: 'Latest gold price news, market analysis, and investment guides.',
     type: 'website',
+    url: '/news',
+    images: [
+      {
+        url: getOgImage('/images/og-news.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'Gold Price News - Market Analysis & Investment Guides',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gold Price News | Market Analysis & Investment Guides',
+    description: 'Latest gold price news, market analysis, and investment guides.',
+    images: [getOgImage('/images/og-news.jpg')],
+  },
+  alternates: {
+    canonical: '/news',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     url: '/contact',
     images: [
       {
-        url: '/og-silver-price.jpg',
+        url: getOgImage('/images/og-contact.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Silver Price Chart and Spot Price',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Contact Dave at Gold Price Live',
     description: 'Contact Dave at Gold Price Live for business and advertising inquiries.',
-    images: ['/og-silver-price.jpg'],
+    images: [getOgImage('/images/og-contact.jpg')],
   },
   alternates: {
     canonical: '/contact',

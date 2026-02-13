@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     url: '/ethereum-price',
     images: [
       {
-        url: '/og-ethereum-price.jpg',
+        url: getOgImage('/images/og-ethereum-price.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Ethereum Price Chart and Spot Price',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ethereum Price Today | Live Ethereum Spot Price',
     description: 'Track live Ethereum prices with real-time charts and market analysis.',
-    images: ['/og-ethereum-price.jpg'],
+    images: [getOgImage('/images/og-ethereum-price.jpg')],
   },
   alternates: {
     canonical: '/ethereum-price',

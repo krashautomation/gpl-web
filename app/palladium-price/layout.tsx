@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     url: '/palladium-price',
     images: [
       {
-        url: '/og-palladium-price.jpg',
+        url: getOgImage('/images/og-palladium-price.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Palladium Price Chart and Spot Price',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Palladium Price Today | Live Palladium Spot Price',
     description: 'Track live palladium prices with real-time charts and market analysis.',
-    images: ['/og-palladium-price.jpg'],
+    images: [getOgImage('/images/og-palladium-price.jpg')],
   },
   alternates: {
     canonical: '/palladium-price',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     url: '/gold-silver-ratio',
     images: [
       {
-        url: '/og-gold-silver-ratio.jpg',
+        url: getOgImage('/images/og-gold-silver-ratio.jpg'),
         width: 1200,
         height: 630,
         alt: 'Gold Silver Ratio Chart',
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Gold Silver Ratio | Historical Chart & Performance',
     description: 'Track the Gold-Silver Ratio with historical charts and performance comparison.',
-    images: ['/og-gold-silver-ratio.jpg'],
+    images: [getOgImage('/images/og-gold-silver-ratio.jpg')],
   },
   alternates: {
     canonical: '/gold-silver-ratio',

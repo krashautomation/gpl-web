@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     url: '/privacy',
     images: [
       {
-        url: '/og-silver-price.jpg',
+        url: getOgImage('/images/og-privacy.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Silver Price Chart and Spot Price',
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Privacy Policy | Gold Price Live',
     description: 'Learn how we collect, use, and protect your information at Gold Price Live.',
-    images: ['/og-silver-price.jpg'],
+    images: [getOgImage('/images/og-privacy.jpg')],
   },
   alternates: {
     canonical: '/privacy',

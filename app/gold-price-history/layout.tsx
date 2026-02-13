@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     url: '/gold-price-history',
     images: [
       {
-        url: '/og-gold-price-history.jpg',
+        url: getOgImage('/images/og-gold-price-history.jpg'),
         width: 1200,
         height: 630,
         alt: 'Gold Price History - 100 Year Chart',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Gold Price History | 100 Year Historical Chart',
     description: 'Explore gold price history with our 100 year historical chart and performance metrics.',
-    images: ['/og-gold-price-history.jpg'],
+    images: [getOgImage('/images/og-gold-price-history.jpg')],
   },
   alternates: {
     canonical: '/gold-price-history',

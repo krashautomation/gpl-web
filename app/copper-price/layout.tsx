@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getOgImage } from '@/lib/og-utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     url: '/copper-price',
     images: [
       {
-        url: '/og-copper-price.jpg',
+        url: getOgImage('/images/og-copper-price.jpg'),
         width: 1200,
         height: 630,
         alt: 'Live Copper Price Chart and Spot Price',
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Copper Price Today | Live Copper Spot Price',
     description: 'Track live copper prices with real-time charts and market analysis.',
-    images: ['/og-copper-price.jpg'],
+    images: [getOgImage('/images/og-copper-price.jpg')],
   },
   alternates: {
     canonical: '/copper-price',
