@@ -4,9 +4,12 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Features
 
-- **Live Price Tracking**: Real-time gold, silver, platinum, and palladium prices
+- **Live Price Tracking**: Real-time gold, silver, platinum, palladium, copper, aluminum prices plus Bitcoin and Ethereum
 - **Interactive Charts**: 7-day and 12-month price charts with Lightweight Charts
-- **Performance Analytics**: 30-day, 6-month, 1-year, 5-year, and 20-year performance metrics
+- **Performance Analytics**: 30-day, 6-month, 1-year, 2-year, 3-year, 5-year, and 20-year performance metrics
+- **Gold/Silver Ratio**: Historical ratio chart with performance comparison
+- **ETF Tracking**: Gold ETFs (GLD, IAU, GLDM, SGOL) and Silver ETFs (SLV, SIVR, SIL, SILJ)
+- **Gold Price History**: 100-year historical chart (macrotrends.net)
 - **Gold Calculator**: Calculate gold value with multi-currency and unit conversion (oz/gr)
 - **Currency Support**: USD, CAD, AUD, GBP, EUR with real-time exchange rates
 - **Blog System**: SEO-optimized blog with categories and related posts
@@ -37,6 +40,16 @@ gpl-web/
 │   │   └── page.tsx              # News listing with category filter
 │   ├── precious-metals/page.tsx  # Precious metals overview
 │   ├── silver-price/page.tsx     # Silver price page
+│   ├── platinum-price/page.tsx   # Platinum price page
+│   ├── palladium-price/page.tsx  # Palladium price page
+│   ├── copper-price/page.tsx     # Copper price page
+│   ├── aluminum-price/page.tsx   # Aluminum price page
+│   ├── bitcoin-price/page.tsx    # Bitcoin price page
+│   ├── ethereum-price/page.tsx   # Ethereum price page
+│   ├── gold-etfs/page.tsx        # Gold ETFs listing
+│   ├── silver-etfs/page.tsx      # Silver ETFs listing
+│   ├── gold-price-history/page.tsx # 100-year historical chart
+│   ├── gold-silver-ratio/page.tsx  # Gold/Silver ratio analysis
 │   ├── layout.tsx                # Root layout
 │   ├── metadata.ts               # SEO metadata config
 │   ├── robots.ts                 # Robots.txt generation
@@ -99,6 +112,10 @@ Fetches real-time market data for:
 - `PL=F` - Platinum
 - `HG=F` - Copper
 - `ALI=F` - Aluminum
+- `BTC-USD` - Bitcoin
+- `ETH-USD` - Ethereum
+- `GLD` - SPDR Gold Shares ETF
+- `SLV` - iShares Silver Trust ETF
 - Currency pairs: EURUSD=X, GBPUSD=X, AUDUSD=X, CADUSD=X
 
 ### Chart API
@@ -108,7 +125,7 @@ Supports two types of queries:
 - **Chart data**: `/api/chart?symbol=GC=F&range=7D|12M`
 - **Performance data**: `/api/chart?symbol=GC=F&type=performance`
 
-Performance data returns metrics for 30D, 6M, 1Y, 5Y, and 20Y periods.
+Performance data returns metrics for 30D, 6M, 1Y, 2Y, 3Y, 5Y, and 20Y periods.
 
 ## SEO Features
 
@@ -304,6 +321,16 @@ All articles are statically generated at build time for optimal performance and 
 |------|-------|-------------|
 | Home | `/` | Gold price with calculator and charts |
 | Silver Price | `/silver-price` | Silver price with 12M chart |
+| Platinum Price | `/platinum-price` | Platinum price with 12M chart |
+| Palladium Price | `/palladium-price` | Palladium price with 12M chart |
+| Copper Price | `/copper-price` | Copper price with 12M chart |
+| Aluminum Price | `/aluminum-price` | Aluminum price with 12M chart |
+| Bitcoin Price | `/bitcoin-price` | Bitcoin price with 12M chart |
+| Ethereum Price | `/ethereum-price` | Ethereum price with 12M chart |
+| Gold ETFs | `/gold-etfs` | Popular Gold ETFs with GLD chart |
+| Silver ETFs | `/silver-etfs` | Popular Silver ETFs with SLV chart |
+| Gold Price History | `/gold-price-history` | 100-year historical chart (macrotrends) |
+| Gold-Silver Ratio | `/gold-silver-ratio` | Ratio analysis with performance comparison |
 | Precious Metals | `/precious-metals` | Overview of all metals |
 | News | `/news` | Article listing with category filter |
 | Article | `/news/[slug]` | Individual article page |
