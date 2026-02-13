@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Palladium Price Today | Live Palladium Spot Price & Charts',
   description: 'Track live palladium prices with real-time charts and historical data. View palladium spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Palladium Price Today | Live Palladium Spot Price & Charts',
     description: 'Track live palladium prices with real-time charts and historical performance data.',
     type: 'website',
-    url: 'https://goldpricelive.com/palladium-price',
+    url: '/palladium-price',
     images: [
       {
         url: '/og-palladium-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-palladium-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/palladium-price',
+    canonical: '/palladium-price',
   },
   robots: {
     index: true,

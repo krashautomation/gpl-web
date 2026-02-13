@@ -1,35 +1,65 @@
-import type { Metadata } from 'next'
+// app/advertise/layout.tsx  (or page.tsx if this is the page file)
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Advertise | GoldPriceLive.co',
-  description: 'Contact Dave at Gold Price Live (a site for realtime gold prices.) For advertising opportunities and more.',
+  // Base URL – resolves relative paths like /og-...png to full https:// URLs
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'
+  ),
+
+  // Page title (inherits from root if you have title.template there)
+  title: 'Advertise on Gold Price Live',
+
+  description:
+    'Reach thousands of daily visitors interested in real-time gold & silver prices. Contact Dave at Gold Price Live for advertising opportunities, sponsorships, and partnerships.',
+
   keywords: [
     'advertise on gold price live',
-
+    'gold price advertising',
+    'sponsor gold price site',
+    'financial website ads',
+    'gold market sponsorship',
+    'precious metals advertising',
   ],
+
+  // Open Graph (Facebook, LinkedIn, Discord, etc.)
   openGraph: {
     title: 'Advertise on Gold Price Live',
-    description: 'Contact Dave at Gold Price Live for advertising inquiries.',
+    description:
+      'Contact Dave for advertising and sponsorship opportunities on a leading real-time gold & silver price tracking site.',
     type: 'website',
-    url: 'https://goldpricelive.co/advertise',
+    url: '/advertise', // relative OK – metadataBase makes it absolute
+    siteName: 'Gold Price Live',
+    locale: 'en_US',
     images: [
       {
-        url: '/og-silver-price.jpg',
+        url: '/og-gold-price-live-advertise.png', // relative – resolved automatically
         width: 1200,
         height: 630,
-        alt: 'Live Silver Price Chart and Spot Price',
+        alt: 'Advertise on Gold Price Live – Reach gold & silver market enthusiasts',
       },
     ],
   },
+
+  // Twitter / X Card
   twitter: {
     card: 'summary_large_image',
-    title: 'Advertise at Gold Price Live',
-    description: 'Contact Dave at Gold Price Live for advertising inquiries.',
-    images: ['/og-silver-price.jpg'],
+    title: 'Advertise on Gold Price Live',
+    description:
+      'Contact Dave for advertising opportunities on real-time gold & silver prices.',
+    images: ['/og-gold-price-live-advertise.png'], // relative OK
+    // Optional: your X handle
+    // site: '@starter_vibes',
+    // creator: '@starter_vibes',
   },
+
+  // Canonical URL (prevents duplicate content issues)
   alternates: {
-    canonical: 'https://goldpricelive.com/advertise',
+    canonical: '/advertise', // relative OK – becomes full URL via metadataBase
   },
+
+  // Robots & crawling instructions
   robots: {
     index: true,
     follow: true,
@@ -41,12 +71,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function AdvertiseGoldPriceLive({
+export default function AdvertiseLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return children
+  return children;
 }

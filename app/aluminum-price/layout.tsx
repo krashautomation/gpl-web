@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Aluminum Price Today | Live Aluminum Spot Price & Charts',
   description: 'Track live aluminum prices with real-time charts and historical data. View aluminum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Aluminum Price Today | Live Aluminum Spot Price & Charts',
     description: 'Track live aluminum prices with real-time charts and historical performance data.',
     type: 'website',
-    url: 'https://goldpricelive.com/aluminum-price',
+    url: '/aluminum-price',
     images: [
       {
         url: '/og-aluminum-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-aluminum-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/aluminum-price',
+    canonical: '/aluminum-price',
   },
   robots: {
     index: true,

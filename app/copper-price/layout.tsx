@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Copper Price Today | Live Copper Spot Price & Charts',
   description: 'Track live copper prices with real-time charts and historical data. View copper spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Copper Price Today | Live Copper Spot Price & Charts',
     description: 'Track live copper prices with real-time charts and historical performance data.',
     type: 'website',
-    url: 'https://goldpricelive.com/copper-price',
+    url: '/copper-price',
     images: [
       {
         url: '/og-copper-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-copper-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/copper-price',
+    canonical: '/copper-price',
   },
   robots: {
     index: true,

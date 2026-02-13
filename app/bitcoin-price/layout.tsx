@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Bitcoin Price Today | Live Bitcoin Spot Price & Charts',
   description: 'Track live Bitcoin prices with real-time charts and historical data. View Bitcoin spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Bitcoin Price Today | Live Bitcoin Spot Price & Charts',
     description: 'Track live Bitcoin prices with real-time charts and historical performance data.',
     type: 'website',
-    url: 'https://goldpricelive.com/bitcoin-price',
+    url: '/bitcoin-price',
     images: [
       {
         url: '/og-bitcoin-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-bitcoin-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/bitcoin-price',
+    canonical: '/bitcoin-price',
   },
   robots: {
     index: true,

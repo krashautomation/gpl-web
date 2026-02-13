@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Silver Price Today | Live Silver Spot Price & Charts',
   description: 'Track live silver prices with real-time charts and historical data. View silver spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Gold Price Live 24/7 App',
     description: 'Track live gold prices on your mobile phone.',
     type: 'website',
-    url: 'https://goldpricelive.co/gold-price-live-app',
+    url: '/gold-price-live-app',
     images: [
       {
         url: '/og-silver-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-silver-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/silver-price',
+    canonical: '/gold-price-live-app',
   },
   robots: {
     index: true,

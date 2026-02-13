@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
+import { getArticles } from '@/lib/articles'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://goldpricelive.com'
   
   // Main pages
@@ -50,7 +51,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   // Individual article pages
-  const articlePages = allArticles.map((article) => ({
+  const articles = await getArticles()
+  const articlePages = articles.map((article) => ({
     url: `${baseUrl}/news/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: 'weekly' as const,

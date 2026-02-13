@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Risk Warning | Gold Price Live',
   description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
   keywords: [
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     title: 'Risk Warning | Gold Price Live',
     description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
     type: 'website',
-    url: 'https://goldpricelive.co/risk-warning',
+    url: '/risk-warning',
   },
   twitter: {
     card: 'summary_large_image',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
   },
   alternates: {
-    canonical: 'https://goldpricelive.co/risk-warning',
+    canonical: '/risk-warning',
   },
   robots: {
     index: true,

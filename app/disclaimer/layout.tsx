@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Disclaimer | Gold Price Live',
   description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
   keywords: [
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     title: 'Disclaimer | Gold Price Live',
     description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
     type: 'website',
-    url: 'https://goldpricelive.co/disclaimer',
+    url: '/disclaimer',
   },
   twitter: {
     card: 'summary_large_image',
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
   },
   alternates: {
-    canonical: 'https://goldpricelive.co/disclaimer',
+    canonical: '/disclaimer',
   },
   robots: {
     index: true,

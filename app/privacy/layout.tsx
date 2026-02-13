@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Privacy Policy | GoldPriceLive.co',
   description: 'Read our Privacy Policy to learn how Gold Price Live collects, uses, and protects your information.',
   keywords: [
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Privacy Policy | Gold Price Live',
     description: 'Learn how we collect, use, and protect your information at Gold Price Live.',
     type: 'website',
-    url: 'https://goldpricelive.co/privacy',
+    url: '/privacy',
     images: [
       {
         url: '/og-silver-price.jpg',
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     images: ['/og-silver-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.co/privacy',
+    canonical: '/privacy',
   },
   robots: {
     index: true,

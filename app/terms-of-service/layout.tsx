@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Terms of Service | Gold Price Live',
   description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
   keywords: [
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Terms of Service | Gold Price Live',
     description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
     type: 'website',
-    url: 'https://goldpricelive.co/terms-of-service',
+    url: '/terms-of-service',
   },
   twitter: {
     card: 'summary_large_image',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
   },
   alternates: {
-    canonical: 'https://goldpricelive.co/terms-of-service',
+    canonical: '/terms-of-service',
   },
   robots: {
     index: true,

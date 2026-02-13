@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Silver ETFs | Top Silver Exchange Traded Funds',
   description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more. Track SLV price charts and compare silver ETF options.',
   keywords: [
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     title: 'Silver ETFs | Top Silver Exchange Traded Funds',
     description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
     type: 'website',
-    url: 'https://goldpricelive.com/silver-etfs',
+    url: '/silver-etfs',
     images: [
       {
         url: '/og-silver-etfs.jpg',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     images: ['/og-silver-etfs.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/silver-etfs',
+    canonical: '/silver-etfs',
   },
   robots: {
     index: true,

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Silver Ratio | Historical Chart & Performance Comparison',
   description: 'Track the Gold-Silver Ratio with historical charts and performance comparison. Compare gold and silver returns over 1, 2, 5, and 20 year periods.',
   keywords: [
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Gold Silver Ratio | Historical Chart & Performance Comparison',
     description: 'Track the Gold-Silver Ratio with historical charts and performance comparison.',
     type: 'website',
-    url: 'https://goldpricelive.com/gold-silver-ratio',
+    url: '/gold-silver-ratio',
     images: [
       {
         url: '/og-gold-silver-ratio.jpg',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     images: ['/og-gold-silver-ratio.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/gold-silver-ratio',
+    canonical: '/gold-silver-ratio',
   },
   robots: {
     index: true,

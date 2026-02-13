@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Price History | 100 Year Historical Chart & Performance',
   description: 'Explore gold price history with our 100 year historical chart. View gold price performance over 30 days, 6 months, 1 year, 5 years, and 20 years. Track historical gold prices.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Gold Price History | 100 Year Historical Chart & Performance',
     description: 'Explore gold price history with our 100 year historical chart and performance metrics.',
     type: 'website',
-    url: 'https://goldpricelive.com/gold-price-history',
+    url: '/gold-price-history',
     images: [
       {
         url: '/og-gold-price-history.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-gold-price-history.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/gold-price-history',
+    canonical: '/gold-price-history',
   },
   robots: {
     index: true,

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Ethereum Price Today | Live Ethereum Spot Price & Charts',
   description: 'Track live Ethereum prices with real-time charts and historical data. View Ethereum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Ethereum Price Today | Live Ethereum Spot Price & Charts',
     description: 'Track live Ethereum prices with real-time charts and historical performance data.',
     type: 'website',
-    url: 'https://goldpricelive.com/ethereum-price',
+    url: '/ethereum-price',
     images: [
       {
         url: '/og-ethereum-price.jpg',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     images: ['/og-ethereum-price.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/ethereum-price',
+    canonical: '/ethereum-price',
   },
   robots: {
     index: true,

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold ETFs | Top Gold Exchange Traded Funds',
   description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more. Track GLD price charts and compare gold ETF options.',
   keywords: [
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Gold ETFs | Top Gold Exchange Traded Funds',
     description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
     type: 'website',
-    url: 'https://goldpricelive.com/gold-etfs',
+    url: '/gold-etfs',
     images: [
       {
         url: '/og-gold-etfs.jpg',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     images: ['/og-gold-etfs.jpg'],
   },
   alternates: {
-    canonical: 'https://goldpricelive.com/gold-etfs',
+    canonical: '/gold-etfs',
   },
   robots: {
     index: true,
