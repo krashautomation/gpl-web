@@ -14,6 +14,8 @@ import {
 import { Button } from '@/components/ui/button';
 import MainLayout from '@/components/layout/MainLayout';
 import LightweightChart from '@/components/LightweightChart';
+import RecentArticlesSection from './components/RecentArticlesSection';
+
 
 const goldPriceData = [
   { time: 'Feb 6', price: 5015 },
@@ -514,18 +516,16 @@ export default function Home() {
      
       </div>
 
+      {/* Recent Articles Section */}
+      <RecentArticlesSection />
 
-
-
-      
-     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-       
 
-  
- <Card className="bg-neutral-900 border-neutral-800 h-full">
-        <CardHeader>
-          <CardTitle className="text-yellow-500 text-2xl">GOLD PRICE FAQ</CardTitle>
+
+
+        <Card className="bg-neutral-900 border-neutral-800 h-full">
+          <CardHeader>
+            <CardTitle className="text-yellow-500 text-2xl">GOLD PRICE FAQ</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
