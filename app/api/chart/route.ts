@@ -29,6 +29,8 @@ export async function GET(request: Request) {
         '30D': new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
         '6M': new Date(now.getTime() - 180 * 24 * 60 * 60 * 1000),
         '1Y': new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000),
+        '2Y': new Date(now.getTime() - 2 * 365 * 24 * 60 * 60 * 1000),
+        '3Y': new Date(now.getTime() - 3 * 365 * 24 * 60 * 60 * 1000),
         '5Y': new Date(now.getTime() - 5 * 365 * 24 * 60 * 60 * 1000),
         '20Y': new Date(now.getTime() - 20 * 365 * 24 * 60 * 60 * 1000),
       };

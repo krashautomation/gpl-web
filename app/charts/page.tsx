@@ -20,14 +20,14 @@ const chartTypes = [
     title: 'Historical Gold Prices',
     description: 'Long-term gold price trends and analysis',
     icon: LineChart,
-    href: '/#performance',
+    href: '/gold-price-history',
     timeframes: ['20 Years', '10 Years', '5 Years', '1 Year']
   },
   {
-    title: 'Gold vs Silver Ratio',
+    title: 'Gold Silver Ratio',
     description: 'Compare gold and silver price movements',
     icon: BarChart3,
-    href: '/#metals',
+    href: '/gold-silver-ratio',
     timeframes: ['1Y', '5Y', '20Y']
   },
 ]
