@@ -252,7 +252,7 @@ const Header = () => {
 
                 {/* Text column */}
                 <div className="flex-1">
-                  <p className="mt-1 text-lg">
+                  <p className="mt-1 text-sm">
                     <b className="">Hey guys...</b> 👋 (
                     <a
                       href="/about"

@@ -1,20 +1,19 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Calendar, Clock, ArrowLeft, User } from 'lucide-react'
-import MainLayout from '@/components/layout/MainLayout'
-import { marked } from 'marked'
-import { getArticles, type Article } from '@/lib/articles'
-import { getOgImage } from '@/lib/og-utils'
-
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
+import MainLayout from '@/components/layout/MainLayout';
+import { marked } from 'marked';
+import { getArticles, type Article } from '@/lib/articles';
+import { getOgImage } from '@/lib/og-utils';
 
 interface ArticlePageProps {
   params: Promise<{
-    slug: string
-  }>
+    slug: string;
+  }>;
 }
 
 // Generate static paths for all articles at build time
@@ -23,24 +22,24 @@ interface ArticlePageProps {
 // }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const { slug } = await params
-  const allArticles = await getArticles()
-  const article = allArticles.find((a: Article) => a.slug === slug)
-  
+  const { slug } = await params;
+  const allArticles = await getArticles();
+  const article = allArticles.find((a: Article) => a.slug === slug);
+
   if (!article) {
     return {
       title: 'Article Not Found',
-    }
+    };
   }
 
-  const seoTitle = article.seo?.title || article.title
-  const seoDescription = article.seo?.description || article.excerpt
-  const seoKeywords = article.seo?.keywords || article.tags
-  
+  const seoTitle = article.seo?.title || article.title;
+  const seoDescription = article.seo?.description || article.excerpt;
+  const seoKeywords = article.seo?.keywords || article.tags;
+
   // Use featured image if available, fallback to default
-  const ogImage = article.featuredImage 
+  const ogImage = article.featuredImage
     ? getOgImage(article.featuredImage)
-    : getOgImage('/images/og-gold-price-live.png')
+    : getOgImage('/images/og-gold-price-live.png');
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -56,14 +55,16 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       authors: [article.author],
       tags: article.tags,
       url: `/news/${article.slug}`,
-      images: article.featuredImage ? [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ] : undefined,
+      images: article.featuredImage
+        ? [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: article.title,
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: 'summary_large_image',
@@ -74,40 +75,42 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     alternates: {
       canonical: `/news/${article.slug}`,
     },
-  }
+  };
 }
 
-
-
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { slug } = await params
-  const allArticles = await getArticles()
-  const article = allArticles.find((a: Article) => a.slug === slug)
-  
+  const { slug } = await params;
+  const allArticles = await getArticles();
+  const article = allArticles.find((a: Article) => a.slug === slug);
+
   if (!article) {
-    notFound()
+    notFound();
   }
 
   const relatedArticles = allArticles
     .filter((a: Article) => a.slug !== slug && a.category === article.category)
-    .slice(0, 3)
+    .slice(0, 3);
 
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-12">
         {/* Breadcrumb */}
-        <nav className="text-sm text-neutral-400 mb-6">
-          <Link href="/" className="hover:">Home</Link>
+        <nav className="text-sm text-black mb-6">
+          <Link href="/" className="hover:text-black">
+            Home
+          </Link>
           <span className="mx-2">/</span>
-          <Link href="/news" className="hover:">News</Link>
+          <Link href="/news" className="hover:text-black">
+            News
+          </Link>
           <span className="mx-2">/</span>
-          <span className="text-neutral-500">{article.title}</span>
+          <span className="text-black">{article.title}</span>
         </nav>
 
         {/* Back Link */}
-        <Link 
-          href="/news" 
-          className="inline-flex items-center gap-2 text-neutral-400 hover: mb-8 transition-colors"
+        <Link
+          href="/news"
+          className="inline-flex items-center gap-2 text-black hover:text-black mb-8 transition-colors"
         >
           <ArrowLeft size={16} />
           Back to News
@@ -126,13 +129,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 />
               </div>
             )}
-            <Badge className="bg-yellow-500 text-black mb-4">
-              {article.category}
-            </Badge>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              {article.title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-6 text-sm text-neutral-400">
+            <Badge className="bg-yellow-500 text-black mb-4">{article.category}</Badge>
+            <h1 className="text-3xl md:text-5xl font-bold text-black mb-6">{article.title}</h1>
+            <div className="flex flex-wrap items-center gap-6 text-sm text-black">
               <span className="flex items-center gap-2">
                 <User size={16} />
                 {article.author}
@@ -142,7 +141,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 {new Date(article.date).toLocaleDateString('en-US', {
                   month: 'long',
                   day: 'numeric',
-                  year: 'numeric'
+                  year: 'numeric',
                 })}
               </span>
               <span className="flex items-center gap-2">
@@ -153,19 +152,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </header>
 
           {/* Article Content */}
-          <div 
+          <div
             className="prose prose-invert prose-lg max-w-none mb-12
-              prose-headings:text-white-500 
+              prose-headings:text-black 
               prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4
               prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3
-              prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:mb-4
-              prose-ul:text-neutral-300 prose-ul:mb-4
+              prose-p:text-black prose-p:leading-relaxed prose-p:mb-4
+              prose-ul:text-black prose-ul:mb-4
               prose-li:mb-2
-              prose-strong:text-white
-              prose-a: prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-black
+              prose-a:text-black prose-a:no-underline hover:prose-a:underline
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
-              prose-td:border-neutral-700 prose-td:p-3 prose-td:text-neutral-300"
+              prose-td:border-neutral-700 prose-td:p-3 prose-td:text-black"
             dangerouslySetInnerHTML={{ __html: marked.parse(article.body) as string }}
           />
 
@@ -173,7 +172,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {article.tags && article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-12">
               {article.tags.map((tag: string) => (
-                <Badge key={tag} variant="outline" className="border-neutral-700 text-neutral-400">
+                <Badge key={tag} variant="outline" className="border-black text-black">
                   #{tag}
                 </Badge>
               ))}
@@ -184,21 +183,22 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
           <div className="mt-16 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold  mb-6">Related Articles</h2>
+            <h2 className="text-2xl font-bold text-black mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedArticles.map((relatedArticle: Article) => (
                 <Link key={relatedArticle.slug} href={`/news/${relatedArticle.slug}`}>
-                  <Card className=" border-neutral-800 hover:border-yellow-500 transition-colors h-full">
+                  <Card className=" border-neutral-800 h-full">
                     <CardContent className="p-6">
-                      <Badge variant="secondary" className="bg-neutral-800  mb-3">
+                      <Badge
+                        variant="secondary"
+                        className="bg-neutral-800 text-white mb-3 hover:bg-neutral-800 hover:text-white"
+                      >
                         {relatedArticle.category}
                       </Badge>
-                      <h3 className="text-white font-semibold mb-2 line-clamp-2 hover: transition-colors">
+                      <h3 className="text-black font-semibold mb-2 line-clamp-2 hover:underline">
                         {relatedArticle.title}
                       </h3>
-                      <p className="text-neutral-500 text-sm line-clamp-2">
-                        {relatedArticle.excerpt}
-                      </p>
+                      <p className="text-black text-sm line-clamp-2">{relatedArticle.excerpt}</p>
                     </CardContent>
                   </Card>
                 </Link>
@@ -208,5 +208,5 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
       </div>
     </MainLayout>
-  )
+  );
 }
