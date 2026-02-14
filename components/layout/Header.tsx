@@ -144,23 +144,23 @@ const Header = () => {
                     <NavigationMenuItem key={item.label}>
                       {item.children ? (
                         <>
-                          <NavigationMenuTrigger className="text-white bg-transparent hover:bg-neutral-800 data-[state=open]:bg-neutral-800 focus:bg-neutral-800">
+                          <NavigationMenuTrigger className="text-white bg-transparent hover:bg-[#002a6a] hover:text-white data-[state=open]:bg-[#002a6a] data-[state=open]:text-white focus:bg-[#002a6a] focus:text-white">
                             {item.label}
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-neutral-900 border border-neutral-800">
+                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-[#001a4a] border border-[#001e5a]">
                               {item.children.map(child => (
                                 <li key={child.href}>
                                   <NavigationMenuLink asChild>
                                     <Link
                                       href={child.href}
-                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-neutral-800 hover:text-yellow-500 focus:bg-neutral-800"
+                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#002a6a] hover:text-white focus:bg-[#002a6a]"
                                     >
                                       <div className="text-sm font-medium text-white leading-none">
                                         {child.label}
                                       </div>
                                       {child.description && (
-                                        <p className="line-clamp-2 text-sm leading-snug text-neutral-400 mt-1">
+                                        <p className="line-clamp-2 text-sm leading-snug text-gray-300 mt-1">
                                           {child.description}
                                         </p>
                                       )}
@@ -174,7 +174,7 @@ const Header = () => {
                       ) : (
                         <Link
                           href={item.href}
-                          className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-800 hover:text-yellow-500 focus:bg-neutral-800 focus:text-yellow-500 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-neutral-800/50 data-[state=open]:bg-neutral-800/50"
+                          className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-[#002a6a] hover:text-white focus:bg-[#002a6a] focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-[#002a6a]/50 data-[state=open]:bg-[#002a6a]/50"
                         >
                           {item.label}
                         </Link>
@@ -189,7 +189,7 @@ const Header = () => {
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
                 <button
-                  className="p-2 rounded-md text-white hover:bg-neutral-800 transition-colors"
+                  className="p-2 rounded-md text-white hover:bg-[#002a6a] transition-colors"
                   aria-label="Toggle menu"
                 >
                   <Menu size={24} />
@@ -197,7 +197,7 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-[300px] bg-neutral-900 border-neutral-800 text-white"
+                className="w-[300px] bg-[#001a4a] border-[#001e5a] text-white"
               >
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-2 mb-8 pt-4">
@@ -253,7 +253,7 @@ const Header = () => {
                 {/* Text column */}
                 <div className="flex-1">
                   <p className="mt-1 text-lg">
-                    <b className="">WELCOME TO GOLD PRICE LIVE...</b> 👋 (
+                    <b className="">Hey guys...</b> 👋 (
                     <a
                       href="/about"
                       target="_blank"
@@ -265,13 +265,12 @@ const Header = () => {
                     ){' '}
                   </p>
                   <p className="mt-1  text-sm">
-                    I created this site to help gold bugs invest wisely.
+                    I created this site to help my fellow gold bugs invest more wisely. I write
+                    about investing on Substack...
                   </p>
-                  <p className="mt-1  text-sm">
-                    I write about gold, silver and investing on Substack...
-                  </p>
+
                   <p className="my-1  text-sm">
-                    You can signup here 👉 &nbsp;
+                    Signup here: 👉 &nbsp;
                     <a
                       href="https://investorsgold.substack.com"
                       target="_blank"
@@ -281,7 +280,7 @@ const Header = () => {
                       investorsgold.substack.com
                     </a>
                   </p>
-                  <p className="mt-1  text-sm">( Your support is appreciated 😊)</p>
+                  <p className="mt-1  text-sm">( Your support is appreciated 😊) - Dave</p>
                 </div>
               </div>
             </CardContent>
@@ -339,7 +338,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
         <SheetClose asChild>
           <Link
             href={item.href}
-            className="block py-3 px-4 text-sm font-medium text-white hover:bg-neutral-800 hover:text-yellow-500 rounded-md transition-colors"
+            className="block py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
             onClick={onClose}
           >
             {item.label}
@@ -352,7 +351,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
   return (
     <li>
       <button
-        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-neutral-800 hover:text-yellow-500 rounded-md transition-colors"
+        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{item.label}</span>
@@ -367,7 +366,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
           <SheetClose asChild>
             <Link
               href={item.href}
-              className="block py-2.5 px-4 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-yellow-500 rounded-md transition-colors"
+              className="block py-2.5 px-4 text-sm text-gray-200 hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
               onClick={onClose}
             >
               View All {item.label}
@@ -377,7 +376,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
             <SheetClose asChild key={child.href}>
               <Link
                 href={child.href}
-                className="block py-2.5 px-4 text-sm text-neutral-300 hover:bg-neutral-800 hover:text-yellow-500 rounded-md transition-colors"
+                className="block py-2.5 px-4 text-sm text-gray-200 hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
                 onClick={onClose}
               >
                 {child.label}
