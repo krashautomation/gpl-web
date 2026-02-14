@@ -21,7 +21,7 @@ export default function AboutGoldPriceLive() {
     <MainLayout>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
               <div className="flex-shrink-0">
                         <Image
@@ -56,7 +56,7 @@ export default function AboutGoldPriceLive() {
         </Card>
         
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
     
           <CardContent>
             <div className="overflow-x-auto">

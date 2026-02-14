@@ -97,9 +97,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="container mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav className="text-sm text-neutral-400 mb-6">
-          <Link href="/" className="hover:text-yellow-500">Home</Link>
+          <Link href="/" className="hover:">Home</Link>
           <span className="mx-2">/</span>
-          <Link href="/news" className="hover:text-yellow-500">News</Link>
+          <Link href="/news" className="hover:">News</Link>
           <span className="mx-2">/</span>
           <span className="text-neutral-500">{article.title}</span>
         </nav>
@@ -107,7 +107,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Back Link */}
         <Link 
           href="/news" 
-          className="inline-flex items-center gap-2 text-neutral-400 hover:text-yellow-500 mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-neutral-400 hover: mb-8 transition-colors"
         >
           <ArrowLeft size={16} />
           Back to News
@@ -162,7 +162,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               prose-ul:text-neutral-300 prose-ul:mb-4
               prose-li:mb-2
               prose-strong:text-white
-              prose-a:text-yellow-500 prose-a:no-underline hover:prose-a:underline
+              prose-a: prose-a:no-underline hover:prose-a:underline
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
               prose-td:border-neutral-700 prose-td:p-3 prose-td:text-neutral-300"
@@ -184,16 +184,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
           <div className="mt-16 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-yellow-500 mb-6">Related Articles</h2>
+            <h2 className="text-2xl font-bold  mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedArticles.map((relatedArticle: Article) => (
                 <Link key={relatedArticle.slug} href={`/news/${relatedArticle.slug}`}>
-                  <Card className="bg-neutral-900 border-neutral-800 hover:border-yellow-500 transition-colors h-full">
+                  <Card className=" border-neutral-800 hover:border-yellow-500 transition-colors h-full">
                     <CardContent className="p-6">
-                      <Badge variant="secondary" className="bg-neutral-800 text-yellow-500 mb-3">
+                      <Badge variant="secondary" className="bg-neutral-800  mb-3">
                         {relatedArticle.category}
                       </Badge>
-                      <h3 className="text-white font-semibold mb-2 line-clamp-2 hover:text-yellow-500 transition-colors">
+                      <h3 className="text-white font-semibold mb-2 line-clamp-2 hover: transition-colors">
                         {relatedArticle.title}
                       </h3>
                       <p className="text-neutral-500 text-sm line-clamp-2">

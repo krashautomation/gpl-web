@@ -50,15 +50,15 @@ export default function RecentArticlesSection() {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-yellow-500">Latest News</h2>
-        <Link href="/news" className="text-sm text-yellow-500 hover:underline flex items-center gap-1">
+        <h2 className="text-2xl font-bold ">Latest News</h2>
+        <Link href="/news" className="text-sm  hover:underline flex items-center gap-1">
           View all <ArrowRight size={16} />
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <Link key={article.slug} href={`/news/${article.slug}`}>
-            <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+            <Card className=" border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
               {article.featuredImage && (
                 <div className="relative w-full h-48 overflow-hidden">
                   <Image

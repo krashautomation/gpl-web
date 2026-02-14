@@ -85,9 +85,9 @@ export default function GoldPriceHistory() {
   return (
     <MainLayout>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold Price History</CardTitle>
+            <CardTitle className="">Gold Price History</CardTitle>
             <div className="flex items-center gap-2 text-sm text-white">
               <span>100 Year Historical Chart</span>
             </div>
@@ -109,9 +109,9 @@ export default function GoldPriceHistory() {
           </CardContent>
         </Card>
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold Price Performance USD</CardTitle>
+            <CardTitle className="">Gold Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">

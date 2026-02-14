@@ -86,7 +86,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
     <MainLayout>
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold  mb-4">
             Gold Price News
           </h1>
           <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
@@ -122,7 +122,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         {/* Active Category Header */}
         {activeCategory !== 'All' && (
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold text-yellow-500">
+            <h2 className="text-2xl font-semibold ">
               {activeCategory}
             </h2>
             <p className="text-neutral-400 mt-2">
@@ -135,7 +135,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article) => (
             <Link key={article.slug} href={`/news/${article.slug}`}>
-              <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+              <Card className=" border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
                 {article.featuredImage && (
                   <div className="relative w-full h-48 overflow-hidden">
                     <Image
@@ -189,7 +189,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 : 'No articles found.'}
             </p>
             {activeCategory !== 'All' && (
-              <Link href="/news" className="text-yellow-500 hover:underline mt-4 inline-block">
+              <Link href="/news" className=" hover:underline mt-4 inline-block">
                 View all articles
               </Link>
             )}

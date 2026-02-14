@@ -69,7 +69,7 @@ export default function ChartsPage() {
     <MainLayout>
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold  mb-4">
             Gold Price Charts
           </h1>
           <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
@@ -80,14 +80,14 @@ export default function ChartsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {chartTypes.map((chart) => (
             <Link key={chart.title} href={chart.href}>
-              <Card className="bg-neutral-900 border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+              <Card className=" border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-neutral-800 rounded-lg group-hover:bg-neutral-700 transition-colors">
-                      <chart.icon className="h-6 w-6 text-yellow-500" />
+                      <chart.icon className="h-6 w-6 " />
                     </div>
                     <div>
-                      <CardTitle className="text-yellow-500 group-hover:text-yellow-400">
+                      <CardTitle className=" group-hover:text-yellow-400">
                         {chart.title}
                       </CardTitle>
                     </div>
@@ -115,7 +115,7 @@ export default function ChartsPage() {
 
         {/* Additional Info */}
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-yellow-500 mb-4">
+          <h2 className="text-2xl font-bold  mb-4">
             Understanding Gold Charts
           </h2>
           <p className="text-neutral-400 mb-6">
@@ -124,7 +124,7 @@ export default function ChartsPage() {
           </p>
           <Link 
             href="/news/understanding-gold-price-charts"
-            className="text-yellow-500 hover:underline"
+            className=" hover:underline"
           >
             Learn how to read gold price charts →
           </Link>

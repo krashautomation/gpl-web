@@ -134,9 +134,9 @@ export default function SilverPrice() {
     <MainLayout>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="text-yellow-500">Silver Price</CardTitle>
+             <CardTitle className="">Silver Price</CardTitle>
                <div className="flex items-center gap-2 text-sm text-white">
                <span>1 Year Chart</span>
                       </div>
@@ -157,9 +157,9 @@ export default function SilverPrice() {
         </Card>
         
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Silver Price Performance USD</CardTitle>
+            <CardTitle className="">Silver Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">

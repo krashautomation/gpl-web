@@ -129,9 +129,9 @@ export default function GoldSilverRatio() {
   return (
     <MainLayout>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold-Silver Ratio</CardTitle>
+            <CardTitle className="">Gold-Silver Ratio</CardTitle>
             <div className="flex items-center gap-2 text-sm text-white">
               <span>12 Month Chart (GC=F / SI=F)</span>
             </div>
@@ -143,9 +143,9 @@ export default function GoldSilverRatio() {
           </CardContent>
         </Card>
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Gold Silver Performance Comparison</CardTitle>
+            <CardTitle className="">Gold Silver Performance Comparison</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">

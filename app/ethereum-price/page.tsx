@@ -138,9 +138,9 @@ export default function EthereumPrice() {
     <MainLayout>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="text-yellow-500">Ethereum Price</CardTitle>
+             <CardTitle className="">Ethereum Price</CardTitle>
                <div className="flex items-center gap-2 text-sm text-white">
                <span>1 Year Chart</span>
                       </div>
@@ -161,9 +161,9 @@ export default function EthereumPrice() {
         </Card>
         
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Ethereum Price Performance USD</CardTitle>
+            <CardTitle className="">Ethereum Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">

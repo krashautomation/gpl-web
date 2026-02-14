@@ -114,9 +114,9 @@ export default function SilverETFs() {
     <MainLayout>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="text-yellow-500">Silver ETFs</CardTitle>
+             <CardTitle className="">Silver ETFs</CardTitle>
                <div className="flex items-center gap-2 text-sm text-white">
                <span>iShares Silver Trust SLV 1 Year Chart</span>
                       </div>
@@ -137,9 +137,9 @@ export default function SilverETFs() {
         </Card>
         
         
-        <Card className="bg-neutral-900 border-neutral-800">
+        <Card className=" border-neutral-800">
           <CardHeader>
-            <CardTitle className="text-yellow-500">Popular Silver ETFs</CardTitle>
+            <CardTitle className="">Popular Silver ETFs</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
