@@ -235,18 +235,18 @@ const Header = () => {
       <div className="container mx-auto px-4 pt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="border-neutral-800 h-full">
-            <CardContent className="p-6">
+            <CardContent className="p-3">
               {/* Flex row → image left | text right */}
-              <div className="flex items-center gap-6">
+              <div className="flex items-start gap-4">
                 {/* Image column */}
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 pl-3 pt-2">
                   <Image
                     src="/images/dave-profile.png"
                     alt="Dave at Gold Price Live"
-                    width={110}
-                    height={110}
+                    width={80}
+                    height={80}
                     priority={false}
-                    className="shadow-lg " // rounded-full is nice for profile pics
+                    className="shadow-lg rounded-full border-4 border-amber-500" // rounded-full is nice for profile pics
                   />
                 </div>
 
@@ -265,8 +265,9 @@ const Header = () => {
                     ){' '}
                   </p>
                   <p className="mt-1  text-sm">
-                    I created this site to help my fellow gold bugs invest more wisely. I write
-                    about investing on Substack...
+                    Welcome to Gold Price Live. I created this site to help my fellow gold bugs
+                    invest more wisely. When I am not working on this site, I write about investing
+                    on Substack...
                   </p>
 
                   <p className="my-1  text-sm">
@@ -281,6 +282,7 @@ const Header = () => {
                     </a>
                   </p>
                   <p className="mt-1  text-sm">( Your support is appreciated 😊) - Dave</p>
+                  <p className="mt-1  text-sm">P.S. - Keep stacking!</p>
                 </div>
               </div>
             </CardContent>
