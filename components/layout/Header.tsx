@@ -88,28 +88,33 @@ const navItems: NavItem[] = [
   },
 ];
 
+const fetchArticles = async () => {
+  const res = await fetch(
+    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Finvestorsgold.substack.com%2Ffeed',
+    { next: { revalidate: 86400 } }
+  );
+  const data = await res.json();
+  if (data.status === 'ok' && data.items) {
+    return data.items.slice(0, 5);
+  }
+  return [];
+};
+
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [articles, setArticles] = useState<{ title: string; link: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const res = await fetch(
-          'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Finvestorsgold.substack.com%2Ffeed'
-        );
-        const data = await res.json();
-        if (data.status === 'ok' && data.items) {
-          setArticles(data.items.slice(0, 5));
-        }
-      } catch (error) {
-        console.error('Failed to fetch articles:', error);
-      } finally {
+    fetchArticles()
+      .then(data => {
+        setArticles(data);
         setLoading(false);
-      }
-    };
-    fetchArticles();
+      })
+      .catch(error => {
+        console.error('Failed to fetch articles:', error);
+        setLoading(false);
+      });
   }, []);
 
   return (
