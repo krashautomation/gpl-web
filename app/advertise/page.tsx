@@ -19,14 +19,17 @@ import Link from "next/link"                      // if using Next.js
 export default function AdvertiseGoldPriceLive() {
   return (
     <MainLayout>
+
+      <div className="flex items-center justify-center mb-6">
+  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+    Advertise
+  </h1>
+</div>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
 
- <p className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
-    Advertise on Gold Price live
-  </p>
 
               <div className="flex-shrink-0">
                         <Image
@@ -69,28 +72,28 @@ export default function AdvertiseGoldPriceLive() {
           <CardContent>
             <div className="overflow-x-auto">
         <div className="flex flex-col px-6 py-8">
-  <p className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+  <p className="text-2xl md:text-3xl font-bold mb-3 tracking-tight">
     Advertising  on GoldPricelive.co
   </p>
   
-  <p className="text-md text-gray-300 font-medium mb-6  max-w-md">
+  <p className="text-md font-medium mb-6  max-w-md">
    I started Gold Price Live as a vibe coding project to help me share what I have learned about investing, finance and precious metals. 
   </p>
 
-  <p className="text-base text-gray-400 leading-relaxed max-w-lg mb-8">
+  <p className="text-base  leading-relaxed max-w-lg mb-8">
    "Gold is the money of kings." — Anonymous</p>
-    <p className="text-md text-gray-300 font-medium mb-6  max-w-md">
+    <p className="text-md font-medium mb-6  max-w-md">
    I didn't realize how many people I would help along the way. If you want to be a part of our growth story, we are looking for long-term partners who want to build the relationships of the future. 
   </p>
 
-   <p className="text-base text-amber-400 font-semibold mb-3">
+   <p className="text-base  font-semibold mb-3">
     For Advertising and Business Inquiries
   </p>
      
 
  <p className='mb-3'>Reach savvy investors interested in gold and precious metals investing. Advertise on Gold Price Live.</p>
  
-    <p className='mb-3'>Contact: 👉 &nbsp;<span className='text-amber-400'>westrock@protonmail.com</span></p>
+    <p className='mb-3'>Contact: 👉 &nbsp;<span className=''>westrock@protonmail.com</span></p>
     <p className="my-1 text-base text-md">
     Thanks for stopping by... </p>
       <p className="my-1 text-base text-md">

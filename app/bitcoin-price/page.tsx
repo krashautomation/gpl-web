@@ -141,11 +141,11 @@ export default function BitcoinPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Bitcoin Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {bitcoinQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {bitcoinQuote.price.toFixed(2)}</span>
                  <span className={bitcoinQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {bitcoinQuote.change < 0 ? '▼' : '▲'} {Math.abs(bitcoinQuote.change).toFixed(2)} {bitcoinQuote.changePercent}%

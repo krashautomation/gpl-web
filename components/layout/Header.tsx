@@ -119,7 +119,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="border-b border-[#001e5a]/30 bg-[#001e5a] text-white sticky top-0 z-50">
+      <header className="border-b border-[#001e5a]/30 bg-[#001e5a]  sticky top-0 z-50">
         <div className="container mx-auto px-2 py-2 pt-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -137,30 +137,30 @@ const Header = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:block text-white">
               <NavigationMenu className="text-white">
-                <NavigationMenuList className="gap-1">
+                <NavigationMenuList className="gap-1 text-white">
                   {navItems.map(item => (
-                    <NavigationMenuItem key={item.label}>
+                    <NavigationMenuItem key={item.label} className="text-white">
                       {item.children ? (
                         <>
-                          <NavigationMenuTrigger className="text-white bg-transparent hover:bg-[#002a6a] hover:text-white data-[state=open]:bg-[#002a6a] data-[state=open]:text-white focus:bg-[#002a6a] focus:text-white">
+                          <NavigationMenuTrigger className="text-white bg-transparent hover:bg-[#002a6a] hover: data-[state=open]:bg-[#002a6a] data-[state=open]: focus:bg-[#002a6a] focus:">
                             {item.label}
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-[#001a4a] border border-[#001e5a]">
+                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-[#001a4a] border border-[#001e5a] text-white">
                               {item.children.map(child => (
                                 <li key={child.href}>
                                   <NavigationMenuLink asChild>
                                     <Link
                                       href={child.href}
-                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#002a6a] hover:text-white focus:bg-[#002a6a]"
+                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors text-white hover:bg-[#002a6a] hover: focus:bg-[#002a6a]"
                                     >
-                                      <div className="text-sm font-medium text-white leading-none">
+                                      <div className="text-sm text-white font-medium  leading-none">
                                         {child.label}
                                       </div>
                                       {child.description && (
-                                        <p className="line-clamp-2 text-sm leading-snug text-gray-300 mt-1">
+                                        <p className="line-clamp-2 text-sm leading-snug mt-1">
                                           {child.description}
                                         </p>
                                       )}
@@ -174,7 +174,7 @@ const Header = () => {
                       ) : (
                         <Link
                           href={item.href}
-                          className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-[#002a6a] hover:text-white focus:bg-[#002a6a] focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-[#002a6a]/50 data-[state=open]:bg-[#002a6a]/50"
+                          className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-[#002a6a] hover: focus:bg-[#002a6a] focus: focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-[#002a6a]/50 data-[state=open]:bg-[#002a6a]/50"
                         >
                           {item.label}
                         </Link>
@@ -187,9 +187,9 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild className="lg:hidden">
+              <SheetTrigger asChild className="lg:hidden text-white">
                 <button
-                  className="p-2 rounded-md text-white hover:bg-[#002a6a] transition-colors"
+                  className="p-2 rounded-md  hover:bg-[#002a6a] hover:text-white transition-colors text-white"
                   aria-label="Toggle menu"
                 >
                   <Menu size={24} />
@@ -197,7 +197,7 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-[300px] bg-[#001a4a] border-[#001e5a] text-white"
+                className="w-[300px] bg-[#001a4a] border-[#001e5a] "
               >
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-2 mb-8 pt-4">
@@ -206,7 +206,7 @@ const Header = () => {
                   </div>
 
                   <nav className="flex-1">
-                    <ul className="space-y-1">
+                    <ul className="space-y-1 text-white">
                       {navItems.map(item => (
                         <MobileNavItem
                           key={item.label}
@@ -226,7 +226,7 @@ const Header = () => {
           </div>
 
           {/* Tagline */}
-          <p className="text-xs text-white mt-0 hidden sm:block px-0">
+          <p className="text-xs  mt-0 hidden sm:block px-0 text-white">
             GOLD PRICES LIVE 24/7 MARKET NEWS
           </p>
         </div>
@@ -258,7 +258,7 @@ const Header = () => {
                       href="/about"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-amber-400 hover:underline"
+                      className="hover: hover:underline"
                     >
                       about
                     </a>
@@ -290,13 +290,13 @@ const Header = () => {
 
           <Card className="border-[#001e5a]/30 bg-[#001e5a]  h-full">
             <CardContent className="p-3">
-              <div className="flex-shrink-0 text-white font-extrabold px-3 pb-2">
+              <div className="flex-shrink-0 text-white  font-extrabold px-3 pb-2">
                 INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
               </div>
 
               <ul className="space-y-2 text-sm text-gray-200 pl-3">
                 {loading ? (
-                  <li className="text-gray-400">Loading articles...</li>
+                  <li className="">Loading articles...</li>
                 ) : (
                   articles.map((article, index) => (
                     <li key={index}>
@@ -313,12 +313,12 @@ const Header = () => {
                 )}
               </ul>
 
-              <div className="mt-1 pl-3">
+              <div className="mt-1 pl-3 text-white">
                 <a
                   href="https://investorsgold.substack.com/archive"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white hover:text-[#ffe600] hover:underline"
+                  className="text-sm  hover:text-[#ffe600] hover:underline"
                 >
                   See more posts from Investor's Gold →
                 </a>
@@ -340,7 +340,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
         <SheetClose asChild>
           <Link
             href={item.href}
-            className="block py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
+            className="block py-3 px-4 text-sm font-medium  hover:bg-[#002a6a] hover: rounded-md transition-colors"
             onClick={onClose}
           >
             {item.label}
@@ -353,13 +353,13 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
   return (
     <li>
       <button
-        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
+        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{item.label}</span>
         <ChevronDown
           size={16}
-          className={cn('transition-transform duration-200', isOpen && 'rotate-180')}
+          className={cn('transition-transform duration-200 text-white', isOpen && 'rotate-180 text-white')}
         />
       </button>
 
@@ -368,7 +368,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
           <SheetClose asChild>
             <Link
               href={item.href}
-              className="block py-2.5 px-4 text-sm text-gray-200 hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
+              className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
               onClick={onClose}
             >
               View All {item.label}
@@ -378,7 +378,7 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
             <SheetClose asChild key={child.href}>
               <Link
                 href={child.href}
-                className="block py-2.5 px-4 text-sm text-gray-200 hover:bg-[#002a6a] hover:text-white rounded-md transition-colors"
+                className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
                 onClick={onClose}
               >
                 {child.label}

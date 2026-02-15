@@ -64,14 +64,14 @@ export default function AboutGoldPriceLive() {
     Contact Dave at Gold Price live
   </p>
   
-  <p className="text-md text-gray-300 font-medium mb-6  max-w-md">
+  <p className="text-md font-medium mb-6  max-w-md">
    I started Gold Price Live as a vibe coding project to help me share what I have learned about investing, finance and precious metals. 
   </p>
 
-  <p className="text-base text-gray-400 leading-relaxed max-w-lg mb-8">
+  <p className="text-base  leading-relaxed max-w-lg mb-8">
    "Gold is the money of kings." — Anonymous</p>
 
-   <p className="text-base text-amber-400 font-semibold mb-3">
+   <p className="text-base  font-semibold mb-3">
     For Advertising and Business Inquiries
   </p>
      
@@ -85,7 +85,7 @@ export default function AboutGoldPriceLive() {
       href="/advertise" 
       target="_blank" 
       rel="noopener noreferrer"
-      className="text-amber-400 hover:underline"
+      className=" hover:underline"
     >
       Advertise on Gold Price Live
     </a></p>

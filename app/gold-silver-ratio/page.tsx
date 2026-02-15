@@ -132,7 +132,7 @@ export default function GoldSilverRatio() {
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Gold-Silver Ratio</CardTitle>
-            <div className="flex items-center gap-2 text-sm text-white">
+            <div className="flex items-center gap-2 text-sm ">
               <span>12 Month Chart (GC=F / SI=F)</span>
             </div>
           </CardHeader>

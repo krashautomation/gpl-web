@@ -137,11 +137,11 @@ export default function PalladiumPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Palladium Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {palladiumQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {palladiumQuote.price.toFixed(2)}</span>
                  <span className={palladiumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {palladiumQuote.change < 0 ? '▼' : '▲'} {Math.abs(palladiumQuote.change).toFixed(2)} {palladiumQuote.changePercent}%

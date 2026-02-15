@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-[#001e5a] border-t border-[#001e5a]/30 text-white mt-16 py-12">
+    <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-16 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* Column 1: WORLD GOLD PRICES */}

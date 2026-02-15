@@ -137,11 +137,11 @@ export default function PlatinumPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Platinum Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {platinumQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {platinumQuote.price.toFixed(2)}</span>
                  <span className={platinumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {platinumQuote.change < 0 ? '▼' : '▲'} {Math.abs(platinumQuote.change).toFixed(2)} {platinumQuote.changePercent}%

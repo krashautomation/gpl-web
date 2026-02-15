@@ -137,11 +137,11 @@ export default function SilverPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Silver Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {silverQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {silverQuote.price.toFixed(2)}</span>
                  <span className={silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {silverQuote.change < 0 ? '▼' : '▲'} {Math.abs(silverQuote.change).toFixed(2)} {silverQuote.changePercent}%

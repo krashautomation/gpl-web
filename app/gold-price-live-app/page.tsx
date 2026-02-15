@@ -50,11 +50,11 @@ export default function GoldPriceLiveApp() {
     Gold Price Live App
   </p>
   
-  <p className="text-lg md:text-xl text-gray-300 font-medium mb-6 text-center max-w-md">
+  <p className="text-lg md:text-xl font-medium mb-6 text-center max-w-md">
     Real-Time Precious Metals & Market Tracker
   </p>
 
-  <p className="text-base text-gray-400 leading-relaxed text-center max-w-lg mb-8">
+  <p className="text-base  leading-relaxed text-center max-w-lg mb-8">
     Stay ahead of the market with live gold prices, silver prices, and major market indexes — updated in real time on your Android device.
   </p>
 
@@ -69,7 +69,7 @@ export default function GoldPriceLiveApp() {
     <li>Available now on Android</li>
   </ul>
 
-   <p className="text-base text-amber-400 font-semibold mb-3">
+   <p className="text-base  font-semibold mb-3">
      More powerful features coming soon:
    </p>
 

@@ -73,7 +73,7 @@ export default function RecentArticlesSection() {
                 <Badge variant="secondary" className="bg-amber-500 text-black w-fit mb-2">
                   {article.category}
                 </Badge>
-                <CardTitle className="text-white-500 group-hover:underline line-clamp-2">
+                <CardTitle className="-500 group-hover:underline line-clamp-2">
                   {article.title}
                 </CardTitle>
               </CardHeader>
