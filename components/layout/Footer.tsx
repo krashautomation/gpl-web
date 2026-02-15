@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-16 py-12">
+    <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-16 py-12 text-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* Column 1: WORLD GOLD PRICES */}
@@ -164,7 +164,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-neutral-800 text-center text-xs text-neutral-500">
+        <div className="mt-12 pt-8 border-t border-white text-center text-xs text-white">
           <p>© 2026 Gold Price Live. Gold, Silver and Precious Metals Prices.</p>
           <p>
             <a href="/terms-of-service" className="hover:text-yellow-500">

@@ -95,11 +95,11 @@ export default function ContactGoldPriceLive() {
                   my thoughts inevitably turned towards precious metals investing and gold....
                 </p>
 
-                <p className="text-base text-gray-600 leading-relaxed max-w-lg mb-8">
+                <p className="text-base leading-relaxed max-w-lg mb-8">
                   "Gold is money. Everything else is credit." — J.P. Morgan
                 </p>
 
-                <p className="text-base text-amber-600 font-semibold mb-3">
+                <p className="text-base  font-semibold mb-3">
                   My Mission for Gold Price Live
                 </p>
                 <p className="text-base  mb-3">
@@ -113,7 +113,7 @@ export default function ContactGoldPriceLive() {
                   instability in today's uncertain world.
                 </p>
 
-                <p className="text-base text-amber-600 font-semibold mb-3 mt-6">
+                <p className="text-base font-semibold mb-3 mt-6">
                   Advertise with Us{' '}
                 </p>
 
@@ -128,7 +128,7 @@ export default function ContactGoldPriceLive() {
                     href="/advertise"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-amber-600 hover:underline"
+                    className="font-bold hover:underline"
                   >
                     Advertise on Gold Price Live
                   </a>
