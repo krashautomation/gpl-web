@@ -253,7 +253,7 @@ const Header = () => {
                 {/* Text column */}
                 <div className="flex-1">
                   <p className="mt-1 text-sm">
-                    <b className="">Hey guys...</b> 👋 (
+                    <b className="">Hey guys</b> 👋 (
                     <a
                       href="/about"
                       target="_blank"
@@ -265,13 +265,13 @@ const Header = () => {
                     ){' '}
                   </p>
                   <p className="mt-1  text-sm">
-                    Welcome to Gold Price Live. I created this site to help my fellow gold bugs
-                    invest more wisely. When I am not working on this site, I write about investing
-                    on Substack...
+                    Welcome to Gold Price Live. I created this site to help my gold bug friends
+                    invest their savings wisely. When I am not working on this site, I write about investing
+                    on Substack. You can signup below:
                   </p>
 
                   <p className="my-1  text-sm">
-                    Signup here: 👉 &nbsp;
+                    
                     <a
                       href="https://investorsgold.substack.com"
                       target="_blank"
@@ -281,8 +281,8 @@ const Header = () => {
                       investorsgold.substack.com
                     </a>
                   </p>
-                  <p className="mt-1  text-sm">( Your support is appreciated 😊) - Dave</p>
-                  <p className="mt-1  text-sm">P.S. - Keep stacking!</p>
+                  <p className="mt-1  text-sm">I appreciate your support 😊 - Dave</p>
+                  <p className="mt-1  text-sm">P.S.  Keep stacking and feel free to contact me with comments or questions.</p>
                 </div>
               </div>
             </CardContent>

@@ -58,7 +58,7 @@ export default function RecentArticlesSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <Link key={article.slug} href={`/news/${article.slug}`}>
-            <Card className=" border-neutral-800 h-full hover:border-yellow-500 transition-colors group">
+            <Card className=" border-neutral-800 h-full hover:border-black transition-colors group">
               {article.featuredImage && (
                 <div className="relative w-full h-48 overflow-hidden">
                   <Image
@@ -70,18 +70,18 @@ export default function RecentArticlesSection() {
                 </div>
               )}
               <CardHeader>
-                <Badge variant="secondary" className="bg-neutral-800 text-white-500 w-fit mb-2">
+                <Badge variant="secondary" className="bg-amber-500 text-black w-fit mb-2">
                   {article.category}
                 </Badge>
-                <CardTitle className="text-white-500 group-hover:text-yellow-400 line-clamp-2">
+                <CardTitle className="text-white-500 group-hover:underline line-clamp-2">
                   {article.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-neutral-400 text-sm line-clamp-3 mb-4">
+                <p className="text-sm line-clamp-3 mb-4">
                   {article.excerpt}
                 </p>
-                <div className="flex items-center justify-between text-xs text-neutral-500">
+                <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
                       <Calendar size={12} />
