@@ -32,6 +32,9 @@ export const metadata: Metadata = {
       'Track live gold and silver prices with real-time charts and performance statistics.',
     images: [getOgImage('/images/og-gold-price-live.jpg')],
   },
+  other: {
+    'google-site-verification': 'H4GmbzGjib2O-9zx7ETrZkSxyVsXdd0ja4mQWeSSNpk',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
