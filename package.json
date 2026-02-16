@@ -55,8 +55,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "embla-carousel-react": "^8.3.0",
-    "eslint": "8.49.0",
-    "eslint-config-next": "13.5.1",
     "flag-icons": "^7.5.0",
     "gray-matter": "^4.0.3",
     "input-otp": "^1.2.4",
@@ -84,9 +82,16 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@humanwhocodes/config-array": "^0.13.0",
+    "@humanwhocodes/object-schema": "^2.0.3",
     "@tailwindcss/typography": "^0.5.19",
+    "eslint": "^10.0.0",
+    "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
-    "prettier": "^3.8.1"
+    "glob": "^13.0.3",
+    "inflight": "^1.0.6",
+    "prettier": "^3.8.1",
+    "rimraf": "^6.1.3"
   }
 }
