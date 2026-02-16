@@ -130,16 +130,25 @@ const Footer = () => {
             </CardContent>
           </Card>
         </div>
-        <div className="flex justify-center mt-8">
-          <iframe
-            src="https://investorsgold.substack.com/embed"
-            width={480}
-            height={320}
-            style={{ border: '1px solid #EEE', background: 'white' }}
-            frameBorder={0}
-            scrolling="no"
-            loading="lazy"
-          ></iframe>
+        <div className="flex flex-col items-center mt-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Image
+              src="/images/substack-logo.jpg"
+              alt="Investor's Gold"
+              width={40}
+              height={40}
+              className="rounded"
+            />
+            <div>
+              <p className="font-bold text-lg">Investor's Gold</p>
+              <p className="text-sm text-gray-400">The Investor's Edge. Subscribe ↓</p>
+            </div>
+          </div>
+          <div data-supascribe-embed-id="232973870932" data-supascribe-subscribe></div>
+          <script
+            src="https://js.supascribe.com/v1/loader/z1oBwbT8aJaUbULnzyYbNJfmm5u2.js"
+            async
+          ></script>
         </div>
       </div>
 
