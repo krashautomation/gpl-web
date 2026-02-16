@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
+import Script from 'next/script';
 
 const fetchArticles = async () => {
   const res = await fetch(
@@ -145,10 +146,10 @@ const Footer = () => {
             </div>
           </div>
           <div data-supascribe-embed-id="232973870932" data-supascribe-subscribe></div>
-          <script
+          <Script
             src="https://js.supascribe.com/v1/loader/z1oBwbT8aJaUbULnzyYbNJfmm5u2.js"
-            async
-          ></script>
+            strategy="lazyOnload"
+          />
         </div>
       </div>
 
