@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   title: 'Gold Price Live - Where the World Checks the Gold Price',
   description:
     'Track live gold and silver prices with real-time charts, performance statistics, and calculators. Get current precious metal prices in all major currencies.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+  },
   openGraph: {
     title: 'Gold Price Live - Live Gold & Silver Prices',
     description:
@@ -36,6 +43,7 @@ export const metadata: Metadata = {
     'google-site-verification': 'H4GmbzGjib2O-9zx7ETrZkSxyVsXdd0ja4mQWeSSNpk',
     'google-adsense-account': 'ca-pub-5013867288772497',
   },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
