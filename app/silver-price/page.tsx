@@ -60,12 +60,12 @@ export default function SilverPrice() {
         if (!data.success) {
           throw new Error('API returned error');
         }
-        
-        const formattedData = data.chartData.map((item: { time: any; value: any; }) => ({
+
+        const formattedData = data.chartData.map((item: { time: any; value: any }) => ({
           time: item.time,
           value: item.value,
         }));
-        
+
         setSilver12MData(formattedData);
       } catch (err: any) {
         setSilver12MError(err.message || 'Failed to load 12M chart data');
@@ -128,47 +128,62 @@ export default function SilverPrice() {
     return () => clearInterval(interval);
   }, []);
 
-  const silverQuote = quotes.find((q) => q.symbol === 'SI=F');
+  const silverQuote = quotes.find(q => q.symbol === 'SI=F');
 
   return (
     <MainLayout>
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-Silver Price Live  </h1>
-</div>
- 
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Silver Price Live </h1>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="">Silver Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm ">
-               <span>1 Year Chart</span>
-                      </div>
-             {silverQuote && (
-               <div className="flex items-center gap-2 text-sm ">
-                 <span>Current Price: </span><span>USD {silverQuote.price.toFixed(2)}</span>
-                 <span className={silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
-                   {silverQuote.change < 0 ? '▼' : '▲'} {Math.abs(silverQuote.change).toFixed(2)} {silverQuote.changePercent}%
-                 </span>
-               </div>
-             )}
+            <CardTitle className="">Silver Price</CardTitle>
+            <div className="flex items-center gap-2 text-sm ">
+              <span>1 Year Chart</span>
+            </div>
+            {silverQuote && (
+              <div className="flex items-center gap-2 text-sm ">
+                <span>Current Price: </span>
+                <span>USD {silverQuote.price.toFixed(2)}</span>
+                <span className={silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {silverQuote.change < 0 ? '▼' : '▲'} {Math.abs(silverQuote.change).toFixed(2)}{' '}
+                  {silverQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            {silver12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {silver12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{silver12MError}</div>}
+            {silver12MLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {silver12MError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {silver12MError}
+              </div>
+            )}
             {!silver12MLoading && !silver12MError && <LightweightChart data={silver12MData} />}
           </CardContent>
         </Card>
-        
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Silver Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
-              {silverPerfLoading && <div className="text-center py-8">Loading performance data...</div>}
-              {silverPerfError && <div className="text-center py-8 text-red-500">{silverPerfError}</div>}
+              {silverPerfLoading && (
+                <div className="text-center py-8">Loading performance data...</div>
+              )}
+              {silverPerfError && (
+                <div className="text-center py-8 text-red-500">{silverPerfError}</div>
+              )}
               {!silverPerfLoading && !silverPerfError && silverPerformance && (
                 <table className="w-full">
                   <thead>
@@ -182,77 +197,119 @@ Silver Price Live  </h1>
                     {silverQuote && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">Today</td>
-                        <td className={`text-right ${silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverQuote.change >= 0 ? '+' : ''}{silverQuote.change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverQuote.change >= 0 ? '+' : ''}
+                          {silverQuote.change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${Number(silverQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {Number(silverQuote.changePercent) >= 0 ? '+' : ''}{silverQuote.changePercent}%
+                        <td
+                          className={`text-right ${Number(silverQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {Number(silverQuote.changePercent) >= 0 ? '+' : ''}
+                          {silverQuote.changePercent}%
                         </td>
                       </tr>
                     )}
                     {silverPerformance.performance && silverPerformance.performance['30D'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">30 Days</td>
-                        <td className={`text-right ${silverPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['30D'].change >= 0 ? '+' : ''}{silverPerformance.performance['30D'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['30D'].change >= 0 ? '+' : ''}
+                          {silverPerformance.performance['30D'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${silverPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['30D'].changePercent}%
+                        <td
+                          className={`text-right ${silverPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}
+                          {silverPerformance.performance['30D'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {silverPerformance.performance && silverPerformance.performance['6M'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">6 Months</td>
-                        <td className={`text-right ${silverPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['6M'].change >= 0 ? '+' : ''}{silverPerformance.performance['6M'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['6M'].change >= 0 ? '+' : ''}
+                          {silverPerformance.performance['6M'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${silverPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['6M'].changePercent}%
+                        <td
+                          className={`text-right ${silverPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}
+                          {silverPerformance.performance['6M'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {silverPerformance.performance && silverPerformance.performance['1Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">1 Year</td>
-                        <td className={`text-right ${silverPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['1Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['1Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['1Y'].change >= 0 ? '+' : ''}
+                          {silverPerformance.performance['1Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${silverPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['1Y'].changePercent}%
+                        <td
+                          className={`text-right ${silverPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}
+                          {silverPerformance.performance['1Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {silverPerformance.performance && silverPerformance.performance['5Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">5 Year</td>
-                        <td className={`text-right ${silverPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['5Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['5Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['5Y'].change >= 0 ? '+' : ''}
+                          {silverPerformance.performance['5Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${silverPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['5Y'].changePercent}%
+                        <td
+                          className={`text-right ${silverPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}
+                          {silverPerformance.performance['5Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {silverPerformance.performance && silverPerformance.performance['20Y'] && (
                       <tr>
                         <td className="py-3">20 Years</td>
-                        <td className={`text-right ${silverPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['20Y'].change >= 0 ? '+' : ''}{silverPerformance.performance['20Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${silverPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['20Y'].change >= 0 ? '+' : ''}
+                          {silverPerformance.performance['20Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${silverPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {silverPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}{silverPerformance.performance['20Y'].changePercent}%
+                        <td
+                          className={`text-right ${silverPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {silverPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}
+                          {silverPerformance.performance['20Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
-  
       </div>
     </MainLayout>
   );

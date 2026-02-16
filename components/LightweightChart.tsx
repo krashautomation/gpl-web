@@ -1,20 +1,25 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import { ColorType } from 'lightweight-charts';
-import { Chart, AreaSeries, TimeScale, TimeScaleFitContentTrigger } from 'lightweight-charts-react-components';
+import {
+  Chart,
+  AreaSeries,
+  TimeScale,
+  TimeScaleFitContentTrigger,
+} from 'lightweight-charts-react-components';
 
 type LightweightChartProps = {
   data: { time: string; value: number }[];
 };
 
 const areaSeriesOptions = {
-  lineColor: '#eab308', // yellow-500
+  lineColor: '#eab308',
   topColor: 'rgba(234, 179, 8, 0.4)',
   bottomColor: 'rgba(234, 179, 8, 0)',
 };
 
-const LightweightChart = ({ data }: LightweightChartProps) => {
+function ChartComponent({ data }: LightweightChartProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 
@@ -35,7 +40,11 @@ const LightweightChart = ({ data }: LightweightChartProps) => {
   }, []);
 
   if (!data || data.length === 0) {
-    return <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>No data available</div>;
+    return (
+      <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+        No data available
+      </div>
+    );
   }
 
   return (
@@ -65,6 +74,12 @@ const LightweightChart = ({ data }: LightweightChartProps) => {
       )}
     </div>
   );
-};
+}
 
-export default LightweightChart;
+export default function LightweightChart(props: LightweightChartProps) {
+  return (
+    <Suspense fallback={<div className="h-[300px] bg-zinc-900 animate-pulse" />}>
+      <ChartComponent {...props} />
+    </Suspense>
+  );
+}

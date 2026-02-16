@@ -63,12 +63,12 @@ export default function SilverETFs() {
         if (!data.success) {
           throw new Error('API returned error');
         }
-        
-        const formattedData = data.chartData.map((item: { time: any; value: any; }) => ({
+
+        const formattedData = data.chartData.map((item: { time: any; value: any }) => ({
           time: item.time,
           value: item.value,
         }));
-        
+
         setSlv12MData(formattedData);
       } catch (err: any) {
         setSlv12MError(err.message || 'Failed to load 12M chart data');
@@ -86,7 +86,9 @@ export default function SilverETFs() {
       try {
         const key = process.env.NEXT_PUBLIC_YAHOO_API_KEY;
         if (!key) throw new Error('Missing API key');
-        const res = await fetch(`/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD,GLD,SLV&key=${key}`);
+        const res = await fetch(
+          `/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD,GLD,SLV&key=${key}`
+        );
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
@@ -108,38 +110,49 @@ export default function SilverETFs() {
     return () => clearInterval(interval);
   }, []);
 
-  const slvQuote = quotes.find((q) => q.symbol === 'SLV');
+  const slvQuote = quotes.find(q => q.symbol === 'SLV');
 
   return (
     <MainLayout>
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-Silver ETFs  </h1>
-</div>
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Silver ETFs </h1>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="">Silver ETFs</CardTitle>
-               <div className="flex items-center gap-2 text-sm ">
-               <span>iShares Silver Trust SLV 1 Year Chart</span>
-                      </div>
-             {slvQuote && (
-               <div className="flex items-center gap-2 text-sm ">
-                 <span>Current Price: </span><span>USD {slvQuote.price.toFixed(2)}</span>
-                 <span className={slvQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
-                   {slvQuote.change < 0 ? '▼' : '▲'} {Math.abs(slvQuote.change).toFixed(2)} {slvQuote.changePercent}%
-                 </span>
-               </div>
-             )}
+            <CardTitle className="">Silver ETFs</CardTitle>
+            <div className="flex items-center gap-2 text-sm ">
+              <span>iShares Silver Trust SLV 1 Year Chart</span>
+            </div>
+            {slvQuote && (
+              <div className="flex items-center gap-2 text-sm ">
+                <span>Current Price: </span>
+                <span>USD {slvQuote.price.toFixed(2)}</span>
+                <span className={slvQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {slvQuote.change < 0 ? '▼' : '▲'} {Math.abs(slvQuote.change).toFixed(2)}{' '}
+                  {slvQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            {slv12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {slv12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{slv12MError}</div>}
+            {slv12MLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {slv12MError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {slv12MError}
+              </div>
+            )}
             {!slv12MLoading && !slv12MError && <LightweightChart data={slv12MData} />}
           </CardContent>
         </Card>
-        
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Popular Silver ETFs</CardTitle>
@@ -156,7 +169,10 @@ Silver ETFs  </h1>
                 </thead>
                 <tbody className="text-sm">
                   {silverETFs.map((etf, index) => (
-                    <tr key={etf.symbol} className={index < silverETFs.length - 1 ? 'border-b border-neutral-800' : ''}>
+                    <tr
+                      key={etf.symbol}
+                      className={index < silverETFs.length - 1 ? 'border-b border-neutral-800' : ''}
+                    >
                       <td className="py-3">{etf.name}</td>
                       <td className="text-right">{etf.symbol}</td>
                       <td className="text-right">{etf.country}</td>
@@ -164,11 +180,17 @@ Silver ETFs  </h1>
                   ))}
                 </tbody>
               </table>
-              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
-  
       </div>
     </MainLayout>
   );

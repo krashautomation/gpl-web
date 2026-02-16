@@ -61,12 +61,12 @@ export default function EthereumPrice() {
         if (!data.success) {
           throw new Error('API returned error');
         }
-        
-        const formattedData = data.chartData.map((item: { time: any; value: any; }) => ({
+
+        const formattedData = data.chartData.map((item: { time: any; value: any }) => ({
           time: item.time,
           value: item.value,
         }));
-        
+
         setEthereum12MData(formattedData);
       } catch (err: any) {
         setEthereum12MError(err.message || 'Failed to load 12M chart data');
@@ -110,7 +110,9 @@ export default function EthereumPrice() {
       try {
         const key = process.env.NEXT_PUBLIC_YAHOO_API_KEY;
         if (!key) throw new Error('Missing API key');
-        const res = await fetch(`/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD&key=${key}`);
+        const res = await fetch(
+          `/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD&key=${key}`
+        );
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
@@ -132,49 +134,64 @@ export default function EthereumPrice() {
     return () => clearInterval(interval);
   }, []);
 
-  const ethereumQuote = quotes.find((q) => q.symbol === 'ETH-USD');
+  const ethereumQuote = quotes.find(q => q.symbol === 'ETH-USD');
 
   return (
     <MainLayout>
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Ethereum Price Live</h1>
+      </div>
 
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-    Ethereum Price Live
-  </h1>
-</div>
- 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="">Ethereum Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm ">
-               <span>1 Year Chart</span>
-                      </div>
-             {ethereumQuote && (
-               <div className="flex items-center gap-2 text-sm ">
-                 <span>Current Price: </span><span>USD {ethereumQuote.price.toFixed(2)}</span>
-                 <span className={ethereumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
-                   {ethereumQuote.change < 0 ? '▼' : '▲'} {Math.abs(ethereumQuote.change).toFixed(2)} {ethereumQuote.changePercent}%
-                 </span>
-               </div>
-             )}
+            <CardTitle className="">Ethereum Price</CardTitle>
+            <div className="flex items-center gap-2 text-sm ">
+              <span>1 Year Chart</span>
+            </div>
+            {ethereumQuote && (
+              <div className="flex items-center gap-2 text-sm ">
+                <span>Current Price: </span>
+                <span>USD {ethereumQuote.price.toFixed(2)}</span>
+                <span className={ethereumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {ethereumQuote.change < 0 ? '▼' : '▲'} {Math.abs(ethereumQuote.change).toFixed(2)}{' '}
+                  {ethereumQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            {ethereum12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {ethereum12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{ethereum12MError}</div>}
-            {!ethereum12MLoading && !ethereum12MError && <LightweightChart data={ethereum12MData} />}
+            {ethereum12MLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {ethereum12MError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {ethereum12MError}
+              </div>
+            )}
+            {!ethereum12MLoading && !ethereum12MError && (
+              <LightweightChart data={ethereum12MData} />
+            )}
           </CardContent>
         </Card>
-        
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Ethereum Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
-              {ethereumPerfLoading && <div className="text-center py-8">Loading performance data...</div>}
-              {ethereumPerfError && <div className="text-center py-8 text-red-500">{ethereumPerfError}</div>}
+              {ethereumPerfLoading && (
+                <div className="text-center py-8">Loading performance data...</div>
+              )}
+              {ethereumPerfError && (
+                <div className="text-center py-8 text-red-500">{ethereumPerfError}</div>
+              )}
               {!ethereumPerfLoading && !ethereumPerfError && ethereumPerformance && (
                 <table className="w-full">
                   <thead>
@@ -188,89 +205,142 @@ export default function EthereumPrice() {
                     {ethereumQuote && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">Today</td>
-                        <td className={`text-right ${ethereumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumQuote.change >= 0 ? '+' : ''}{ethereumQuote.change.toFixed(2)}
+                        <td
+                          className={`text-right ${ethereumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumQuote.change >= 0 ? '+' : ''}
+                          {ethereumQuote.change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${Number(ethereumQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {Number(ethereumQuote.changePercent) >= 0 ? '+' : ''}{ethereumQuote.changePercent}%
+                        <td
+                          className={`text-right ${Number(ethereumQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {Number(ethereumQuote.changePercent) >= 0 ? '+' : ''}
+                          {ethereumQuote.changePercent}%
                         </td>
                       </tr>
                     )}
                     {ethereumPerformance.performance && ethereumPerformance.performance['30D'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">30 Days</td>
-                        <td className={`text-right ${ethereumPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['30D'].change >= 0 ? '+' : ''}{ethereumPerformance.performance['30D'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['30D'].change >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['30D'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${ethereumPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}{ethereumPerformance.performance['30D'].changePercent}%
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['30D'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {ethereumPerformance.performance && ethereumPerformance.performance['6M'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">6 Months</td>
-                        <td className={`text-right ${ethereumPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['6M'].change >= 0 ? '+' : ''}{ethereumPerformance.performance['6M'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['6M'].change >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['6M'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${ethereumPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}{ethereumPerformance.performance['6M'].changePercent}%
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['6M'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {ethereumPerformance.performance && ethereumPerformance.performance['1Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">1 Year</td>
-                        <td className={`text-right ${ethereumPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['1Y'].change >= 0 ? '+' : ''}{ethereumPerformance.performance['1Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['1Y'].change >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['1Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${ethereumPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}{ethereumPerformance.performance['1Y'].changePercent}%
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['1Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {ethereumPerformance.performance && ethereumPerformance.performance['5Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">5 Year</td>
-                        <td className={`text-right ${ethereumPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['5Y'].change >= 0 ? '+' : ''}{ethereumPerformance.performance['5Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['5Y'].change >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['5Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${ethereumPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {ethereumPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}{ethereumPerformance.performance['5Y'].changePercent}%
+                        <td
+                          className={`text-right ${ethereumPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {ethereumPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}
+                          {ethereumPerformance.performance['5Y'].changePercent}%
                         </td>
                       </tr>
                     )}
-                    {ethereumPerformance.performance && '20Y' in ethereumPerformance.performance && (
-                      <tr>
-                        <td className="py-3">20 Years</td>
-                        {ethereumPerformance.performance['20Y'] ? (
-                          <>
-                            <td className={`text-right ${ethereumPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                              {ethereumPerformance.performance['20Y'].change >= 0 ? '+' : ''}{ethereumPerformance.performance['20Y'].change.toFixed(2)}
-                            </td>
-                            <td className={`text-right ${ethereumPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                              {ethereumPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}{ethereumPerformance.performance['20Y'].changePercent}%
-                            </td>
-                          </>
-                        ) : (
-                          <>
-                            <td className="text-right text-neutral-500">--</td>
-                            <td className="text-right text-neutral-500">--</td>
-                          </>
-                        )}
-                      </tr>
-                    )}
+                    {ethereumPerformance.performance &&
+                      '20Y' in ethereumPerformance.performance && (
+                        <tr>
+                          <td className="py-3">20 Years</td>
+                          {ethereumPerformance.performance['20Y'] ? (
+                            <>
+                              <td
+                                className={`text-right ${ethereumPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                              >
+                                {ethereumPerformance.performance['20Y'].change >= 0 ? '+' : ''}
+                                {ethereumPerformance.performance['20Y'].change.toFixed(2)}
+                              </td>
+                              <td
+                                className={`text-right ${ethereumPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                              >
+                                {ethereumPerformance.performance['20Y'].changePercent >= 0
+                                  ? '+'
+                                  : ''}
+                                {ethereumPerformance.performance['20Y'].changePercent}%
+                              </td>
+                            </>
+                          ) : (
+                            <>
+                              <td className="text-right text-neutral-500">--</td>
+                              <td className="text-right text-neutral-500">--</td>
+                            </>
+                          )}
+                        </tr>
+                      )}
                   </tbody>
                 </table>
               )}
               {earliestDate && (
-                <p className="text-xs text-neutral-800 text-center mt-2">Earliest price data is {new Date(earliestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                <p className="text-xs text-neutral-800 text-center mt-2">
+                  Earliest price data is{' '}
+                  {new Date(earliestDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </p>
               )}
-              <p className="text-xs text-neutral-800 text-center mt-2"> {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-2">
+                {' '}
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
-  
       </div>
     </MainLayout>
   );

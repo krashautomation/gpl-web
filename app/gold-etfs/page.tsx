@@ -63,12 +63,12 @@ export default function GoldETFs() {
         if (!data.success) {
           throw new Error('API returned error');
         }
-        
-        const formattedData = data.chartData.map((item: { time: any; value: any; }) => ({
+
+        const formattedData = data.chartData.map((item: { time: any; value: any }) => ({
           time: item.time,
           value: item.value,
         }));
-        
+
         setGld12MData(formattedData);
       } catch (err: any) {
         setGld12MError(err.message || 'Failed to load 12M chart data');
@@ -86,7 +86,9 @@ export default function GoldETFs() {
       try {
         const key = process.env.NEXT_PUBLIC_YAHOO_API_KEY;
         if (!key) throw new Error('Missing API key');
-        const res = await fetch(`/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD,GLD&key=${key}`);
+        const res = await fetch(
+          `/api/quotes?symbols=GC=F,SI=F,PL=F,PA=F,HG=F,ALI=F,BTC-USD,ETH-USD,GLD&key=${key}`
+        );
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
@@ -108,40 +110,50 @@ export default function GoldETFs() {
     return () => clearInterval(interval);
   }, []);
 
-  const gldQuote = quotes.find((q) => q.symbol === 'GLD');
+  const gldQuote = quotes.find(q => q.symbol === 'GLD');
 
   return (
     <MainLayout>
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold ETFs </h1>
+      </div>
 
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-Gold ETFs  </h1>
-</div>
- 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="">Gold ETFs</CardTitle>
-               <div className="flex items-center gap-2 text-sm">
-               <span>SPDR Gold Shares GLD 1 Year Chart</span>
-                      </div>
-             {gldQuote && (
-               <div className="flex items-center gap-2 text-sm">
-                 <span>Current Price: </span><span>USD {gldQuote.price.toFixed(2)}</span>
-                 <span className={gldQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
-                   {gldQuote.change < 0 ? '▼' : '▲'} {Math.abs(gldQuote.change).toFixed(2)} {gldQuote.changePercent}%
-                 </span>
-               </div>
-             )}
+            <CardTitle className="">Gold ETFs</CardTitle>
+            <div className="flex items-center gap-2 text-sm">
+              <span>SPDR Gold Shares GLD 1 Year Chart</span>
+            </div>
+            {gldQuote && (
+              <div className="flex items-center gap-2 text-sm">
+                <span>Current Price: </span>
+                <span>USD {gldQuote.price.toFixed(2)}</span>
+                <span className={gldQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {gldQuote.change < 0 ? '▼' : '▲'} {Math.abs(gldQuote.change).toFixed(2)}{' '}
+                  {gldQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            {gld12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {gld12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{gld12MError}</div>}
+            {gld12MLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {gld12MError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {gld12MError}
+              </div>
+            )}
             {!gld12MLoading && !gld12MError && <LightweightChart data={gld12MData} />}
           </CardContent>
         </Card>
-        
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Popular Gold ETFs</CardTitle>
@@ -158,7 +170,10 @@ Gold ETFs  </h1>
                 </thead>
                 <tbody className="text-sm">
                   {goldETFs.map((etf, index) => (
-                    <tr key={etf.symbol} className={index < goldETFs.length - 1 ? 'border-b border-neutral-800' : ''}>
+                    <tr
+                      key={etf.symbol}
+                      className={index < goldETFs.length - 1 ? 'border-b border-neutral-800' : ''}
+                    >
                       <td className="py-3">{etf.name}</td>
                       <td className="text-right">{etf.symbol}</td>
                       <td className="text-right">{etf.country}</td>
@@ -166,11 +181,17 @@ Gold ETFs  </h1>
                   ))}
                 </tbody>
               </table>
-              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
-  
       </div>
     </MainLayout>
   );

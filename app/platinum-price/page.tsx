@@ -60,12 +60,12 @@ export default function PlatinumPrice() {
         if (!data.success) {
           throw new Error('API returned error');
         }
-        
-        const formattedData = data.chartData.map((item: { time: any; value: any; }) => ({
+
+        const formattedData = data.chartData.map((item: { time: any; value: any }) => ({
           time: item.time,
           value: item.value,
         }));
-        
+
         setPlatinum12MData(formattedData);
       } catch (err: any) {
         setPlatinum12MError(err.message || 'Failed to load 12M chart data');
@@ -128,47 +128,64 @@ export default function PlatinumPrice() {
     return () => clearInterval(interval);
   }, []);
 
-  const platinumQuote = quotes.find((q) => q.symbol === 'PL=F');
+  const platinumQuote = quotes.find(q => q.symbol === 'PL=F');
 
   return (
     <MainLayout>
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-Platinum Price Live  </h1>
-</div>
- 
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Platinum Price Live </h1>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
-             <CardTitle className="">Platinum Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm ">
-               <span>1 Year Chart</span>
-                      </div>
-             {platinumQuote && (
-               <div className="flex items-center gap-2 text-sm ">
-                 <span>Current Price: </span><span>USD {platinumQuote.price.toFixed(2)}</span>
-                 <span className={platinumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
-                   {platinumQuote.change < 0 ? '▼' : '▲'} {Math.abs(platinumQuote.change).toFixed(2)} {platinumQuote.changePercent}%
-                 </span>
-               </div>
-             )}
+            <CardTitle className="">Platinum Price</CardTitle>
+            <div className="flex items-center gap-2 text-sm ">
+              <span>1 Year Chart</span>
+            </div>
+            {platinumQuote && (
+              <div className="flex items-center gap-2 text-sm ">
+                <span>Current Price: </span>
+                <span>USD {platinumQuote.price.toFixed(2)}</span>
+                <span className={platinumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {platinumQuote.change < 0 ? '▼' : '▲'} {Math.abs(platinumQuote.change).toFixed(2)}{' '}
+                  {platinumQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            {platinum12MLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {platinum12MError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{platinum12MError}</div>}
-            {!platinum12MLoading && !platinum12MError && <LightweightChart data={platinum12MData} />}
+            {platinum12MLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {platinum12MError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {platinum12MError}
+              </div>
+            )}
+            {!platinum12MLoading && !platinum12MError && (
+              <LightweightChart data={platinum12MData} />
+            )}
           </CardContent>
         </Card>
-        
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Platinum Price Performance USD</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
-              {platinumPerfLoading && <div className="text-center py-8">Loading performance data...</div>}
-              {platinumPerfError && <div className="text-center py-8 text-red-500">{platinumPerfError}</div>}
+              {platinumPerfLoading && (
+                <div className="text-center py-8">Loading performance data...</div>
+              )}
+              {platinumPerfError && (
+                <div className="text-center py-8 text-red-500">{platinumPerfError}</div>
+              )}
               {!platinumPerfLoading && !platinumPerfError && platinumPerformance && (
                 <table className="w-full">
                   <thead>
@@ -182,77 +199,119 @@ Platinum Price Live  </h1>
                     {platinumQuote && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">Today</td>
-                        <td className={`text-right ${platinumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumQuote.change >= 0 ? '+' : ''}{platinumQuote.change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumQuote.change >= 0 ? '+' : ''}
+                          {platinumQuote.change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${Number(platinumQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {Number(platinumQuote.changePercent) >= 0 ? '+' : ''}{platinumQuote.changePercent}%
+                        <td
+                          className={`text-right ${Number(platinumQuote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {Number(platinumQuote.changePercent) >= 0 ? '+' : ''}
+                          {platinumQuote.changePercent}%
                         </td>
                       </tr>
                     )}
                     {platinumPerformance.performance && platinumPerformance.performance['30D'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">30 Days</td>
-                        <td className={`text-right ${platinumPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['30D'].change >= 0 ? '+' : ''}{platinumPerformance.performance['30D'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumPerformance.performance['30D'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['30D'].change >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['30D'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${platinumPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}{platinumPerformance.performance['30D'].changePercent}%
+                        <td
+                          className={`text-right ${platinumPerformance.performance['30D'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['30D'].changePercent >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['30D'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {platinumPerformance.performance && platinumPerformance.performance['6M'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">6 Months</td>
-                        <td className={`text-right ${platinumPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['6M'].change >= 0 ? '+' : ''}{platinumPerformance.performance['6M'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumPerformance.performance['6M'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['6M'].change >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['6M'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${platinumPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}{platinumPerformance.performance['6M'].changePercent}%
+                        <td
+                          className={`text-right ${platinumPerformance.performance['6M'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['6M'].changePercent >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['6M'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {platinumPerformance.performance && platinumPerformance.performance['1Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">1 Year</td>
-                        <td className={`text-right ${platinumPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['1Y'].change >= 0 ? '+' : ''}{platinumPerformance.performance['1Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumPerformance.performance['1Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['1Y'].change >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['1Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${platinumPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}{platinumPerformance.performance['1Y'].changePercent}%
+                        <td
+                          className={`text-right ${platinumPerformance.performance['1Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['1Y'].changePercent >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['1Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {platinumPerformance.performance && platinumPerformance.performance['5Y'] && (
                       <tr className="border-b border-neutral-800">
                         <td className="py-3">5 Year</td>
-                        <td className={`text-right ${platinumPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['5Y'].change >= 0 ? '+' : ''}{platinumPerformance.performance['5Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumPerformance.performance['5Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['5Y'].change >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['5Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${platinumPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}{platinumPerformance.performance['5Y'].changePercent}%
+                        <td
+                          className={`text-right ${platinumPerformance.performance['5Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['5Y'].changePercent >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['5Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                     {platinumPerformance.performance && platinumPerformance.performance['20Y'] && (
                       <tr>
                         <td className="py-3">20 Years</td>
-                        <td className={`text-right ${platinumPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['20Y'].change >= 0 ? '+' : ''}{platinumPerformance.performance['20Y'].change.toFixed(2)}
+                        <td
+                          className={`text-right ${platinumPerformance.performance['20Y'].change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['20Y'].change >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['20Y'].change.toFixed(2)}
                         </td>
-                        <td className={`text-right ${platinumPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {platinumPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}{platinumPerformance.performance['20Y'].changePercent}%
+                        <td
+                          className={`text-right ${platinumPerformance.performance['20Y'].changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {platinumPerformance.performance['20Y'].changePercent >= 0 ? '+' : ''}
+                          {platinumPerformance.performance['20Y'].changePercent}%
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
-  
       </div>
     </MainLayout>
   );

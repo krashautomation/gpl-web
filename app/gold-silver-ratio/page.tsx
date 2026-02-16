@@ -28,7 +28,7 @@ export default function GoldSilverRatio() {
       try {
         const [goldRes, silverRes] = await Promise.all([
           fetch('/api/chart?symbol=GC=F&range=12M'),
-          fetch('/api/chart?symbol=SI=F&range=12M')
+          fetch('/api/chart?symbol=SI=F&range=12M'),
         ]);
 
         if (!goldRes.ok || !silverRes.ok) {
@@ -43,14 +43,18 @@ export default function GoldSilverRatio() {
         }
 
         // Merge data by date and calculate ratio
-        const goldMap = new Map<string, number>(goldData.chartData.map((item: any) => [item.time, item.value]));
-        const silverMap = new Map<string, number>(silverData.chartData.map((item: any) => [item.time, item.value]));
-        
+        const goldMap = new Map<string, number>(
+          goldData.chartData.map((item: any) => [item.time, item.value])
+        );
+        const silverMap = new Map<string, number>(
+          silverData.chartData.map((item: any) => [item.time, item.value])
+        );
+
         const commonDates = Array.from(goldMap.keys()).filter(date => silverMap.has(date));
-        
+
         const calculatedRatio = commonDates.map(date => ({
           time: date,
-          value: Number(((goldMap.get(date) || 0) / (silverMap.get(date) || 1)).toFixed(2))
+          value: Number(((goldMap.get(date) || 0) / (silverMap.get(date) || 1)).toFixed(2)),
         }));
 
         setRatioData(calculatedRatio);
@@ -70,7 +74,7 @@ export default function GoldSilverRatio() {
       try {
         const [goldRes, silverRes] = await Promise.all([
           fetch('/api/chart?symbol=GC=F&type=performance'),
-          fetch('/api/chart?symbol=SI=F&type=performance')
+          fetch('/api/chart?symbol=SI=F&type=performance'),
         ]);
 
         if (!goldRes.ok || !silverRes.ok) {
@@ -96,7 +100,7 @@ export default function GoldSilverRatio() {
             comparison[period] = {
               goldReturn: goldPerf.changePercent,
               silverReturn: silverPerf.changePercent,
-              difference: Number((silverPerf.changePercent - goldPerf.changePercent).toFixed(2))
+              difference: Number((silverPerf.changePercent - goldPerf.changePercent).toFixed(2)),
             };
           }
         });
@@ -121,19 +125,16 @@ export default function GoldSilverRatio() {
       '2Y': '2 Years',
       '3Y': '3 Years',
       '5Y': '5 Years',
-      '20Y': '20 Years'
+      '20Y': '20 Years',
     };
     return labels[period] || period;
   };
 
   return (
     <MainLayout>
-
-       <div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-Gold Silver Ratio  </h1>
-</div>
-
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold Silver Ratio </h1>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
@@ -144,12 +145,23 @@ Gold Silver Ratio  </h1>
             </div>
           </CardHeader>
           <CardContent>
-            {ratioLoading && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>Loading chart...</div>}
-            {ratioError && <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }} className="text-red-500">{ratioError}</div>}
+            {ratioLoading && (
+              <div style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}>
+                Loading chart...
+              </div>
+            )}
+            {ratioError && (
+              <div
+                style={{ height: '300px', textAlign: 'center', paddingTop: '120px' }}
+                className="text-red-500"
+              >
+                {ratioError}
+              </div>
+            )}
             {!ratioLoading && !ratioError && <LightweightChart data={ratioData} />}
           </CardContent>
         </Card>
-        
+
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Gold Silver Performance Comparison</CardTitle>
@@ -170,23 +182,42 @@ Gold Silver Ratio  </h1>
                   </thead>
                   <tbody className="text-sm">
                     {Object.entries(performance).map(([period, data], index, arr) => (
-                      <tr key={period} className={index < arr.length - 1 ? 'border-b border-neutral-800' : ''}>
+                      <tr
+                        key={period}
+                        className={index < arr.length - 1 ? 'border-b border-neutral-800' : ''}
+                      >
                         <td className="py-3">{getPeriodLabel(period)}</td>
-                        <td className={`text-right ${data.goldReturn < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {data.goldReturn >= 0 ? '+' : ''}{data.goldReturn.toFixed(2)}%
+                        <td
+                          className={`text-right ${data.goldReturn < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {data.goldReturn >= 0 ? '+' : ''}
+                          {data.goldReturn.toFixed(2)}%
                         </td>
-                        <td className={`text-right ${data.silverReturn < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {data.silverReturn >= 0 ? '+' : ''}{data.silverReturn.toFixed(2)}%
+                        <td
+                          className={`text-right ${data.silverReturn < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {data.silverReturn >= 0 ? '+' : ''}
+                          {data.silverReturn.toFixed(2)}%
                         </td>
-                        <td className={`text-right ${data.difference < 0 ? 'text-red-500' : 'text-green-500'}`}>
-                          {data.difference >= 0 ? '+' : ''}{data.difference.toFixed(2)}%
+                        <td
+                          className={`text-right ${data.difference < 0 ? 'text-red-500' : 'text-green-500'}`}
+                        >
+                          {data.difference >= 0 ? '+' : ''}
+                          {data.difference.toFixed(2)}%
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-80 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-80 text-center mt-4">
+                {new Date().toLocaleTimeString('en-US', {
+                  timeZone: 'America/New_York',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}{' '}
+                NY Time
+              </p>
             </div>
           </CardContent>
         </Card>
