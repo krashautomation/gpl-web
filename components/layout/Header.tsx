@@ -88,34 +88,71 @@ const navItems: NavItem[] = [
   },
 ];
 
-const fetchArticles = async () => {
-  const res = await fetch(
-    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Finvestorsgold.substack.com%2Ffeed',
-    { next: { revalidate: 86400 } }
-  );
-  const data = await res.json();
-  if (data.status === 'ok' && data.items) {
-    return data.items.slice(0, 5);
+function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!item.children) {
+    return (
+      <li>
+        <SheetClose asChild>
+          <Link
+            href={item.href}
+            className="block py-3 px-4 text-sm font-medium  hover:bg-[#002a6a] hover: rounded-md transition-colors"
+            onClick={onClose}
+          >
+            {item.label}
+          </Link>
+        </SheetClose>
+      </li>
+    );
   }
-  return [];
-};
+
+  return (
+    <li>
+      <button
+        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{item.label}</span>
+        <ChevronDown
+          size={16}
+          className={cn(
+            'transition-transform duration-200 text-white',
+            isOpen && 'rotate-180 text-white'
+          )}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="pl-4 space-y-1 mt-1">
+          <SheetClose asChild>
+            <Link
+              href={item.href}
+              className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
+              onClick={onClose}
+            >
+              View All {item.label}
+            </Link>
+          </SheetClose>
+          {item.children.map(child => (
+            <SheetClose asChild key={child.href}>
+              <Link
+                href={child.href}
+                className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
+                onClick={onClose}
+              >
+                {child.label}
+              </Link>
+            </SheetClose>
+          ))}
+        </div>
+      )}
+    </li>
+  );
+}
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [articles, setArticles] = useState<{ title: string; link: string }[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchArticles()
-      .then(data => {
-        setArticles(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Failed to fetch articles:', error);
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <>
@@ -195,10 +232,7 @@ const Header = () => {
                   <Menu size={24} />
                 </button>
               </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="w-[300px] bg-[#001a4a] border-[#001e5a] "
-              >
+              <SheetContent side="right" className="w-[300px] bg-[#001a4a] border-[#001e5a] ">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-2 mb-8 pt-4">
                     <Coins className="h-6 w-6 text-yellow-500" />
@@ -217,8 +251,8 @@ const Header = () => {
                     </ul>
                   </nav>
 
-                  <div className="border-t border-neutral-800 pt-4 mt-4">
-                    <p className="text-xs text-neutral-400">© 2026 Gold Price Live</p>
+                  <div className="border-t border-white pt-4 mt-4">
+                    <p className="text-xs text-white">© 2026 Gold Price Live</p>
                   </div>
                 </div>
               </SheetContent>
@@ -231,164 +265,8 @@ const Header = () => {
           </p>
         </div>
       </header>
-
-      <div className="container mx-auto px-4 pt-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="border-neutral-800 h-full">
-            <CardContent className="p-3">
-              {/* Flex row → image left | text right */}
-              <div className="flex items-start gap-4">
-                {/* Image column */}
-                <div className="flex-shrink-0 pl-3 pt-2">
-                  <Image
-                    src="/images/dave-profile.png"
-                    alt="Dave at Gold Price Live"
-                    width={80}
-                    height={80}
-                    priority={false}
-                    className="shadow-lg rounded-full border-4 border-amber-500" // rounded-full is nice for profile pics
-                  />
-                </div>
-
-                {/* Text column */}
-                <div className="flex-1">
-                  <p className="mt-1 text-sm">
-                    <b className="">Hey guys</b> 👋 (
-                    <a
-                      href="/about"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover: hover:underline"
-                    >
-                      about
-                    </a>
-                    ){' '}
-                  </p>
-                  <p className="mt-1  text-sm">
-                    Welcome to Gold Price Live. I created this site to help my gold bug friends
-                    invest their savings wisely. When I am not working on this site, I write about investing
-                    on Substack. You can signup below:
-                  </p>
-
-                  <p className="my-1  text-sm">
-                    
-                    <a
-                      href="https://investorsgold.substack.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=" hover:underline font-extrabold"
-                    >
-                      investorsgold.substack.com
-                    </a>
-                  </p>
-                  <p className="mt-1  text-sm">I appreciate your support 😊 - Dave</p>
-                  <p className="mt-1  text-sm">P.S.  Keep stacking and feel free to contact me with comments or questions.</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-[#001e5a]/30 bg-[#001e5a]  h-full">
-            <CardContent className="p-3">
-              <div className="flex-shrink-0 text-white  font-extrabold px-3 pb-2">
-                INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
-              </div>
-
-              <ul className="space-y-2 text-sm text-gray-200 pl-3">
-                {loading ? (
-                  <li className="">Loading articles...</li>
-                ) : (
-                  articles.map((article, index) => (
-                    <li key={index}>
-                      <a
-                        href={article.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#ffe600] hover:underline"
-                      >
-                        {article.title}
-                      </a>
-                    </li>
-                  ))
-                )}
-              </ul>
-
-              <div className="mt-1 pl-3 text-white">
-                <a
-                  href="https://investorsgold.substack.com/archive"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm  hover:text-[#ffe600] hover:underline"
-                >
-                  See more posts from Investor's Gold →
-                </a>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
     </>
   );
 };
-
-function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  if (!item.children) {
-    return (
-      <li>
-        <SheetClose asChild>
-          <Link
-            href={item.href}
-            className="block py-3 px-4 text-sm font-medium  hover:bg-[#002a6a] hover: rounded-md transition-colors"
-            onClick={onClose}
-          >
-            {item.label}
-          </Link>
-        </SheetClose>
-      </li>
-    );
-  }
-
-  return (
-    <li>
-      <button
-        className="flex justify-between items-center w-full py-3 px-4 text-sm font-medium text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{item.label}</span>
-        <ChevronDown
-          size={16}
-          className={cn('transition-transform duration-200 text-white', isOpen && 'rotate-180 text-white')}
-        />
-      </button>
-
-      {isOpen && (
-        <div className="pl-4 space-y-1 mt-1">
-          <SheetClose asChild>
-            <Link
-              href={item.href}
-              className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
-              onClick={onClose}
-            >
-              View All {item.label}
-            </Link>
-          </SheetClose>
-          {item.children.map(child => (
-            <SheetClose asChild key={child.href}>
-              <Link
-                href={child.href}
-                className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
-                onClick={onClose}
-              >
-                {child.label}
-              </Link>
-            </SheetClose>
-          ))}
-        </div>
-      )}
-    </li>
-  );
-}
 
 export default Header;

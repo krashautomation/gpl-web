@@ -72,7 +72,7 @@ export default function ChartsPage() {
           <h1 className="text-4xl md:text-5xl font-bold  mb-4">
             Gold Price Charts
           </h1>
-          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto">
             Interactive charts showing gold price trends, historical data, and live market movements
           </p>
         </div>
@@ -84,17 +84,17 @@ export default function ChartsPage() {
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-neutral-800 rounded-lg group-hover:bg-neutral-700 transition-colors">
-                      <chart.icon className="h-6 w-6 " />
+                      <chart.icon className="h-6 w-6 text-white " />
                     </div>
                     <div>
-                      <CardTitle className=" group-hover:text-yellow-400">
+                      <CardTitle className=" ">
                         {chart.title}
                       </CardTitle>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-neutral-400 mb-4">
+                  <p className=" mb-4">
                     {chart.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -118,7 +118,7 @@ export default function ChartsPage() {
           <h2 className="text-2xl font-bold  mb-4">
             Understanding Gold Charts
           </h2>
-          <p className="text-neutral-400 mb-6">
+          <p className=" mb-6">
             Our charts display real-time data from global markets. Use different timeframes to analyze short-term 
             volatility or long-term trends. The charts update automatically to reflect the latest market prices.
           </p>

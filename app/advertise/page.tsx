@@ -99,7 +99,7 @@ export default function AdvertiseGoldPriceLive() {
       <p className="my-1 text-base text-md">
     Dave at Gold Price Live</p>
 
-   <p className="text-xs text-neutral-400 text-center mt-6">
+   <p className="text-xs text-neutral-800 text-center mt-6">
      We respond within 24 hours. Packages available. 
    </p>
 </div>

@@ -136,6 +136,11 @@ export default function BitcoinPrice() {
 
   return (
     <MainLayout>
+
+                <div className="flex items-center justify-center mb-6">
+  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+Bitcoin Price Live  </h1>
+</div>
  
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
@@ -258,9 +263,9 @@ export default function BitcoinPrice() {
                 </table>
               )}
               {earliestDate && (
-                <p className="text-xs text-neutral-500 text-center mt-2">Earliest price data is {new Date(earliestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                <p className="text-xs text-neutral-800 text-center mt-2">Earliest price data is {new Date(earliestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               )}
-              <p className="text-xs text-neutral-400 text-center mt-2">goldbug.org - {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-2">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
             </div>
           </CardContent>
         </Card>

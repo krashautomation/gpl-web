@@ -143,11 +143,11 @@ export default function AluminumPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Aluminum Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm">
                <span>1 Year Chart</span>
                       </div>
              {aluminumQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {aluminumQuote.price.toFixed(2)}</span>
                  <span className={aluminumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {aluminumQuote.change < 0 ? '▼' : '▲'} {Math.abs(aluminumQuote.change).toFixed(2)} {aluminumQuote.changePercent}%
@@ -250,7 +250,7 @@ export default function AluminumPrice() {
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-400 text-center mt-4">goldbug.org - {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
             </div>
           </CardContent>
         </Card>

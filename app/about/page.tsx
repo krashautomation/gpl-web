@@ -90,7 +90,7 @@ export default function ContactGoldPriceLive() {
                   About Gold Price live
                 </p>
 
-                <p className="text-md text-gray-700 font-medium mb-6  max-w-md">
+                <p className="text-md  font-medium mb-6  max-w-md">
                   After dissecting the mechanics of modern financial markets investing in bitcoin,
                   my thoughts inevitably turned towards precious metals investing and gold....
                 </p>
