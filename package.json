@@ -16,7 +16,6 @@
     "@hookform/resolvers": "^3.9.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
-    "@netlify/plugin-nextjs": "^5.15.1",
     "@next/mdx": "^16.1.6",
     "@next/swc-wasm-nodejs": "13.5.1",
     "@next/third-parties": "^16.1.6",
