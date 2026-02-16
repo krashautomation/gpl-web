@@ -12,18 +12,17 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 - **Gold Price History**: 100-year historical chart (macrotrends.net)
 - **Gold Calculator**: Calculate gold value with multi-currency and unit conversion (oz/gr)
 - **Currency Support**: USD, CAD, AUD, GBP, EUR with real-time exchange rates
-- **Blog System**: SEO-optimized blog with categories and related posts
+- **Blog System**: SEO-optimized blog with MDX articles
 - **Responsive Design**: Mobile-first design with dark theme
 
 ## Tech Stack
 
-- **Framework**: Next.js 15+ with App Router
+- **Framework**: Next.js 16 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
-- **Content Management**: Contentlayer with MDX
 - **Charts**: Lightweight Charts
-- **API**: Yahoo Finance
+- **Data**: Yahoo Finance API
 
 ## Project Structure
 
@@ -32,387 +31,133 @@ gpl-web/
 ├── app/                          # Next.js App Router
 │   ├── api/                      # API Routes
 │   │   ├── chart/route.ts        # Chart & performance data
-│   │   └── quotes/route.js       # Real-time price quotes
-│   ├── charts/page.tsx           # Charts overview
-│   ├── faq/page.tsx              # FAQ page
-│   ├── news/                     # News/Articles System
-│   │   ├── [slug]/page.tsx       # Individual article pages
-│   │   └── page.tsx              # News listing with category filter
-│   ├── precious-metals/page.tsx  # Precious metals overview
-│   ├── silver-price/page.tsx     # Silver price page
-│   ├── platinum-price/page.tsx   # Platinum price page
-│   ├── palladium-price/page.tsx  # Palladium price page
-│   ├── copper-price/page.tsx     # Copper price page
-│   ├── aluminum-price/page.tsx   # Aluminum price page
-│   ├── bitcoin-price/page.tsx    # Bitcoin price page
-│   ├── ethereum-price/page.tsx   # Ethereum price page
-│   ├── gold-etfs/page.tsx        # Gold ETFs listing
-│   ├── silver-etfs/page.tsx      # Silver ETFs listing
-│   ├── gold-price-history/page.tsx # 100-year historical chart
-│   ├── gold-silver-ratio/page.tsx  # Gold/Silver ratio analysis
-│   ├── layout.tsx                # Root layout
-│   ├── metadata.ts               # SEO metadata config
-│   ├── robots.ts                 # Robots.txt generation
-│   └── sitemap.ts                # Sitemap.xml generation
-│
+│   │   └── quotes/route.ts       # Real-time price quotes
+│   ├── layout.tsx               # Root layout with Google Analytics
+│   ├── sitemap.ts               # Sitemap.xml generation
+│   ├── robots.ts                # Robots.txt generation
+│   └── [page routes]            # Page components
 ├── components/
-│   ├── layout/                   # Header, Footer, MainLayout
-│   ├── ui/                       # shadcn/ui components (47 files)
-│   ├── BullionVaultChart.tsx
+│   ├── layout/                  # Header, Footer, MainLayout
+│   ├── ui/                      # shadcn/ui components
 │   └── LightweightChart.tsx
-│
-├── content/
-│   └── articles/                 # MDX article files
-│       ├── gold-price-predictions-2025.mdx
-│       └── ... (9 articles)
-│
 ├── lib/
-│   └── utils.ts                  # Utility functions
-│
-├── contentlayer.config.ts      # Contentlayer configuration
-├── next.config.js              # Next.js configuration
-├── tailwind.config.ts          # Tailwind CSS configuration
-└── tsconfig.json               # TypeScript configuration
+│   ├── articles.ts              # MDX article loader
+│   ├── og-utils.ts              # OpenGraph image utilities
+│   └── utils.ts                 # Utility functions
+├── content/
+│   └── articles/                # MDX article files
+├── public/                      # Static assets
+└── package.json
 ```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 ## Environment Variables
 
-This project uses a proxy API to fetch data from the Yahoo Finance API. To run the application, you need to create a `.env.local` file in the root of the project and add the following environment variables:
+Create a `.env.local` file:
 
+```env
+NEXT_PUBLIC_SITE_URL=https://goldpricelive.co
+NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
 ```
-NEXT_PUBLIC_YAHOO_API_KEY=your-secret-value
-YAHOO2_API_KEY=your-secret-value
-```
-
-Replace `your-secret-value` with your actual Yahoo Finance API key. The `NEXT_PUBLIC_YAHOO_API_KEY` is used on the client-side to authorize with the proxy, and the `YAHOO2_API_KEY` is used on the server-side by the proxy to fetch data from the Yahoo Finance API. Make sure these two keys are the same.
-
-## API Routes
-
-### Quotes API
-**Route**: `app/api/quotes/route.js`
-
-Fetches real-time market data for:
-- `GC=F` - Gold
-- `SI=F` - Silver
-- `PA=F` - Palladium
-- `PL=F` - Platinum
-- `HG=F` - Copper
-- `ALI=F` - Aluminum
-- `BTC-USD` - Bitcoin
-- `ETH-USD` - Ethereum
-- `GLD` - SPDR Gold Shares ETF
-- `SLV` - iShares Silver Trust ETF
-- Currency pairs: EURUSD=X, GBPUSD=X, AUDUSD=X, CADUSD=X
-
-### Chart API
-**Route**: `app/api/chart/route.ts`
-
-Supports two types of queries:
-- **Chart data**: `/api/chart?symbol=GC=F&range=7D|12M`
-- **Performance data**: `/api/chart?symbol=GC=F&type=performance`
-
-Performance data returns metrics for 30D, 6M, 1Y, 2Y, 3Y, 5Y, and 20Y periods.
-
-## SEO Features
-
-The application includes comprehensive SEO optimization:
-
-### Automatic SEO Generation
-- **Sitemap** (`app/sitemap.ts`): Auto-generated XML sitemap at `/sitemap.xml`
-- **Robots.txt** (`app/robots.ts`): Search engine crawling rules at `/robots.txt`
-- **Metadata**: Every page has optimized meta tags
-
-### SEO Implementation per Page
-```typescript
-export const metadata: Metadata = {
-  title: 'Page Title | Gold Price Live',
-  description: 'Detailed description for search engines',
-  keywords: ['gold price', 'silver price', 'precious metals'],
-  openGraph: {
-    title: 'Social Media Title',
-    description: 'Social Media Description',
-    images: ['/og-image.jpg'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Twitter Title',
-    description: 'Twitter Description',
-  },
-  alternates: {
-    canonical: 'https://goldpricelive.com/page-url',
-  },
-}
-```
-
-### Blog SEO
-Each blog post includes:
-- Dynamic metadata generation based on post content
-- JSON-LD structured data
-- Reading time estimates
-- Category and tag optimization
-- Related posts for internal linking
-
-## Blog/News System
-
-The blog system uses **Contentlayer** with MDX files for optimal developer experience and SEO.
-
-### Features
-- **Contentlayer**: Type-safe content management with auto-generated TypeScript types
-- **MDX Format**: Write articles in Markdown with JSX support
-- **Categories**: Market Analysis, Investment Guide, Education, Market News
-- **Dynamic Routing**: `/news/[slug]` for individual posts
-- **Category Filtering**: `/news?category=category-name` for filtered views
-- **Related Posts**: Automatically shows related content
-- **SEO Optimization**: Every post has unique metadata and Open Graph tags
-- **Static Generation**: All articles pre-rendered at build time for optimal performance
-
-### Creating a New Article
-
-#### Step 1: Create MDX File
-Create a new file in `content/articles/` with a URL-friendly filename:
-
-```bash
-# Example: Create article about gold mining stocks
-touch content/articles/gold-mining-stocks-investment.mdx
-```
-
-#### Step 2: Add Frontmatter and Content
-
-```mdx
----
-title: "Investing in Gold Mining Stocks: Complete Guide"
-excerpt: "Learn how to invest in gold mining companies and understand the risks and rewards compared to physical gold."
-author: "Gold Price Live Team"
-date: "2025-02-15"
-category: "Investment Guide"
-tags: ["gold mining", "stocks", "investment", "equities"]
-featuredImage: "/blog/gold-mining-stocks.jpg"
-readingTime: 10
-seo:
-  title: "Gold Mining Stocks Investment Guide | Complete Analysis"
-  description: "Learn how to invest in gold mining stocks. Compare mining companies vs physical gold for your portfolio."
-  keywords: ["gold mining stocks", "mining investment", "gold equities"]
----
-
-## Introduction to Gold Mining Stocks
-
-Gold mining stocks offer investors exposure to gold prices through companies that extract the precious metal. Unlike physical gold, these stocks can provide dividends and leverage to gold price movements.
-
-### Why Invest in Mining Stocks?
-
-- **Leverage**: Mining stocks often amplify gold price movements
-- **Dividends**: Many miners pay regular dividends
-- **Growth potential**: Successful exploration can lead to significant gains
-
-## Conclusion
-
-Gold mining stocks can be an excellent complement to physical gold in a diversified portfolio.
-```
-
-#### Frontmatter Fields
-
-**Required:**
-- `title` - Article headline
-- `excerpt` - Brief description shown in listings
-- `author` - Author name
-- `date` - Publication date (YYYY-MM-DD format)
-- `category` - Must be one of:
-  - Market Analysis
-  - Investment Guide
-  - Education
-  - Market News
-
-**Optional:**
-- `tags` - Array of keywords for filtering
-- `featuredImage` - Path to image (e.g., "/blog/image.jpg")
-- `readingTime` - Estimated minutes (auto-calculated if omitted)
-- `seo.title` - Custom SEO title
-- `seo.description` - Meta description
-- `seo.keywords` - Array of SEO keywords
-
-#### Step 3: Restart Dev Server
-
-Contentlayer automatically detects the new file and generates types:
-
-```bash
-# Stop current server
-Ctrl+C
-
-# Restart
-npm run dev
-```
-
-#### Step 4: Access Your Article
-
-- **Article URL**: `http://localhost:3000/news/gold-mining-stocks-investment`
-- **News Listing**: `http://localhost:3000/news`
-
-### Markdown Features
-
-Articles support full Markdown syntax plus:
-
-```markdown
-# Heading 1
-## Heading 2
-### Heading 3
-
-**Bold text**
-*Italic text*
-
-- Bullet points
-- Another item
-
-1. Numbered list
-2. Another item
-
-[Link text](https://example.com)
-
-| Table | Column 2 |
-|-------|----------|
-| Row 1 | Data     |
-| Row 2 | Data     |
-
-> Blockquote
-
-`inline code`
-
-```code block```
-```
-
-### Adding Images
-
-1. Place image in `/public/blog/` folder
-2. Reference in frontmatter: `featuredImage: "/blog/image-name.jpg"`
-3. Or use in content: `![Alt text](/blog/image-name.jpg)`
-
-### Best Practices
-
-- **URL-friendly filenames**: Use lowercase with hyphens (e.g., `gold-price-outlook-2025.mdx`)
-- **Category names**: Match existing categories exactly (case-sensitive)
-- **Dates**: Use YYYY-MM-DD format
-- **Excerpts**: Keep under 160 characters for optimal SEO
-- **Tags**: Use 3-5 relevant keywords
-
-### URL Structure
-
-- **News Listing**: `/news`
-- **Individual Article**: `/news/article-slug`
-- **Filtered by Category**: `/news?category=market-analysis`
-
-All articles are statically generated at build time for optimal performance and SEO.
 
 ## Pages
 
-| Page | Route | Description |
-|------|-------|-------------|
-| Home | `/` | Gold price with calculator and charts |
-| Silver Price | `/silver-price` | Silver price with 12M chart |
-| Platinum Price | `/platinum-price` | Platinum price with 12M chart |
-| Palladium Price | `/palladium-price` | Palladium price with 12M chart |
-| Copper Price | `/copper-price` | Copper price with 12M chart |
-| Aluminum Price | `/aluminum-price` | Aluminum price with 12M chart |
-| Bitcoin Price | `/bitcoin-price` | Bitcoin price with 12M chart |
-| Ethereum Price | `/ethereum-price` | Ethereum price with 12M chart |
-| Gold ETFs | `/gold-etfs` | Popular Gold ETFs with GLD chart |
-| Silver ETFs | `/silver-etfs` | Popular Silver ETFs with SLV chart |
-| Gold Price History | `/gold-price-history` | 100-year historical chart (macrotrends) |
-| Gold-Silver Ratio | `/gold-silver-ratio` | Ratio analysis with performance comparison |
-| Precious Metals | `/precious-metals` | Overview of all metals |
-| News | `/news` | Article listing with category filter |
-| Article | `/news/[slug]` | Individual article page |
-| Charts | `/charts` | Charts overview page |
-| FAQ | `/faq` | Frequently asked questions |
+| Page                | Route                  |
+| ------------------- | ---------------------- |
+| Home                | `/`                    |
+| Gold Price          | `/gold-price`          |
+| Silver Price        | `/silver-price`        |
+| Platinum Price      | `/platinum-price`      |
+| Palladium Price     | `/palladium-price`     |
+| Copper Price        | `/copper-price`        |
+| Aluminum Price      | `/aluminum-price`      |
+| Bitcoin Price       | `/bitcoin-price`       |
+| Ethereum Price      | `/ethereum-price`      |
+| Gold ETFs           | `/gold-etfs`           |
+| Silver ETFs         | `/silver-etfs`         |
+| Gold Price History  | `/gold-price-history`  |
+| Gold-Silver Ratio   | `/gold-silver-ratio`   |
+| Charts              | `/charts`              |
+| News                | `/news`                |
+| About               | `/about`               |
+| Contact             | `/contact`             |
+| Privacy             | `/privacy`             |
+| Terms of Service    | `/terms-of-service`    |
+| Disclaimer          | `/disclaimer`          |
+| Risk Warning        | `/risk-warning`        |
+| Advertise           | `/advertise`           |
+| Gold Price Live App | `/gold-price-live-app` |
 
-## Gold Price Calculator
+## SEO
 
-The calculator supports:
-- **Currencies**: USD, CAD, AUD, GBP, EUR
-- **Units**: Ounces (oz), Grams (gr)
-- **Real-time Conversion**: Uses live exchange rates from Yahoo Finance
-- **Formula**: `Total Value = Units × (Price in USD / Exchange Rate)`
-- For grams: divides ounce price by 31.1035
+The application includes comprehensive SEO optimization:
 
-## Navigation
+- **Sitemap**: Auto-generated at `/sitemap.xml`
+- **Robots.txt**: Generated at `/robots.txt`
+- **Metadata**: Every page has optimized title, description, OpenGraph, and Twitter cards
+- **Canonical URLs**: Configured per page
+- **Google Analytics**: Integrated via next/script
 
-The header navigation features:
-- **Desktop**: Dropdown menus with hover states using NavigationMenu
-- **Mobile**: Slide-out sheet menu with accordion submenus
-- **Responsive**: Adapts between mobile and desktop at lg breakpoint
+## Blog System
 
-## Important Technical Notes
+Articles are stored as MDX files in `content/articles/`.
 
-### Next.js 15+ Async APIs
+### Adding an Article
 
-This project uses **Next.js 15+**, which requires awaiting dynamic APIs:
+1. Create a new `.mdx` file in `content/articles/`
+2. Add frontmatter:
 
-```typescript
-// Page params are now a Promise
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  // ...
-}
+```mdx
+---
+title: 'Your Article Title'
+excerpt: 'Brief description for listings'
+author: 'Author Name'
+date: '2026-02-15'
+category: 'Market Analysis'
+tags: ['tag1', 'tag2']
+featuredImage: '/blog/image.jpg'
+readingTime: 5
+seo:
+  title: 'SEO Title'
+  description: 'SEO Description'
+  keywords: ['keyword1', 'keyword2']
+---
 
-// Search params are also a Promise
-export default async function Page({ searchParams }: { searchParams: Promise<{ [key: string]: string }> }) {
-  const params = await searchParams
-  // ...
-}
+Your article content here...
 ```
-
-Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
-
-### Contentlayer Build Process
-
-Contentlayer must build before Next.js to generate types:
-
-```bash
-# Build script in package.json runs contentlayer first
-"build": "contentlayer build && next build"
-```
-
-The `.contentlayer/generated` directory contains:
-- TypeScript types for all articles
-- JSON data for each article
-- MDX compilation output
 
 ## Deployment
 
-This project is optimized for deployment on Vercel:
+Deploy to Vercel:
 
 ```bash
-npm run build
+# Push to GitHub
+git add .
+git commit -m "deploy"
+git push
+
+# Or deploy via Vercel CLI
+vercel
 ```
 
-Environment variables must be configured in your deployment platform dashboard.
+### Environment Variables on Vercel
 
-### Build Requirements
+Add these in Vercel project settings:
 
-- Node.js 18+ 
-- Contentlayer needs write access to generate files
-- All articles are pre-rendered at build time (SSG)
+- `NEXT_PUBLIC_SITE_URL` - Your domain
+- `NEXT_PUBLIC_YAHOO_API_KEY` - Yahoo Finance API key
 
 ## License
 
-MIT License - Feel free to use this project for your own gold price tracking needs.
-
-## Support
-
-For issues or questions, please open an issue on GitHub.
-
----
-
-Built with Next.js, Tailwind CSS, and shadcn/ui.
+MIT License
