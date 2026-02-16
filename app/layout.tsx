@@ -1,11 +1,17 @@
 import './globals.css';
 import 'flag-icons/css/flag-icons.min.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { getOgImage } from '@/lib/og-utils';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'] });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -49,6 +55,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://substackcdn.com" />
+      </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         {children}
         {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId="G-8V1L5GB59Y" />}
