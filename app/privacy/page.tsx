@@ -140,7 +140,7 @@ Privacy Policy  </h1>
       Advertise on Gold Price Live
     </a></p>
 
-   <p className="text-xs text-neutral-400 text-center mt-6 mb-6">
+   <p className="text-xs text-neutral-800 text-center mt-6 mb-6">
      We respond within 24 hours. Packages available. 
    </p>
 

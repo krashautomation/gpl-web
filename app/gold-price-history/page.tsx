@@ -93,7 +93,7 @@ Gold Price History  </h1>
         <Card className=" border-neutral-800">
           <CardHeader>
             <CardTitle className="">Gold Price History</CardTitle>
-            <div className="flex items-center gap-2 text-sm text-white">
+            <div className="flex items-center gap-2 text-sm">
               <span>100 Year Historical Chart</span>
             </div>
           </CardHeader>
@@ -108,7 +108,7 @@ Gold Price History  </h1>
                 className="shadow-lg w-full h-auto"
               />
             </div>
-            <p className="text-xs text-neutral-400 text-center mt-4">
+            <p className="text-xs text-neutral-800 text-center mt-4">
               Gold Prices - 100 Year Historical Chart (macrotrends.net)
             </p>
           </CardContent>
@@ -201,7 +201,7 @@ Gold Price History  </h1>
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-400 text-center mt-4">goldbug.org - {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
             </div>
           </CardContent>
         </Card>

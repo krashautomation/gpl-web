@@ -142,11 +142,11 @@ export default function CopperPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Copper Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {copperQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {copperQuote.price.toFixed(2)}</span>
                  <span className={copperQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {copperQuote.change < 0 ? '▼' : '▲'} {Math.abs(copperQuote.change).toFixed(2)} {copperQuote.changePercent}%
@@ -249,7 +249,7 @@ export default function CopperPrice() {
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-neutral-400 text-center mt-4">goldbug.org - {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-4">{new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
             </div>
           </CardContent>
         </Card>

@@ -147,11 +147,11 @@ export default function EthereumPrice() {
         <Card className=" border-neutral-800">
           <CardHeader>
              <CardTitle className="">Ethereum Price</CardTitle>
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                <span>1 Year Chart</span>
                       </div>
              {ethereumQuote && (
-               <div className="flex items-center gap-2 text-sm text-white">
+               <div className="flex items-center gap-2 text-sm ">
                  <span>Current Price: </span><span>USD {ethereumQuote.price.toFixed(2)}</span>
                  <span className={ethereumQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
                    {ethereumQuote.change < 0 ? '▼' : '▲'} {Math.abs(ethereumQuote.change).toFixed(2)} {ethereumQuote.changePercent}%
@@ -264,9 +264,9 @@ export default function EthereumPrice() {
                 </table>
               )}
               {earliestDate && (
-                <p className="text-xs text-neutral-500 text-center mt-2">Earliest price data is {new Date(earliestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                <p className="text-xs text-neutral-800 text-center mt-2">Earliest price data is {new Date(earliestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
               )}
-              <p className="text-xs text-neutral-400 text-center mt-2">goldbug.org - {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
+              <p className="text-xs text-neutral-800 text-center mt-2"> {new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit' })} NY Time</p>
             </div>
           </CardContent>
         </Card>

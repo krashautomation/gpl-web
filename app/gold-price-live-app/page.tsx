@@ -50,7 +50,7 @@ export default function GoldPriceLiveApp() {
           <CardContent>
             <div className="overflow-x-auto">
         <div className="flex flex-col items-center px-6 py-8">
-  <p className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+  <p className="text-2xl md:text-3xl font-bold  mb-3 tracking-tight">
     Gold Price Live App
   </p>
   
@@ -62,11 +62,11 @@ export default function GoldPriceLiveApp() {
     Stay ahead of the market with live gold prices, silver prices, and major market indexes — updated in real time on your Android device.
   </p>
 
-  <p className="text-sm text-neutral-300 font-medium mb-4">
+  <p className="text-sm  font-medium mb-4">
     Current features:
   </p>
 
-  <ul className="text-sm text-neutral-400 list-disc list-inside mb-6 space-y-1.5">
+  <ul className="text-sm  list-disc list-inside mb-6 space-y-1.5">
     <li>Live spot prices for Gold (XAU/USD) and Silver (XAG/USD)</li>
     <li>Real-time major market indexes</li>
     <li>Clean, fast, mobile-optimized interface</li>
@@ -77,7 +77,7 @@ export default function GoldPriceLiveApp() {
      More powerful features coming soon:
    </p>
 
-   <p className="text-sm text-neutral-400 text-center mb-8 max-w-md">
+   <p className="text-sm  text-center mb-8 max-w-md">
      Portfolio tracking • Price alerts • Interactive charts • Historical data • And much more…
    </p>
 
@@ -85,7 +85,7 @@ export default function GoldPriceLiveApp() {
      Download Now
    </Button>
 
-   <p className="text-xs text-neutral-400 text-center mt-6">
+   <p className="text-xs text-center mt-6">
      Download Gold Price Live now and never miss a move in the precious metals market!
    </p>
 </div>

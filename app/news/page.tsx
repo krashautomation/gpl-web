@@ -151,7 +151,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                 <CardHeader>
                   <Badge
                     variant="secondary"
-                    className="bg-neutral-800  w-fit mb-2 hover:bg-neutral-800 hover:"
+                    className="bg-neutral-800 text-white w-fit mb-2 hover:bg-neutral-800 hover:"
                   >
                     {article.category}
                   </Badge>

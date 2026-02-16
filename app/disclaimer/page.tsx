@@ -24,7 +24,7 @@ export default function AboutGoldPriceLive() {
         <Card className=" border-neutral-800">
           <CardHeader>
              
-            <p className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+            <p className="text-2xl md:text-3xl font-bold  mb-3 tracking-tight">
   Disclaimer
   </p>
           </CardHeader>
@@ -60,7 +60,7 @@ export default function AboutGoldPriceLive() {
           <CardContent>
             <div className="overflow-x-auto">
         <div className="flex flex-col px-6 py-8">
-  <p className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+  <p className="text-2xl md:text-3xl font-bold  mb-3 tracking-tight">
     Contact Dave at Gold Price live
   </p>
   
@@ -68,10 +68,10 @@ export default function AboutGoldPriceLive() {
    I started Gold Price Live as a vibe coding project to help me share what I have learned about investing, finance and precious metals. 
   </p>
 
-  <p className="text-base  leading-relaxed max-w-lg mb-8">
+  <p className=" leading-relaxed max-w-lg mb-8">
    "Gold is the money of kings." — Anonymous</p>
 
-   <p className="text-base  font-semibold mb-3">
+   <p className=" font-semibold mb-3">
     For Advertising and Business Inquiries
   </p>
      
@@ -90,7 +90,7 @@ export default function AboutGoldPriceLive() {
       Advertise on Gold Price Live
     </a></p>
 
-   <p className="text-xs text-neutral-400 text-center mt-6 mb-6">
+   <p className="text-xs text-neutral-800 text-center mt-6 mb-6">
      We respond within 24 hours. Packages available. 
    </p>
 
