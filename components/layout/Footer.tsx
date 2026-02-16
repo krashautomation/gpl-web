@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import Script from 'next/script';
 
 const fetchArticles = async () => {
   const res = await fetch(
@@ -132,16 +131,15 @@ const Footer = () => {
           </Card>
         </div>
         <div className="flex justify-center mt-8">
-          <div id="substack-embed" className="min-h-[320px]">
-            <div className="h-[320px] flex items-center justify-center bg-gray-100 rounded">
-              <span className="text-gray-500">Loading newsletter...</span>
-            </div>
-          </div>
-          <Script id="substack-load" strategy="lazyOnload">
-            {`
-              document.getElementById('substack-embed').innerHTML = '<iframe src="https://investorsgold.substack.com/embed" width="480" height="320" style="border:1px solid #EEE;background:white" frameborder="0" scrolling="no"></iframe>';
-            `}
-          </Script>
+          <iframe
+            src="https://investorsgold.substack.com/embed"
+            width={480}
+            height={320}
+            style={{ border: '1px solid #EEE', background: 'white' }}
+            frameBorder={0}
+            scrolling="no"
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
 
