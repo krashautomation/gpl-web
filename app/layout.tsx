@@ -3,6 +3,7 @@ import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { getOgImage } from '@/lib/og-utils';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +37,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-background text-foreground`}>{children}</body>
+      <body className={`${inter.className} bg-background text-foreground`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8V1L5GB59Y"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8V1L5GB59Y');
+          `}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
