@@ -19,7 +19,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
-              "connect-src 'self' https://www.google-analytics.com https://*.yahoo.com https://query1.finance.yahoo.com https://query2.finance.yahoo.com",
+              "connect-src 'self' https://www.google-analytics.com https://api.rss2json.com https://*.yahoo.com https://query1.finance.yahoo.com https://query2.finance.yahoo.com",
               "frame-src 'none'",
             ].join('; '),
           },
