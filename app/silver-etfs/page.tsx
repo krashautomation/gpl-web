@@ -112,7 +112,10 @@ export default function SilverETFs() {
 
   return (
     <MainLayout>
- 
+       <div className="flex items-center justify-center mb-6">
+  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+Silver ETFs  </h1>
+</div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
