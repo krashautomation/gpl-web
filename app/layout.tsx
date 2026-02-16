@@ -3,7 +3,7 @@ import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { getOgImage } from '@/lib/og-utils';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -62,7 +62,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         {children}
-        {process.env.NODE_ENV === 'production' && <GoogleAnalytics gaId="G-8V1L5GB59Y" />}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-8V1L5GB59Y"
+              strategy="lazyOnload"
+            />
+            <Script id="google-analytics" strategy="lazyOnload">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-8V1L5GB59Y');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
