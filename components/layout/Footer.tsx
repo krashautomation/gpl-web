@@ -313,6 +313,10 @@ const Footer = () => {
               &nbsp;
               <a href="/privacy" className="hover:text-yellow-500">
                 Privacy
+              </a>{' '}
+              &nbsp;
+              <a href="/roadmap" className="hover:text-yellow-500">
+                Roadmap
               </a>
             </p>
           </div>
