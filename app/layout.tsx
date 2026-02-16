@@ -3,6 +3,7 @@ import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { getOgImage } from '@/lib/og-utils';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -59,7 +60,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://substackcdn.com" />
       </head>
-      <body className={`${inter.className} bg-background text-foreground`}>{children}</body>
+      <body className={`${inter.className} bg-background text-foreground`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

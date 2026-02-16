@@ -131,7 +131,7 @@ const Footer = () => {
             </CardContent>
           </Card>
         </div>
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center mt-8 p-8">
           <div className="flex items-center gap-3 mb-4">
             <Image
               src="/images/substack-logo.jpg"
