@@ -78,6 +78,9 @@ export default function Roadmap() {
               </li>
               <li className="text-base">Add new chart types and timeframes.</li>
               <li className="text-base">Build out additional content pages and resources.</li>
+              <li className="text-base">Add browser and app icons.</li>
+               <li className="text-base">Complete alpha mobile app, launch and add links.</li>
+               <li className="text-base">Secure apis.</li>
             </ul>
 
             <p className="text-base mb-3">
