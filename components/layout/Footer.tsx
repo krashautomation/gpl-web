@@ -35,7 +35,7 @@ const Footer = () => {
 
   return (
     <div>
-      <div className="container mx-auto px-4 pt-8">
+      <div className="container mx-auto px-4 pt-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="border-neutral-800 h-full">
             <CardContent className="p-3">
@@ -130,9 +130,19 @@ const Footer = () => {
             </CardContent>
           </Card>
         </div>
+        <div className="flex justify-center mt-8">
+          <iframe
+            src="https://investorsgold.substack.com/embed"
+            width={480}
+            height={320}
+            style={{ border: '1px solid #EEE', background: 'white' }}
+            frameBorder={0}
+            scrolling="no"
+          ></iframe>
+        </div>
       </div>
 
-      <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-16 py-12 text-white">
+      <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-8 py-12 text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {/* Column 1: WORLD GOLD PRICES */}

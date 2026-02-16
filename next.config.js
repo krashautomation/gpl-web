@@ -20,7 +20,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
               "connect-src 'self' https://www.google-analytics.com https://api.rss2json.com https://*.yahoo.com https://query1.finance.yahoo.com https://query2.finance.yahoo.com",
-              "frame-src 'none'",
+              "frame-src 'self' https://investorsgold.substack.com",
             ].join('; '),
           },
         ],
