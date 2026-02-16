@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import MainLayout from '@/components/layout/MainLayout';
 import LightweightChart from '@/components/LightweightChart';
 import RecentArticlesSection from './components/RecentArticlesSection';
+import Image from 'next/image';
 
 const goldPriceData = [
   { time: 'Feb 6', price: 5015 },
@@ -385,8 +386,8 @@ export default function Home() {
                   </tbody>
                 </table>
               )}
-              <p className="text-xs text-gray-500 text-center mt-4">
-                goldbug.org -{' '}
+              <p className="text-xs text-gray-800 text-center mt-4">
+              
                 {new Date().toLocaleTimeString('en-US', {
                   timeZone: 'America/New_York',
                   hour: '2-digit',
@@ -478,7 +479,7 @@ export default function Home() {
               </h3>
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex-1">
-                  <label className="block text-sm text-gray-600 mb-2">Number of units</label>
+                  <label className="block text-sm mb-2">Number of units</label>
                   <Input
                     type="number"
                     value={numberOfUnits}
@@ -493,14 +494,14 @@ export default function Home() {
               {goldQuote && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
-                    <span className="text-gray-600">Price per {goldUnit}:</span>
+                    <span className="">Price per {goldUnit}:</span>
                     <span className="text-lg font-semibold ">
                       {goldCurrency} {convertedPrice.toFixed(2)}
                     </span>
                   </div>
                   {numberOfUnits && parseFloat(numberOfUnits) > 0 && (
                     <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
-                      <span className="text-gray-600">Total value:</span>
+                      <span className="">Total value:</span>
                       <span className="text-2xl font-bold ">
                         {goldCurrency} {totalValue.toFixed(2)}
                       </span>
@@ -514,10 +515,10 @@ export default function Home() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-gray-700">Other Metals</CardTitle>
+            <CardTitle className="">Other Metals</CardTitle>
           </CardHeader>
           <CardContent>
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">Other Precious Metals</h3>
+            <h3 className="text-lg font-semibold  mb-2">Other Precious Metals</h3>
             <table className="w-full text-sm mb-4">
               <thead>
                 <tr className="border-b border-gray-200">
@@ -562,7 +563,7 @@ export default function Home() {
                 )}
               </tbody>
             </table>
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">Base Metals</h3>
+            <h3 className="text-lg font-semibold mb-2">Base Metals</h3>
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200">
@@ -602,103 +603,152 @@ export default function Home() {
 
       {/* Recent Articles Section */}
       <RecentArticlesSection />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="h-full">
-          <CardHeader>
-            <CardTitle className=" text-2xl">GOLD PRICE FAQ</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-              <div className="flex gap-6">
-                <div className="space-y-2">
-                  <ul className="space-y-1.5 text-sm">
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much is your gold worth?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much was your gold worth when you bought it?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much profit have you made on your gold?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much is any gold coin worth in any currency?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        All major exchange rates
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much is your scrap gold worth?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much is any Karat of your gold jewelry worth?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        What change should you give in gold coins?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much gold can you buy with your currency?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much is your gold worth in any currency?
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        Convert between ounces, grams and kilos
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className=" hover:underline">
-                        How much will you pay to buy or sell gold?
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+<div className="grid grid-cols-1 gap-6">
+  {/* FAQ Card - full 100% width */}
+  <Card className="h-full w-full">
+    <CardHeader>
+      <CardTitle className="text-2xl">GOLD PRICE FAQ</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="grid grid-cols-1 gap-6">
+        {/* Two-column layout for FAQ items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Column 1 items */}
+          <div className="space-y-6">
+            <div>
+              <p className="font-bold text-sm">How much is your gold worth?</p>
+              <p className="text-sm mt-1">
+                Multiply your gold's weight (in troy ounces or grams) by current spot price, adjusted for purity (e.g., 24K = 100%). Example: 1 oz pure gold ≈ $5,040 USD. Provide weight/purity for exact calc.
+              </p>
             </div>
-          </CardContent>
-        </Card>
 
-        <Card className="bg-gradient-to-br from-green-100 to-green-200 border-green-300 h-full">
-          <CardContent className="p-8">
-            <div className="text-center mb-4">
-              <div className="inline-block bg-green-200 rounded-lg p-6 mb-4">
-                <div className="text-6xl">📱</div>
-              </div>
-              <h3 className="text-2xl font-bold mb-2 text-green-800">GOLD PRICE LIVE APP</h3>
+            <div>
+              <p className="font-bold text-sm">How much was your gold worth when you bought it?</p>
+              <p className="text-sm mt-1">
+                Depends on purchase date, amount, and historical spot + premiums paid. Check receipt/history and compare to spot price then.
+              </p>
             </div>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li>• All charts from goldbug.org available on Android.</li>
-              <li>• Live gold and silver price tickers in all national currencies.</li>
-              <li>• Save your favorite charts and view in one convenient place.</li>
-              <li>• Buy gold from a premier online gold bullion dealer.</li>
-              <li>• Read the latest financial news impacting gold prices.</li>
-            </ul>
-            <Button className="w-full mt-6 bg-green-600 hover:bg-green-700">Google Play</Button>
-          </CardContent>
-        </Card>
+
+            <div>
+              <p className="font-bold text-sm">How much profit have you made on your gold?</p>
+              <p className="text-sm mt-1">
+                Profit = current value − original cost (incl. fees/premiums). Subtract what you paid from today's spot-adjusted value.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">How much is any gold coin worth in any currency?</p>
+              <p className="text-sm mt-1">
+                Bullion coins (e.g., Maple Leaf, Eagle) ≈ spot + 3–8% premium. 1 oz pure ≈ $5,040–5,100 USD. Rare/collectible coins higher.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">All major exchange rates</p>
+              <p className="text-sm mt-1">
+                Use a live converter for current rates (e.g., USD to EUR, GBP, etc.). Gold is typically priced in USD globally.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">How much is your scrap gold worth?</p>
+              <p className="text-sm mt-1">
+                Weight × purity × spot price, minus 10–30% dealer/refining fee. Example: 10g 14K (58.3% pure) ≈ $945 USD spot value, but ~$660–850 received.
+              </p>
+            </div>
+          </div>
+
+          {/* Column 2 items */}
+          <div className="space-y-6">
+            <div>
+              <p className="font-bold text-sm">How much is any Karat of your gold jewelry worth?</p>
+              <p className="text-sm mt-1">
+                Per gram (spot basis, approx.): 24K ≈ $162 USD • 22K ≈ $148 USD • 18K ≈ $122 USD • 14K ≈ $95 USD • 10K ≈ $68 USD. Resale often lower due to fees/markup.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">What change should you give in gold coins?</p>
+              <p className="text-sm mt-1">
+                Rare in practice—gold coins aren't used for small change due to value/premiums. Use fiat currency for everyday transactions.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">How much gold can you buy with your currency?</p>
+              <p className="text-sm mt-1">
+                Divide amount by spot price per unit + premium. E.g., $1,000 USD buys ≈ 0.198 oz pure gold at spot (less after fees).
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">How much is your gold worth in any currency?</p>
+              <p className="text-sm mt-1">
+                Gold is priced in USD spot; convert using current exchange rates. Example: 1 oz ≈ $5,040 USD.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">Convert between ounces, grams and kilos</p>
+              <p className="text-sm mt-1">
+                1 troy oz = 31.1035 g • 1 kg = 32.1507 troy oz • Grams to oz: ÷ 31.1035 • Oz to grams: × 31.1035.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-bold text-sm">How much will you pay to buy or sell gold?</p>
+              <p className="text-sm mt-1">
+                Buy: spot + 3–10% premium (higher for small/jewelry) + taxes. Sell: spot minus 5–30% (less for bullion, more for scrap). Local dealers vary.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </CardContent>
+  </Card>
+
+  {/* Gold Price Live App card - max 700px wide, centered */}
+  <Card className="bg-amber-100 border-amber-300 h-full max-w-[700px] mx-auto w-full">
+    <CardContent className="p-8">
+      <div className="text-center mb-4">
+        <div className="inline-block bg-amber-200 rounded-lg p-6 mb-3">
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/app-mockup.png"
+              alt="Gold Price Live App"
+              width={283}
+              height={250}
+              priority={false}
+              className="shadow-lg rounded"
+            />
+          </div>
+        </div>
+        <h3 className="text-2xl font-bold mb-2">GOLD PRICE LIVE APP</h3>
+        <p>(coming soon)</p>
+      </div>
+      <ul className="space-y-2 text-sm">
+        <li>• Gold price charts available on Android.</li>
+        <li>• Live gold and silver price tickers.</li>
+        <li>• Buy gold from a premier online gold bullion dealer.</li>
+        <li>• Read the latest financial news impacting gold prices.</li>
+      </ul>
+      <div className="text-center mt-3">
+        <div className="inline-block rounded-lg">
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/goldprice-googleplay.png"
+              alt="Gold Price Live App"
+              width={180}
+              height={55}
+              priority={false}
+              className="shadow-lg rounded"
+            />
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+</div>
     </MainLayout>
   );
 }
