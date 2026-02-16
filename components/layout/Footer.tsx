@@ -139,6 +139,7 @@ const Footer = () => {
               width={40}
               height={40}
               className="rounded"
+              unoptimized
             />
             <div>
               <p className="font-bold text-lg">Investor's Gold</p>
