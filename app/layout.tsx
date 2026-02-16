@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     'Track live gold and silver prices with real-time charts, performance statistics, and calculators. Get current precious metal prices in all major currencies.',
   openGraph: {
-    title: 'Gold Bug - Live Gold & Silver Prices',
+    title: 'Gold Price Live - Live Gold & Silver Prices',
     description:
       'Track live gold and silver prices with real-time charts and performance statistics.',
     images: [
