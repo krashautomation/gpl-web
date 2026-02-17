@@ -37,14 +37,11 @@ const Footer = () => {
   return (
     <div>
       <div className="container mx-auto px-4 pt-4">
-       
-
         <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="grid grid-cols-1 gap-4">
               <Card className="border-neutral-800">
                 <CardContent className="p-4">
-              
                   <div className="flex items-start gap-4 mt-2">
                     <div className="flex-shrink-0">
                       <Image
@@ -94,7 +91,6 @@ const Footer = () => {
               </Card>
               <Card className="border-neutral-800" style={{ backgroundColor: '#001e5a' }}>
                 <CardContent className="p-4">
-             
                   <div className="flex-shrink-0 text-white font-extrabold px-3 pb-2">
                     INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
                   </div>
@@ -130,7 +126,6 @@ const Footer = () => {
               </Card>
               <Card className="border-neutral-800">
                 <CardContent className="p-4">
-     
                   <div className="flex flex-col items-center mt-2" suppressHydrationWarning>
                     <div className="flex items-center gap-3 mb-4">
                       <Image
