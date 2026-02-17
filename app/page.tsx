@@ -237,10 +237,10 @@ export default function Home() {
         <Card>
           <CardHeader>
             <CardTitle className="">Gold Price Live USD</CardTitle>
-            <div className="flex items-center gap-2 text-sm text-gray-900">
+            <div className="flex items-center gap-2  text-gray-900">
               <span>1 Year Chart</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-900">
+            <div className="flex items-center gap-2  text-gray-900">
               <span>Current Price: </span>
               <span>USD 5039.72</span>
               <span className="text-red-500">▼ 15.64 -0.31%</span>
@@ -280,12 +280,12 @@ export default function Home() {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-gray-200">
-                      <th className="text-left py-2 text-sm font-semibold">Change</th>
-                      <th className="text-right py-2 text-sm font-semibold">Amount</th>
-                      <th className="text-right py-2 text-sm font-semibold">%</th>
+                      <th className="text-left py-2  font-semibold">Change</th>
+                      <th className="text-right py-2  font-semibold">Amount</th>
+                      <th className="text-right py-2  font-semibold">%</th>
                     </tr>
                   </thead>
-                  <tbody className="text-sm">
+                  <tbody className="">
                     {goldQuote && (
                       <tr className="border-b border-gray-100">
                         <td className="py-3">Today</td>
@@ -404,7 +404,7 @@ export default function Home() {
           <CardHeader>
             <CardTitle className="">Gold Price Calculator</CardTitle>
 
-            <div className="flex items-center gap-2 text-sm text-gray-900">
+            <div className="flex items-center gap-2  text-gray-900">
               <span>
                 Calculate World Gold Prices in: USD, GBP, CAD, EUR, AUD in grams or ounces.
               </span>
@@ -418,7 +418,7 @@ export default function Home() {
                 <div className="flex items-center gap-4">
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-bold">{convertedPrice.toFixed(2)}</span>
-                    <span className="text-sm text-gray-600">
+                    <span className=" text-gray-600">
                       {goldCurrency}/{goldUnit}
                     </span>
                   </div>
@@ -476,7 +476,7 @@ export default function Home() {
               <h3 className="text-lg font-semibold  mb-4">How much is your gold worth?</h3>
               <div className="flex items-center gap-4 mb-4">
                 <div className="flex-1">
-                  <label className="block text-sm mb-2">Number of units</label>
+                  <label className="block  mb-2">Number of units</label>
                   <Input
                     type="number"
                     value={numberOfUnits}
@@ -516,7 +516,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <h3 className="text-lg font-semibold  mb-2">Other Precious Metals</h3>
-            <table className="w-full text-sm mb-4">
+            <table className="w-full  mb-4">
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left py-2 font-semibold">Name</th>
@@ -561,7 +561,7 @@ export default function Home() {
               </tbody>
             </table>
             <h3 className="text-lg font-semibold mb-2">Base Metals</h3>
-            <table className="w-full text-sm">
+            <table className="w-full ">
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left py-2 font-semibold">Name</th>
@@ -613,8 +613,8 @@ export default function Home() {
                 {/* Column 1 items */}
                 <div className="space-y-6">
                   <div>
-                    <p className="font-bold text-sm">How much is your gold worth?</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">How much is your gold worth?</p>
+                    <p className=" mt-1">
                       Multiply your gold's weight (in troy ounces or grams) by current spot price,
                       adjusted for purity (e.g., 24K = 100%). Example: 1 oz pure gold ≈ $5,040 USD.
                       Provide weight/purity for exact calc.
@@ -622,44 +622,44 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold ">
                       How much was your gold worth when you bought it?
                     </p>
-                    <p className="text-sm mt-1">
+                    <p className=" mt-1">
                       Depends on purchase date, amount, and historical spot + premiums paid. Check
                       receipt/history and compare to spot price then.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">How much profit have you made on your gold?</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">How much profit have you made on your gold?</p>
+                    <p className=" mt-1">
                       Profit = current value − original cost (incl. fees/premiums). Subtract what
                       you paid from today's spot-adjusted value.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold ">
                       How much is any gold coin worth in any currency?
                     </p>
-                    <p className="text-sm mt-1">
+                    <p className=" mt-1">
                       Bullion coins (e.g., Maple Leaf, Eagle) ≈ spot + 3–8% premium. 1 oz pure ≈
                       $5,040–5,100 USD. Rare/collectible coins higher.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">All major exchange rates</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">All major exchange rates</p>
+                    <p className=" mt-1">
                       Use a live converter for current rates (e.g., USD to EUR, GBP, etc.). Gold is
                       typically priced in USD globally.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">How much is your scrap gold worth?</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">How much is your scrap gold worth?</p>
+                    <p className=" mt-1">
                       Weight × purity × spot price, minus 10–30% dealer/refining fee. Example: 10g
                       14K (58.3% pure) ≈ $945 USD spot value, but ~$660–850 received.
                     </p>
@@ -669,54 +669,54 @@ export default function Home() {
                 {/* Column 2 items */}
                 <div className="space-y-6">
                   <div>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold ">
                       How much is any Karat of your gold jewelry worth?
                     </p>
-                    <p className="text-sm mt-1">
+                    <p className=" mt-1">
                       Per gram (spot basis, approx.): 24K ≈ $162 USD • 22K ≈ $148 USD • 18K ≈ $122
                       USD • 14K ≈ $95 USD • 10K ≈ $68 USD. Resale often lower due to fees/markup.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">What change should you give in gold coins?</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">What change should you give in gold coins?</p>
+                    <p className=" mt-1">
                       Rare in practice—gold coins aren't used for small change due to
                       value/premiums. Use fiat currency for everyday transactions.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold ">
                       How much gold can you buy with your currency?
                     </p>
-                    <p className="text-sm mt-1">
+                    <p className=" mt-1">
                       Divide amount by spot price per unit + premium. E.g., $1,000 USD buys ≈ 0.198
                       oz pure gold at spot (less after fees).
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">
+                    <p className="font-bold ">
                       How much is your gold worth in any currency?
                     </p>
-                    <p className="text-sm mt-1">
+                    <p className=" mt-1">
                       Gold is priced in USD spot; convert using current exchange rates. Example: 1
                       oz ≈ $5,040 USD.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">Convert between ounces, grams and kilos</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">Convert between ounces, grams and kilos</p>
+                    <p className=" mt-1">
                       1 troy oz = 31.1035 g • 1 kg = 32.1507 troy oz • Grams to oz: ÷ 31.1035 • Oz
                       to grams: × 31.1035.
                     </p>
                   </div>
 
                   <div>
-                    <p className="font-bold text-sm">How much will you pay to buy or sell gold?</p>
-                    <p className="text-sm mt-1">
+                    <p className="font-bold ">How much will you pay to buy or sell gold?</p>
+                    <p className=" mt-1">
                       Buy: spot + 3–10% premium (higher for small/jewelry) + taxes. Sell: spot minus
                       5–30% (less for bullion, more for scrap). Local dealers vary.
                     </p>
