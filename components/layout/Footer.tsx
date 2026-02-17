@@ -37,7 +37,7 @@ const Footer = () => {
   return (
     <div>
       <div className="container mx-auto px-4 pt-4">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-2">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="grid grid-cols-1 gap-4">
               <Card className="border-neutral-800">
@@ -54,7 +54,7 @@ const Footer = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm">
+                      <p className="">
                         <b className="">Hey guys</b> 👋 (
                         <a
                           href="/about"
@@ -66,12 +66,12 @@ const Footer = () => {
                         </a>
                         ){' '}
                       </p>
-                      <p className="text-sm mt-1">
+                      <p className="mt-6">
                         Welcome to Gold Price Live. I created this site to help my gold bug friends
                         invest their savings wisely. When I am not working on this site, I write
                         about investing on Substack. You can signup below:
                       </p>
-                      <p className="text-sm mt-1">
+                      <p className="mt-6">
                         <a
                           href="https://investorsgold.substack.com"
                           target="_blank"
@@ -81,8 +81,9 @@ const Footer = () => {
                           investorsgold.substack.com
                         </a>
                       </p>
-                      <p className="text-sm mt-1">I appreciate your support 😊 - Dave</p>
-                      <p className="text-sm mt-1">
+                      <p className=" mt-6">I appreciate your support 😊</p>
+                     <p className=" mt-1">  - Dave</p>
+                      <p className=" mt-6">
                         P.S. Keep stacking and feel free to contact me with comments or questions.
                       </p>
                     </div>
@@ -94,7 +95,7 @@ const Footer = () => {
                   <div className="flex-shrink-0 text-white font-extrabold px-3 pb-2">
                     INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-200 pl-3 mt-2">
+                  <ul className="space-y-2 text-white pl-3 mt-2 mb-3">
                     {loading ? (
                       <li className="">Loading articles...</li>
                     ) : (
@@ -112,12 +113,12 @@ const Footer = () => {
                       ))
                     )}
                   </ul>
-                  <div className="mt-1 pl-3 text-white">
+                  <div className="mt-1 mb-3 pl-3 text-white">
                     <a
                       href="https://investorsgold.substack.com/archive"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm hover:text-[#ffe600] hover:underline"
+                      className="hover:text-[#ffe600] hover:underline"
                     >
                       See more posts from Investor's Gold →
                     </a>
@@ -138,7 +139,7 @@ const Footer = () => {
                       />
                       <div>
                         <p className="font-bold text-lg">Investor's Gold</p>
-                        <p className="text-sm text-gray-400">The Investor's Edge. Subscribe ↓</p>
+                        <p className="text-md ">The Investor's Edge. Subscribe ↓</p>
                       </div>
                     </div>
                     <div data-supascribe-embed-id="232973870932" data-supascribe-subscribe></div>
@@ -159,17 +160,17 @@ const Footer = () => {
                         <Image
                           src="/images/app-mockup.png"
                           alt="Gold Price Live App"
-                          width={283}
-                          height={250}
+                          width={566}
+                          height={500}
                           priority={false}
                           className="shadow-lg rounded"
                         />
                       </div>
                     </div>
                     <h3 className="text-lg font-bold mb-1">GOLD PRICE LIVE APP</h3>
-                    <p className="text-sm">(coming soon)</p>
+                    <p className="text-md">(coming soon)</p>
                   </div>
-                  <ul className="space-y-1 text-xs mb-2">
+                  <ul className="space-y-1  mb-4">
                     <li>• Gold price charts available on Android.</li>
                     <li>• Live gold and silver price tickers.</li>
                     <li>• Buy gold from a premier online gold bullion dealer.</li>
