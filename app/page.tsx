@@ -727,47 +727,7 @@ export default function Home() {
           </CardContent>
         </Card>
 
-        {/* Gold Price Live App card - max 700px wide, centered */}
-        <Card className="bg-amber-100 border-amber-300 h-full max-w-[700px] mx-auto w-full">
-          <CardContent className="p-8">
-            <div className="text-center mb-4">
-              <div className="inline-block bg-amber-200 rounded-lg p-6 mb-3">
-                <div className="flex-shrink-0">
-                  <Image
-                    src="/images/app-mockup.png"
-                    alt="Gold Price Live App"
-                    width={283}
-                    height={250}
-                    priority={false}
-                    className="shadow-lg rounded"
-                  />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-2">GOLD PRICE LIVE APP</h3>
-              <p>(coming soon)</p>
-            </div>
-            <ul className="space-y-2 text-sm">
-              <li>• Gold price charts available on Android.</li>
-              <li>• Live gold and silver price tickers.</li>
-              <li>• Buy gold from a premier online gold bullion dealer.</li>
-              <li>• Read the latest financial news impacting gold prices.</li>
-            </ul>
-            <div className="text-center mt-3">
-              <div className="inline-block rounded-lg">
-                <div className="flex-shrink-0">
-                  <Image
-                    src="/images/goldprice-googleplay.png"
-                    alt="Gold Price Live App"
-                    width={180}
-                    height={55}
-                    priority={false}
-                    className="shadow-lg rounded"
-                  />
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+     
       </div>
     </MainLayout>
   );

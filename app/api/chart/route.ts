@@ -8,11 +8,17 @@ export async function GET(request: Request) {
   const type = searchParams.get('type') || 'chart';
 
   if (!symbol) {
-    return NextResponse.json({ success: false, error: 'Symbol parameter is required' }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: 'Symbol parameter is required' },
+      { status: 400 }
+    );
   }
 
   if (!['chart', 'performance'].includes(type)) {
-    return NextResponse.json({ success: false, error: 'Type must be chart or performance' }, { status: 400 });
+    return NextResponse.json(
+      { success: false, error: 'Type must be chart or performance' },
+      { status: 400 }
+    );
   }
 
   const yahoo = new YahooFinance();
@@ -36,7 +42,10 @@ export async function GET(request: Request) {
       };
 
       // Fetch historical data for each period
-      const performance: Record<string, { price: number; change: number; changePercent: number } | null> = {};
+      const performance: Record<
+        string,
+        { price: number; change: number; changePercent: number } | null
+      > = {};
       let earliestDate: string | null = null;
 
       for (const [period, date] of Object.entries(periods)) {
@@ -68,7 +77,7 @@ export async function GET(request: Request) {
             }
 
             const historicalPrice = closestQuote.close;
-            
+
             if (historicalPrice !== null && historicalPrice !== undefined) {
               const change = currentPrice - historicalPrice;
               const changePercent = (change / historicalPrice) * 100;
@@ -117,7 +126,10 @@ export async function GET(request: Request) {
 
     // Original chart logic
     if (!['7D', '12M'].includes(range)) {
-      return NextResponse.json({ success: false, error: 'Range must be 7D or 12M' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: 'Range must be 7D or 12M' },
+        { status: 400 }
+      );
     }
 
     const now = new Date();
@@ -141,17 +153,25 @@ export async function GET(request: Request) {
     const result = await yahoo.chart(symbol, queryOptions);
 
     if (!result.quotes || result.quotes.length === 0) {
-      return NextResponse.json({ success: false, error: 'No chart data found for the symbol' }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: 'No chart data found for the symbol' },
+        { status: 404 }
+      );
     }
 
-    const chartData = result.quotes.map((quote) => ({
-      time: quote.date.toISOString().split('T')[0], // YYYY-MM-DD
-      value: quote.close,
-    }));
+    const chartData = result.quotes
+      .filter(quote => quote.close !== null && quote.close !== undefined)
+      .map(quote => ({
+        time: quote.date.toISOString().split('T')[0], // YYYY-MM-DD
+        value: quote.close,
+      }));
 
     return NextResponse.json({ success: true, chartData });
   } catch (error) {
     console.error('Yahoo Finance API error:', error);
-    return NextResponse.json({ success: false, error: 'Failed to fetch chart data' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to fetch chart data' },
+      { status: 500 }
+    );
   }
 }

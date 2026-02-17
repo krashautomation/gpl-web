@@ -37,120 +37,167 @@ const Footer = () => {
   return (
     <div>
       <div className="container mx-auto px-4 pt-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="border-neutral-800 h-full">
-            <CardContent className="p-3">
-              {/* Flex row → image left | text right */}
-              <div className="flex items-start gap-4">
-                {/* Image column */}
-                <div className="flex-shrink-0 pl-3 pt-2">
-                  <Image
-                    src="/images/dave-profile.png"
-                    alt="Dave at Gold Price Live"
-                    width={80}
-                    height={80}
-                    priority={false}
-                    className="shadow-lg rounded-full border-4 border-amber-500" // rounded-full is nice for profile pics
-                  />
-                </div>
+       
 
-                {/* Text column */}
-                <div className="flex-1">
-                  <p className="mt-1 text-sm">
-                    <b className="">Hey guys</b> 👋 (
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-4">
+              <Card className="border-neutral-800">
+                <CardContent className="p-4">
+              
+                  <div className="flex items-start gap-4 mt-2">
+                    <div className="flex-shrink-0">
+                      <Image
+                        src="/images/dave-profile.png"
+                        alt="Dave at Gold Price Live"
+                        width={80}
+                        height={80}
+                        priority={false}
+                        className="shadow-lg rounded-full border-4 border-amber-500"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm">
+                        <b className="">Hey guys</b> 👋 (
+                        <a
+                          href="/about"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline"
+                        >
+                          about
+                        </a>
+                        ){' '}
+                      </p>
+                      <p className="text-sm mt-1">
+                        Welcome to Gold Price Live. I created this site to help my gold bug friends
+                        invest their savings wisely. When I am not working on this site, I write
+                        about investing on Substack. You can signup below:
+                      </p>
+                      <p className="text-sm mt-1">
+                        <a
+                          href="https://investorsgold.substack.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline font-extrabold"
+                        >
+                          investorsgold.substack.com
+                        </a>
+                      </p>
+                      <p className="text-sm mt-1">I appreciate your support 😊 - Dave</p>
+                      <p className="text-sm mt-1">
+                        P.S. Keep stacking and feel free to contact me with comments or questions.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="border-neutral-800" style={{ backgroundColor: '#001e5a' }}>
+                <CardContent className="p-4">
+             
+                  <div className="flex-shrink-0 text-white font-extrabold px-3 pb-2">
+                    INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
+                  </div>
+                  <ul className="space-y-2 text-sm text-gray-200 pl-3 mt-2">
+                    {loading ? (
+                      <li className="">Loading articles...</li>
+                    ) : (
+                      articles.map((article, index) => (
+                        <li key={index}>
+                          <a
+                            href={article.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-[#ffe600] hover:underline"
+                          >
+                            {article.title}
+                          </a>
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                  <div className="mt-1 pl-3 text-white">
                     <a
-                      href="/about"
+                      href="https://investorsgold.substack.com/archive"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover: hover:underline"
+                      className="text-sm hover:text-[#ffe600] hover:underline"
                     >
-                      about
+                      See more posts from Investor's Gold →
                     </a>
-                    ){' '}
-                  </p>
-                  <p className="mt-1  text-sm">
-                    Welcome to Gold Price Live. I created this site to help my gold bug friends
-                    invest their savings wisely. When I am not working on this site, I write about
-                    investing on Substack. You can signup below:
-                  </p>
-
-                  <p className="my-1  text-sm">
-                    <a
-                      href="https://investorsgold.substack.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=" hover:underline font-extrabold"
-                    >
-                      investorsgold.substack.com
-                    </a>
-                  </p>
-                  <p className="mt-1  text-sm">I appreciate your support 😊 - Dave</p>
-                  <p className="mt-1  text-sm">
-                    P.S. Keep stacking and feel free to contact me with comments or questions.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-[#001e5a]/30 bg-[#001e5a]  h-full">
-            <CardContent className="p-3">
-              <div className="flex-shrink-0 text-white  font-extrabold px-3 pb-2">
-                INVESTORS <span className="text-[#ffe600]">GOLD</span> 🎯 (Newsletter)
-              </div>
-
-              <ul className="space-y-2 text-sm text-gray-200 pl-3">
-                {loading ? (
-                  <li className="">Loading articles...</li>
-                ) : (
-                  articles.map((article, index) => (
-                    <li key={index}>
-                      <a
-                        href={article.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#ffe600] hover:underline"
-                      >
-                        {article.title}
-                      </a>
-                    </li>
-                  ))
-                )}
-              </ul>
-
-              <div className="mt-1 pl-3 text-white">
-                <a
-                  href="https://investorsgold.substack.com/archive"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm  hover:text-[#ffe600] hover:underline"
-                >
-                  See more posts from Investor's Gold →
-                </a>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="flex flex-col items-center mt-8 p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Image
-              src="/images/substack-logo.jpg"
-              alt="Investor's Gold"
-              width={40}
-              height={40}
-              className="rounded"
-              unoptimized
-            />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="border-neutral-800">
+                <CardContent className="p-4">
+     
+                  <div className="flex flex-col items-center mt-2" suppressHydrationWarning>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Image
+                        src="/images/substack-logo.jpg"
+                        alt="Investor's Gold"
+                        width={40}
+                        height={40}
+                        className="rounded"
+                        unoptimized
+                      />
+                      <div>
+                        <p className="font-bold text-lg">Investor's Gold</p>
+                        <p className="text-sm text-gray-400">The Investor's Edge. Subscribe ↓</p>
+                      </div>
+                    </div>
+                    <div data-supascribe-embed-id="232973870932" data-supascribe-subscribe></div>
+                    <Script
+                      src="https://js.supascribe.com/v1/loader/z1oBwbT8aJaUbULnzyYbNJfmm5u2.js"
+                      strategy="afterInteractive"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
             <div>
-              <p className="font-bold text-lg">Investor's Gold</p>
-              <p className="text-sm text-gray-400">The Investor's Edge. Subscribe ↓</p>
+              <Card className="bg-amber-100 border-amber-300 h-full">
+                <CardContent className="p-4">
+                  <div className="text-center mb-4">
+                    <div className="inline-block bg-amber-200 rounded-lg p-2 mb-3">
+                      <div className="flex-shrink-0">
+                        <Image
+                          src="/images/app-mockup.png"
+                          alt="Gold Price Live App"
+                          width={283}
+                          height={250}
+                          priority={false}
+                          className="shadow-lg rounded"
+                        />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold mb-1">GOLD PRICE LIVE APP</h3>
+                    <p className="text-sm">(coming soon)</p>
+                  </div>
+                  <ul className="space-y-1 text-xs mb-2">
+                    <li>• Gold price charts available on Android.</li>
+                    <li>• Live gold and silver price tickers.</li>
+                    <li>• Buy gold from a premier online gold bullion dealer.</li>
+                    <li>• Read the latest financial news impacting gold prices.</li>
+                  </ul>
+                  <div className="text-center">
+                    <div className="inline-block rounded-lg">
+                      <div className="flex-shrink-0">
+                        <Image
+                          src="/images/goldprice-googleplay.png"
+                          alt="Gold Price Live App"
+                          width={180}
+                          height={55}
+                          priority={false}
+                          className="shadow-lg rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          <div data-supascribe-embed-id="232973870932" data-supascribe-subscribe></div>
-          <Script
-            src="https://js.supascribe.com/v1/loader/z1oBwbT8aJaUbULnzyYbNJfmm5u2.js"
-            strategy="lazyOnload"
-          />
         </div>
       </div>
 
