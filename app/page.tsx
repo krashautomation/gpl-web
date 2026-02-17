@@ -240,11 +240,16 @@ export default function Home() {
             <div className="flex items-center gap-2  text-gray-900">
               <span>1 Year Chart</span>
             </div>
-            <div className="flex items-center gap-2  text-gray-900">
-              <span>Current Price: </span>
-              <span>USD 5039.72</span>
-              <span className="text-red-500">▼ 15.64 -0.31%</span>
-            </div>
+            {goldQuote && (
+              <div className="flex items-center gap-2  text-gray-900">
+                <span>Current Price: </span>
+                <span>USD {goldQuote.price.toFixed(2)}</span>
+                <span className={goldQuote.change < 0 ? 'text-red-500' : 'text-green-500'}>
+                  {goldQuote.change < 0 ? '▼' : '▲'} {Math.abs(goldQuote.change).toFixed(2)}{' '}
+                  {goldQuote.changePercent}%
+                </span>
+              </div>
+            )}
           </CardHeader>
           <CardContent>
             {gold12MLoading && (
@@ -622,9 +627,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className="font-bold ">
-                      How much was your gold worth when you bought it?
-                    </p>
+                    <p className="font-bold ">How much was your gold worth when you bought it?</p>
                     <p className=" mt-1">
                       Depends on purchase date, amount, and historical spot + premiums paid. Check
                       receipt/history and compare to spot price then.
@@ -640,9 +643,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className="font-bold ">
-                      How much is any gold coin worth in any currency?
-                    </p>
+                    <p className="font-bold ">How much is any gold coin worth in any currency?</p>
                     <p className=" mt-1">
                       Bullion coins (e.g., Maple Leaf, Eagle) ≈ spot + 3–8% premium. 1 oz pure ≈
                       $5,040–5,100 USD. Rare/collectible coins higher.
@@ -669,9 +670,7 @@ export default function Home() {
                 {/* Column 2 items */}
                 <div className="space-y-6">
                   <div>
-                    <p className="font-bold ">
-                      How much is any Karat of your gold jewelry worth?
-                    </p>
+                    <p className="font-bold ">How much is any Karat of your gold jewelry worth?</p>
                     <p className=" mt-1">
                       Per gram (spot basis, approx.): 24K ≈ $162 USD • 22K ≈ $148 USD • 18K ≈ $122
                       USD • 14K ≈ $95 USD • 10K ≈ $68 USD. Resale often lower due to fees/markup.
@@ -687,9 +686,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className="font-bold ">
-                      How much gold can you buy with your currency?
-                    </p>
+                    <p className="font-bold ">How much gold can you buy with your currency?</p>
                     <p className=" mt-1">
                       Divide amount by spot price per unit + premium. E.g., $1,000 USD buys ≈ 0.198
                       oz pure gold at spot (less after fees).
@@ -697,9 +694,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <p className="font-bold ">
-                      How much is your gold worth in any currency?
-                    </p>
+                    <p className="font-bold ">How much is your gold worth in any currency?</p>
                     <p className=" mt-1">
                       Gold is priced in USD spot; convert using current exchange rates. Example: 1
                       oz ≈ $5,040 USD.
@@ -726,8 +721,6 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
-
-     
       </div>
     </MainLayout>
   );
