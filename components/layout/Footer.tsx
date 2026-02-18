@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
 import Script from 'next/script';
+import { BannerAd } from '@/components/BannerAd';
 
 const fetchArticles = async () => {
   const res = await fetch(
@@ -196,6 +197,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      <BannerAd 
+  affiliateName="Money Metals Exchange"
+  adName="Money Metals Exchange"
+  href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+  src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+  className="my-6 pt-6"
+/>
 
       <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-8 py-12 text-white">
         <div className="container mx-auto px-4">

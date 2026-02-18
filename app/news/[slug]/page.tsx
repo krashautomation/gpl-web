@@ -177,7 +177,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           )}
         </article>
 
-<BannerAd className="my-0" />
+<BannerAd 
+  affiliateName="Money Metals Exchange"
+  adName="Money Metals Exchange"
+  href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
+  src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
+  className="my-0 py-0"
+/>
 
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
