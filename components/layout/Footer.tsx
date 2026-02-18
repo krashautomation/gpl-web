@@ -328,6 +328,23 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
+
+   <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY PRICES</h4>
+              <ul className="space-y-2 text-xs mb-6">
+                <li>
+                  <a href="/oil-price" className="hover:text-yellow-500">
+                    Crude Oil Price
+                  </a>
+                </li>
+                <li>
+                  <a href="/natural-gas-price" className="hover:text-yellow-500">
+                    Natural Gas Price
+                  </a>
+                </li>
+              </ul>
+
+
+
             </div>
 
             {/* Column 5: CONTACT + MOBILE + ADVERTISING */}
