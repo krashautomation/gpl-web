@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -59,6 +59,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState<string>('');
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
 
   useEffect(() => {
     setCurrentTime(
@@ -240,7 +245,7 @@ export default function Home() {
             <div className="flex items-center gap-2  text-gray-900">
               <span>1 Year Chart</span>
             </div>
-            {goldQuote && (
+            {mounted.current && goldQuote && (
               <div className="flex items-center gap-2  text-gray-900">
                 <span>Current Price: </span>
                 <span>USD {goldQuote.price.toFixed(2)}</span>
@@ -291,7 +296,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody className="">
-                    {goldQuote && (
+                    {mounted.current && goldQuote && (
                       <tr className="border-b border-gray-100">
                         <td className="py-3">Today</td>
                         <td
@@ -397,7 +402,7 @@ export default function Home() {
                 </table>
               )}
               <p className="text-xs text-gray-800 text-center mt-4">
-                {currentTime || 'Loading...'} NY Time
+                {mounted.current ? currentTime || 'Loading...' : 'Loading...'} NY Time
               </p>
             </div>
           </CardContent>
@@ -419,7 +424,7 @@ export default function Home() {
             <div className="flex items-center justify-between mb-4">
               {loading && <p>Loading...</p>}
               {error && <p className="text-red-500">{error}</p>}
-              {goldQuote && (
+              {mounted.current && goldQuote && (
                 <div className="flex items-center gap-4">
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-bold">{convertedPrice.toFixed(2)}</span>
@@ -493,7 +498,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              {goldQuote && (
+              {mounted.current && goldQuote && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
                     <span className="">Price per {goldUnit}:</span>

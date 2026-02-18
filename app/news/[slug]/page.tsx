@@ -138,11 +138,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </span>
               <span className="flex items-center gap-2">
                 <Calendar size={16} />
-                {new Date(article.date).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
+                {article.date}
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={16} />

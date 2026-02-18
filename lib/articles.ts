@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import yaml from 'js-yaml';
 
 export interface Article {
   slug: string;
@@ -20,7 +21,7 @@ export interface Article {
 }
 
 function parseFrontmatter(content: string): { data: Record<string, any>; content: string } {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const match = content.match(/^---(\r?\n[\s\S]*?)---(\r?\n[\s\S]*)$/);
   if (!match) {
     return { data: {}, content };
   }
@@ -28,34 +29,18 @@ function parseFrontmatter(content: string): { data: Record<string, any>; content
   const frontmatterBlock = match[1];
   const articleContent = match[2];
 
-  const data: Record<string, any> = {};
-  const lines = frontmatterBlock.split('\n');
-  let currentKey = '';
-
-  for (const line of lines) {
-    const keyMatch = line.match(/^(\w+):\s*(.*)$/);
-    if (keyMatch) {
-      const [, key, value] = keyMatch;
-      if (value.startsWith('"') && value.endsWith('"')) {
-        data[key] = value.slice(1, -1);
-      } else if (value.startsWith('[') && value.endsWith(']')) {
-        data[key] = value.slice(1, -1).split(',').map((s) => s.trim().replace(/^"|"$/g, ''));
-      } else if (value === '') {
-        currentKey = key;
-      } else {
-        data[key] = value;
-      }
-    } else if (currentKey && line.trim()) {
-      data[currentKey] += '\n' + line;
-    }
+  try {
+    const data = yaml.load(frontmatterBlock) as Record<string, any>;
+    return { data: data || {}, content: articleContent };
+  } catch (err) {
+    console.error('Error parsing frontmatter:', err);
+    return { data: {}, content: articleContent };
   }
-
-  return { data, content: articleContent };
 }
 
 export async function getArticles(): Promise<Article[]> {
   const articlesDir = path.join(process.cwd(), 'content', 'articles');
-  
+
   try {
     const entries = await fs.readdir(articlesDir, { withFileTypes: true });
     const articles: Article[] = [];
@@ -66,7 +51,7 @@ export async function getArticles(): Promise<Article[]> {
         try {
           const content = await fs.readFile(indexPath, 'utf-8');
           const { data, content: articleContent } = parseFrontmatter(content);
-          
+
           articles.push({
             slug: entry.name,
             title: data.title || entry.name,
@@ -95,5 +80,5 @@ export async function getArticles(): Promise<Article[]> {
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const articles = await getArticles();
-  return articles.find((a) => a.slug === slug) || null;
+  return articles.find(a => a.slug === slug) || null;
 }

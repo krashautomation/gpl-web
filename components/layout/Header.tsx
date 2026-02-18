@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Coins, Menu, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -133,15 +133,6 @@ function MobileNavItem({ item, onClose }: { item: NavItem; onClose: () => void }
 
       {isOpen && (
         <div className="pl-4 space-y-1 mt-1">
-          <SheetClose asChild>
-            <Link
-              href={item.href}
-              className="block py-2.5 px-4 text-sm text-white hover:bg-[#002a6a] hover: rounded-md transition-colors"
-              onClick={onClose}
-            >
-              View All {item.label}
-            </Link>
-          </SheetClose>
           {item.children.map(child => (
             <SheetClose asChild key={child.href}>
               <Link
@@ -241,6 +232,7 @@ const Header = () => {
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] bg-[#001a4a] border-[#001e5a] ">
+                <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-2 mb-8 pt-4">
                     <Coins className="h-6 w-6 text-yellow-500" />

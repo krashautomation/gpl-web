@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import MainLayout from '@/components/layout/MainLayout';
 import Image from 'next/image';
 import { getOgImage } from '@/lib/og-utils';
+import { Suspense } from 'react';
 
 import { getArticles, type Article } from '@/lib/articles';
 
@@ -165,11 +166,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     <div className="flex items-center gap-4">
                       <span className="flex items-center gap-1">
                         <Calendar size={12} />
-                        {new Date(article.date).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
+                        {article.date}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock size={12} />
