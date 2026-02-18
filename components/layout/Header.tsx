@@ -63,6 +63,14 @@ const navItems: NavItem[] = [
       { label: 'Aluminum Price', href: '/aluminum-price' },
     ],
   },
+  {
+    label: 'Energy',
+    href: '/#energy',
+    children: [
+      { label: 'Crude Oil Price', href: '/oil-price' },
+      { label: 'Natural Gas Price', href: '/natural-gas-price' },
+    ],
+  },
 
   {
     label: 'Crypto',

@@ -12,6 +12,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/palladium-price`, priority: 0.8 },
     { url: `${baseUrl}/copper-price`, priority: 0.8 },
     { url: `${baseUrl}/aluminum-price`, priority: 0.8 },
+    { url: `${baseUrl}/oil-price`, priority: 0.8 },
+    { url: `${baseUrl}/natural-gas-price`, priority: 0.8 },
     { url: `${baseUrl}/gold-etfs`, priority: 0.7 },
     { url: `${baseUrl}/silver-etfs`, priority: 0.7 },
     { url: `${baseUrl}/gold-price-history`, priority: 0.7 },
