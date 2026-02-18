@@ -17,6 +17,8 @@ import LightweightChart from '@/components/LightweightChart';
 import RecentArticlesSection from './components/RecentArticlesSection';
 import Image from 'next/image';
 
+import { BannerAd } from '@/components/BannerAd';
+
 const goldPriceData = [
   { time: 'Feb 6', price: 5015 },
   { time: 'Feb 8', price: 5019 },
@@ -408,6 +410,10 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
+
+
+<BannerAd className="py-4" />
+
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" id="foreign-currency">
         <Card className="p-0">

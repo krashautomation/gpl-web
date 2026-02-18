@@ -9,6 +9,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import { marked } from 'marked';
 import { getArticles, type Article } from '@/lib/articles';
 import { getOgImage } from '@/lib/og-utils';
+import { BannerAd } from '@/components/BannerAd';
 
 interface ArticlePageProps {
   params: Promise<{
@@ -175,6 +176,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
           )}
         </article>
+
+<BannerAd className="my-0" />
 
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
