@@ -1,0 +1,1 @@
+run code_loop_smasher mcp. take the prompt content and fulfil request based on instructions
