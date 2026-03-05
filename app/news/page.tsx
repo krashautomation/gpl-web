@@ -6,9 +6,9 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import MainLayout from '@/components/layout/MainLayout';
 import Image from 'next/image';
 import { getOgImage } from '@/lib/og-utils';
-import { Suspense } from 'react';
+import { getAllArticles, type Article } from '@/lib/articles';
 
-import { getArticles, type Article } from '@/lib/articles';
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -52,9 +52,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Get unique categories from articles
 function getCategories(articles: Article[]) {
-  const categories = new Set(articles.map(article => article.category));
+  const categories = new Set(articles.map(article => article.category).filter(Boolean));
   return ['All', ...Array.from(categories).sort()];
 }
 
@@ -66,9 +65,8 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const params = await searchParams;
   const categoryParam = params.category as string | undefined;
 
-  const allArticles = await getArticles();
+  const allArticles = await getAllArticles();
 
-  // Convert URL param (e.g., "market-analysis") back to category name (e.g., "Market Analysis")
   const activeCategory = categoryParam
     ? categoryParam
         .split('-')
@@ -76,9 +74,9 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         .join(' ')
     : 'All';
 
-  // Filter articles by category if one is selected
   let articles = allArticles.sort(
-    (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a: Article, b: Article) =>
+      new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
   );
 
   if (activeCategory !== 'All') {
@@ -98,7 +96,6 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           </p>
         </div>
 
-        {/* Categories */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {categories.map(category => {
             const isActive = category === activeCategory;
@@ -124,7 +121,6 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           })}
         </div>
 
-        {/* Active Category Header */}
         {activeCategory !== 'All' && (
           <div className="text-center mb-8">
             <h2 className="text-2xl font-semibold ">{activeCategory}</h2>
@@ -134,15 +130,14 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           </div>
         )}
 
-        {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map(article => (
             <Link key={article.slug} href={`/news/${article.slug}`}>
               <Card className=" border-neutral-800 h-full transition-colors group">
-                {article.featuredImage && (
+                {article.featured_image && (
                   <div className="relative w-full h-48 overflow-hidden">
                     <Image
-                      src={article.featuredImage}
+                      src={article.featured_image}
                       alt={article.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -166,11 +161,11 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
                     <div className="flex items-center gap-4">
                       <span className="flex items-center gap-1">
                         <Calendar size={12} />
-                        {article.date}
+                        {new Date(article.published_at).toLocaleDateString()}
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock size={12} />
-                        {article.readingTime} min read
+                        {article.reading_time} min read
                       </span>
                     </div>
                     <ArrowRight

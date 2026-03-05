@@ -17,3 +17,4 @@ export function BannerAd({ affiliateName, adName, href, src, className }: Banner
     </div>
   );
 }
+

@@ -7,9 +7,11 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
 import MainLayout from '@/components/layout/MainLayout';
 import { marked } from 'marked';
-import { getArticles, type Article } from '@/lib/articles';
-import { getOgImage } from '@/lib/og-utils';
+import { getArticleBySlug, getAllArticles, type Article } from '@/lib/articles';
 import { BannerAd } from '@/components/BannerAd';
+
+
+export const revalidate = 3600;
 
 interface ArticlePageProps {
   params: Promise<{
@@ -17,15 +19,9 @@ interface ArticlePageProps {
   }>;
 }
 
-// Generate static paths for all articles at build time
-// export function generateStaticParams() {
-//  return allArticles.map((article) => ({ slug: article.slug }))
-// }
-
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const allArticles = await getArticles();
-  const article = allArticles.find((a: Article) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     return {
@@ -33,14 +29,11 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     };
   }
 
-  const seoTitle = article.seo?.title || article.title;
-  const seoDescription = article.seo?.description || article.excerpt;
-  const seoKeywords = article.seo?.keywords || article.tags;
+  const seoTitle = article.seo_title || article.title;
+  const seoDescription = article.seo_description || article.excerpt;
+  const seoKeywords = article.seo_keywords || article.tags;
 
-  // Use featured image if available, fallback to default
-  const ogImage = article.featuredImage
-    ? getOgImage(article.featuredImage)
-    : getOgImage('/images/og-gold-price-live.png');
+  const ogImage = article.og_image || article.featured_image || '/images/og-gold-price-live.png';
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
@@ -49,29 +42,30 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     keywords: seoKeywords,
     authors: [{ name: article.author }],
     openGraph: {
-      title: seoTitle,
-      description: seoDescription,
+      title: article.og_title || seoTitle,
+      description: article.og_description || seoDescription,
       type: 'article',
-      publishedTime: article.date,
+      publishedTime: article.published_at,
       authors: [article.author],
       tags: article.tags,
       url: `/news/${article.slug}`,
-      images: article.featuredImage
-        ? [
-            {
-              url: ogImage,
-              width: 1200,
-              height: 630,
-              alt: article.title,
-            },
-          ]
-        : undefined,
+      images:
+        article.og_image || article.featured_image
+          ? [
+              {
+                url: ogImage,
+                width: 1200,
+                height: 630,
+                alt: article.title,
+              },
+            ]
+          : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: seoTitle,
-      description: seoDescription,
-      images: article.featuredImage ? [ogImage] : undefined,
+      title: article.og_title || seoTitle,
+      description: article.og_description || seoDescription,
+      images: article.og_image || article.featured_image ? [ogImage] : undefined,
     },
     alternates: {
       canonical: `/news/${article.slug}`,
@@ -81,13 +75,13 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const allArticles = await getArticles();
-  const article = allArticles.find((a: Article) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     notFound();
   }
 
+  const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter((a: Article) => a.slug !== slug && a.category === article.category)
     .slice(0, 3);
@@ -95,7 +89,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-12">
-        {/* Breadcrumb */}
         <nav className="text-sm text-black mb-6">
           <Link href="/" className="hover:text-black">
             Home
@@ -108,7 +101,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <span className="text-black">{article.title}</span>
         </nav>
 
-        {/* Back Link */}
         <Link
           href="/news"
           className="inline-flex items-center gap-2 text-black hover:text-black mb-8 transition-colors"
@@ -117,13 +109,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           Back to News
         </Link>
 
-        {/* Article Header */}
         <article className="max-w-4xl mx-auto">
           <header className="mb-8">
-            {article.featuredImage && (
+            {article.featured_image && (
               <div className="relative w-full h-64 md:h-96 mb-6 rounded-lg overflow-hidden">
                 <Image
-                  src={article.featuredImage}
+                  src={article.featured_image}
                   alt={article.title}
                   fill
                   className="object-cover"
@@ -139,16 +130,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </span>
               <span className="flex items-center gap-2">
                 <Calendar size={16} />
-                {article.date}
+                {new Date(article.published_at).toLocaleDateString()}
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={16} />
-                {article.readingTime} min read
+                {article.reading_time} min read
               </span>
             </div>
           </header>
 
-          {/* Article Content */}
           <div
             className="prose prose-invert prose-lg max-w-none mb-12
               prose-headings:text-black 
@@ -162,10 +152,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
               prose-td:border-neutral-700 prose-td:p-3 prose-td:text-black"
-            dangerouslySetInnerHTML={{ __html: marked.parse(article.body) as string }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(article.content) as string }}
           />
 
-          {/* Tags */}
           {article.tags && article.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-12">
               {article.tags.map((tag: string) => (
@@ -177,15 +166,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           )}
         </article>
 
-<BannerAd 
-  affiliateName="Money Metals Exchange"
-  adName="Money Metals Exchange"
-  href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
-  src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
-  className="my-0 py-0"
-/>
+        <BannerAd
+          affiliateName="Money Metals Exchange"
+          adName="Money Metals Exchange"
+          href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
+          src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
+          className="my-0 py-0"
+        />
 
-        {/* Related Articles */}
         {relatedArticles.length > 0 && (
           <div className="mt-16 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-black mb-6">Related Articles</h2>
