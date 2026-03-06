@@ -12,7 +12,7 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 - **Gold Price History**: 100-year historical chart (macrotrends.net)
 - **Gold Calculator**: Calculate gold value with multi-currency and unit conversion (oz/gr)
 - **Currency Support**: USD, CAD, AUD, GBP, EUR with real-time exchange rates
-- **Blog System**: SEO-optimized blog with MDX articles
+- **Blog System**: SEO-optimized blog with articles stored in Supabase
 - **Responsive Design**: Mobile-first design with dark theme
 
 ## Tech Stack
@@ -22,6 +22,7 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 - **Styling**: Tailwind CSS
 - **UI Components**: shadcn/ui
 - **Charts**: Lightweight Charts
+- **Database**: Supabase
 - **Data**: Yahoo Finance API
 
 ## Project Structure
@@ -29,23 +30,22 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 ```
 gpl-web/
 ├── app/                          # Next.js App Router
-│   ├── api/                      # API Routes
-│   │   ├── chart/route.ts        # Chart & performance data
-│   │   └── quotes/route.ts       # Real-time price quotes
 │   ├── layout.tsx               # Root layout with Google Analytics
 │   ├── sitemap.ts               # Sitemap.xml generation
 │   ├── robots.ts                # Robots.txt generation
+│   ├── news/                    # Blog pages (from Supabase)
 │   └── [page routes]            # Page components
 ├── components/
 │   ├── layout/                  # Header, Footer, MainLayout
 │   ├── ui/                      # shadcn/ui components
 │   └── LightweightChart.tsx
 ├── lib/
-│   ├── articles.ts              # MDX article loader
+│   ├── articles.ts              # Supabase article queries
+│   ├── supabase.ts              # Supabase client
 │   ├── og-utils.ts              # OpenGraph image utilities
 │   └── utils.ts                 # Utility functions
-├── content/
-│   └── articles/                # MDX article files
+├── supabase/
+│   └── schema.sql               # Database schema
 ├── public/                      # Static assets
 └── package.json
 ```
@@ -68,6 +68,8 @@ Create a `.env.local` file:
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://goldpricelive.co
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEYabase-anon-key=your-sup
 NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
 ```
 
@@ -111,31 +113,40 @@ The application includes comprehensive SEO optimization:
 
 ## Blog System
 
-Articles are stored as MDX files in `content/articles/`.
+Articles are stored in Supabase `articles` table. See `supabase/schema.sql` for the schema.
 
 ### Adding an Article
 
-1. Create a new `.mdx` file in `content/articles/`
-2. Add frontmatter:
+Insert a new row into the `articles` table via Supabase dashboard or API:
 
-```mdx
----
-title: 'Your Article Title'
-excerpt: 'Brief description for listings'
-author: 'Author Name'
-date: '2026-02-15'
-category: 'Market Analysis'
-tags: ['tag1', 'tag2']
-featuredImage: '/blog/image.jpg'
-readingTime: 5
-seo:
-  title: 'SEO Title'
-  description: 'SEO Description'
-  keywords: ['keyword1', 'keyword2']
----
+| Field           | Type        | Required | Description                       |
+| --------------- | ----------- | -------- | --------------------------------- |
+| slug            | text        | Yes      | URL-friendly identifier (unique)  |
+| title           | text        | Yes      | Article title                     |
+| excerpt         | text        | No       | Short description for listings    |
+| content         | text        | Yes      | Markdown content                  |
+| author          | text        | No       | Author name                       |
+| published_at    | timestamptz | Yes      | Publication date                  |
+| category        | text        | No       | Article category                  |
+| tags            | text[]      | No       | Array of tags                     |
+| featured_image  | text        | No       | URL to featured image             |
+| reading_time    | integer     | No       | Estimated reading time in minutes |
+| seo_title       | text        | No       | Custom SEO title                  |
+| seo_description | text        | No       | Custom SEO description            |
+| seo_keywords    | text[]      | No       | SEO keywords array                |
+| og_image        | text        | No       | OpenGraph image URL               |
+| draft           | boolean     | No       | Set to true to hide from public   |
 
-Your article content here...
+### Running the Migration
+
+If migrating from MDX files, use the migration script:
+
+```bash
+# Run the migration to import MDX articles into Supabase
+node scripts/migrate-articles.js
 ```
+
+Note: After migration, you can safely remove the `content/articles/` folder and migration scripts.
 
 ## Deployment
 
@@ -156,6 +167,8 @@ vercel
 Add these in Vercel project settings:
 
 - `NEXT_PUBLIC_SITE_URL` - Your domain
+- `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon key
 - `NEXT_PUBLIC_YAHOO_API_KEY` - Yahoo Finance API key
 
 ## License

@@ -1,0 +1,188 @@
+# AGENTS.md - Agentic Coding Guidelines
+
+Guidelines for AI agents operating in this repository.
+
+## Project Overview
+
+**Gold Price Live** - A Next.js 16 app for tracking live precious metals, commodities, and cryptocurrency prices with real-time charts and educational content.
+
+**Tech Stack**: Next.js 16 (App Router), TypeScript 5.2 (strict), Tailwind CSS 3.3, shadcn/ui (Radix), Lightweight Charts, Supabase, npm
+
+## Build Commands
+
+```bash
+npm run dev          # Start dev server localhost:3000
+npm run build        # Production build
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run lint:fix     # ESLint with auto-fix
+npm run format       # Format all files with Prettier
+npm run format:check # Check formatting without fixing
+npm run typecheck    # TypeScript type check only
+# No test framework - test manually in browser
+```
+
+## Code Style
+
+### Prettier
+
+`{"semi": true, "singleQuote": true, "tabWidth": 2, "trailingComma": "es5", "printWidth": 100, "bracketSpacing": true, "arrowParens": "avoid"}`
+
+### ESLint
+
+- Extends: `next/core-web-vitals` + `prettier`
+- Rules: `prettier/prettier` set to `warn`
+
+### TypeScript
+
+- **Strict mode** - all type annotations required
+- Use `type` for unions/interfaces, `interface` for object shapes
+- Never use `any` - use `unknown` if truly unknown
+- Always handle null/undefined
+
+### Imports
+
+Use path alias `@/*`. Group: React/Next → External libs → Internal:
+
+```typescript
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+```
+
+### Naming
+
+- **Components**: PascalCase (`Header.tsx`)
+- **Files**: kebab-case configs, PascalCase components
+- **Functions**: camelCase with verb prefix (`fetchData`)
+- **Constants**: SCREAMING_SNAKE_CASE
+
+### Component Structure
+
+```typescript
+'use client';
+
+import { useState, useEffect } from 'react';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function ComponentName({ className, children }: Props) {
+  const [state, setState] = useState(false);
+
+  useEffect(() => {
+    // effect logic
+  }, []);
+
+  return (
+    <div className={cn('base-classes', className)}>
+      {children}
+    </div>
+  );
+}
+```
+
+### Tailwind CSS
+
+Use `cn()` from `lib/utils.ts`. Mobile-first approach.
+
+### Error Handling
+
+```typescript
+try {
+  const { data, error } = await supabase.from('table').select('*');
+  if (error) throw new Error(`Failed: ${error.message}`);
+  return data;
+} catch (err) {
+  console.error('Fetch error:', err);
+  return [];
+}
+```
+
+## Project Structure
+
+```
+gpl-web/
+├── app/                    # Next.js App Router pages
+├── components/
+│   ├── layout/            # Header, Footer, MainLayout
+│   ├── ui/                # shadcn/ui components
+│   └── LightweightChart.tsx
+├── lib/
+│   ├── utils.ts           # cn() utility
+│   ├── supabase.ts        # Supabase client
+│   └── articles.ts        # MDX article loading
+├── content/articles/      # MDX blog posts
+└── public/                # Static assets
+```
+
+## Key Libraries
+
+### UI Components (shadcn/ui)
+
+All components in `components/ui/` are from shadcn/ui using Radix primitives. Copy to customize, never modify node_modules.
+
+### Supabase Client
+
+```typescript
+import { supabase } from '@/lib/supabase';
+// Configured with auth: { persistSession: false }
+```
+
+### MDX Articles
+
+Articles in `content/articles/*.mdx` with frontmatter:
+
+```mdx
+---
+title: 'Article Title'
+excerpt: 'Brief description'
+author: 'Author Name'
+date: '2026-02-15'
+category: 'Market Analysis'
+tags: ['tag1', 'tag2']
+---
+```
+
+## Environment Variables
+
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://goldpricelive.co
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
+```
+
+## Testing
+
+No test framework. Test manually: run `npm run dev`, open `http://localhost:3000`, test in browser, then run `npm run lint` and `npm run typecheck` before committing.
+
+## Common Tasks
+
+### Adding a New Page
+
+1. Create `app/page-name/page.tsx`
+2. Add `layout.tsx` if needed
+3. Add metadata export for SEO
+4. Add route to Header in `components/layout/Header.tsx`
+
+### Adding a New UI Component
+
+1. Copy from shadcn/ui or create new in `components/ui/`
+2. Follow component structure above
+
+### Adding a Blog Article
+
+1. Create `content/articles/slug/index.mdx`
+2. Add frontmatter
+3. Auto-generates at `/news/slug`
+
+## Cursor Rules
+
+- `.cursor/commands/codeloop.md` - Code loop command reference
