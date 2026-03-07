@@ -1,7 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { getArticles } from '@/lib/articles';
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const generatedAt = new Date().toISOString();
+  console.log('[Sitemap] Generated at:', generatedAt);
+
   const baseUrl = 'https://goldpricelive.co';
 
   const mainPages = [
