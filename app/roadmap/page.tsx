@@ -6,6 +6,15 @@ import Link from 'next/link';
 export default function Roadmap() {
   const checklistItems = [
     {
+      category: 'Content Management',
+      items: [
+        { text: 'Build admin dashboard for article management (/dashboard)', completed: true },
+        { text: 'Add AI article import feature using Claude/OpenAI', completed: true },
+        { text: 'Implement image upload and management system', completed: true },
+        { text: 'Add dynamic sitemap with timestamps for SEO', completed: true },
+      ],
+    },
+    {
       category: 'Monetization',
       items: [
         { text: 'Add Google Ads placements across key pages.', completed: false },
@@ -112,7 +121,6 @@ export default function Roadmap() {
           text: 'Generate and submit sitemap.xml (include all important pages, verify in Google Search Console)',
           completed: true,
         },
-        { text: 'Confirm robots.txt allows crawling of public content', completed: false },
       ],
     },
     {
@@ -224,7 +232,7 @@ export default function Roadmap() {
             </p>
           </CardHeader>
           <CardContent>
-            <p className="text-base mb-4">Last updated: February 16, 2026</p>
+            <p className="text-base mb-4">Last updated: March 7, 2026</p>
 
             {checklistItems.map((section, idx) => (
               <div key={idx} className="mb-6">

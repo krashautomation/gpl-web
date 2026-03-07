@@ -2,6 +2,13 @@
 
 A comprehensive Next.js application for tracking live gold and silver prices with real-time charts, performance analytics, and educational content.
 
+## Recent Changes
+
+- **AI Article Import** - Import and reword articles using Claude or OpenAI. Access via `/dashboard` in development mode.
+- **Admin Dashboard** - Full article management system at `/dashboard` (dev mode only)
+- **Image Management** - Upload and manage article images with usage tracking
+- **Dynamic Sitemap** - Sitemap now includes timestamps for better SEO freshness
+
 ## Features
 
 - **Live Price Tracking**: Real-time gold, silver, platinum, palladium, copper, aluminum prices plus Bitcoin and Ethereum
@@ -69,8 +76,10 @@ Create a `.env.local` file:
 ```env
 NEXT_PUBLIC_SITE_URL=https://goldpricelive.co
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEYabase-anon-key=your-sup
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
+ANTHROPIC_API_KEY=your-anthropic-api-key
+OPENAI_API_KEY=your-openai-api-key
 ```
 
 ## Pages
@@ -100,6 +109,8 @@ NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
 | Risk Warning        | `/risk-warning`        |
 | Advertise           | `/advertise`           |
 | Gold Price Live App | `/gold-price-live-app` |
+| Roadmap             | `/roadmap`             |
+| Dashboard (dev)     | `/dashboard`           |
 
 ## SEO
 
@@ -114,6 +125,16 @@ The application includes comprehensive SEO optimization:
 ## Blog System
 
 Articles are stored in Supabase `articles` table. See `supabase/schema.sql` for the schema.
+
+### Admin Dashboard
+
+The dashboard is available at `/dashboard` in development mode only. It provides:
+
+- **Articles** - List, edit, delete, and create new articles
+- **Import Article** - Use AI to import and reword articles from any text
+- **Images** - Upload and manage article images with usage tracking
+
+To use the AI import feature, add either `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` to your `.env.local` file.
 
 ### Adding an Article
 
