@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next'
- 
+import type { MetadataRoute } from 'next';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://goldpricelive.com/sitemap.xml',
-    host: 'https://goldpricelive.com',
-  }
+    sitemap: 'https://goldpricelive.co/sitemap.xml',
+    host: 'https://goldpricelive.co',
+  };
 }

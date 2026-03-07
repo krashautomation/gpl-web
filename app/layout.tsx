@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     'google-site-verification': 'H4GmbzGjib2O-9zx7ETrZkSxyVsXdd0ja4mQWeSSNpk',
     'google-adsense-account': 'ca-pub-5013867288772497',
   },
+  alternates: {
+    canonical: '/',
+  },
   manifest: '/site.webmanifest',
 };
 
