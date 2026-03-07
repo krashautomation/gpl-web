@@ -23,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ImportArticleModal } from '@/app/components/ImportArticleModal';
 
 export default function NewArticlePage() {
   const router = useRouter();
@@ -101,32 +100,10 @@ export default function NewArticlePage() {
     }
   }
 
-  // Called when ImportArticleModal finishes — pre-fills form fields
-  function handleImport(imported: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    seo_description: string;
-    seo_keywords: string;
-  }) {
-    setForm(prev => ({
-      ...prev,
-      title: imported.title,
-      slug: imported.slug,
-      excerpt: imported.excerpt,
-      content: imported.content,
-      seo_title: imported.title,
-      seo_description: imported.seo_description,
-      seo_keywords: imported.seo_keywords,
-    }));
-  }
-
   return (
     <div className="max-w-[1000px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">New Article</h1>
-        <ImportArticleModal onImport={handleImport} />
       </div>
 
       <form onSubmit={handleSubmit}>
