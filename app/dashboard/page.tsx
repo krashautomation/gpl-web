@@ -48,6 +48,26 @@ export default function DashboardPage() {
         </Link>
       </div>
 
+      <div className="mb-6 flex items-center gap-4">
+        <a
+          href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.goldpricelive.co%2F"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+        >
+          Google Search Console
+        </a>
+        <a
+          href="https://www.goldpricelive.co/sitemap.xml"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-pink-700 text-white px-4 py-2 rounded-md hover:bg-pink-800"
+        >
+          Sitemap
+        </a>
+        <span className="text-sm text-gray-500">Rebuild and redeploy to generate new sitemap</span>
+      </div>
+
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -78,6 +98,16 @@ export default function DashboardPage() {
                     <div>
                       <div className="font-medium text-gray-900">{article.title}</div>
                       <div className="text-sm text-gray-500">/{article.slug}</div>
+                      {!article.draft && (
+                        <a
+                          href={`https://www.goldpricelive.co/news/${article.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline"
+                        >
+                          https://www.goldpricelive.co/news/{article.slug}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </td>
