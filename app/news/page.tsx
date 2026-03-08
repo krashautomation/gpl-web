@@ -130,7 +130,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {articles.map(article => (
             <Link key={article.slug} href={`/news/${article.slug}`}>
               <Card className=" border-neutral-800 h-full transition-colors group">

@@ -19,7 +19,7 @@ import Link from 'next/link'; // if using Next.js
 export default function AboutGoldPriceLive() {
   return (
     <MainLayout>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         <Card className=" border-neutral-800">
           <CardHeader>
             <p className="text-2xl md:text-3xl font-bold  mb-3 tracking-tight">Disclaimer</p>

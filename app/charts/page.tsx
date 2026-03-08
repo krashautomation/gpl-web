@@ -81,7 +81,7 @@ export default function ChartsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 gap-6 mb-12">
           {chartTypes.map(chart => (
             <Link key={chart.title} href={chart.href}>
               <Card className=" border-neutral-800 h-full hover:border-yellow-500 transition-colors group">

@@ -240,7 +240,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold Price Live</h1>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         <Card>
           <CardHeader>
             <CardTitle className="">Gold Price Live USD</CardTitle>
@@ -419,7 +419,7 @@ export default function Home() {
         className="py-4"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" id="foreign-currency">
+      <div className="grid grid-cols-1 gap-6 mb-8" id="foreign-currency">
         <Card className="p-0">
           <CardHeader>
             <CardTitle className="">Gold Price Calculator</CardTitle>
@@ -629,7 +629,7 @@ export default function Home() {
           <CardContent>
             <div className="grid grid-cols-1 gap-6">
               {/* Two-column layout for FAQ items */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 {/* Column 1 items */}
                 <div className="space-y-6">
                   <div>

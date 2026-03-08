@@ -39,7 +39,7 @@ const Footer = () => {
     <div>
       <div className="container mx-auto px-4 pt-4">
         <div className="container mx-auto px-4 py-2">
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
             {/* Card 1: Hey guys intro */}
             <Card className="border-neutral-800">
               <CardContent className="p-4">

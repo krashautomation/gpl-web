@@ -134,7 +134,7 @@ export default function TestPage() {
 
       <h2 className="text-xl font-semibold mb-4">Phase 2: Components Test</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         <div>
           <h3 className="text-lg font-medium mb-2">ContactSidebar</h3>
           <ContactSidebar />
@@ -146,7 +146,7 @@ export default function TestPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         <div>
           <h3 className="text-lg font-medium mb-2">CommodityChartCard</h3>
           <CommodityChartCard
@@ -168,7 +168,7 @@ export default function TestPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         <div>
           <h3 className="text-lg font-medium mb-2">ContentCard</h3>
           <ContentCard title="Sample Content">

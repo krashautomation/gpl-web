@@ -31,7 +31,7 @@ export default function RecentArticlesSection() {
           const sorted = data.articles.sort(
             (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime()
           );
-          setArticles(sorted.slice(0, 3));
+          setArticles(sorted.slice(0, 2));
         }
       } catch (err) {
         console.error('Failed to load articles:', err);
@@ -55,7 +55,7 @@ export default function RecentArticlesSection() {
           View all <ArrowRight size={16} />
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {articles.map(article => (
           <Link key={article.slug} href={`/news/${article.slug}`}>
             <Card className=" border-neutral-800 h-full hover:border-black transition-colors group">

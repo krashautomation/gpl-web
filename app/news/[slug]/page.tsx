@@ -83,7 +83,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter((a: Article) => a.slug !== slug && a.category === article.category)
-    .slice(0, 3);
+    .slice(0, 2);
 
   return (
     <MainLayout>
@@ -176,7 +176,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {relatedArticles.length > 0 && (
           <div className="mt-16 max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-black mb-6">Related Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedArticles.map((relatedArticle: Article) => (
                 <Link key={relatedArticle.slug} href={`/news/${relatedArticle.slug}`}>
                   <Card className=" border-neutral-800 h-full">
