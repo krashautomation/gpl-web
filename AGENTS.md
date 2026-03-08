@@ -258,18 +258,31 @@ Testing: Verified via [test method]
 
 The Footer component (`components/layout/Footer.tsx`) has two sections:
 
-1. **Top section** (cards): Single-column stacked layout. Contains:
+1. **Top section** (cards): Single-column stacked layout at 896px max-width. Contains:
    - Dave's intro ("Hey guys")
    - INVESTORS GOLD newsletter
    - Subscribe form
    - Gold Price Live App promo (bottom)
 
-2. **Bottom section** (links): 5-column grid layout. Contains navigation links.
+2. **Bottom section** (links): 5-column grid layout at 1200px max-width. Contains navigation links.
 
 When modifying:
 
-- Top section uses `grid-cols-1` (single column)
-- Bottom section uses `grid-cols-2 md:grid-cols-3 lg:grid-cols-5` (5 columns on desktop)
+- Top section uses `grid-cols-1` (single column) with `max-w-4xl mx-auto`
+- Bottom section uses `grid-cols-2 md:grid-cols-3 lg:grid-cols-5` (5 columns) with `max-w-[1200px] mx-auto`
+
+### Page Container Layout
+
+All pages use consistent container widths:
+
+| Section      | Max Width         | File             |
+| ------------ | ----------------- | ---------------- |
+| Header nav   | 1200px            | `Header.tsx`     |
+| Main content | 896px (max-w-4xl) | `MainLayout.tsx` |
+| Footer cards | 896px (max-w-4xl) | `Footer.tsx`     |
+| Footer links | 1200px            | `Footer.tsx`     |
+
+To change widths, modify the corresponding max-w class in each file.
 
 ## Cursor Rules
 

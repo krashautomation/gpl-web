@@ -4,6 +4,9 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Recent Changes
 
+- **Single Column Layout** - All pages converted to single-column layout with consistent container widths (March 2026)
+- **Container Widths** - Header nav and footer links: 1200px, main content: 896px (March 2026)
+- **Article Grids** - News index and related articles now 2 columns, 2 articles (March 2026)
 - **Footer Single Column** - Converted footer top section from two-column to single-column layout (March 2026)
 - **Feature Flags** - Dynamic pages now render ads, articles, and earliest date based on DB flags (March 2026)
 - **Smart Defaults** - Page type selection auto-sets appropriate feature flags

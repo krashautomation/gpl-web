@@ -7,6 +7,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import Image from 'next/image';
 import { getOgImage } from '@/lib/og-utils';
 import { getAllArticles, type Article } from '@/lib/articles';
+import { BreadcrumbStructuredData } from '@/components/StructuredData';
 
 export const revalidate = 3600;
 
@@ -87,6 +88,12 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
 
   return (
     <MainLayout>
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Home', url: 'https://goldpricelive.co' },
+          { name: 'News', url: 'https://goldpricelive.co/news' },
+        ]}
+      />
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold  mb-4">Gold Price News</h1>

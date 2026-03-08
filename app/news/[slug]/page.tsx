@@ -9,6 +9,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import { marked } from 'marked';
 import { getArticleBySlug, getAllArticles, type Article } from '@/lib/articles';
 import { BannerAd } from '@/components/BannerAd';
+import { ArticleStructuredData, BreadcrumbStructuredData } from '@/components/StructuredData';
 
 export const revalidate = 3600;
 
@@ -87,6 +88,21 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <MainLayout>
+      <ArticleStructuredData
+        headline={article.title}
+        image={article.featured_image ? [article.featured_image] : []}
+        datePublished={article.published_at}
+        dateModified={article.updated_at || article.published_at}
+        author={[{ name: article.author }]}
+        description={article.excerpt}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Home', url: 'https://goldpricelive.co' },
+          { name: 'News', url: 'https://goldpricelive.co/news' },
+          { name: article.title, url: `https://goldpricelive.co/news/${article.slug}` },
+        ]}
+      />
       <div className="container mx-auto px-4 py-12">
         <nav className="text-sm text-black mb-6">
           <Link href="/" className="hover:text-black">

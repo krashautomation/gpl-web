@@ -18,6 +18,11 @@ import RecentArticlesSection from './components/RecentArticlesSection';
 import Image from 'next/image';
 
 import { BannerAd } from '@/components/BannerAd';
+import {
+  FAQStructuredData,
+  OrganizationStructuredData,
+  WebSiteStructuredData,
+} from '@/components/StructuredData';
 
 const goldPriceData = [
   { time: 'Feb 6', price: 5015 },
@@ -236,6 +241,76 @@ export default function Home() {
 
   return (
     <MainLayout>
+      <OrganizationStructuredData
+        name="Gold Price Live"
+        url="https://goldpricelive.co"
+        logo="https://goldpricelive.co/favicon.ico"
+      />
+      <WebSiteStructuredData name="Gold Price Live" url="https://goldpricelive.co" />
+      <FAQStructuredData
+        faqs={[
+          {
+            question: 'How much is your gold worth?',
+            answer:
+              "Multiply your gold's weight (in troy ounces or grams) by current spot price, adjusted for purity (e.g., 24K = 100%). Example: 1 oz pure gold ≈ $5,040 USD.",
+          },
+          {
+            question: 'How much was your gold worth when you bought it?',
+            answer:
+              'Depends on purchase date, amount, and historical spot + premiums paid. Check receipt/history and compare to spot price then.',
+          },
+          {
+            question: 'How much profit have you made on your gold?',
+            answer:
+              "Profit = current value − original cost (incl. fees/premiums). Subtract what you paid from today's spot-adjusted value.",
+          },
+          {
+            question: 'How much is any gold coin worth in any currency?',
+            answer:
+              'Bullion coins (e.g., Maple Leaf, Eagle) ≈ spot + 3–8% premium. 1 oz pure ≈ $5,040–5,100 USD. Rare/collectible coins higher.',
+          },
+          {
+            question: 'All major exchange rates',
+            answer:
+              'Use a live converter for current rates (e.g., USD to EUR, GBP, etc.). Gold is typically priced in USD globally.',
+          },
+          {
+            question: 'How much is your scrap gold worth?',
+            answer:
+              'Weight × purity × spot price, minus 10–30% dealer/refining fee. Example: 10g 14K (58.3% pure) ≈ $945 USD spot value, but ~$660–850 received.',
+          },
+          {
+            question: 'How much is any Karat of your gold jewelry worth?',
+            answer:
+              'Per gram (spot basis, approx.): 24K ≈ $162 USD • 22K ≈ $148 USD • 18K ≈ $122 USD • 14K ≈ $95 USD • 10K ≈ $68 USD. Resale often lower due to fees/markup.',
+          },
+          {
+            question: 'What change should you give in gold coins?',
+            answer:
+              "Rare in practice—gold coins aren't used for small change due to value/premiums. Use fiat currency for everyday transactions.",
+          },
+          {
+            question: 'How much gold can you buy with your currency?',
+            answer:
+              'Divide amount by spot price per unit + premium. E.g., $1,000 USD buys ≈ 0.198 oz pure gold at spot (less after fees).',
+          },
+          {
+            question: 'How much is your gold worth in any currency?',
+            answer:
+              'Gold is priced in USD spot; convert using current exchange rates. Example: 1 oz ≈ $5,040 USD.',
+          },
+          {
+            question: 'Convert between ounces, grams and kilos',
+            answer:
+              '1 troy oz = 31.1035 g • 1 kg = 32.1507 troy oz • Grams to oz: ÷ 31.1035 • Oz to grams: × 31.1035.',
+          },
+          {
+            question: 'How much will you pay to buy or sell gold?',
+            answer:
+              'Buy: spot + 3–10% premium (higher for small/jewelry) + taxes. Sell: spot minus 5–30% (less for bullion, more for scrap). Local dealers vary.',
+          },
+        ]}
+      />
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold Price Live</h1>
       </div>

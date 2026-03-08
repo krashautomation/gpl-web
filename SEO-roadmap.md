@@ -38,6 +38,7 @@ A concise, prioritized roadmap for maximum efficiency, SEO, and traffic growth f
 ### SEO Automation
 
 - Auto-generate meta tags, schema, canonical URLs, OG/Twitter cards for all pages.
+- **Structured Data:** Implement JSON-LD schemas (Breadcrumb, Article, FAQPage, Organization, WebSite). See [`docs/structured-data-plan.md`](docs/structured-data-plan.md) for details.
 
 ---
 

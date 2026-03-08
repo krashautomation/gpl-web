@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import MainLayout from '@/components/layout/MainLayout';
+import { BreadcrumbStructuredData } from '@/components/StructuredData';
 import { TrendingUp, LineChart, BarChart3, Clock } from 'lucide-react';
 import { getOgImage } from '@/lib/og-utils';
 
@@ -73,6 +74,12 @@ const chartTypes = [
 export default function ChartsPage() {
   return (
     <MainLayout>
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Home', url: 'https://goldpricelive.co' },
+          { name: 'Charts', url: 'https://goldpricelive.co/charts' },
+        ]}
+      />
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold  mb-4">Gold Price Charts</h1>

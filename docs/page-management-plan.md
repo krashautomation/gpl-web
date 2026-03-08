@@ -37,13 +37,16 @@ All phases completed successfully:
 
 ### Recent Updates (March 2026)
 
-| Date       | Change                                        |
-| ---------- | --------------------------------------------- |
-| 2026-03-08 | Feature flags implemented in dynamic route    |
-| 2026-03-08 | Smart defaults by page type                   |
-| 2026-03-08 | GoldCalculator component extracted            |
-| 2026-03-08 | Dashboard form reordered (Data Source first)  |
-| 2026-03-08 | Schema defaults: has_ads, has_articles = true |
+| Date       | Change                                                |
+| ---------- | ----------------------------------------------------- |
+| 2026-03-08 | Single column layout across all pages                 |
+| 2026-03-08 | Container widths: 1200px header/footer, 896px content |
+| 2026-03-08 | Article grids reduced to 2 columns                    |
+| 2026-03-08 | Feature flags implemented in dynamic route            |
+| 2026-03-08 | Smart defaults by page type                           |
+| 2026-03-08 | GoldCalculator component extracted                    |
+| 2026-03-08 | Dashboard form reordered (Data Source first)          |
+| 2026-03-08 | Schema defaults: has_ads, has_articles = true         |
 
 ---
 
