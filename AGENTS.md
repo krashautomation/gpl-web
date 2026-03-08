@@ -181,6 +181,8 @@ No test framework. Test manually: run `npm run dev`, open `http://localhost:3000
 
 ### Commit Message Format
 
+Use single quotes in commit messages, not double quotes:
+
 ```
 feat/fix/chore: [brief description]
 

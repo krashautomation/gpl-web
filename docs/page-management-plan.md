@@ -1266,6 +1266,8 @@ Commit after each phase is **tested and verified working**. Never commit broken 
 
 ### Commit Message Format
 
+Use single quotes in commit messages, not double quotes:
+
 When testing is successful, provide commit messages in this format:
 
 ```
