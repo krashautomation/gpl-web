@@ -8,6 +8,7 @@ import {
   createPage,
   updatePage,
   isPageLocked,
+  isSlugUnique,
   type Page,
   type CreatePageInput,
 } from '@/lib/pages';
@@ -53,6 +54,9 @@ export default function EditPagePage() {
   const [saving, setSaving] = useState(false);
   const [locked, setLocked] = useState(false);
   const [uploadingOgImage, setUploadingOgImage] = useState(false);
+  const [slugError, setSlugError] = useState<string | null>(null);
+  const [titleError, setTitleError] = useState<string | null>(null);
+  const [checkingSlug, setCheckingSlug] = useState(false);
   const [form, setForm] = useState<CreatePageInput>({
     slug: '',
     title: '',
@@ -135,8 +139,29 @@ export default function EditPagePage() {
       return;
     }
 
+    setSlugError(null);
+    setTitleError(null);
+
+    if (!form.slug.trim()) {
+      setSlugError('Slug is required.');
+      return;
+    }
+
+    if (!form.title.trim()) {
+      setTitleError('Title is required.');
+      return;
+    }
+
     setSaving(true);
     try {
+      const excludeId = isNew ? undefined : id;
+      const unique = await isSlugUnique(form.slug, excludeId);
+      if (!unique) {
+        setSlugError(`Slug "${form.slug}" is already in use. Please choose a different slug.`);
+        setSaving(false);
+        return;
+      }
+
       const pageData = {
         ...form,
         meta_keywords: form.meta_keywords || [],
@@ -148,14 +173,16 @@ export default function EditPagePage() {
         if (created) {
           router.push('/dashboard/pages');
         } else {
-          alert('Failed to create page');
+          alert(
+            'Failed to create page. Check console for details or ensure RLS policies are set up.'
+          );
         }
       } else {
         const updated = await updatePage(id, pageData);
         if (updated) {
           router.push('/dashboard/pages');
         } else {
-          alert('Failed to update page');
+          alert('Failed to update page. Please check that all required fields are filled.');
         }
       }
     } finally {
@@ -224,26 +251,38 @@ export default function EditPagePage() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">
+                    Title <span className="text-red-500">*</span>
+                  </Label>
                   <Input
                     id="title"
                     value={form.title}
-                    onChange={e => handleChange('title', e.target.value)}
+                    onChange={e => {
+                      handleChange('title', e.target.value);
+                      setTitleError(null);
+                    }}
                     placeholder="Page Title"
                     required
                     disabled={locked}
                   />
+                  {titleError && <p className="text-sm text-red-600 mt-1">{titleError}</p>}
                 </div>
                 <div>
-                  <Label htmlFor="slug">Slug</Label>
+                  <Label htmlFor="slug">
+                    Slug <span className="text-red-500">*</span>
+                  </Label>
                   <Input
                     id="slug"
                     value={form.slug}
-                    onChange={e => handleChange('slug', e.target.value)}
+                    onChange={e => {
+                      handleChange('slug', e.target.value);
+                      setSlugError(null);
+                    }}
                     placeholder="page-slug"
                     required
                     disabled={locked}
                   />
+                  {slugError && <p className="text-sm text-red-600 mt-1">{slugError}</p>}
                 </div>
               </div>
               <div>
@@ -413,20 +452,11 @@ export default function EditPagePage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="twitter_card">Twitter Card Type</Label>
-                  <Select
-                    value={form.twitter_card || ''}
-                    onValueChange={value => handleChange('twitter_card', value)}
-                    disabled={locked}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Twitter card" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="summary">Summary</SelectItem>
-                      <SelectItem value="summary_large_image">Summary Large Image</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label>Social Preview</Label>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Twitter Card defaults to &quot;summary_large_image&quot; (1200 x 630 px). Upload
+                    an OG image above for best social media visibility.
+                  </p>
                 </div>
                 <div>
                   <Label htmlFor="robots">Robots</Label>
@@ -599,18 +629,32 @@ export default function EditPagePage() {
           </Card>
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.push('/dashboard/pages')}
-              disabled={saving}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={saving || locked}>
-              {saving ? 'Saving...' : isNew ? 'Create Page' : 'Save Changes'}
-            </Button>
+          <div className="flex items-center justify-between">
+            <div>
+              {form.slug && (
+                <a
+                  href={`/${form.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800"
+                >
+                  Preview: /{form.slug}
+                </a>
+              )}
+            </div>
+            <div className="flex items-center gap-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push('/dashboard/pages')}
+                disabled={saving}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={saving || locked}>
+                {saving ? 'Saving...' : isNew ? 'Create Page' : 'Save Changes'}
+              </Button>
+            </div>
           </div>
         </div>
       </form>

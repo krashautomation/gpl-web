@@ -260,3 +260,20 @@ export async function isPageLocked(id: string): Promise<boolean> {
 
   return data?.is_locked ?? false;
 }
+
+export async function isSlugUnique(slug: string, excludeId?: string): Promise<boolean> {
+  let query = supabase.from('pages').select('id').eq('slug', slug);
+
+  if (excludeId) {
+    query = query.neq('id', excludeId);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error('Error checking slug uniqueness:', error);
+    return false;
+  }
+
+  return !data || data.length === 0;
+}

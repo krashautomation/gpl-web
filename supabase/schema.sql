@@ -94,6 +94,112 @@ BEGIN
 END
 $$;
 
+-- Allow anon users to insert/update/delete pages (for dashboard)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can insert pages'
+  ) THEN
+    CREATE POLICY "Anon can insert pages"
+    ON public.pages FOR INSERT
+    TO anon
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can update pages'
+  ) THEN
+    CREATE POLICY "Anon can update pages"
+    ON public.pages FOR UPDATE
+    TO anon
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can delete pages'
+  ) THEN
+    CREATE POLICY "Anon can delete pages"
+    ON public.pages FOR DELETE
+    TO anon
+    USING (true);
+  END IF;
+END
+$$;
+
+-- Allow anon users for page_components
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can insert page_components'
+  ) THEN
+    CREATE POLICY "Anon can insert page_components"
+    ON public.page_components FOR INSERT
+    TO anon
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can update page_components'
+  ) THEN
+    CREATE POLICY "Anon can update page_components"
+    ON public.page_components FOR UPDATE
+    TO anon
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Anon can delete page_components'
+  ) THEN
+    CREATE POLICY "Anon can delete page_components"
+    ON public.page_components FOR DELETE
+    TO anon
+    USING (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Authenticated can update pages'
+  ) THEN
+    CREATE POLICY "Authenticated can update pages"
+    ON public.pages FOR UPDATE
+    TO authenticated
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Authenticated can delete pages'
+  ) THEN
+    CREATE POLICY "Authenticated can delete pages"
+    ON public.pages FOR DELETE
+    TO authenticated
+    USING (true);
+  END IF;
+END
+$$;
+
 DO $$
 BEGIN
   IF NOT EXISTS (
@@ -101,6 +207,46 @@ BEGIN
   ) THEN
     CREATE POLICY "Public can read page components"
     ON public.page_components FOR SELECT
+    USING (true);
+  END IF;
+END
+$$;
+
+-- Allow authenticated users to insert/update/delete page components
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Authenticated can insert page_components'
+  ) THEN
+    CREATE POLICY "Authenticated can insert page_components"
+    ON public.page_components FOR INSERT
+    TO authenticated
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Authenticated can update page_components'
+  ) THEN
+    CREATE POLICY "Authenticated can update page_components"
+    ON public.page_components FOR UPDATE
+    TO authenticated
+    WITH CHECK (true);
+  END IF;
+END
+$$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_policies WHERE policyname = 'Authenticated can delete page_components'
+  ) THEN
+    CREATE POLICY "Authenticated can delete page_components"
+    ON public.page_components FOR DELETE
+    TO authenticated
     USING (true);
   END IF;
 END

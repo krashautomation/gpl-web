@@ -134,6 +134,7 @@ Articles are stored in Supabase `articles` table. See `supabase/schema.sql` for 
 The dashboard is available at `/dashboard` in development mode only. It provides:
 
 - **Articles** - List, edit, delete, and create new articles
+- **Pages** - Manage dynamic pages with full CRUD, slug validation, and preview
 - **Import Article** - Use AI to import and reword articles from any text
 - **Images** - Upload and manage article images with usage tracking
 
@@ -176,14 +177,24 @@ Note: After migration, you can safely remove the `content/articles/` folder and 
 
 Pages are stored in Supabase `pages` table. The system uses a dynamic route `app/[slug]/page.tsx` to render pages from the database.
 
+### Dashboard
+
+Manage pages at `/dashboard/pages`:
+
+- **Create** - Add new pages with title, slug, page type, SEO fields
+- **Edit** - Modify existing pages (except locked pages)
+- **Delete** - Remove pages (locked pages protected)
+- **Preview** - View page before publishing
+- **Slug Validation** - Prevents duplicate slugs
+
 ### Database Schema
 
 See `supabase/schema.sql` for the full schema. Key tables:
 
-| Table             | Purpose                             |
-| ----------------- | ----------------------------------- |
-| `pages`           | Page configurations with SEO fields |
-| `page_components` | Future: custom component layouts    |
+| Table             | Purpose                             | Status             |
+| ----------------- | ----------------------------------- | ------------------ |
+| `pages`           | Page configurations with SEO fields | ✅ Active          |
+| `page_components` | Future: custom component layouts    | ⚠️ Not implemented |
 
 ### Page Types
 
@@ -203,7 +214,7 @@ Pages include comprehensive SEO configuration:
 - `meta_description` - SEO description
 - `meta_keywords` - SEO keywords array
 - `og_image` - Open Graph image
-- `twitter_card` - Twitter card type
+- `twitter_card` - Twitter card type (defaults to summary_large_image)
 - `robots` - Robots meta (index/follow)
 - `canonical_url` - Canonical URL
 - `seo_page_type` - SEO classification
@@ -212,6 +223,17 @@ Pages include comprehensive SEO configuration:
 - `related_pages` - Related page slugs
 - `schema_type` - Schema.org type
 - `is_locked` - Prevent AI overwrites
+
+### Feature Flags
+
+The following flags are stored in DB but not yet rendered in dynamic route:
+
+| Flag          | DB Field             | Dynamic Route   | Purpose                           |
+| ------------- | -------------------- | --------------- | --------------------------------- |
+| Calculator    | `has_calculator`     | ❌ Not rendered | Show gold calculator              |
+| Ads           | `has_ads`            | ❌ Not rendered | Show banner ads                   |
+| Articles      | `has_articles`       | ❌ Not rendered | Show recent articles              |
+| Earliest Date | `show_earliest_date` | ❌ Not rendered | Show earliest price date (crypto) |
 
 ### Current Pages (11)
 

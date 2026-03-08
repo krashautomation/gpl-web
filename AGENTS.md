@@ -108,6 +108,12 @@ try {
 ```
 gpl-web/
 ├── app/                    # Next.js App Router pages
+│   ├── [slug]/page.tsx     # Dynamic page route (database-driven)
+│   ├── [slug]/DynamicPageClient.tsx
+│   ├── dashboard/          # Admin dashboard (dev mode)
+│   │   ├── articles/       # Article management
+│   │   └── pages/         # Page management
+│   └── news/[slug]/       # Dynamic blog posts
 ├── components/
 │   ├── layout/            # Header, Footer, MainLayout
 │   ├── ui/                # shadcn/ui components
@@ -115,16 +121,15 @@ gpl-web/
 ├── lib/
 │   ├── utils.ts           # cn() utility
 │   ├── supabase.ts        # Supabase client
-│   └── articles.ts        # MDX article loading
-├── content/articles/      # MDX blog posts
+│   ├── articles.ts        # Article CMS functions
+│   └── pages.ts           # Page CMS functions (CRUD)
+├── supabase/
+│   └── schema.sql         # Database schema
+├── content/articles/       # MDX blog posts (legacy)
 └── public/                # Static assets
 ```
 
 ## Key Libraries
-
-### UI Components (shadcn/ui)
-
-All components in `components/ui/` are from shadcn/ui using Radix primitives. Copy to customize, never modify node_modules.
 
 ### Supabase Client
 
@@ -133,9 +138,37 @@ import { supabase } from '@/lib/supabase';
 // Configured with auth: { persistSession: false }
 ```
 
-### MDX Articles
+### Pages Library (`lib/pages.ts`)
 
-Articles in `content/articles/*.mdx` with frontmatter:
+Use for page management operations:
+
+```typescript
+import {
+  getPageBySlug,
+  getAllPagesAdmin,
+  createPage,
+  updatePage,
+  deletePage,
+  isSlugUnique,
+  isPageLocked,
+} from '@/lib/pages';
+```
+
+- `getPageBySlug(slug)` - Fetch page by URL slug
+- `getAllPagesAdmin()` - Fetch all pages for dashboard
+- `createPage(data)` - Create new page
+- `updatePage(id, data)` - Update existing page
+- `deletePage(id)` - Delete page (checks locked status)
+- `isSlugUnique(slug, excludeId?)` - Validate unique slug
+- `isPageLocked(id)` - Check if page is locked
+
+### Articles
+
+Articles are stored in Supabase `articles` table. Access via dashboard at `/dashboard` (dev mode only).
+
+### MDX Articles (Legacy)
+
+Articles previously stored in `content/articles/*.mdx` - now migrated to Supabase.
 
 ```mdx
 ---
