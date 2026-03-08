@@ -4,6 +4,8 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Recent Changes
 
+- **Feature Flags** - Dynamic pages now render ads, articles, and earliest date based on DB flags (March 2026)
+- **Smart Defaults** - Page type selection auto-sets appropriate feature flags
 - **Page Management System** - Database-driven pages with SEO from Supabase (March 2026)
 - **Dynamic Route** - All commodity/crypto pages use `app/[slug]/` route from database
 - **Reusable Components** - 6 new components: ContactSidebar, PriceCard, PerformanceTable, CommodityChartCard, ContentCard, ProfileCard
@@ -205,6 +207,7 @@ See `supabase/schema.sql` for the full schema. Key tables:
 | `ratio`     | Metal ratios         | ChartCard + PerformanceTable |
 | `static`    | Static content       | ContentCard + ContactSidebar |
 | `legal`     | Legal pages          | ContentCard + ContactSidebar |
+| `home`      | Home page            | Calculator + Quotes + Ads    |
 
 ### SEO Fields (13 fields)
 
@@ -226,14 +229,20 @@ Pages include comprehensive SEO configuration:
 
 ### Feature Flags
 
-The following flags are stored in DB but not yet rendered in dynamic route:
+Dynamic pages support these configurable features:
 
-| Flag          | DB Field             | Dynamic Route   | Purpose                           |
-| ------------- | -------------------- | --------------- | --------------------------------- |
-| Calculator    | `has_calculator`     | ❌ Not rendered | Show gold calculator              |
-| Ads           | `has_ads`            | ❌ Not rendered | Show banner ads                   |
-| Articles      | `has_articles`       | ❌ Not rendered | Show recent articles              |
-| Earliest Date | `show_earliest_date` | ❌ Not rendered | Show earliest price date (crypto) |
+| Flag          | DB Field             | Dynamic Route  | Purpose                           |
+| ------------- | -------------------- | -------------- | --------------------------------- |
+| Calculator    | `has_calculator`     | ✅ Placeholder | Show gold calculator              |
+| Ads           | `has_ads`            | ✅ Rendered    | Show banner ads                   |
+| Articles      | `has_articles`       | ✅ Rendered    | Show recent articles              |
+| Earliest Date | `show_earliest_date` | ✅ Rendered    | Show earliest price date (crypto) |
+
+Smart defaults are applied based on page type:
+
+- **commodity/crypto/ratio**: has_ads=true, has_articles=true
+- **crypto**: additionally show_earliest_date=true
+- **static/legal**: has_ads=false, has_articles=false
 
 ### Current Pages (11)
 

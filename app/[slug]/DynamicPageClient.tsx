@@ -7,6 +7,7 @@ import { PerformanceTable } from '@/components/PerformanceTable';
 import { ContactSidebar } from '@/components/ContactSidebar';
 import { ContentCard } from '@/components/ContentCard';
 import { BannerAd } from '@/components/BannerAd';
+import { GoldCalculator } from '@/components/GoldCalculator';
 import RecentArticlesSection from '@/app/components/RecentArticlesSection';
 import type { Page } from '@/lib/pages';
 
@@ -168,8 +169,8 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
         </div>
 
         {hasCalculator && (
-          <div className="mb-8 p-6 bg-gray-50 rounded-lg">
-            <p className="text-center text-gray-500">Calculator feature coming soon</p>
+          <div className="mb-8">
+            <GoldCalculator symbol={symbol || 'GC=F'} title={`${page.title} Calculator`} />
           </div>
         )}
 
