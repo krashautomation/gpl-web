@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getArticles } from '@/lib/articles';
+import { getAllPages } from '@/lib/pages';
 
 export const dynamic = 'force-dynamic';
 
@@ -52,5 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...pages, ...articlePages];
+  const dbPages = await getAllPages();
+  const dynamicPages = dbPages.map(page => ({
+    url: `${baseUrl}/${page.slug}`,
+    lastModified: new Date(page.updated_at),
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+  }));
+
+  return [...pages, ...articlePages, ...dynamicPages];
 }

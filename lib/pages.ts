@@ -152,3 +152,111 @@ export async function getPageComponents(pageId: string): Promise<PageComponent[]
 
   return data ?? [];
 }
+
+export async function getAllPagesAdmin(): Promise<Page[]> {
+  const { data, error } = await supabase
+    .from('pages')
+    .select('*')
+    .order('display_order', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching pages:', error);
+    return [];
+  }
+
+  return data ?? [];
+}
+
+export async function getPageById(id: string): Promise<Page | null> {
+  const { data, error } = await supabase.from('pages').select('*').eq('id', id).single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      return null;
+    }
+    console.error('Error fetching page:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export interface CreatePageInput {
+  slug: string;
+  title: string;
+  description?: string | null;
+  symbol?: string | null;
+  symbol2?: string | null;
+  page_type?: string;
+  category?: string | null;
+  is_active?: boolean;
+  is_locked?: boolean;
+  display_order?: number;
+  meta_title?: string | null;
+  meta_description?: string | null;
+  meta_keywords?: string[] | null;
+  og_image?: string | null;
+  twitter_card?: string | null;
+  robots?: string;
+  seo_page_type?: string | null;
+  pillar_slug?: string | null;
+  pillar_priority?: number | null;
+  primary_keyword?: string | null;
+  related_pages?: string[] | null;
+  has_calculator?: boolean;
+  has_ads?: boolean;
+  has_articles?: boolean;
+  show_earliest_date?: boolean;
+}
+
+export async function createPage(pageData: CreatePageInput): Promise<Page | null> {
+  const { data, error } = await supabase.from('pages').insert(pageData).select().single();
+
+  if (error) {
+    console.error('Error creating page:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function updatePage(
+  id: string,
+  pageData: Partial<CreatePageInput>
+): Promise<Page | null> {
+  const { data, error } = await supabase
+    .from('pages')
+    .update({ ...pageData, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error updating page:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function deletePage(id: string): Promise<boolean> {
+  const { error } = await supabase.from('pages').delete().eq('id', id);
+
+  if (error) {
+    console.error('Error deleting page:', error);
+    return false;
+  }
+
+  return true;
+}
+
+export async function isPageLocked(id: string): Promise<boolean> {
+  const { data, error } = await supabase.from('pages').select('is_locked').eq('id', id).single();
+
+  if (error) {
+    console.error('Error checking page lock status:', error);
+    return false;
+  }
+
+  return data?.is_locked ?? false;
+}

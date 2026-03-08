@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, Plus, LogOut, Image } from 'lucide-react';
+import { LayoutDashboard, FileText, Plus, LogOut, Image, File } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   if (process.env.NODE_ENV !== 'development') {
@@ -32,6 +32,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 >
                   <Plus size={18} />
                   New Article
+                </Link>
+                <Link
+                  href="/dashboard/pages"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+                >
+                  <File size={18} />
+                  Pages
                 </Link>
                 <Link
                   href="/dashboard/images"

@@ -1005,6 +1005,125 @@ npm run typecheck    # TypeScript check
 
 ---
 
+## Page Management Dashboard Plan
+
+### Overview
+
+Add page management to the existing dashboard at `/dashboard`, following the same patterns as the Articles system.
+
+### Current State
+
+| Component                    | Status      |
+| ---------------------------- | ----------- |
+| Articles dashboard           | ✅ Complete |
+| Pages database               | ✅ Complete |
+| lib/pages.ts fetch functions | ✅ Complete |
+| lib/pages.ts CRUD functions  | ❌ Missing  |
+| Pages dashboard UI           | ❌ Missing  |
+
+### Notes
+
+- **Locked Pages**: Locked pages cannot be edited/deleted via dashboard. This is intentional to prevent accidental changes to core commodity pages.
+- **OG Image Upload**: Pages support OG image upload via Supabase storage bucket 'gpl', same as articles.
+
+### Implementation
+
+#### Step 1: Add CRUD Functions to lib/pages.ts
+
+Add these functions to `lib/pages.ts`:
+
+- `createPage(pageData)` - Insert new page
+- `updatePage(id, pageData)` - Update existing page
+- `deletePage(id)` - Delete page (check locked first)
+
+#### Step 2: Update Dashboard Navigation
+
+Add "Pages" link to `app/dashboard/layout.tsx`:
+
+```tsx
+<Link href="/dashboard/pages" className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
+  <FileText size={18} />
+  Pages
+</Link>
+```
+
+#### Step 3: Create Pages List View
+
+Create `app/dashboard/pages/page.tsx`:
+
+- List all pages in table (similar to articles)
+- Show: Title, Slug, Type, Category, Locked status, Active status
+- Actions: Edit, View, Delete (disabled for locked pages)
+- "New Page" button
+
+#### Step 4: Create Page Edit Form
+
+Create `app/dashboard/pages/[id]/page.tsx`:
+
+**Fields to include (grouped):**
+
+| Group              | Fields                                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| **Basic**          | Title, Slug, Description                                                                  |
+| **Data Source**    | Symbol, Symbol2, Page Type (dropdown: commodity, crypto, ratio, static, legal)            |
+| **SEO**            | Meta Title, Meta Description, Meta Keywords, OG Image (with upload), Twitter Card, Robots |
+| **Classification** | SEO Page Type, Pillar Slug, Primary Keyword, Related Pages                                |
+| **Settings**       | Is Active, Is Locked, Display Order, Category                                             |
+| **Features**       | Has Calculator, Has Ads, Has Articles, Show Earliest Date                                 |
+
+**OG Image Upload:**
+
+- Use existing Supabase storage bucket 'gpl' (same as articles)
+- Upload button to select image file
+- Preview of uploaded image
+- Store path in `og_image` field
+
+**Form Features:**
+
+- Pre-fill from database on edit
+- Validate slug uniqueness
+- Warn when saving locked page
+- Preview link to view page
+
+#### Step 5: Handle Locked Pages
+
+- Locked pages show lock icon
+- Delete button disabled for locked pages
+- Warning: "This page is locked and cannot be edited"
+
+### Page Types Dropdown Options
+
+```tsx
+const pageTypes = [
+  { value: 'commodity', label: 'Commodity (Gold, Silver, etc.)' },
+  { value: 'crypto', label: 'Cryptocurrency' },
+  { value: 'ratio', label: 'Ratio (Gold/Silver)' },
+  { value: 'static', label: 'Static Content' },
+  { value: 'legal', label: 'Legal Page' },
+];
+```
+
+### Files to Create/Modify
+
+| File                                | Action | Purpose                              |
+| ----------------------------------- | ------ | ------------------------------------ |
+| `lib/pages.ts`                      | Modify | Add create, update, delete functions |
+| `app/dashboard/layout.tsx`          | Modify | Add "Pages" nav link                 |
+| `app/dashboard/pages/page.tsx`      | Create | Pages list view                      |
+| `app/dashboard/pages/[id]/page.tsx` | Create | Page edit/create form                |
+
+### Testing Checklist
+
+- [ ] Pages list loads from database
+- [ ] Can create new page
+- [ ] Can edit existing page
+- [ ] Locked pages cannot be edited/deleted
+- [ ] OG image upload works
+- [ ] Slug validation works
+- [ ] Changes reflect on live site
+
+---
+
 ## Incremental Migration Plan
 
 ### Overview
