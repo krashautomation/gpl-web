@@ -133,7 +133,7 @@ export default function OilPrice() {
   const oilQuote = quotes.find(q => q.symbol === 'CL=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Oil Price' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Crude Oil Price Live </h1>
       </div>

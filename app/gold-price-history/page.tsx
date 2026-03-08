@@ -83,7 +83,7 @@ export default function GoldPriceHistory() {
   const goldQuote = quotes.find(q => q.symbol === 'GC=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Gold Price History' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold Price History </h1>
       </div>

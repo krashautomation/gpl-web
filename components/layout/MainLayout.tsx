@@ -1,16 +1,49 @@
 import Header from './Header';
 import Footer from './Footer';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
+
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
 
 type MainLayoutProps = {
   children: React.ReactNode;
+  breadcrumbs?: BreadcrumbItem[];
 };
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
+  return (
+    <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-sm">
+      <Link href="/" className="hover:text-amber-600 transition-colors">
+        Home
+      </Link>
+      {items.map((item, index) => (
+        <span key={index} className="flex items-center gap-2">
+          <ChevronRight className="w-4 h-4 text-gray-400" />
+          {item.href ? (
+            <Link href={item.href} className="hover:text-amber-600 transition-colors">
+              {item.label}
+            </Link>
+          ) : (
+            <span className="text-gray-900 font-medium">{item.label}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+  );
+}
+
+const MainLayout = ({ children, breadcrumbs }: MainLayoutProps) => {
   return (
     <div className="min-h-screen bg-white text-black">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">{children}</div>
+        <div className="max-w-4xl mx-auto">
+          {breadcrumbs && breadcrumbs.length > 0 && <BreadcrumbNav items={breadcrumbs} />}
+          {children}
+        </div>
       </main>
       <Footer />
     </div>

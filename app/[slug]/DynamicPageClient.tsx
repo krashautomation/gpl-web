@@ -243,7 +243,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (useComponentSystem) {
     return (
-      <MainLayout>
+      <MainLayout breadcrumbs={[{ label: page.title }]}>
         {pageComponents.map(component => {
           const Component = renderComponent(
             component.component_type,
@@ -270,7 +270,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'commodity' || page.page_type === 'crypto') {
     return (
-      <MainLayout>
+      <MainLayout breadcrumbs={[{ label: page.title }]}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -340,7 +340,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'ratio') {
     return (
-      <MainLayout>
+      <MainLayout breadcrumbs={[{ label: page.title }]}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -392,7 +392,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'static' || page.page_type === 'legal') {
     return (
-      <MainLayout>
+      <MainLayout breadcrumbs={[{ label: page.title }]}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -432,7 +432,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   }
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: page.title }]}>
       {hasAds && (
         <BannerAd
           affiliateName="Money Metals Exchange"

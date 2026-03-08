@@ -131,7 +131,7 @@ export default function PalladiumPrice() {
   const palladiumQuote = quotes.find(q => q.symbol === 'PA=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Palladium Price' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Palladium Price Live </h1>
       </div>

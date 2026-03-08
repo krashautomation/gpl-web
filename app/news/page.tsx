@@ -87,7 +87,7 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
   const categories = getCategories(allArticles);
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'News' }]}>
       <BreadcrumbStructuredData
         items={[
           { name: 'Home', url: 'https://goldpricelive.co' },

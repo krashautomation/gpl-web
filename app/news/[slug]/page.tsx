@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     .slice(0, 2);
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'News', href: '/news' }, { label: article.title }]}>
       <ArticleStructuredData
         headline={article.title}
         image={article.featured_image ? [article.featured_image] : []}
@@ -104,18 +104,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         ]}
       />
       <div className="container mx-auto px-4 py-12">
-        <nav className="text-sm text-black mb-6">
-          <Link href="/" className="hover:text-black">
-            Home
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href="/news" className="hover:text-black">
-            News
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-black">{article.title}</span>
-        </nav>
-
         <Link
           href="/news"
           className="inline-flex items-center gap-2 text-black hover:text-black mb-8 transition-colors"

@@ -131,7 +131,7 @@ export default function CopperPrice() {
   const copperQuote = quotes.find(q => q.symbol === 'HG=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Copper Price' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Copper Price Live</h1>
       </div>

@@ -113,7 +113,7 @@ export default function SilverETFs() {
   const slvQuote = quotes.find(q => q.symbol === 'SLV');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Silver ETFs' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Silver ETFs </h1>
       </div>

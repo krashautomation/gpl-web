@@ -73,7 +73,7 @@ const chartTypes = [
 
 export default function ChartsPage() {
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Charts' }]}>
       <BreadcrumbStructuredData
         items={[
           { name: 'Home', url: 'https://goldpricelive.co' },

@@ -131,7 +131,7 @@ export default function AluminumPrice() {
   const aluminumQuote = quotes.find(q => q.symbol === 'ALI=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Aluminum Price' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Aluminum Price Live</h1>
       </div>

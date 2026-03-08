@@ -131,7 +131,7 @@ export default function PlatinumPrice() {
   const platinumQuote = quotes.find(q => q.symbol === 'PL=F');
 
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Platinum Price' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Platinum Price Live </h1>
       </div>

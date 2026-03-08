@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { ArrowDown, ArrowUp, DollarSign } from 'lucide-react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
@@ -14,11 +15,9 @@ import MainLayout from '@/components/layout/MainLayout';
 
 import Image from 'next/image';
 
-import Link from 'next/link'; // if using Next.js
-
 export default function AboutGoldPriceLive() {
   return (
-    <MainLayout>
+    <MainLayout breadcrumbs={[{ label: 'Contact' }]}>
       <div className="flex items-center justify-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Contact Us </h1>
       </div>
