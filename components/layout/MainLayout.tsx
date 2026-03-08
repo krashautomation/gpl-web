@@ -2,6 +2,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { BreadcrumbStructuredData } from '@/components/StructuredData';
 
 type BreadcrumbItem = {
   label: string;
@@ -35,13 +36,38 @@ function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
   );
 }
 
+function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co';
+  const schemaItems = [
+    { name: 'Home', url: siteUrl },
+    ...items.map(item => ({
+      name: item.label,
+      url: item.href ? `${siteUrl}${item.href}` : '',
+    })),
+  ].filter(item => item.url);
+
+  return (
+    <BreadcrumbStructuredData
+      items={schemaItems.map((item, index) => ({
+        name: item.name,
+        url: item.url,
+      }))}
+    />
+  );
+}
+
 const MainLayout = ({ children, breadcrumbs }: MainLayoutProps) => {
   return (
     <div className="min-h-screen bg-white text-black">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          {breadcrumbs && breadcrumbs.length > 0 && <BreadcrumbNav items={breadcrumbs} />}
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <>
+              <BreadcrumbSchema items={breadcrumbs} />
+              <BreadcrumbNav items={breadcrumbs} />
+            </>
+          )}
           {children}
         </div>
       </main>
