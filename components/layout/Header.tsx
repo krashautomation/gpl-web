@@ -156,7 +156,7 @@ const Header = () => {
   return (
     <>
       <header className="border-b border-[#001e5a]/30 bg-[#001e5a]  sticky top-0 z-50">
-        <div className="container mx-auto px-2 py-2 pt-3">
+        <div className="container mx-auto px-2 py-2 pt-3 max-w-[1200px]">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-2">
