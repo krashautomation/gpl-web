@@ -74,38 +74,62 @@ export function PerformanceTable({
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {quote && (
+                {quote && quote.change !== null && (
                   <tr className="border-b border-neutral-800">
                     <td className="py-3">Today</td>
                     <td
-                      className={`text-right ${quote.change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                      className={`text-right ${(quote.change ?? 0) < 0 ? 'text-red-500' : 'text-green-500'}`}
                     >
-                      {formatChange(quote.change)}
+                      {formatChange(quote.change ?? 0)}
                     </td>
                     <td
-                      className={`text-right ${Number(quote.changePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}
+                      className={`text-right ${(Number(quote.changePercent) ?? 0) < 0 ? 'text-red-500' : 'text-green-500'}`}
                     >
                       {Number(quote.changePercent) >= 0 ? '+' : ''}
-                      {quote.changePercent}%
+                      {quote.changePercent ?? 0}%
                     </td>
                   </tr>
                 )}
                 {performance.performance &&
-                  Object.entries(performance.performance).map(([period, data]) => (
-                    <tr key={period} className="border-b border-neutral-800">
-                      <td className="py-3">{periodLabels[period] || period}</td>
-                      <td
-                        className={`text-right ${data.change < 0 ? 'text-red-500' : 'text-green-500'}`}
-                      >
-                        {formatChange(data.change)}
-                      </td>
-                      <td
-                        className={`text-right ${data.changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
-                      >
-                        {formatPercent(data.changePercent)}
-                      </td>
-                    </tr>
-                  ))}
+                  Object.entries(performance.performance || {})
+                    .filter((entry): boolean => {
+                      const key = entry[0];
+                      const data = entry[1];
+                      if (key == null) return false;
+                      if (data == null) return false;
+                      if (typeof data !== 'object') return false;
+                      const perf = data as Record<string, unknown>;
+                      if (typeof perf.change !== 'number') return false;
+                      if (typeof perf.changePercent !== 'number') return false;
+                      return true;
+                    })
+                    .map(([period, data]) => {
+                      if (!data || typeof data !== 'object') return null;
+                      try {
+                        const perf = data as Record<string, unknown>;
+                        const change = typeof perf?.change === 'number' ? perf.change : 0;
+                        const changePercent =
+                          typeof perf?.changePercent === 'number' ? perf.changePercent : 0;
+                        return (
+                          <tr key={period} className="border-b border-neutral-800">
+                            <td className="py-3">{periodLabels[period] || period}</td>
+                            <td
+                              className={`text-right ${change < 0 ? 'text-red-500' : 'text-green-500'}`}
+                            >
+                              {formatChange(change)}
+                            </td>
+                            <td
+                              className={`text-right ${changePercent < 0 ? 'text-red-500' : 'text-green-500'}`}
+                            >
+                              {formatPercent(changePercent)}
+                            </td>
+                          </tr>
+                        );
+                      } catch {
+                        return null;
+                      }
+                    })
+                    .filter(Boolean)}
               </tbody>
             </table>
           )}
