@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS public.pages (
   
   -- Feature flags
   has_calculator       boolean default false,
-  has_ads              boolean default false,
-  has_articles         boolean default false,
-  show_earliest_date  boolean default false,
+  has_ads              boolean default true,
+  has_articles         boolean default true,
+  show_earliest_date   boolean default false,
   
   -- Metadata
   meta_title           text,
@@ -269,18 +269,18 @@ CREATE INDEX IF NOT EXISTS page_components_position_idx ON page_components(posit
 -- SEED DATA: Pre-locked Data Pages
 -- ============================================
 
-INSERT INTO pages (slug, title, page_type, seo_page_type, is_locked, category, description, robots, is_active, symbol) VALUES
-('gold-price', 'Gold Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live gold price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'GC=F'),
-('silver-price', 'Silver Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live silver price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'SI=F'),
-('platinum-price', 'Platinum Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live platinum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'PL=F'),
-('palladium-price', 'Palladium Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live palladium price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'PA=F'),
-('copper-price', 'Copper Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'commodities', 'Live copper price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'HG=F'),
-('aluminum-price', 'Aluminum Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'commodities', 'Live aluminum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'ALI=F'),
-('oil-price', 'Crude Oil Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'energy', 'Live crude oil price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'CL=F'),
-('natural-gas-price', 'Natural Gas Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'energy', 'Live natural gas price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'NG=F'),
-('bitcoin-price', 'Bitcoin Price Live - Real-Time USD Rates', 'crypto', 'data', true, 'crypto', 'Live Bitcoin price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'BTC-USD'),
-('ethereum-price', 'Ethereum Price Live - Real-Time USD Rates', 'crypto', 'data', true, 'crypto', 'Live Ethereum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'ETH-USD'),
-('gold-silver-ratio', 'Gold Silver Ratio Live - Historical Chart', 'ratio', 'data', true, 'precious-metals', 'Live gold silver ratio with historical charts and comparison data.', 'index,follow', true, 'GC=F')
+INSERT INTO pages (slug, title, page_type, seo_page_type, is_locked, category, description, robots, is_active, symbol, has_ads, has_articles, show_earliest_date) VALUES
+('gold-price', 'Gold Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live gold price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'GC=F', true, true),
+('silver-price', 'Silver Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live silver price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'SI=F', true, true),
+('platinum-price', 'Platinum Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live platinum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'PL=F', true, true),
+('palladium-price', 'Palladium Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'precious-metals', 'Live palladium price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'PA=F', true, true),
+('copper-price', 'Copper Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'commodities', 'Live copper price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'HG=F', true, true),
+('aluminum-price', 'Aluminum Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'commodities', 'Live aluminum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'ALI=F', true, true),
+('oil-price', 'Crude Oil Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'energy', 'Live crude oil price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'CL=F', true, true),
+('natural-gas-price', 'Natural Gas Price Live - Real-Time USD Rates', 'commodity', 'data', true, 'energy', 'Live natural gas price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'NG=F', true, true),
+('bitcoin-price', 'Bitcoin Price Live - Real-Time USD Rates', 'crypto', 'data', true, 'crypto', 'Live Bitcoin price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'BTC-USD', true, true, true),
+('ethereum-price', 'Ethereum Price Live - Real-Time USD Rates', 'crypto', 'data', true, 'crypto', 'Live Ethereum price in USD with real-time updates, charts, and historical data.', 'index,follow', true, 'ETH-USD', true, true, true),
+('gold-silver-ratio', 'Gold Silver Ratio Live - Historical Chart', 'ratio', 'data', true, 'precious-metals', 'Live gold silver ratio with historical charts and comparison data.', 'index,follow', true, 'GC=F', true, true)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Update symbol2 for gold-silver-ratio

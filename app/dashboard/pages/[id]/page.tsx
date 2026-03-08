@@ -86,7 +86,7 @@ export default function EditPagePage() {
     meta_description: '',
     meta_keywords: [],
     og_image: '',
-    twitter_card: '',
+    twitter_card: 'summary_large_image',
     robots: 'index,follow',
     seo_page_type: '',
     pillar_slug: '',

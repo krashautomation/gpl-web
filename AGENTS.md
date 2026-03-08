@@ -226,6 +226,14 @@ feat/fix/chore: [brief description]
 Testing: Verified via [test method]
 ```
 
+## Before Editing Files
+
+1. Always read the current file content first to ensure you have the latest version
+2. Check git status to see if there are uncommitted changes that might be lost
+3. If working across WSL/Windows, verify file sync is working properly
+
+---
+
 ## Common Tasks
 
 ### Adding a New Page
