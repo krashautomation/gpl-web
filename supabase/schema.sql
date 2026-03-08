@@ -285,3 +285,252 @@ ON CONFLICT (slug) DO NOTHING;
 
 -- Update symbol2 for gold-silver-ratio
 UPDATE pages SET symbol2 = 'SI=F' WHERE slug = 'gold-silver-ratio';
+
+-- ============================================
+-- SEED DATA: Default Page Components
+-- ============================================
+
+-- Gold Price (commodity with calculator)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}', 0 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}', 1 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}', 2 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}', 3 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'calculator', '{}', 4 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}', 5 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}', 6 FROM pages WHERE slug = 'gold-price'
+ON CONFLICT DO NOTHING;
+
+-- Silver Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}', 0 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}', 1 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}', 2 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}', 3 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}', 4 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}', 5 FROM pages WHERE slug = 'silver-price'
+ON CONFLICT DO NOTHING;
+
+-- Bitcoin Price (crypto with show_earliest_date)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}', 0 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}', 1 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}', 2 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}', 3 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}', 4 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}', 5 FROM pages WHERE slug = 'bitcoin-price'
+ON CONFLICT DO NOTHING;
+
+-- Ethereum Price (crypto)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}', 0 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}', 1 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}', 2 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}', 3 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}', 4 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}', 5 FROM pages WHERE slug = 'ethereum-price'
+ON CONFLICT DO NOTHING;
+
+-- Gold-Silver Ratio (ratio)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}', 0 FROM pages WHERE slug = 'gold-silver-ratio'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}', 1 FROM pages WHERE slug = 'gold-silver-ratio'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}', 2 FROM pages WHERE slug = 'gold-silver-ratio'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}', 3 FROM pages WHERE slug = 'gold-silver-ratio'
+ON CONFLICT DO NOTHING;
+
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}', 4 FROM pages WHERE slug = 'gold-silver-ratio'
+ON CONFLICT DO NOTHING;
+
+-- Platinum Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'platinum-price'
+ON CONFLICT DO NOTHING;
+
+-- Palladium Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'palladium-price'
+ON CONFLICT DO NOTHING;
+
+-- Copper Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'copper-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'copper-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'copper-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'copper-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'copper-price'
+ON CON;
+INSERT INTO page_components (page_id, component_type,FLICT DO NOTHING config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'copper-price'
+ON CONFLICT DO NOTHING;
+
+-- Aluminum Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'aluminum-price'
+ON CONFLICT DO NOTHING;
+
+-- Oil Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'oil-price'
+ON CONFLICT DO NOTHING;
+
+-- Natural Gas Price (commodity)
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"affiliateName": "Money Metals Exchange"}'::jsonb, 0 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'hero', '{}'::jsonb, 1 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'chart', '{}'::jsonb, 2 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'performance', '{}'::jsonb, 3 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'articles', '{}'::jsonb, 4 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;
+INSERT INTO page_components (page_id, component_type, config, position)
+SELECT id, 'ads', '{"className": "my-6"}'::jsonb, 5 FROM pages WHERE slug = 'natural-gas-price'
+ON CONFLICT DO NOTHING;

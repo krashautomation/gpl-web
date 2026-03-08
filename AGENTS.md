@@ -254,6 +254,23 @@ Testing: Verified via [test method]
 2. Add frontmatter
 3. Auto-generates at `/news/slug`
 
+### Modifying the Footer
+
+The Footer component (`components/layout/Footer.tsx`) has two sections:
+
+1. **Top section** (cards): Single-column stacked layout. Contains:
+   - Dave's intro ("Hey guys")
+   - INVESTORS GOLD newsletter
+   - Subscribe form
+   - Gold Price Live App promo (bottom)
+
+2. **Bottom section** (links): 5-column grid layout. Contains navigation links.
+
+When modifying:
+
+- Top section uses `grid-cols-1` (single column)
+- Bottom section uses `grid-cols-2 md:grid-cols-3 lg:grid-cols-5` (5 columns on desktop)
+
 ## Cursor Rules
 
 - `.cursor/commands/codeloop.md` - Code loop command reference

@@ -210,11 +210,12 @@ export interface CreatePageInput {
 }
 
 export async function createPage(pageData: CreatePageInput): Promise<Page | null> {
+  console.log('Creating page:', pageData);
   const { data, error } = await supabase.from('pages').insert(pageData).select().single();
 
   if (error) {
     console.error('Error creating page:', error);
-    return null;
+    throw new Error(error.message || 'Failed to create page');
   }
 
   return data;
@@ -224,6 +225,7 @@ export async function updatePage(
   id: string,
   pageData: Partial<CreatePageInput>
 ): Promise<Page | null> {
+  console.log('Updating page:', id, pageData);
   const { data, error } = await supabase
     .from('pages')
     .update({ ...pageData, updated_at: new Date().toISOString() })
@@ -233,7 +235,7 @@ export async function updatePage(
 
   if (error) {
     console.error('Error updating page:', error);
-    return null;
+    throw new Error(error.message || 'Failed to update page');
   }
 
   return data;
@@ -244,6 +246,68 @@ export async function deletePage(id: string): Promise<boolean> {
 
   if (error) {
     console.error('Error deleting page:', error);
+    return false;
+  }
+
+  return true;
+}
+
+export interface CreatePageComponentInput {
+  page_id: string;
+  component_type: string;
+  config?: Record<string, unknown>;
+  position?: number;
+}
+
+export async function createPageComponent(
+  input: CreatePageComponentInput
+): Promise<PageComponent | null> {
+  const { data, error } = await supabase
+    .from('page_components')
+    .insert({
+      page_id: input.page_id,
+      component_type: input.component_type,
+      config: input.config || {},
+      position: input.position || 0,
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error creating page component:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function updatePageComponent(
+  id: string,
+  updates: Partial<CreatePageComponentInput>
+): Promise<boolean> {
+  console.log('Updating component:', id, updates);
+  const { error } = await supabase
+    .from('page_components')
+    .update({
+      component_type: updates.component_type,
+      config: updates.config,
+      position: updates.position,
+    })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error updating page component:', error);
+    throw new Error(error.message || 'Failed to update component');
+  }
+
+  return true;
+}
+
+export async function deletePageComponent(id: string): Promise<boolean> {
+  const { error } = await supabase.from('page_components').delete().eq('id', id);
+
+  if (error) {
+    console.error('Error deleting page component:', error);
     return false;
   }
 

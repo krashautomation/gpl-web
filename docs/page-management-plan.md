@@ -30,6 +30,20 @@ All phases completed successfully:
 - **Database** with 13 SEO fields per page
 - **Backups** preserved in `app/backup-static-pages/`
 - **Dashboard UI** fully implemented with CRUD operations
+- **Feature flags** implemented (ads, articles, calculator, earliest date)
+- **GoldCalculator** component extracted and reusable
+
+---
+
+### Recent Updates (March 2026)
+
+| Date       | Change                                        |
+| ---------- | --------------------------------------------- |
+| 2026-03-08 | Feature flags implemented in dynamic route    |
+| 2026-03-08 | Smart defaults by page type                   |
+| 2026-03-08 | GoldCalculator component extracted            |
+| 2026-03-08 | Dashboard form reordered (Data Source first)  |
+| 2026-03-08 | Schema defaults: has_ads, has_articles = true |
 
 ---
 
@@ -1036,16 +1050,100 @@ The core dynamic page system is implemented:
 | Fix default values      | has_ads, has_articles should default to true       | ✅ Complete |
 | Implement feature flags | Render ads, articles, calculator based on DB flags | ✅ Complete |
 | Add show_earliest_date  | Render for crypto pages                            | ✅ Complete |
-| page_components table   | Implement flexible component layout                | Not started |
+| Calculator component    | Extract GoldCalculator from home page              | ✅ Complete |
+| page_components table   | Implement flexible component layout                | ✅ Complete |
+| Page Components UI      | Dashboard UI to add/remove/reorder components      | ✅ Complete |
+| Component reordering    | Add move up/down buttons to reorder components     | ✅ Complete |
+| Page layout统一         | Apply max-w-4xl container, single column layout    | In Progress |
+| Component-based layout  | Each section is a reorderable component            | Not started |
+| Default components      | Seed default components for commodity/crypto pages | Not started |
+| Error feedback          | Improve error messages for form validation         | In Progress |
 
 #### Lower Priority
 
 | Task                 | Description                                           | Status      |
 | -------------------- | ----------------------------------------------------- | ----------- |
-| Component extraction | Extract PriceCard, PerformanceTable from backup pages | Not started |
+| Component extraction | Extract PriceCard, PerformanceTable from backup pages | ✅ Complete |
 | SEO optimization     | Implement internal_links auto-injection               | Not started |
 | Schema markup        | Add structured data based on page type                | Not started |
-| Calculator component | Extract GoldCalculator from home page                 | Not started |
+
+---
+
+## page_components Implementation Plan
+
+### Current Status
+
+- ✅ Table `page_components` exists in schema
+- ✅ Component Registry in DynamicPageClient
+- ✅ Dashboard UI to add/remove/reorder components
+- ✅ max-w-4xl container applied (single column)
+- ❌ Default components NOT seeded - pages rely on fallback layout
+- ❌ Fallback layout still has hardcoded two-column grid
+
+### New Approach: Fully Component-Based
+
+All page sections should be separate, reorderable components:
+
+| Component   | Description           |
+| ----------- | --------------------- |
+| hero        | Page title/heading    |
+| chart       | CommodityChartCard    |
+| performance | PerformanceTable      |
+| calculator  | GoldCalculator        |
+| articles    | RecentArticlesSection |
+| ads         | BannerAd              |
+| text_block  | ContentCard           |
+| contact     | ContactSidebar        |
+
+**Each component stacks vertically in single column** - no hardcoded grids.
+
+### Implementation Steps
+
+1. **Fix fallback layout** - Remove hardcoded two-column grid, use single column
+2. **Seed default components** - Add default components for commodity/crypto pages so they work immediately
+3. **Remove feature flag toggles** - Once component system is mature, can remove has_calculator/has_ads/has_articles switches from dashboard
+
+### Testing
+
+| Step       | Test                                                      |
+| ---------- | --------------------------------------------------------- |
+| 1          | Add components via dashboard to gold-price                |
+| 2          | Visit gold-price - verify single column, components stack |
+| 3          | Reorder in dashboard - verify order changes on page       |
+| 4          | Seed defaults for all commodity/crypto pages              |
+| 5          | Verify all pages work without manual component setup      |
+| calculator | GoldCalculator                                            |
+| articles   | RecentArticlesSection                                     |
+| ads        | BannerAd                                                  |
+| hero       | Title + description block                                 |
+| text_block | ContentCard                                               |
+| contact    | ContactSidebar                                            |
+
+#### Phase 2: Integrate DynamicPageClient
+
+- Fetch components via `getPageComponents(pageId)`
+- Render dynamically from registry
+- Keep fallback for pages without components (backward compat)
+
+#### Phase 3: Dashboard UI
+
+- Add "Components" section to page edit form
+- Add/remove/reorder components
+- JSON editor for component config
+
+#### Phase 4: Seed Defaults
+
+- Insert default components for existing pages so nothing breaks
+
+### Testing Plan
+
+| Step | Test                                                                   |
+| ---- | ---------------------------------------------------------------------- |
+| 1    | Run SQL: `SELECT * FROM page_components LIMIT 1` - verify table exists |
+| 2    | Create test page with custom component config in DB                    |
+| 3    | Visit page - verify custom components render in order                  |
+| 4    | Edit page in dashboard - test add/remove/reorder (Phase 3)             |
+| 5    | Verify existing pages still work (backward compat)                     |
 
 ---
 

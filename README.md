@@ -4,6 +4,7 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Recent Changes
 
+- **Footer Single Column** - Converted footer top section from two-column to single-column layout (March 2026)
 - **Feature Flags** - Dynamic pages now render ads, articles, and earliest date based on DB flags (March 2026)
 - **Smart Defaults** - Page type selection auto-sets appropriate feature flags
 - **Page Management System** - Database-driven pages with SEO from Supabase (March 2026)
@@ -193,21 +194,45 @@ Manage pages at `/dashboard/pages`:
 
 See `supabase/schema.sql` for the full schema. Key tables:
 
-| Table             | Purpose                             | Status             |
-| ----------------- | ----------------------------------- | ------------------ |
-| `pages`           | Page configurations with SEO fields | ✅ Active          |
-| `page_components` | Future: custom component layouts    | ⚠️ Not implemented |
+| Table             | Purpose                             | Status    |
+| ----------------- | ----------------------------------- | --------- |
+| `pages`           | Page configurations with SEO fields | ✅ Active |
+| `page_components` | Custom component layouts            | ✅ Active |
 
 ### Page Types
 
-| Type        | Description          | Components                   |
-| ----------- | -------------------- | ---------------------------- |
-| `commodity` | Precious/base metals | ChartCard + PerformanceTable |
-| `crypto`    | Cryptocurrencies     | ChartCard + PerformanceTable |
-| `ratio`     | Metal ratios         | ChartCard + PerformanceTable |
-| `static`    | Static content       | ContentCard + ContactSidebar |
-| `legal`     | Legal pages          | ContentCard + ContactSidebar |
-| `home`      | Home page            | Calculator + Quotes + Ads    |
+| Type        | Description          | Layout                   |
+| ----------- | -------------------- | ------------------------ |
+| `commodity` | Precious/base metals | Single column, max-w-4xl |
+| `crypto`    | Cryptocurrencies     | Single column, max-w-4xl |
+| `ratio`     | Metal ratios         | Single column, max-w-4xl |
+| `static`    | Static content       | Single column, max-w-4xl |
+| `legal`     | Legal pages          | Single column, max-w-4xl |
+| `home`      | Home page            | Full width               |
+
+> Note: All dynamic pages use `max-w-4xl` (896px) container with single column layout for simplified, consistent presentation.
+
+### Page Components System
+
+Each page section is a **reorderable component** that can be added/removed via dashboard:
+
+| Component     | Description                           |
+| ------------- | ------------------------------------- |
+| `hero`        | Page title/heading                    |
+| `chart`       | CommodityChartCard with price chart   |
+| `performance` | PerformanceTable with historical data |
+| `calculator`  | GoldCalculator for value conversion   |
+| `articles`    | RecentArticlesSection                 |
+| `ads`         | BannerAd (Money Metals Exchange)      |
+| `text_block`  | ContentCard with custom text          |
+| `contact`     | ContactSidebar                        |
+
+**How it works:**
+
+1. Pages use `page_components` table to define which components to render
+2. Components render in order by `position` field (single column stack)
+3. Add/remove/reorder via dashboard at `/dashboard/pages` → edit page → Page Components
+4. If no components defined, uses default layout (being updated to single column)
 
 ### SEO Fields (13 fields)
 

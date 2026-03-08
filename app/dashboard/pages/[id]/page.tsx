@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import {
   getPageById,
@@ -9,8 +10,13 @@ import {
   updatePage,
   isPageLocked,
   isSlugUnique,
+  getPageComponents,
+  createPageComponent,
+  updatePageComponent,
+  deletePageComponent,
   type Page,
   type CreatePageInput,
+  type PageComponent,
 } from '@/lib/pages';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -98,6 +104,8 @@ export default function EditPagePage() {
     has_articles: true,
     show_earliest_date: false,
   });
+  const [components, setComponents] = useState<PageComponent[]>([]);
+  const [loadingComponents, setLoadingComponents] = useState(false);
 
   useEffect(() => {
     if (!isNew) {
@@ -106,6 +114,7 @@ export default function EditPagePage() {
   }, [id]);
 
   async function loadPage() {
+    setLoadingComponents(true);
     const page = await getPageById(id);
     if (!page) {
       alert('Page not found');
@@ -143,7 +152,11 @@ export default function EditPagePage() {
       has_articles: page.has_articles,
       show_earliest_date: page.show_earliest_date,
     });
+
+    const pageComponents = await getPageComponents(page.id);
+    setComponents(pageComponents.sort((a, b) => a.position - b.position));
     setLoading(false);
+    setLoadingComponents(false);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -183,20 +196,30 @@ export default function EditPagePage() {
       };
 
       if (isNew) {
-        const created = await createPage(pageData);
-        if (created) {
-          router.push('/dashboard/pages');
-        } else {
-          alert(
-            'Failed to create page. Check console for details or ensure RLS policies are set up.'
-          );
+        try {
+          const created = await createPage(pageData);
+          if (created) {
+            router.push('/dashboard/pages');
+          } else {
+            alert('Failed to create page. Please try again.');
+          }
+        } catch (err) {
+          const message = err instanceof Error ? err.message : 'Unknown error';
+          console.error('Create error:', err);
+          alert(`Failed to create page: ${message}`);
         }
       } else {
-        const updated = await updatePage(id, pageData);
-        if (updated) {
-          router.push('/dashboard/pages');
-        } else {
-          alert('Failed to update page. Please check that all required fields are filled.');
+        try {
+          const updated = await updatePage(id, pageData);
+          if (updated) {
+            router.push('/dashboard/pages');
+          } else {
+            alert('Failed to update page. Please try again.');
+          }
+        } catch (err) {
+          const message = err instanceof Error ? err.message : 'Unknown error';
+          console.error('Update error:', err);
+          alert(`Failed to update page: ${message}`);
         }
       }
     } finally {
@@ -605,53 +628,6 @@ export default function EditPagePage() {
             </CardContent>
           </Card>
 
-          {/* Features */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Features</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="flex items-center gap-2">
-                  <Switch
-                    id="has_calculator"
-                    checked={form.has_calculator}
-                    onCheckedChange={checked => handleChange('has_calculator', checked)}
-                    disabled={locked}
-                  />
-                  <Label htmlFor="has_calculator">Calculator</Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Switch
-                    id="has_ads"
-                    checked={form.has_ads}
-                    onCheckedChange={checked => handleChange('has_ads', checked)}
-                    disabled={locked}
-                  />
-                  <Label htmlFor="has_ads">Ads</Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Switch
-                    id="has_articles"
-                    checked={form.has_articles}
-                    onCheckedChange={checked => handleChange('has_articles', checked)}
-                    disabled={locked}
-                  />
-                  <Label htmlFor="has_articles">Articles</Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Switch
-                    id="show_earliest_date"
-                    checked={form.show_earliest_date}
-                    onCheckedChange={checked => handleChange('show_earliest_date', checked)}
-                    disabled={locked}
-                  />
-                  <Label htmlFor="show_earliest_date">Show Earliest Date</Label>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
           {/* Actions */}
           <div className="flex items-center justify-between">
             <div>
@@ -682,6 +658,189 @@ export default function EditPagePage() {
           </div>
         </div>
       </form>
+
+      {/* Page Components - Only for existing pages */}
+      {!isNew && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Page Components</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {loadingComponents ? (
+              <p>Loading components...</p>
+            ) : (
+              <div className="space-y-4">
+                {components.length === 0 ? (
+                  <p className="text-gray-500">No custom components. Using default layout.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {components.map((comp, index) => (
+                      <div
+                        key={comp.id}
+                        className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg"
+                      >
+                        <span className="text-sm font-medium w-6">{index + 1}</span>
+                        <div className="flex-1">
+                          <p className="font-medium">{comp.component_type}</p>
+                          <p className="text-sm text-gray-500">
+                            {comp.config ? JSON.stringify(comp.config).slice(0, 50) : 'No config'}
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={async () => {
+                            if (index === 0) return;
+                            const prevComp = components[index - 1];
+                            console.log(
+                              'Move UP:',
+                              comp.component_type,
+                              'from pos',
+                              comp.position,
+                              'to',
+                              prevComp.position
+                            );
+                            try {
+                              const result1 = await updatePageComponent(comp.id, {
+                                position: prevComp.position,
+                              });
+                              console.log('Update 1 result:', result1);
+                              const result2 = await updatePageComponent(prevComp.id, {
+                                position: comp.position,
+                              });
+                              console.log('Update 2 result:', result2);
+                              if (result1 && result2) {
+                                const pageData = await getPageById(id);
+                                if (pageData) {
+                                  const newComponents = await getPageComponents(pageData.id);
+                                  setComponents(
+                                    newComponents.sort((a, b) => a.position - b.position)
+                                  );
+                                }
+                              } else {
+                                alert('Failed to update positions');
+                              }
+                            } catch (err) {
+                              console.error('Move up error:', err);
+                              alert('Error: ' + (err instanceof Error ? err.message : 'Unknown'));
+                            }
+                          }}
+                          disabled={locked || index === 0}
+                          title="Move up"
+                        >
+                          <ArrowUp className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={async () => {
+                            if (index === components.length - 1) return;
+                            const nextComp = components[index + 1];
+                            console.log(
+                              'Move DOWN:',
+                              comp.component_type,
+                              'from pos',
+                              comp.position,
+                              'to',
+                              nextComp.position
+                            );
+                            try {
+                              const result1 = await updatePageComponent(comp.id, {
+                                position: nextComp.position,
+                              });
+                              console.log('Update 1 result:', result1);
+                              const result2 = await updatePageComponent(nextComp.id, {
+                                position: comp.position,
+                              });
+                              console.log('Update 2 result:', result2);
+                              if (result1 && result2) {
+                                const pageData = await getPageById(id);
+                                if (pageData) {
+                                  const newComponents = await getPageComponents(pageData.id);
+                                  setComponents(
+                                    newComponents.sort((a, b) => a.position - b.position)
+                                  );
+                                }
+                              } else {
+                                alert('Failed to update positions');
+                              }
+                            } catch (err) {
+                              console.error('Move down error:', err);
+                              alert('Error: ' + (err instanceof Error ? err.message : 'Unknown'));
+                            }
+                          }}
+                          disabled={locked || index === components.length - 1}
+                          title="Move down"
+                        >
+                          <ArrowDown className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="sm"
+                          onClick={async () => {
+                            if (confirm('Delete this component?')) {
+                              await deletePageComponent(comp.id);
+                              setComponents(components.filter(c => c.id !== comp.id));
+                            }
+                          }}
+                          disabled={locked}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {!locked && (
+                  <div className="pt-4 border-t">
+                    <p className="text-sm font-medium mb-2">Add Component</p>
+                    <div className="flex gap-2">
+                      <Select
+                        value=""
+                        onValueChange={async value => {
+                          if (!value) return;
+                          const pageData = await getPageById(id);
+                          if (pageData) {
+                            const maxPos =
+                              components.length > 0
+                                ? Math.max(...components.map(c => c.position))
+                                : -1;
+                            await createPageComponent({
+                              page_id: pageData.id,
+                              component_type: value,
+                              position: maxPos + 1,
+                            });
+                            const newComponents = await getPageComponents(pageData.id);
+                            setComponents(newComponents.sort((a, b) => a.position - b.position));
+                          }
+                        }}
+                      >
+                        <SelectTrigger className="w-48">
+                          <SelectValue placeholder="Select component" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="hero">Hero (Title)</SelectItem>
+                          <SelectItem value="chart">Chart</SelectItem>
+                          <SelectItem value="performance">Performance Table</SelectItem>
+                          <SelectItem value="calculator">Calculator</SelectItem>
+                          <SelectItem value="articles">Articles Section</SelectItem>
+                          <SelectItem value="ads">Banner Ad</SelectItem>
+                          <SelectItem value="text_block">Text Block</SelectItem>
+                          <SelectItem value="contact">Contact Sidebar</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
