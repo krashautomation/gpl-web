@@ -980,6 +980,114 @@ npm run typecheck    # TypeScript check
 | 5.2  | Add page management to dashboard  | CRUD operations work        |
 | 5.3  | Update sitemap integration        | New pages auto-added        |
 
+---
+
+## Incremental Migration Plan
+
+### Overview
+
+Migrate static pages to use the dynamic route one at a time with testing and commits after each successful migration.
+
+### Backup Strategy
+
+Before migration, backup ALL static price pages:
+
+```bash
+# Create backup directory
+mkdir -p app/backup-static-pages
+
+# Move each price page to backup
+mv app/aluminum-price app/backup-static-pages/
+mv app/silver-price app/backup-static-pages/
+mv app/platinum-price app/backup-static-pages/
+mv app/palladium-price app/backup-static-pages/
+mv app/copper-price app/backup-static-pages/
+mv app/oil-price app/backup-static-pages/
+mv app/natural-gas-price app/backup-static-pages/
+mv app/bitcoin-price app/backup-static-pages/
+mv app/ethereum-price app/backup-static-pages/
+mv app/gold-silver-ratio app/backup-static-pages/
+```
+
+### Rollback Strategy
+
+If issues occur after migration:
+
+```bash
+# Restore specific page from backup
+mv app/backup-static-pages/silver-price app/
+
+# Or restore all
+mv app/backup-static-pages/* app/
+rmdir app/backup-static-pages
+```
+
+**Alternative: Vercel Dashboard Rollback**
+
+- Go to Vercel Dashboard → Deployments
+- Find last working deployment
+- Click "Promote to Production"
+
+### Migration Steps (One Page at a Time)
+
+| Step | Task                           | Testing                   | Commit               |
+| ---- | ------------------------------ | ------------------------- | -------------------- |
+| 1    | Move `silver-price` to backup  | Test `/silver-price`      | Commit backup + test |
+| 2    | Compare dynamic vs static      | Browser comparison        | Commit if passing    |
+| 3    | Repeat for `aluminum-price`    | Test `/aluminum-price`    | Commit               |
+| 4    | Repeat for `platinum-price`    | Test `/platinum-price`    | Commit               |
+| 5    | Repeat for `palladium-price`   | Test `/palladium-price`   | Commit               |
+| 6    | Repeat for `copper-price`      | Test `/copper-price`      | Commit               |
+| 7    | Repeat for `oil-price`         | Test `/oil-price`         | Commit               |
+| 8    | Repeat for `natural-gas-price` | Test `/natural-gas-price` | Commit               |
+| 9    | Repeat for `bitcoin-price`     | Test `/bitcoin-price`     | Commit               |
+| 10   | Repeat for `ethereum-price`    | Test `/ethereum-price`    | Commit               |
+| 11   | Repeat for `gold-silver-ratio` | Test `/gold-silver-ratio` | Commit               |
+
+### Pre-Migration Checklist
+
+- [ ] Backup all static pages to `app/backup-static-pages/`
+- [ ] Verify dynamic route works for target page
+- [ ] Run `npm run typecheck` - must pass
+- [ ] Run `npm run format` - format code
+
+### Post-Migration Testing Checklist
+
+For each migrated page:
+
+- [ ] Browser test: page loads without errors
+- [ ] Compare: dynamic vs backup version side-by-side
+- [ ] Chart: renders correctly with real data
+- [ ] Performance table: shows correct data
+- [ ] Quote: current price displays
+- [ ] Console: no JavaScript errors
+- [ ] Network: API calls successful (no 500s)
+
+### Risk Mitigation
+
+| Risk          | Mitigation                             |
+| ------------- | -------------------------------------- |
+| Data mismatch | Compare side-by-side before committing |
+| API failures  | Keep backup until verified working     |
+| SEO impact    | Verify meta tags in page source        |
+| Performance   | Check page load time                   |
+
+### Current Status
+
+| Page                 | Static File | Dynamic Route | Status   |
+| -------------------- | ----------- | ------------- | -------- |
+| `/gold-price`        | N/A (home)  | ✅ Working    | Migrated |
+| `/silver-price`      | ✅ Exists   | Should work   | Pending  |
+| `/aluminum-price`    | ✅ Exists   | Should work   | Pending  |
+| `/platinum-price`    | ✅ Exists   | Should work   | Pending  |
+| `/palladium-price`   | ✅ Exists   | Should work   | Pending  |
+| `/copper-price`      | ✅ Exists   | Should work   | Pending  |
+| `/oil-price`         | ✅ Exists   | Should work   | Pending  |
+| `/natural-gas-price` | ✅ Exists   | Should work   | Pending  |
+| `/bitcoin-price`     | ✅ Exists   | Should work   | Pending  |
+| `/ethereum-price`    | ✅ Exists   | Should work   | Pending  |
+| `/gold-silver-ratio` | ✅ Exists   | Should work   | Pending  |
+
 ### Testing Strategy
 
 | Level        | Method                                  |
