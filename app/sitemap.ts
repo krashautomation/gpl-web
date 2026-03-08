@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/about`, priority: 0.6 },
     { url: `${baseUrl}/contact`, priority: 0.6 },
     { url: `${baseUrl}/advertise`, priority: 0.5 },
+    { url: `${baseUrl}/roadmap`, priority: 0.5 },
     { url: `${baseUrl}/gold-price-live-app`, priority: 0.6 },
     { url: `${baseUrl}/bitcoin-price`, priority: 0.7 },
     { url: `${baseUrl}/ethereum-price`, priority: 0.7 },
