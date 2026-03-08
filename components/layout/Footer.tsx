@@ -83,7 +83,7 @@ const Footer = () => {
                         </a>
                       </p>
                       <p className=" mt-6">I appreciate your support 😊</p>
-                     <p className=" mt-1">  - Dave</p>
+                      <p className=" mt-1"> - Dave</p>
                       <p className=" mt-6">
                         P.S. Keep stacking and feel free to contact me with comments or questions.
                       </p>
@@ -198,13 +198,13 @@ const Footer = () => {
         </div>
       </div>
 
-      <BannerAd 
-  affiliateName="Money Metals Exchange"
-  adName="Money Metals Exchange"
-  href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
-  src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
-  className="my-6 pt-6"
-/>
+      <BannerAd
+        affiliateName="Money Metals Exchange"
+        adName="Money Metals Exchange"
+        href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+        src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+        className="my-6 pt-6"
+      />
 
       <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-8 py-12 text-white">
         <div className="container mx-auto px-4">
@@ -338,7 +338,7 @@ const Footer = () => {
                 </li>
               </ul>
 
-   <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY PRICES</h4>
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY PRICES</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
                   <a href="/oil-price" className="hover:text-yellow-500">
@@ -351,9 +351,6 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-
-
-
             </div>
 
             {/* Column 5: CONTACT + MOBILE + ADVERTISING */}

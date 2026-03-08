@@ -56,7 +56,7 @@ export default function RecentArticlesSection() {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.map((article) => (
+        {articles.map(article => (
           <Link key={article.slug} href={`/news/${article.slug}`}>
             <Card className=" border-neutral-800 h-full hover:border-black transition-colors group">
               {article.featuredImage && (
@@ -78,9 +78,7 @@ export default function RecentArticlesSection() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm line-clamp-3 mb-4">
-                  {article.excerpt}
-                </p>
+                <p className="text-sm line-clamp-3 mb-4">{article.excerpt}</p>
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1">
@@ -88,7 +86,7 @@ export default function RecentArticlesSection() {
                       {new Date(article.date).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
-                        year: 'numeric'
+                        year: 'numeric',
                       })}
                     </span>
                     <span className="flex items-center gap-1">
@@ -96,7 +94,10 @@ export default function RecentArticlesSection() {
                       {article.readingTime} min read
                     </span>
                   </div>
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight
+                    size={16}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
                 </div>
               </CardContent>
             </Card>

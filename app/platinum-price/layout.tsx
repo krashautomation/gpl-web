@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Platinum Price Today | Live platinum Spot Price & Charts',
-  description: 'Track live platinum prices with real-time charts and historical data. View platinum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
+  description:
+    'Track live platinum prices with real-time charts and historical data. View platinum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
     'platinum price',
     'platinum spot price',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     'platinum price per ounce',
     'platinum performance',
     'precious metals',
-    'platinum investment'
+    'platinum investment',
   ],
   openGraph: {
     title: 'Silver Price Today | Live Silver Spot Price & Charts',
@@ -50,12 +51,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function PlatinumPriceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function PlatinumPriceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

@@ -54,7 +54,7 @@ export default function MarketQuotes() {
     <div>
       <h2>Market Quotes</h2>
       <ul style={{ listStyle: 'none', padding: 0 }}>
-        {quotes.map((q) => (
+        {quotes.map(q => (
           <li key={q.symbol} style={{ marginBottom: '12px' }}>
             <strong>{q.symbol}</strong>: ${q.price.toFixed(2)}{' '}
             <span

@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Price History | 100 Year Historical Chart & Performance',
-  description: 'Explore gold price history with our 100 year historical chart. View gold price performance over 30 days, 6 months, 1 year, 5 years, and 20 years. Track historical gold prices.',
+  description:
+    'Explore gold price history with our 100 year historical chart. View gold price performance over 30 days, 6 months, 1 year, 5 years, and 20 years. Track historical gold prices.',
   keywords: [
     'gold price history',
     'historical gold prices',
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
     'gold price historical data',
     'gold price trends',
     'gold investment history',
-    'gold price over time'
+    'gold price over time',
   ],
   openGraph: {
     title: 'Gold Price History | 100 Year Historical Chart & Performance',
-    description: 'Explore gold price history with our 100 year historical chart and performance metrics.',
+    description:
+      'Explore gold price history with our 100 year historical chart and performance metrics.',
     type: 'website',
     url: '/gold-price-history',
     images: [
@@ -33,7 +35,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Gold Price History | 100 Year Historical Chart',
-    description: 'Explore gold price history with our 100 year historical chart and performance metrics.',
+    description:
+      'Explore gold price history with our 100 year historical chart and performance metrics.',
     images: [getOgImage('/images/og-gold-price-history.jpg')],
   },
   alternates: {
@@ -50,12 +53,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function GoldPriceHistoryLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function GoldPriceHistoryLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

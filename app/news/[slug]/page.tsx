@@ -10,7 +10,6 @@ import { marked } from 'marked';
 import { getArticleBySlug, getAllArticles, type Article } from '@/lib/articles';
 import { BannerAd } from '@/components/BannerAd';
 
-
 export const revalidate = 3600;
 
 interface ArticlePageProps {

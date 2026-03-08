@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
-const PROMPT = (rawArticle: string) => `You are an article editor. Reword the following article, keeping all facts identical but using different phrasing and sentence structure. Then output ONLY a valid JSON object (no markdown, no backticks, no preamble) with these exact fields:
+const PROMPT = (
+  rawArticle: string
+) => `You are an article editor. Reword the following article, keeping all facts identical but using different phrasing and sentence structure. Then output ONLY a valid JSON object (no markdown, no backticks, no preamble) with these exact fields:
 
 {
   "title": "Article title",
@@ -50,7 +52,10 @@ export async function POST(request: Request) {
     const { rawArticle } = await request.json();
 
     if (!rawArticle || typeof rawArticle !== 'string') {
-      return NextResponse.json({ success: false, error: 'No article text provided' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: 'No article text provided' },
+        { status: 400 }
+      );
     }
 
     const hasAnthropic = !!process.env.ANTHROPIC_API_KEY;
@@ -58,7 +63,11 @@ export async function POST(request: Request) {
 
     if (!hasAnthropic && !hasOpenAI) {
       return NextResponse.json(
-        { success: false, error: 'No AI API key configured. Add ANTHROPIC_API_KEY or OPENAI_API_KEY to your .env.local' },
+        {
+          success: false,
+          error:
+            'No AI API key configured. Add ANTHROPIC_API_KEY or OPENAI_API_KEY to your .env.local',
+        },
         { status: 500 }
       );
     }
@@ -74,6 +83,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, article: parsed });
   } catch (error) {
     console.error('Import article error:', error);
-    return NextResponse.json({ success: false, error: 'Failed to process article' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to process article' },
+      { status: 500 }
+    );
   }
 }

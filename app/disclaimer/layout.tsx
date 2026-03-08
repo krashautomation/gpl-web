@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Disclaimer | Gold Price Live',
-  description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
+  description:
+    'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
   keywords: [
     'disclaimer',
     'gold price disclaimer',
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Disclaimer | Gold Price Live',
-    description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
+    description:
+      'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
     type: 'website',
     url: '/disclaimer',
     images: [
@@ -30,7 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Disclaimer | Gold Price Live',
-    description: 'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
+    description:
+      'Read our Disclaimer for information about data accuracy, third-party sources, liability limitations, and the informational nature of our gold price data.',
     images: [getOgImage('/images/og-disclaimer.jpg')],
   },
   alternates: {
@@ -47,12 +50,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function DisclaimerLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function DisclaimerLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

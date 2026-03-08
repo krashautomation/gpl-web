@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Copper Price Today | Live Copper Spot Price & Charts',
-  description: 'Track live copper prices with real-time charts and historical data. View copper spot price, performance metrics, and market analysis. Updated every 5 minutes.',
+  description:
+    'Track live copper prices with real-time charts and historical data. View copper spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
     'copper price',
     'copper spot price',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     'copper price per ounce',
     'copper performance',
     'base metals',
-    'copper investment'
+    'copper investment',
   ],
   openGraph: {
     title: 'Copper Price Today | Live Copper Spot Price & Charts',
@@ -50,12 +51,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function CopperPriceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function CopperPriceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

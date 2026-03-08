@@ -77,7 +77,8 @@ export function ImportArticleModal({ onImport }: ImportArticleModalProps) {
           <DialogHeader>
             <DialogTitle>Import & Reword Article</DialogTitle>
             <DialogDescription>
-              Paste the raw article text below. Claude will reword it and pre-fill all fields for your review.
+              Paste the raw article text below. Claude will reword it and pre-fill all fields for
+              your review.
             </DialogDescription>
           </DialogHeader>
 
@@ -94,12 +95,15 @@ export function ImportArticleModal({ onImport }: ImportArticleModalProps) {
               />
             </div>
 
-            {error && (
-              <p className="text-sm text-red-500">{error}</p>
-            )}
+            {error && <p className="text-sm text-red-500">{error}</p>}
 
             <div className="flex gap-2 justify-end">
-              <Button type="button" variant="outline" onClick={() => setOpen(false)} disabled={loading}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setOpen(false)}
+                disabled={loading}
+              >
                 Cancel
               </Button>
               <Button type="button" onClick={handleImport} disabled={loading || !rawText.trim()}>

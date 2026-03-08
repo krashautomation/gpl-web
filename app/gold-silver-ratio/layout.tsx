@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold Silver Ratio | Historical Chart & Performance Comparison',
-  description: 'Track the Gold-Silver Ratio with historical charts and performance comparison. Compare gold and silver returns over 1, 2, 5, and 20 year periods.',
+  description:
+    'Track the Gold-Silver Ratio with historical charts and performance comparison. Compare gold and silver returns over 1, 2, 5, and 20 year periods.',
   keywords: [
     'gold silver ratio',
     'gold to silver ratio',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     'gold vs silver',
     'precious metals ratio',
     'gold silver performance',
-    'gold silver historical data'
+    'gold silver historical data',
   ],
   openGraph: {
     title: 'Gold Silver Ratio | Historical Chart & Performance Comparison',
@@ -49,12 +50,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function GoldSilverRatioLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function GoldSilverRatioLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

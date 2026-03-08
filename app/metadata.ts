@@ -1,9 +1,18 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Gold Price Live - Real-Time Gold & Silver Prices',
-  description: 'Track live gold and silver prices with real-time charts, performance statistics, and calculators. Get current precious metal prices in all major currencies including USD, EUR, GBP, CAD, and AUD.',
-  keywords: ['gold price', 'silver price', 'live gold price', 'gold charts', 'precious metals', 'gold calculator', 'gold spot price'],
+  description:
+    'Track live gold and silver prices with real-time charts, performance statistics, and calculators. Get current precious metal prices in all major currencies including USD, EUR, GBP, CAD, and AUD.',
+  keywords: [
+    'gold price',
+    'silver price',
+    'live gold price',
+    'gold charts',
+    'precious metals',
+    'gold calculator',
+    'gold spot price',
+  ],
   authors: [{ name: 'Gold Price Live' }],
   creator: 'Gold Price Live',
   publisher: 'Gold Price Live',
@@ -24,7 +33,8 @@ export const metadata: Metadata = {
     url: 'https://goldpricelive.com',
     siteName: 'Gold Price Live',
     title: 'Gold Price Live - Real-Time Gold & Silver Prices',
-    description: 'Track live gold and silver prices with real-time charts, performance statistics, and calculators.',
+    description:
+      'Track live gold and silver prices with real-time charts, performance statistics, and calculators.',
     images: [
       {
         url: '/og-image.jpg',
@@ -37,7 +47,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Gold Price Live - Real-Time Gold & Silver Prices',
-    description: 'Track live gold and silver prices with real-time charts and performance statistics.',
+    description:
+      'Track live gold and silver prices with real-time charts and performance statistics.',
     images: ['/twitter-image.jpg'],
     creator: '@goldpricelive',
   },
@@ -46,11 +57,11 @@ export const metadata: Metadata = {
     languages: {
       'en-US': 'https://goldpricelive.com',
       'en-GB': 'https://goldpricelive.com/uk',
-      'de': 'https://goldpricelive.com/de',
+      de: 'https://goldpricelive.com/de',
     },
   },
   verification: {
     google: 'your-google-verification-code',
   },
   category: 'finance',
-}
+};

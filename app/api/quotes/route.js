@@ -14,7 +14,27 @@ if (!ALLOWED_KEY) {
   console.error('YAHOO2_API_KEY is not set in environment variables!');
 }
 
-const symbols = ['GC=F', 'SI=F', '^GSPC', '^DJI', 'PA=F', 'PL=F', 'HG=F', 'ALI=F', 'EURUSD=X', 'GBPUSD=X', 'INR=X', 'AUDUSD=X', 'CADUSD=X', 'BTC-USD', 'ETH-USD', 'GLD', 'SLV', 'CL=F', 'NG=F' ];
+const symbols = [
+  'GC=F',
+  'SI=F',
+  '^GSPC',
+  '^DJI',
+  'PA=F',
+  'PL=F',
+  'HG=F',
+  'ALI=F',
+  'EURUSD=X',
+  'GBPUSD=X',
+  'INR=X',
+  'AUDUSD=X',
+  'CADUSD=X',
+  'BTC-USD',
+  'ETH-USD',
+  'GLD',
+  'SLV',
+  'CL=F',
+  'NG=F',
+];
 
 export async function GET(request) {
   // Get the key from query string: ?key=your-secret-value
@@ -23,15 +43,18 @@ export async function GET(request) {
 
   // Simple authorization check
   if (!key || key !== ALLOWED_KEY) {
-    return NextResponse.json({
-      success: false,
-      error: 'Unauthorized – Invalid or missing API key',
-    }, { status: 401 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Unauthorized – Invalid or missing API key',
+      },
+      { status: 401 }
+    );
   }
 
   try {
     const quotes = await Promise.all(
-      symbols.map(async (symbol) => {
+      symbols.map(async symbol => {
         const q = await yahooFinance.quote(symbol);
 
         return {
@@ -51,9 +74,12 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error('Error fetching quotes:', error);
-    return NextResponse.json({
-      success: false,
-      error: error.message || 'Failed to fetch market data',
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message || 'Failed to fetch market data',
+      },
+      { status: 500 }
+    );
   }
 }

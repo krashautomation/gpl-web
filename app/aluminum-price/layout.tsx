@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Aluminum Price Today | Live Aluminum Spot Price & Charts',
-  description: 'Track live aluminum prices with real-time charts and historical data. View aluminum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
+  description:
+    'Track live aluminum prices with real-time charts and historical data. View aluminum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
     'aluminum price',
     'aluminum spot price',
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
     'aluminum price per ounce',
     'aluminum performance',
     'base metals',
-    'aluminum investment'
+    'aluminum investment',
   ],
   openGraph: {
     title: 'Aluminum Price Today | Live Aluminum Spot Price & Charts',
-    description: 'Track live aluminum prices with real-time charts and historical performance data.',
+    description:
+      'Track live aluminum prices with real-time charts and historical performance data.',
     type: 'website',
     url: '/aluminum-price',
     images: [
@@ -50,12 +52,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function AluminumPriceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function AluminumPriceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

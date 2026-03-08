@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Terms of Service | Gold Price Live',
-  description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
+  description:
+    'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
   keywords: [
     'terms of service',
     'terms and conditions',
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Terms of Service | Gold Price Live',
-    description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
+    description:
+      'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
     type: 'website',
     url: '/terms-of-service',
     images: [
@@ -29,7 +31,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Terms of Service | Gold Price Live',
-    description: 'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
+    description:
+      'Read our Terms of Service to understand the rules and regulations for using the Gold Price Live website and services.',
     images: [getOgImage('/images/og-terms-of-service.jpg')],
   },
   alternates: {
@@ -46,12 +49,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function TermsOfServiceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function TermsOfServiceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

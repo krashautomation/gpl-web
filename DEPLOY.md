@@ -23,12 +23,12 @@ Your existing `vercel.json` is valid (HSTS headers). You do **not** need to enab
 
 In Vercel: **Project → Settings → Environment Variables**. Add:
 
-| Variable | Where used | Required |
-|----------|-------------|----------|
-| `NEXT_PUBLIC_SITE_URL` | Metadata, OG images (default: `https://goldpricelive.co`) | Optional |
-| `NEXT_PUBLIC_YAHOO_API_KEY` | Client-side Yahoo Finance (price pages, charts) | **Yes** |
-| `YAHOO2_API_KEY` | Server route `app/api/quotes/route.js` | **Yes** |
-| `REVALIDATE_SECRET` | On-demand revalidation `app/api/revalidate/route.ts` | **Yes** (if you use revalidate) |
+| Variable                    | Where used                                                | Required                        |
+| --------------------------- | --------------------------------------------------------- | ------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`      | Metadata, OG images (default: `https://goldpricelive.co`) | Optional                        |
+| `NEXT_PUBLIC_YAHOO_API_KEY` | Client-side Yahoo Finance (price pages, charts)           | **Yes**                         |
+| `YAHOO2_API_KEY`            | Server route `app/api/quotes/route.js`                    | **Yes**                         |
+| `REVALIDATE_SECRET`         | On-demand revalidation `app/api/revalidate/route.ts`      | **Yes** (if you use revalidate) |
 
 Set them for **Production** (and optionally Preview if you want same behavior in PR previews).
 

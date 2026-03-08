@@ -998,6 +998,71 @@ After Phase 3 (Dynamic Route), choose:
 
 ---
 
+## Commit Strategy
+
+### When to Commit
+
+Commit after each phase is **tested and verified working**. Never commit broken code.
+
+| Phase       | When to Commit                                                     | Contents                                                |
+| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| **Phase 1** | After DB schema runs, lib/pages.ts works, test-page shows 11 pages | `supabase/schema.sql`, `lib/pages.ts`, `app/test-page/` |
+| **Phase 2** | After all components extracted and tested in isolation             | New components in `components/`                         |
+| **Phase 3** | After dynamic route works with real data                           | `app/[slug]/page.tsx`                                   |
+| **Phase 4** | After full migration tested in browser                             | Migrated pages                                          |
+| **Phase 5** | After admin UI or remaining work complete                          | Dashboard updates                                       |
+
+### Commit Message Format
+
+When testing is successful, provide commit messages in this format:
+
+```
+feat(page-cms): [brief description]
+
+- [What was done]
+- [Why it matters]
+- [How to verify]
+
+Testing: Verified via [test method]
+```
+
+### Before Commit Checklist
+
+- [ ] `npm run lint` passes
+- [ ] `npm run typecheck` passes
+- [ ] Manual browser test completed
+- [ ] No console errors
+- [ ] Feature works as expected
+
+### Example Commit Messages
+
+**Phase 1 Complete:**
+
+```
+feat(page-cms): Add page management system foundation
+
+- Add Supabase schema with pages and page_components tables
+- Add 13 SEO fields for dynamic pages
+- Seed 11 locked commodity/crypto pages
+- Add lib/pages.ts with fetch functions
+
+Testing: Verified via /test-page - all 11 pages load correctly
+```
+
+**Phase 2 Complete:**
+
+```
+feat(page-cms): Extract reusable page components
+
+- Extract ContactSidebar (used on 6+ pages)
+- Add PriceCard, PerformanceTable, CommodityChartCard
+- Add ContentCard, ProfileCard for static pages
+
+Testing: Components render correctly with mock data
+```
+
+---
+
 ## Pages Analyzed
 
 | Page              | Slug               | Type      | Status |

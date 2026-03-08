@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Bitcoin Price Today | Live Bitcoin Spot Price & Charts',
-  description: 'Track live Bitcoin prices with real-time charts and historical data. View Bitcoin spot price, performance metrics, and market analysis. Updated every 5 minutes.',
+  description:
+    'Track live Bitcoin prices with real-time charts and historical data. View Bitcoin spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
     'Bitcoin price',
     'Bitcoin spot price',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     'Bitcoin price per ounce',
     'Bitcoin performance',
     'cryptocurrency',
-    'Bitcoin investment'
+    'Bitcoin investment',
   ],
   openGraph: {
     title: 'Bitcoin Price Today | Live Bitcoin Spot Price & Charts',
@@ -50,12 +51,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function BitcoinPriceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function BitcoinPriceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

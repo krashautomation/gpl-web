@@ -1,14 +1,12 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Contact | GoldPriceLive.co',
-  description: 'Contact Dave at Gold Price Live (a site for realtime gold prices.) For business inquiries, advertising and more.',
-  keywords: [
-    'about gold price live',
-
-  ],
+  description:
+    'Contact Dave at Gold Price Live (a site for realtime gold prices.) For business inquiries, advertising and more.',
+  keywords: ['about gold price live'],
   openGraph: {
     title: 'Contact Dave at Gold Price Live',
     description: 'Contact Dave at Gold Price Live for business and advertising inquiries.',
@@ -43,12 +41,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function ContactGoldPriceLive({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function ContactGoldPriceLive({ children }: { children: React.ReactNode }) {
+  return children;
 }

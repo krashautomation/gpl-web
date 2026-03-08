@@ -19,12 +19,9 @@ import Link from 'next/link'; // if using Next.js
 export default function ContactGoldPriceLive() {
   return (
     <MainLayout>
-
-<div className="flex items-center justify-center mb-6">
-  <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-    About Us
-  </h1>
-</div>
+      <div className="flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">About Us</h1>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card>
@@ -99,9 +96,7 @@ export default function ContactGoldPriceLive() {
                   "Gold is money. Everything else is credit." — J.P. Morgan
                 </p>
 
-                <p className="text-base  font-semibold mb-3">
-                  My Mission for Gold Price Live
-                </p>
+                <p className="text-base  font-semibold mb-3">My Mission for Gold Price Live</p>
                 <p className="text-base  mb-3">
                   At Gold Price Live, our mission is to empower everyday investors with accurate
                   real-time gold prices, in-depth market analysis, and proven strategies.
@@ -113,9 +108,7 @@ export default function ContactGoldPriceLive() {
                   instability in today's uncertain world.
                 </p>
 
-                <p className="text-base font-semibold mb-3 mt-6">
-                  Advertise with Us{' '}
-                </p>
+                <p className="text-base font-semibold mb-3 mt-6">Advertise with Us </p>
 
                 <p className="mb-3">
                   Reach savvy investors tracking gold's bull run. Advertise on Gold Price Live.

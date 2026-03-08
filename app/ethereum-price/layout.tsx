@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Ethereum Price Today | Live Ethereum Spot Price & Charts',
-  description: 'Track live Ethereum prices with real-time charts and historical data. View Ethereum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
+  description:
+    'Track live Ethereum prices with real-time charts and historical data. View Ethereum spot price, performance metrics, and market analysis. Updated every 5 minutes.',
   keywords: [
     'Ethereum price',
     'Ethereum spot price',
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
     'Ethereum price per ounce',
     'Ethereum performance',
     'cryptocurrency',
-    'Ethereum investment'
+    'Ethereum investment',
   ],
   openGraph: {
     title: 'Ethereum Price Today | Live Ethereum Spot Price & Charts',
-    description: 'Track live Ethereum prices with real-time charts and historical performance data.',
+    description:
+      'Track live Ethereum prices with real-time charts and historical performance data.',
     type: 'website',
     url: '/ethereum-price',
     images: [
@@ -50,12 +52,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function EthereumPriceLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function EthereumPriceLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

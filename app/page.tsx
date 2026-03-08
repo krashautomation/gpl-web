@@ -411,15 +411,13 @@ export default function Home() {
         </Card>
       </div>
 
-
-<BannerAd 
-  affiliateName="Money Metals Exchange"
-  adName="Money Metals Exchange"
-  href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
-  src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
-  className="py-4"
-/>
-
+      <BannerAd
+        affiliateName="Money Metals Exchange"
+        adName="Money Metals Exchange"
+        href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
+        src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
+        className="py-4"
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" id="foreign-currency">
         <Card className="p-0">

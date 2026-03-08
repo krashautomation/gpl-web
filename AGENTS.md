@@ -163,6 +163,34 @@ NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
 
 No test framework. Test manually: run `npm run dev`, open `http://localhost:3000`, test in browser, then run `npm run lint` and `npm run typecheck` before committing.
 
+## Commit Strategy
+
+### When to Commit
+
+- Commit after each feature/phase is **tested and verified working**
+- Never commit broken code
+- Run `npm run lint` and `npm run typecheck` before committing
+
+### Before Commit Checklist
+
+- [ ] `npm run lint` passes
+- [ ] `npm run typecheck` passes
+- [ ] Manual browser test completed
+- [ ] No console errors
+- [ ] Feature works as expected
+
+### Commit Message Format
+
+```
+feat/fix/chore: [brief description]
+
+- [What was done]
+- [Why it matters]
+- [How to verify]
+
+Testing: Verified via [test method]
+```
+
 ## Common Tasks
 
 ### Adding a New Page

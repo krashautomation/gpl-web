@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Gold ETFs | Top Gold Exchange Traded Funds',
-  description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more. Track GLD price charts and compare gold ETF options.',
+  description:
+    'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more. Track GLD price charts and compare gold ETF options.',
   keywords: [
     'gold etf',
     'gold etfs',
@@ -15,11 +16,12 @@ export const metadata: Metadata = {
     'gold exchange traded funds',
     'gold investment',
     'gold etf list',
-    'best gold etfs'
+    'best gold etfs',
   ],
   openGraph: {
     title: 'Gold ETFs | Top Gold Exchange Traded Funds',
-    description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
+    description:
+      'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
     type: 'website',
     url: '/gold-etfs',
     images: [
@@ -34,7 +36,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Gold ETFs | Top Gold Exchange Traded Funds',
-    description: 'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
+    description:
+      'Explore popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust (IAU), and more.',
     images: [getOgImage('/images/og-gold-etfs.jpg')],
   },
   alternates: {
@@ -51,12 +54,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function GoldETFsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function GoldETFsLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

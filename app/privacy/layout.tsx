@@ -1,16 +1,12 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Privacy Policy | GoldPriceLive.co',
-  description: 'Read our Privacy Policy to learn how Gold Price Live collects, uses, and protects your information.',
-  keywords: [
-    'privacy policy',
-    'gold price live privacy',
-    'data protection',
-    'privacy',
-  ],
+  description:
+    'Read our Privacy Policy to learn how Gold Price Live collects, uses, and protects your information.',
+  keywords: ['privacy policy', 'gold price live privacy', 'data protection', 'privacy'],
   openGraph: {
     title: 'Privacy Policy | Gold Price Live',
     description: 'Learn how we collect, use, and protect your information at Gold Price Live.',
@@ -45,12 +41,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function PrivacyLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function PrivacyLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

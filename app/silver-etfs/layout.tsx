@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Silver ETFs | Top Silver Exchange Traded Funds',
-  description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more. Track SLV price charts and compare silver ETF options.',
+  description:
+    'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more. Track SLV price charts and compare silver ETF options.',
   keywords: [
     'silver etf',
     'silver etfs',
@@ -19,11 +20,12 @@ export const metadata: Metadata = {
     'silver exchange traded funds',
     'silver investment',
     'silver etf list',
-    'best silver etfs'
+    'best silver etfs',
   ],
   openGraph: {
     title: 'Silver ETFs | Top Silver Exchange Traded Funds',
-    description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
+    description:
+      'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
     type: 'website',
     url: '/silver-etfs',
     images: [
@@ -38,7 +40,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Silver ETFs | Top Silver Exchange Traded Funds',
-    description: 'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
+    description:
+      'Explore popular Silver ETFs including iShares Silver Trust (SLV), abrdn Physical Silver Shares (SIVR), and more.',
     images: [getOgImage('/images/og-silver-etfs.jpg')],
   },
   alternates: {
@@ -55,12 +58,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function SilverETFsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function SilverETFsLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

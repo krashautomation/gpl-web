@@ -5,9 +5,7 @@ import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   // Base URL – resolves relative paths like /og-...png to full https:// URLs
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
 
   // Page title (inherits from root if you have title.template there)
   title: 'Advertise on Gold Price Live',
@@ -47,8 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Advertise on Gold Price Live',
-    description:
-      'Contact Dave for advertising opportunities on real-time gold & silver prices.',
+    description: 'Contact Dave for advertising opportunities on real-time gold & silver prices.',
     images: [getOgImage('/images/og-advertise.jpg')], // absolute URL
     // Optional: your X handle
     // site: '@starter_vibes',
@@ -74,10 +71,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AdvertiseLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdvertiseLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

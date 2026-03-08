@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
-import { getOgImage } from '@/lib/og-utils'
+import type { Metadata } from 'next';
+import { getOgImage } from '@/lib/og-utils';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://goldpricelive.co'),
   title: 'Risk Warning | Gold Price Live',
-  description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
+  description:
+    'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
   keywords: [
     'risk warning',
     'investment risk',
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Risk Warning | Gold Price Live',
-    description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
+    description:
+      'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
     type: 'website',
     url: '/risk-warning',
     images: [
@@ -30,7 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Risk Warning | Gold Price Live',
-    description: 'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
+    description:
+      'Important risk warning regarding gold and precious metals investments. Understand volatility, market risks, and limitations before investing.',
     images: [getOgImage('/images/og-risk-warning.jpg')],
   },
   alternates: {
@@ -47,12 +50,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
-export default function RiskWarningLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function RiskWarningLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }
