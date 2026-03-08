@@ -4,6 +4,9 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Recent Changes
 
+- **Page Management System** - Database-driven pages with SEO from Supabase (March 2026)
+- **Dynamic Route** - All commodity/crypto pages use `app/[slug]/` route from database
+- **Reusable Components** - 6 new components: ContactSidebar, PriceCard, PerformanceTable, CommodityChartCard, ContentCard, ProfileCard
 - **AI Article Import** - Import and reword articles using Claude or OpenAI. Access via `/dashboard` in development mode.
 - **Admin Dashboard** - Full article management system at `/dashboard` (dev mode only)
 - **Image Management** - Upload and manage article images with usage tracking
@@ -168,6 +171,96 @@ node scripts/migrate-articles.js
 ```
 
 Note: After migration, you can safely remove the `content/articles/` folder and migration scripts.
+
+## Page Management System
+
+Pages are stored in Supabase `pages` table. The system uses a dynamic route `app/[slug]/page.tsx` to render pages from the database.
+
+### Database Schema
+
+See `supabase/schema.sql` for the full schema. Key tables:
+
+| Table             | Purpose                             |
+| ----------------- | ----------------------------------- |
+| `pages`           | Page configurations with SEO fields |
+| `page_components` | Future: custom component layouts    |
+
+### Page Types
+
+| Type        | Description          | Components                   |
+| ----------- | -------------------- | ---------------------------- |
+| `commodity` | Precious/base metals | ChartCard + PerformanceTable |
+| `crypto`    | Cryptocurrencies     | ChartCard + PerformanceTable |
+| `ratio`     | Metal ratios         | ChartCard + PerformanceTable |
+| `static`    | Static content       | ContentCard + ContactSidebar |
+| `legal`     | Legal pages          | ContentCard + ContactSidebar |
+
+### SEO Fields (13 fields)
+
+Pages include comprehensive SEO configuration:
+
+- `meta_title` - SEO title
+- `meta_description` - SEO description
+- `meta_keywords` - SEO keywords array
+- `og_image` - Open Graph image
+- `twitter_card` - Twitter card type
+- `robots` - Robots meta (index/follow)
+- `canonical_url` - Canonical URL
+- `seo_page_type` - SEO classification
+- `pillar_slug` - Pillar page for internal linking
+- `primary_keyword` - Main keyword
+- `related_pages` - Related page slugs
+- `schema_type` - Schema.org type
+- `is_locked` - Prevent AI overwrites
+
+### Current Pages (11)
+
+All commodity/crypto pages are database-driven:
+
+| Page              | Slug              | Symbol      |
+| ----------------- | ----------------- | ----------- |
+| Gold              | gold-price        | GC=F        |
+| Silver            | silver-price      | SI=F        |
+| Platinum          | platinum-price    | PL=F        |
+| Palladium         | palladium-price   | PA=F        |
+| Copper            | copper-price      | HG=F        |
+| Aluminum          | aluminum-price    | ALI=F       |
+| Oil               | oil-price         | CL=F        |
+| Natural Gas       | natural-gas-price | NG=F        |
+| Bitcoin           | bitcoin-price     | BTC-USD     |
+| Ethereum          | ethereum-price    | ETH-USD     |
+| Gold/Silver Ratio | gold-silver-ratio | GC=F + SI=F |
+
+### Adding a New Page
+
+1. Add a row to the `pages` table in Supabase
+2. Set `slug`, `title`, `page_type`, `symbol`, and SEO fields
+3. Page automatically renders at `/{slug}`
+
+### Components
+
+New reusable components in `components/`:
+
+| Component            | Purpose                   |
+| -------------------- | ------------------------- |
+| `ContactSidebar`     | Contact info card         |
+| `PriceCard`          | Price display with change |
+| `PerformanceTable`   | Performance metrics table |
+| `CommodityChartCard` | Chart with price header   |
+| `ContentCard`        | Generic content card      |
+| `ProfileCard`        | Profile with image + CTA  |
+
+### Rollback
+
+Static backups are preserved in `app/backup-static-pages/`. To restore:
+
+```bash
+# Restore all
+mv app/backup-static-pages/* app/
+
+# Restore single page
+mv app/backup-static-pages/silver-price app/
+```
 
 ## Deployment
 
