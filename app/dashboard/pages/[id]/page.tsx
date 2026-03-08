@@ -267,62 +267,6 @@ export default function EditPagePage() {
 
       <form onSubmit={handleSubmit}>
         <div className="space-y-6">
-          {/* Basic Information */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Basic Information</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="title">
-                    Title <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="title"
-                    value={form.title}
-                    onChange={e => {
-                      handleChange('title', e.target.value);
-                      setTitleError(null);
-                    }}
-                    placeholder="Page Title"
-                    required
-                    disabled={locked}
-                  />
-                  {titleError && <p className="text-sm text-red-600 mt-1">{titleError}</p>}
-                </div>
-                <div>
-                  <Label htmlFor="slug">
-                    Slug <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="slug"
-                    value={form.slug}
-                    onChange={e => {
-                      handleChange('slug', e.target.value);
-                      setSlugError(null);
-                    }}
-                    placeholder="page-slug"
-                    required
-                    disabled={locked}
-                  />
-                  {slugError && <p className="text-sm text-red-600 mt-1">{slugError}</p>}
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={form.description || ''}
-                  onChange={e => handleChange('description', e.target.value)}
-                  placeholder="Page description"
-                  rows={3}
-                  disabled={locked}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
           {/* Data Source */}
           <Card>
             <CardHeader>
@@ -377,6 +321,62 @@ export default function EditPagePage() {
                   value={form.category || ''}
                   onChange={e => handleChange('category', e.target.value)}
                   placeholder="precious-metals"
+                  disabled={locked}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Basic Information */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Basic Information</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="title">
+                    Title <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="title"
+                    value={form.title}
+                    onChange={e => {
+                      handleChange('title', e.target.value);
+                      setTitleError(null);
+                    }}
+                    placeholder="Page Title"
+                    required
+                    disabled={locked}
+                  />
+                  {titleError && <p className="text-sm text-red-600 mt-1">{titleError}</p>}
+                </div>
+                <div>
+                  <Label htmlFor="slug">
+                    Slug <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="slug"
+                    value={form.slug}
+                    onChange={e => {
+                      handleChange('slug', e.target.value);
+                      setSlugError(null);
+                    }}
+                    placeholder="page-slug"
+                    required
+                    disabled={locked}
+                  />
+                  {slugError && <p className="text-sm text-red-600 mt-1">{slugError}</p>}
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="description">Description</Label>
+                <Textarea
+                  id="description"
+                  value={form.description || ''}
+                  onChange={e => handleChange('description', e.target.value)}
+                  placeholder="Page description"
+                  rows={3}
                   disabled={locked}
                 />
               </div>
