@@ -114,14 +114,14 @@ app/
 | `pages`           | Page configs with SEO fields | ✅ Implemented |
 | `page_components` | Flexible component layout    | ❌ Not used    |
 
-### Feature Flags (Stored but NOT implemented in dynamic route)
+### Feature Flags (Implemented in dynamic route)
 
-| Flag          | DB Field             | Dynamic Route   |
-| ------------- | -------------------- | --------------- |
-| Calculator    | `has_calculator`     | ❌ Not rendered |
-| Ads           | `has_ads`            | ❌ Not rendered |
-| Articles      | `has_articles`       | ❌ Not rendered |
-| Earliest Date | `show_earliest_date` | ❌ Not rendered |
+| Flag          | DB Field             | Dynamic Route          |
+| ------------- | -------------------- | ---------------------- |
+| Calculator    | `has_calculator`     | ✅ Placeholder shown   |
+| Ads           | `has_ads`            | ✅ Rendered            |
+| Articles      | `has_articles`       | ✅ Rendered            |
+| Earliest Date | `show_earliest_date` | ✅ Rendered for crypto |
 
 ---
 
@@ -1033,18 +1033,19 @@ The core dynamic page system is implemented:
 
 | Task                    | Description                                        | Status      |
 | ----------------------- | -------------------------------------------------- | ----------- |
-| Fix default values      | has_ads, has_articles should default to true       | Pending     |
-| Implement feature flags | Render ads, articles, calculator based on DB flags | Not started |
-| Add show_earliest_date  | Render for crypto pages                            | Not started |
+| Fix default values      | has_ads, has_articles should default to true       | ✅ Complete |
+| Implement feature flags | Render ads, articles, calculator based on DB flags | ✅ Complete |
+| Add show_earliest_date  | Render for crypto pages                            | ✅ Complete |
 | page_components table   | Implement flexible component layout                | Not started |
 
 #### Lower Priority
 
-| Task                 | Description                                           |
-| -------------------- | ----------------------------------------------------- |
-| Component extraction | Extract PriceCard, PerformanceTable from backup pages |
-| SEO optimization     | Implement internal_links auto-injection               |
-| Schema markup        | Add structured data based on page type                |
+| Task                 | Description                                           | Status      |
+| -------------------- | ----------------------------------------------------- | ----------- |
+| Component extraction | Extract PriceCard, PerformanceTable from backup pages | Not started |
+| SEO optimization     | Implement internal_links auto-injection               | Not started |
+| Schema markup        | Add structured data based on page type                | Not started |
+| Calculator component | Extract GoldCalculator from home page                 | Not started |
 
 ---
 
@@ -1205,8 +1206,24 @@ const pageTypes = [
   { value: 'ratio', label: 'Ratio (Gold/Silver)' },
   { value: 'static', label: 'Static Content' },
   { value: 'legal', label: 'Legal Page' },
+  { value: 'home', label: 'Home Page' },
 ];
 ```
+
+### Smart Defaults by Page Type
+
+When creating or editing a page, selecting a page type automatically applies sensible defaults:
+
+| Page Type | has_calculator | has_ads | has_articles | show_earliest_date |
+| --------- | -------------- | ------- | ------------ | ------------------ |
+| commodity | false          | true    | true         | false              |
+| crypto    | false          | true    | true         | true               |
+| ratio     | false          | true    | true         | false              |
+| static    | false          | false   | false        | false              |
+| legal     | false          | false   | false        | false              |
+| home      | true           | true    | true         | false              |
+
+Users can still manually override these defaults after selection.
 
 ### Files to Create/Modify
 

@@ -6,6 +6,8 @@ import { CommodityChartCard } from '@/components/CommodityChartCard';
 import { PerformanceTable } from '@/components/PerformanceTable';
 import { ContactSidebar } from '@/components/ContactSidebar';
 import { ContentCard } from '@/components/ContentCard';
+import { BannerAd } from '@/components/BannerAd';
+import RecentArticlesSection from '@/app/components/RecentArticlesSection';
 import type { Page } from '@/lib/pages';
 
 interface Quote {
@@ -22,6 +24,7 @@ interface ChartData {
 
 interface PerformanceData {
   performance: Record<string, { price: number; change: number; changePercent: number }>;
+  earliestDate?: string | null;
 }
 
 interface DynamicPageClientProps {
@@ -41,6 +44,10 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   const symbol = page.symbol;
   const symbol2 = page.symbol2;
+  const hasAds = page.has_ads;
+  const hasArticles = page.has_articles;
+  const showEarliestDate = page.show_earliest_date;
+  const hasCalculator = page.has_calculator;
 
   useEffect(() => {
     if (!symbol) return;
@@ -115,13 +122,30 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   }, [symbol]);
 
   const quote = quotes.find(q => q.symbol === symbol) || null;
+  const earliestDate = performance?.earliestDate;
 
   if (page.page_type === 'commodity' || page.page_type === 'crypto') {
     return (
       <MainLayout>
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
+
         <div className="flex items-center justify-center mb-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
         </div>
+
+        {showEarliestDate && earliestDate && (
+          <p className="text-sm text-gray-500 mb-4 text-center">
+            Historical data available from {new Date(earliestDate).toLocaleDateString()}
+          </p>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <CommodityChartCard
@@ -142,6 +166,28 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
             lastUpdated={new Date().toISOString()}
           />
         </div>
+
+        {hasCalculator && (
+          <div className="mb-8 p-6 bg-gray-50 rounded-lg">
+            <p className="text-center text-gray-500">Calculator feature coming soon</p>
+          </div>
+        )}
+
+        {hasArticles && (
+          <div className="mt-8">
+            <RecentArticlesSection />
+          </div>
+        )}
+
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
       </MainLayout>
     );
   }
@@ -149,6 +195,16 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   if (page.page_type === 'ratio') {
     return (
       <MainLayout>
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
+
         <div className="flex items-center justify-center mb-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
         </div>
@@ -172,6 +228,16 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
             lastUpdated={new Date().toISOString()}
           />
         </div>
+
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
       </MainLayout>
     );
   }
@@ -179,23 +245,69 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   if (page.page_type === 'static' || page.page_type === 'legal') {
     return (
       <MainLayout>
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <ContentCard>
             <p>{page.description || 'Content coming soon...'}</p>
           </ContentCard>
           <ContactSidebar />
         </div>
+
+        {hasArticles && (
+          <div className="mt-8">
+            <RecentArticlesSection />
+          </div>
+        )}
+
+        {hasAds && (
+          <BannerAd
+            affiliateName="Money Metals Exchange"
+            adName="Money Metals Exchange"
+            href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+            src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+            className="my-6"
+          />
+        )}
       </MainLayout>
     );
   }
 
   return (
     <MainLayout>
+      {hasAds && (
+        <BannerAd
+          affiliateName="Money Metals Exchange"
+          adName="Money Metals Exchange"
+          href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+          src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+          className="my-6"
+        />
+      )}
+
       <div className="container mx-auto p-8">
         <h1 className="text-2xl font-bold mb-4">{page.title}</h1>
         <p>Page type: {page.page_type}</p>
         <p>Description: {page.description}</p>
       </div>
+
+      {hasAds && (
+        <BannerAd
+          affiliateName="Money Metals Exchange"
+          adName="Money Metals Exchange"
+          href="https://www.awin1.com/cread.php?s=3928246&v=88985&q=519082&r=2775708"
+          src="https://www.awin1.com/cshow.php?s=3928246&v=88985&q=519082&r=2775708"
+          className="my-6"
+        />
+      )}
     </MainLayout>
   );
 }

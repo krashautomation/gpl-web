@@ -43,6 +43,20 @@ const robotsOptions = [
   { value: 'noindex,nofollow', label: 'No Index, No Follow' },
 ];
 
+const pageTypeDefaults: Record<string, Partial<CreatePageInput>> = {
+  commodity: {
+    has_ads: true,
+    has_articles: true,
+    has_calculator: false,
+    show_earliest_date: false,
+  },
+  crypto: { has_ads: true, has_articles: true, has_calculator: false, show_earliest_date: true },
+  ratio: { has_ads: true, has_articles: true, has_calculator: false, show_earliest_date: false },
+  static: { has_ads: false, has_articles: false, has_calculator: false, show_earliest_date: false },
+  legal: { has_ads: false, has_articles: false, has_calculator: false, show_earliest_date: false },
+  home: { has_ads: true, has_articles: true, has_calculator: true, show_earliest_date: false },
+};
+
 export default function EditPagePage() {
   const router = useRouter();
   const params = useParams();
@@ -80,8 +94,8 @@ export default function EditPagePage() {
     primary_keyword: '',
     related_pages: [],
     has_calculator: false,
-    has_ads: false,
-    has_articles: false,
+    has_ads: true,
+    has_articles: true,
     show_earliest_date: false,
   });
 
@@ -215,7 +229,17 @@ export default function EditPagePage() {
   }
 
   function handleChange(field: keyof CreatePageInput, value: unknown) {
-    setForm({ ...form, [field]: value });
+    const newForm = { ...form, [field]: value };
+
+    if (field === 'page_type' && !locked) {
+      const defaults = pageTypeDefaults[value as string] || {};
+      newForm.has_calculator = defaults.has_calculator ?? form.has_calculator;
+      newForm.has_ads = defaults.has_ads ?? form.has_ads;
+      newForm.has_articles = defaults.has_articles ?? form.has_articles;
+      newForm.show_earliest_date = defaults.show_earliest_date ?? form.show_earliest_date;
+    }
+
+    setForm(newForm);
   }
 
   if (loading) {
