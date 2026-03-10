@@ -39,6 +39,8 @@ All phases completed successfully:
 
 | Date       | Change                                                |
 | ---------- | ----------------------------------------------------- |
+| 2026-03-10 | text_block HTML support with DOMPurify sanitization   |
+| 2026-03-10 | Added component config editor to dashboard UI         |
 | 2026-03-08 | Single column layout across all pages                 |
 | 2026-03-08 | Container widths: 1200px header/footer, 896px content |
 | 2026-03-08 | Article grids reduced to 2 columns                    |
@@ -1057,10 +1059,10 @@ The core dynamic page system is implemented:
 | page_components table   | Implement flexible component layout                | ✅ Complete |
 | Page Components UI      | Dashboard UI to add/remove/reorder components      | ✅ Complete |
 | Component reordering    | Add move up/down buttons to reorder components     | ✅ Complete |
-| Page layout统一         | Apply max-w-4xl container, single column layout    | In Progress |
-| Component-based layout  | Each section is a reorderable component            | Not started |
-| Default components      | Seed default components for commodity/crypto pages | Not started |
-| Error feedback          | Improve error messages for form validation         | In Progress |
+| Component config editor | JSON editor for component config in dashboard      | ✅ Complete |
+| text_block HTML         | HTML support with DOMPurify sanitization           | ✅ Complete |
+| Page layout统一         | Apply max-w-4xl container, single column layout    | ✅ Complete |
+| Default components      | Seed default components for commodity/crypto pages | ✅ Complete |
 
 #### Lower Priority
 

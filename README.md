@@ -262,7 +262,34 @@ Each page section is a **reorderable component** that can be added/removed via d
 1. Pages use `page_components` table to define which components to render
 2. Components render in order by `position` field (single column stack)
 3. Add/remove/reorder via dashboard at `/dashboard/pages` → edit page → Page Components
-4. If no components defined, uses default layout (being updated to single column)
+4. If no components defined, uses default layout
+
+### Adding Custom Text Content (text_block)
+
+The `text_block` component supports HTML content. To add custom text to a page:
+
+1. Go to `/dashboard/pages` → Edit page
+2. In "Page Components" section, click **Add Component** → select **Text Block**
+3. Click the **Edit** (pencil) button on the text_block component
+4. Enter JSON with your content:
+
+```json
+{
+  "content": "<h2>Your Heading</h2><p>Your paragraph text here.</p><p>Learn more at <a href='/gold-price-history'>Gold Price History</a>.</p><img src='https://example.com/chart.jpg' alt='Chart' /><ul><li>Point one</li><li>Point two</li></ul>"
+}
+```
+
+**Supported HTML tags:**
+
+- `<h1>`, `<h2>`, `<h3>` - Headings
+- `<p>` - Paragraphs
+- `<a href="...">` - Links (internal or external)
+- `<img src="..." alt="...">` - Images
+- `<strong>`, `<b>`, `<em>`, `<i>` - Text formatting
+- `<ul>`, `<ol>`, `<li>` - Lists
+- `<br>` - Line breaks
+
+**Security:** HTML is sanitized with DOMPurify to prevent XSS attacks.
 
 ### SEO Fields (13 fields)
 

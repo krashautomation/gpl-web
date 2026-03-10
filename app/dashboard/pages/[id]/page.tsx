@@ -792,9 +792,14 @@ export default function EditPagePage() {
                           size="sm"
                           onClick={() => {
                             setEditingComponent(comp);
-                            setEditingConfig(
-                              comp.config ? JSON.stringify(comp.config, null, 2) : '{}'
-                            );
+                            const config = comp.config as { content?: string } | null;
+                            if (comp.component_type === 'text_block' && config?.content) {
+                              setEditingConfig(config.content);
+                            } else {
+                              setEditingConfig(
+                                comp.config ? JSON.stringify(comp.config, null, 2) : '{}'
+                              );
+                            }
                           }}
                           disabled={locked}
                           title="Edit config"
@@ -874,18 +879,39 @@ export default function EditPagePage() {
             <DialogTitle>Edit {editingComponent?.component_type} Configuration</DialogTitle>
           </DialogHeader>
           <div className="py-4">
-            <Label htmlFor="config">JSON Configuration</Label>
+            <Label htmlFor="config">
+              {editingComponent?.component_type === 'text_block'
+                ? 'HTML Content'
+                : 'JSON Configuration'}
+            </Label>
             <Textarea
               id="config"
               value={editingConfig}
               onChange={e => setEditingConfig(e.target.value)}
               rows={12}
               className="font-mono text-sm"
-              placeholder='{"content": "Your text here"}'
+              placeholder={
+                editingComponent?.component_type === 'text_block'
+                  ? '<h2>Your Heading</h2><p>Your paragraph text here.</p>'
+                  : '{"key": "value"}'
+              }
             />
             <p className="text-sm text-gray-500 mt-2">
-              Edit the JSON configuration for this component. For text_block, use:{' '}
-              <code className="bg-gray-100 px-1 rounded">{'{ "content": "Your text here" }'}</code>
+              {editingComponent?.component_type === 'text_block' ? (
+                <>
+                  Paste your HTML content directly. For example:{' '}
+                  <code className="bg-gray-100 px-1 rounded">
+                    &lt;h2&gt;Title&lt;/h2&gt;&lt;p&gt;Paragraph&lt;/p&gt;
+                  </code>
+                </>
+              ) : (
+                <>
+                  Edit the JSON configuration for this component. For text_block, use:{' '}
+                  <code className="bg-gray-100 px-1 rounded">
+                    {'{ "content": "Your text here" }'}
+                  </code>
+                </>
+              )}
             </p>
           </div>
           <DialogFooter>
@@ -896,7 +922,12 @@ export default function EditPagePage() {
               onClick={async () => {
                 if (!editingComponent) return;
                 try {
-                  const config = JSON.parse(editingConfig);
+                  let config: Record<string, unknown>;
+                  try {
+                    config = JSON.parse(editingConfig);
+                  } catch {
+                    config = { content: editingConfig };
+                  }
                   await updatePageComponent(editingComponent.id, { config });
                   const pageData = await getPageById(id);
                   if (pageData) {
@@ -905,7 +936,7 @@ export default function EditPagePage() {
                   }
                   setEditingComponent(null);
                 } catch (err) {
-                  alert('Invalid JSON: ' + (err instanceof Error ? err.message : 'Unknown error'));
+                  alert('Invalid input: ' + (err instanceof Error ? err.message : 'Unknown error'));
                 }
               }}
               disabled={savingConfig}

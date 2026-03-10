@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import MainLayout from '@/components/layout/MainLayout';
 import { CommodityChartCard } from '@/components/CommodityChartCard';
 import { PerformanceTable } from '@/components/PerformanceTable';
@@ -122,9 +123,21 @@ function renderComponent(
       );
 
     case 'text_block':
+      const textBlockConfig = config as { content?: string } | null;
+      const textContent = textBlockConfig?.content || '';
+      const sanitizedContent = textContent
+        ? DOMPurify.sanitize(textContent, { RETURN_TRUSTED_TYPE: false })
+        : '';
       return (
         <ContentCard>
-          <p>{(config?.content as string) || page.description || 'Content coming soon...'}</p>
+          {sanitizedContent ? (
+            <div
+              className="prose prose-lg max-w-none prose-headings:text-black prose-p:text-black prose-a:text-black prose-a:underline hover:prose-a:no-underline prose-ul:text-black prose-ol:text-black prose-li:text-black prose-strong:text-black prose-img:rounded-lg"
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+            />
+          ) : (
+            <p>{page.description || 'Content coming soon...'}</p>
+          )}
         </ContentCard>
       );
 
@@ -158,6 +171,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   useEffect(() => {
     const fetchComponents = async () => {
       const components = await getPageComponents(page.id);
+      console.log('Page components fetched:', components);
       setPageComponents(components);
       setComponentsLoading(false);
     };
