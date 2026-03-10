@@ -8,6 +8,39 @@ Guidelines for AI agents operating in this repository.
 
 **Tech Stack**: Next.js 16 (App Router), TypeScript 5.2 (strict), Tailwind CSS 3.3, shadcn/ui (Radix), Lightweight Charts, Supabase, npm
 
+## Agent Behavior
+
+### Planning
+
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
+- Write detailed specs upfront to reduce ambiguity
+- If something goes sideways, STOP and re-plan — don't keep pushing
+
+### Verification (Definition of Done)
+
+- Never mark a task complete without proving it works
+- Run `npm run lint` and `npm run typecheck` — both must pass
+- Manual browser test at `http://localhost:3000`
+- Ask yourself: "Would a senior engineer approve this?"
+
+### Quality
+
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- Find root causes — no temporary fixes
+- Make every change as simple as possible, impact minimal code
+
+### Bug Fixing
+
+- When given a bug report: just fix it — point at logs/errors and resolve them
+- Zero context switching required from the user
+
+### Self-Improvement
+
+- After any correction: note the pattern to avoid repeating the same mistake
+- Review lessons at session start for relevant project context
+
+---
+
 ## Build Commands
 
 ```bash
@@ -21,6 +54,8 @@ npm run format:check # Check formatting without fixing
 npm run typecheck    # TypeScript type check only
 # No test framework - test manually in browser
 ```
+
+---
 
 ## Code Style
 
@@ -103,6 +138,8 @@ try {
 }
 ```
 
+---
+
 ## Project Structure
 
 ```
@@ -129,6 +166,8 @@ gpl-web/
 └── public/                # Static assets
 ```
 
+---
+
 ## Key Libraries
 
 ### Supabase Client
@@ -139,8 +178,6 @@ import { supabase } from '@/lib/supabase';
 ```
 
 ### Pages Library (`lib/pages.ts`)
-
-Use for page management operations:
 
 ```typescript
 import {
@@ -181,6 +218,8 @@ tags: ['tag1', 'tag2']
 ---
 ```
 
+---
+
 ## Environment Variables
 
 Create `.env.local`:
@@ -192,15 +231,23 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 NEXT_PUBLIC_YAHOO_API_KEY=your-yahoo-api-key
 ```
 
-## Testing
+---
 
-No test framework. Test manually: run `npm run dev`, open `http://localhost:3000`, test in browser, then run `npm run lint` and `npm run typecheck` before committing.
+## Task Management
+
+1. **Plan First**: Write plan with checkable steps before touching code
+2. **Verify Plan**: Confirm approach before starting implementation
+3. **Track Progress**: Mark items complete as you go
+4. **Explain Changes**: High-level summary at each step
+5. **Document Results**: Note what was done and how to verify
+
+---
 
 ## Commit Strategy
 
 ### When to Commit
 
-- Commit after each feature/phase is **tested and verified working**
+- After each feature/phase is **tested and verified working**
 - Never commit broken code
 - Run `npm run lint` and `npm run typecheck` before committing
 
@@ -214,7 +261,7 @@ No test framework. Test manually: run `npm run dev`, open `http://localhost:3000
 
 ### Commit Message Format
 
-Use single quotes in commit messages, not double quotes:
+Use single quotes, not double quotes:
 
 ```
 feat/fix/chore: [brief description]
@@ -226,11 +273,13 @@ feat/fix/chore: [brief description]
 Testing: Verified via [test method]
 ```
 
+---
+
 ## Before Editing Files
 
-1. Always read the current file content first to ensure you have the latest version
-2. Check git status to see if there are uncommitted changes that might be lost
-3. If working across WSL/Windows, verify file sync is working properly
+1. Always read the current file content first
+2. Check git status for uncommitted changes
+3. If working across WSL/Windows, verify file sync is working
 
 ---
 
@@ -256,24 +305,12 @@ Testing: Verified via [test method]
 
 ### Modifying the Footer
 
-The Footer component (`components/layout/Footer.tsx`) has two sections:
+Two sections:
 
-1. **Top section** (cards): Single-column stacked layout at 896px max-width. Contains:
-   - Dave's intro ("Hey guys")
-   - INVESTORS GOLD newsletter
-   - Subscribe form
-   - Gold Price Live App promo (bottom)
-
-2. **Bottom section** (links): 5-column grid layout at 1200px max-width. Contains navigation links.
-
-When modifying:
-
-- Top section uses `grid-cols-1` (single column) with `max-w-4xl mx-auto`
-- Bottom section uses `grid-cols-2 md:grid-cols-3 lg:grid-cols-5` (5 columns) with `max-w-[1200px] mx-auto`
+1. **Top** (cards): Single-column, `max-w-4xl mx-auto` — Dave's intro, newsletter, subscribe form, app promo
+2. **Bottom** (links): 5-column grid, `max-w-[1200px] mx-auto` — navigation links
 
 ### Page Container Layout
-
-All pages use consistent container widths:
 
 | Section      | Max Width         | File             |
 | ------------ | ----------------- | ---------------- |
@@ -282,8 +319,17 @@ All pages use consistent container widths:
 | Footer cards | 896px (max-w-4xl) | `Footer.tsx`     |
 | Footer links | 1200px            | `Footer.tsx`     |
 
-To change widths, modify the corresponding max-w class in each file.
+### Adding Breadcrumbs
 
-## Cursor Rules
+```tsx
+// Simple
+<MainLayout breadcrumbs={[{ label: 'Page Name' }]}>
 
-- `.cursor/commands/codeloop.md` - Code loop command reference
+// With link
+<MainLayout breadcrumbs={[{ label: 'Page Name', href: '/page-path' }]}>
+
+// Nested
+<MainLayout breadcrumbs={[{ label: 'News', href: '/news' }, { label: 'Article Title' }]}>
+```
+
+Renders both visual breadcrumbs and JSON-LD structured data. Home page (`/`) should NOT have breadcrumbs.

@@ -4,6 +4,7 @@ A comprehensive Next.js application for tracking live gold and silver prices wit
 
 ## Recent Changes
 
+- **Breadcrumbs** - All pages now have breadcrumbs (visual + JSON-LD structured data) via MainLayout (March 2026)
 - **Single Column Layout** - All pages converted to single-column layout with consistent container widths (March 2026)
 - **Container Widths** - Header nav and footer links: 1200px, main content: 896px (March 2026)
 - **Article Grids** - News index and related articles now 2 columns, 2 articles (March 2026)
@@ -130,6 +131,32 @@ The application includes comprehensive SEO optimization:
 - **Metadata**: Every page has optimized title, description, OpenGraph, and Twitter cards
 - **Canonical URLs**: Configured per page
 - **Google Analytics**: Integrated via next/script
+- **Breadcrumbs**: Visual breadcrumbs + JSON-LD structured data for Google rich results
+
+### Breadcrumbs
+
+Breadcrumbs are implemented in `MainLayout.tsx` and automatically include:
+
+1. **Visual breadcrumbs** - Shown on all pages (except home) under the header
+2. **Structured data** - JSON-LD BreadcrumbList markup for Google Search
+
+**Usage:**
+
+```tsx
+<MainLayout breadcrumbs={[{ label: 'Page Name', href: '/page-path' }]}>
+```
+
+**For nested pages:**
+
+```tsx
+<MainLayout breadcrumbs={[{ label: 'News', href: '/news' }, { label: 'Article Title' }]}>
+```
+
+The structured data is automatically generated with:
+
+- Full URLs (e.g., `https://goldpricelive.co/gold-price`)
+- Proper position numbers
+- Schema.org BreadcrumbList format
 
 ## Blog System
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { ArrowUp, ArrowDown } from 'lucide-react';
+import { ArrowUp, ArrowDown, Edit2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import {
   getPageById,
@@ -31,6 +31,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
 
 const STORAGE_BUCKET = 'gpl';
 
@@ -106,6 +113,9 @@ export default function EditPagePage() {
   });
   const [components, setComponents] = useState<PageComponent[]>([]);
   const [loadingComponents, setLoadingComponents] = useState(false);
+  const [editingComponent, setEditingComponent] = useState<PageComponent | null>(null);
+  const [editingConfig, setEditingConfig] = useState('');
+  const [savingConfig, setSavingConfig] = useState(false);
 
   useEffect(() => {
     if (!isNew) {
@@ -778,6 +788,21 @@ export default function EditPagePage() {
                         </Button>
                         <Button
                           type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setEditingComponent(comp);
+                            setEditingConfig(
+                              comp.config ? JSON.stringify(comp.config, null, 2) : '{}'
+                            );
+                          }}
+                          disabled={locked}
+                          title="Edit config"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          type="button"
                           variant="destructive"
                           size="sm"
                           onClick={async () => {
@@ -841,6 +866,55 @@ export default function EditPagePage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Edit Component Config Dialog */}
+      <Dialog open={!!editingComponent} onOpenChange={() => setEditingComponent(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Edit {editingComponent?.component_type} Configuration</DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <Label htmlFor="config">JSON Configuration</Label>
+            <Textarea
+              id="config"
+              value={editingConfig}
+              onChange={e => setEditingConfig(e.target.value)}
+              rows={12}
+              className="font-mono text-sm"
+              placeholder='{"content": "Your text here"}'
+            />
+            <p className="text-sm text-gray-500 mt-2">
+              Edit the JSON configuration for this component. For text_block, use:{' '}
+              <code className="bg-gray-100 px-1 rounded">{'{ "content": "Your text here" }'}</code>
+            </p>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditingComponent(null)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={async () => {
+                if (!editingComponent) return;
+                try {
+                  const config = JSON.parse(editingConfig);
+                  await updatePageComponent(editingComponent.id, { config });
+                  const pageData = await getPageById(id);
+                  if (pageData) {
+                    const newComponents = await getPageComponents(pageData.id);
+                    setComponents(newComponents.sort((a, b) => a.position - b.position));
+                  }
+                  setEditingComponent(null);
+                } catch (err) {
+                  alert('Invalid JSON: ' + (err instanceof Error ? err.message : 'Unknown error'));
+                }
+              }}
+              disabled={savingConfig}
+            >
+              {savingConfig ? 'Saving...' : 'Save Changes'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
