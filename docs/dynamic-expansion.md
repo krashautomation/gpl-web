@@ -193,14 +193,14 @@ CREATE TABLE security_detail (
 
 ## Tasks
 
-| #   | Task                                          | Priority | Status  |
-| --- | --------------------------------------------- | -------- | ------- |
-| 1   | Migrate /gold-etfs with text_block            | High     | Pending |
-| 2   | Migrate /silver-etfs with text_block          | High     | Pending |
-| 3   | Create reusable table component               | Medium   | Pending |
-| 4   | Update migrated pages to use table component  | Medium   | Pending |
-| 5   | Create /security/[symbol] detail pages        | Low      | Pending |
-| 6   | Research Yahoo search API for auto-population | Low      | Pending |
+| #   | Task                                          | Priority | Status      |
+| --- | --------------------------------------------- | -------- | ----------- |
+| 1   | Migrate /gold-etfs with text_block            | High     | ✅ Complete |
+| 2   | Migrate /silver-etfs with text_block          | High     | ✅ Complete |
+| 3   | Create reusable table component               | Medium   | Pending     |
+| 4   | Update migrated pages to use table component  | Medium   | Pending     |
+| 5   | Create /security/[symbol] detail pages        | Low      | Pending     |
+| 6   | Research Yahoo search API for auto-population | Low      | Pending     |
 
 ---
 

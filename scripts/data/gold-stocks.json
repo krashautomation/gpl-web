@@ -1,0 +1,59 @@
+{
+  "category": "gold-mining-stocks",
+  "title": "Gold Mining Stocks",
+  "etf": "GDX",
+  "fetchedAt": "2026-03-11T05:21:00.160Z",
+  "stockCount": 10,
+  "stocks": [
+    {
+      "symbol": "AEM.TO",
+      "name": "AGNICO EAGLE MINES LIMITED",
+      "marketCap": "$154.3B"
+    },
+    {
+      "symbol": "NEM",
+      "name": "Newmont Corporation",
+      "marketCap": "$129.8B"
+    },
+    {
+      "symbol": "ABX.TO",
+      "name": "BARRICK MINING CORPORATION",
+      "marketCap": "$105.0B"
+    },
+    {
+      "symbol": "AU",
+      "name": "AngloGold Ashanti PLC",
+      "marketCap": "$54.7B"
+    },
+    {
+      "symbol": "WPM.TO",
+      "name": "WHEATON PRECIOUS METALS CORP",
+      "marketCap": "$93.0B"
+    },
+    {
+      "symbol": "GFI",
+      "name": "Gold Fields Limited",
+      "marketCap": "$46.7B"
+    },
+    {
+      "symbol": "FNV.TO",
+      "name": "FRANCO-NEVADA CORPORATION",
+      "marketCap": "$68.8B"
+    },
+    {
+      "symbol": "K.TO",
+      "name": "KINROSS GOLD CORP.",
+      "marketCap": "$53.8B"
+    },
+    {
+      "symbol": "PAAS.TO",
+      "name": "PAN AMERICAN SILVER CORP",
+      "marketCap": "$35.2B"
+    },
+    {
+      "symbol": "NST.AX",
+      "name": "NTH STAR FPO [NST]",
+      "marketCap": "$38.2B"
+    }
+  ]
+}

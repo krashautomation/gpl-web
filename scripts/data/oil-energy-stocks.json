@@ -1,0 +1,59 @@
+{
+  "category": "oil-energy-stocks",
+  "title": "Oil & Energy Stocks",
+  "etf": "XLE",
+  "fetchedAt": "2026-03-11T05:21:09.239Z",
+  "stockCount": 10,
+  "stocks": [
+    {
+      "symbol": "XOM",
+      "name": "Exxon Mobil Corporation",
+      "marketCap": "$617.2B"
+    },
+    {
+      "symbol": "CVX",
+      "name": "Chevron Corporation",
+      "marketCap": "$372.5B"
+    },
+    {
+      "symbol": "COP",
+      "name": "ConocoPhillips",
+      "marketCap": "$139.5B"
+    },
+    {
+      "symbol": "WMB",
+      "name": "Williams Companies, Inc. (The)",
+      "marketCap": "$90.2B"
+    },
+    {
+      "symbol": "SLB",
+      "name": "SLB Limited",
+      "marketCap": "$72.2B"
+    },
+    {
+      "symbol": "EOG",
+      "name": "EOG Resources, Inc.",
+      "marketCap": "$69.4B"
+    },
+    {
+      "symbol": "KMI",
+      "name": "Kinder Morgan, Inc.",
+      "marketCap": "$73.3B"
+    },
+    {
+      "symbol": "BKR",
+      "name": "Baker Hughes Company",
+      "marketCap": "$58.6B"
+    },
+    {
+      "symbol": "VLO",
+      "name": "Valero Energy Corporation",
+      "marketCap": "$66.2B"
+    },
+    {
+      "symbol": "PSX",
+      "name": "Phillips 66",
+      "marketCap": "$65.1B"
+    }
+  ]
+}

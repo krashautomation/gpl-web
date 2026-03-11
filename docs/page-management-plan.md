@@ -65,11 +65,33 @@ All phases completed successfully:
 
 ---
 
-### Remaining Static Pages (NOT Migrated)
+## Migration Summary (March 2026)
 
-| Page  | Status       | Reason                                                          |
-| ----- | ------------ | --------------------------------------------------------------- |
-| /news | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
+### Completed ✅
+
+| Phase     | Description                                                                                                          | Status      |
+| --------- | -------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Phase 1-6 | Original 11 commodity/crypto pages (gold-price, silver-price, etc.)                                                  | ✅ Complete |
+| Phase 7   | 8 static pages (privacy, terms-of-service, disclaimer, risk-warning, about, contact, advertise, gold-price-live-app) | ✅ Complete |
+| Phase 8   | roadmap                                                                                                              | ✅ Complete |
+| Phase 9   | gold-etfs, silver-etfs (chart + table)                                                                               | ✅ Complete |
+| Phase 10  | gold-price-history (performance + image)                                                                             | ✅ Complete |
+| Phase 11  | charts                                                                                                               | ✅ Complete |
+
+**Total: 24 pages migrated to database**
+
+---
+
+### Remaining
+
+| Item                         | Status       | Notes                                                           |
+| ---------------------------- | ------------ | --------------------------------------------------------------- |
+| /news                        | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
+| Add images to migrated pages | Pending      | about, contact, gold-price-live-app                             |
+| Dynamic table component      | Pending      | For ETF/stock lists (see docs/dynamic-expansion.md)             |
+| Security detail pages        | Future       | /security/[symbol] pages                                        |
+
+---
 
 ### Follow-up Tasks
 

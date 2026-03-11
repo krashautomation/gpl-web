@@ -50,6 +50,8 @@ const navItems: NavItem[] = [
     children: [
       { label: 'Gold ETFs', href: '/gold-etfs', description: 'Gold ETFs' },
       { label: 'Silver ETFs', href: '/silver-etfs', description: 'Silver ETFs' },
+      { label: 'Gold Stocks', href: '/gold-stocks', description: 'Gold Mining Stocks' },
+      { label: 'Silver Stocks', href: '/silver-stocks', description: 'Silver Mining Stocks' },
     ],
   },
   {
@@ -69,6 +71,7 @@ const navItems: NavItem[] = [
     children: [
       { label: 'Crude Oil Price', href: '/oil-price' },
       { label: 'Natural Gas Price', href: '/natural-gas-price' },
+      { label: 'Oil & Energy Stocks', href: '/oil-energy-stocks' },
     ],
   },
 

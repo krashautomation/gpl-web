@@ -1,0 +1,54 @@
+{
+  "category": "silver-mining-stocks",
+  "title": "Silver Mining Stocks",
+  "etf": "SIL",
+  "fetchedAt": "2026-03-11T05:21:05.640Z",
+  "stockCount": 9,
+  "stocks": [
+    {
+      "symbol": "WPM.TO",
+      "name": "WHEATON PRECIOUS METALS CORP",
+      "marketCap": "$93.0B"
+    },
+    {
+      "symbol": "PAAS.TO",
+      "name": "PAN AMERICAN SILVER CORP",
+      "marketCap": "$35.2B"
+    },
+    {
+      "symbol": "CDE",
+      "name": "Coeur Mining, Inc.",
+      "marketCap": "$15.0B"
+    },
+    {
+      "symbol": "FRES.L",
+      "name": "FRESNILLO PLC ORD USD0.50",
+      "marketCap": "$27.9B"
+    },
+    {
+      "symbol": "HL",
+      "name": "Hecla Mining Company",
+      "marketCap": "$14.8B"
+    },
+    {
+      "symbol": "010130.KS",
+      "name": "KOREA ZINC",
+      "marketCap": "$31.0T"
+    },
+    {
+      "symbol": "PE&OLES.MX",
+      "name": "INDUSTRIAS PENOLES SAB DE CV",
+      "marketCap": "$384.2B"
+    },
+    {
+      "symbol": "BVN",
+      "name": "Buenaventura Mining Company Inc",
+      "marketCap": "$9.9B"
+    },
+    {
+      "symbol": "OR.TO",
+      "name": "OR ROYALTIES INC",
+      "marketCap": "$11.2B"
+    }
+  ]
+}

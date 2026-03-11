@@ -12,6 +12,87 @@ import { GoldCalculator } from '@/components/GoldCalculator';
 import { BioCard } from '@/components/BioCard';
 import RecentArticlesSection from '@/app/components/RecentArticlesSection';
 import { getPageComponents, type Page, type PageComponent } from '@/lib/pages';
+import Link from 'next/link';
+
+interface Stock {
+  id: string;
+  slug: string;
+  title: string;
+  symbol: string | null;
+  category: string | null;
+  description: string | null;
+}
+
+function StockTable({ category }: { category: string | null }) {
+  const [stocks, setStocks] = useState<Stock[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!category) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchStocks = async () => {
+      try {
+        const { data } = await fetch(`/api/stocks?category=${category}`).then(res => res.json());
+        setStocks(data || []);
+      } catch (err) {
+        console.error('Error fetching stocks:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStocks();
+  }, [category]);
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-neutral-400">Loading stocks...</p>
+      </div>
+    );
+  }
+
+  if (stocks.length === 0) {
+    return null;
+  }
+
+  // Extract company name from title (remove " Stock Price" suffix)
+  const getCompanyName = (title: string) => title.replace(' Stock Price', '');
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full">
+        <thead>
+          <tr className="border-b border-neutral-700">
+            <th className="text-left py-3 px-4 text-sm font-semibold">Company Name</th>
+            <th className="text-right py-3 px-4 text-sm font-semibold">Symbol</th>
+            <th className="text-right py-3 px-4 text-sm font-semibold">Country</th>
+          </tr>
+        </thead>
+        <tbody className="text-sm">
+          {stocks.map((stock, index) => (
+            <tr
+              key={stock.id}
+              className="border-b border-neutral-800 hover:bg-neutral-900 transition-colors"
+            >
+              <td className="py-3 px-4">
+                <Link href={`/${stock.slug}`}>{getCompanyName(stock.title)}</Link>
+              </td>
+              <td className="text-right py-3 px-4 text-neutral-400">{stock.symbol}</td>
+              <td className="text-right py-3 px-4 text-neutral-400">
+                {stock.symbol?.endsWith('.TO') ? 'Canada' : 'US'}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="text-xs text-neutral-500 text-center mt-4">{stocks.length} stocks</p>
+    </div>
+  );
+}
 
 interface Quote {
   symbol: string;
@@ -30,8 +111,14 @@ interface PerformanceData {
   earliestDate?: string | null;
 }
 
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 interface DynamicPageClientProps {
   page: Page;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const COMPONENT_REGISTRY: Record<string, React.ComponentType<any>> = {
@@ -44,6 +131,7 @@ const COMPONENT_REGISTRY: Record<string, React.ComponentType<any>> = {
   text_block: ContentCard,
   contact: ContactSidebar,
   bio_card: BioCard,
+  stock_table: StockTable,
 };
 
 function renderComponent(
@@ -168,12 +256,21 @@ function renderComponent(
         />
       );
 
+    case 'stock_table':
+      return (
+        <div className="cms-content border border-neutral-800 rounded-lg p-4">
+          <StockTable category={page.category} />
+        </div>
+      );
+
     default:
       return null;
   }
 }
 
-export function DynamicPageClient({ page }: DynamicPageClientProps) {
+export function DynamicPageClient({ page, breadcrumbs }: DynamicPageClientProps) {
+  const defaultBreadcrumbs: BreadcrumbItem[] = [{ label: page.title }];
+  const pageBreadcrumbs = breadcrumbs || defaultBreadcrumbs;
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [chartLoading, setChartLoading] = useState(true);
   const [chartError, setChartError] = useState<string | null>(null);
@@ -281,7 +378,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (useComponentSystem) {
     return (
-      <MainLayout breadcrumbs={[{ label: page.title }]}>
+      <MainLayout breadcrumbs={pageBreadcrumbs}>
         {pageComponents.map(component => {
           const Component = renderComponent(
             component.component_type,
@@ -308,7 +405,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'commodity' || page.page_type === 'crypto') {
     return (
-      <MainLayout breadcrumbs={[{ label: page.title }]}>
+      <MainLayout breadcrumbs={pageBreadcrumbs}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -378,7 +475,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'ratio') {
     return (
-      <MainLayout breadcrumbs={[{ label: page.title }]}>
+      <MainLayout breadcrumbs={pageBreadcrumbs}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -430,7 +527,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
 
   if (page.page_type === 'static' || page.page_type === 'legal') {
     return (
-      <MainLayout breadcrumbs={[{ label: page.title }]}>
+      <MainLayout breadcrumbs={pageBreadcrumbs}>
         {hasAds && (
           <BannerAd
             affiliateName="Money Metals Exchange"
@@ -470,7 +567,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
   }
 
   return (
-    <MainLayout breadcrumbs={[{ label: page.title }]}>
+    <MainLayout breadcrumbs={pageBreadcrumbs}>
       {hasAds && (
         <BannerAd
           affiliateName="Money Metals Exchange"

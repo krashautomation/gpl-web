@@ -83,6 +83,23 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   return data;
 }
 
+export async function getStocksByCategory(category: string): Promise<Page[]> {
+  const { data, error } = await supabase
+    .from('pages')
+    .select('*')
+    .eq('category', category)
+    .eq('page_type', 'stock')
+    .eq('is_active', true)
+    .order('title');
+
+  if (error) {
+    console.error('Error fetching stocks by category:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
 export async function getActivePages(): Promise<Page[]> {
   return getAllPages();
 }

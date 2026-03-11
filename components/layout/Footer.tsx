@@ -108,7 +108,7 @@ const Footer = () => {
                           href={article.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-[#ffe600] hover:underline"
+                          className="text-white hover:text-orange-600 hover:underline"
                         >
                           {article.title}
                         </a>
@@ -121,7 +121,7 @@ const Footer = () => {
                     href="https://investorsgold.substack.com/archive"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-[#ffe600] hover:underline"
+                    className="text-white hover:text-orange-600 hover:underline"
                   >
                     See more posts from Investor's Gold →
                   </a>
@@ -217,22 +217,22 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">WORLD GOLD PRICES</h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <a href="/#foreign-currency" className="hover:text-yellow-500">
+                  <a href="/#foreign-currency" className="text-white hover:text-orange-600">
                     <span className="fi fi-eu"></span> Gold Price EUR
                   </a>
                 </li>
                 <li>
-                  <a href="/#foreign-currency" className="hover:text-yellow-500">
+                  <a href="/#foreign-currency" className="text-white hover:text-orange-600">
                     <span className="fi fi-au"></span> Gold Price AUD
                   </a>
                 </li>
                 <li>
-                  <a href="/#foreign-currency" className="hover:text-yellow-500">
+                  <a href="/#foreign-currency" className="text-white hover:text-orange-600">
                     <span className="fi fi-ca"></span> Gold Price CAD
                   </a>
                 </li>
                 <li>
-                  <a href="/#foreign-currency" className="hover:text-yellow-500">
+                  <a href="/#foreign-currency" className="text-white hover:text-orange-600">
                     <span className="fi fi-gb"></span> Gold Price GBP
                   </a>
                 </li>
@@ -244,17 +244,17 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE NEWS</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/news" className="hover:text-yellow-500">
+                  <a href="/news" className="text-white hover:text-orange-600">
                     Gold Price News
                   </a>
                 </li>
                 <li>
-                  <a href="/about" className="hover:text-yellow-500">
+                  <a href="/about" className="text-white hover:text-orange-600">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="/about-dave-halmai" className="hover:text-yellow-500">
+                  <a href="/about-dave-halmai" className="text-white hover:text-orange-600">
                     About Dave Halmai
                   </a>
                 </li>
@@ -263,27 +263,27 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE CHARTS</h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <a href="/charts" className="hover:text-yellow-500">
+                  <a href="/charts" className="text-white hover:text-orange-600">
                     Gold Price Charts
                   </a>
                 </li>
                 <li>
-                  <a href="/gold-price-history" className="hover:text-yellow-500">
+                  <a href="/gold-price-history" className="text-white hover:text-orange-600">
                     Gold Price History
                   </a>
                 </li>
                 <li>
-                  <a href="/gold-silver-ratio" className="hover:text-yellow-500">
+                  <a href="/gold-silver-ratio" className="text-white hover:text-orange-600">
                     Gold Silver Ratio
                   </a>
                 </li>
                 <li>
-                  <a href="/gold-price-today" className="hover:text-yellow-500">
+                  <a href="/gold-price-today" className="text-white hover:text-orange-600">
                     Gold Price Today
                   </a>
                 </li>
                 <li>
-                  <a href="/gold-price" className="hover:text-yellow-500">
+                  <a href="/gold-price" className="text-white hover:text-orange-600">
                     Gold Price
                   </a>
                 </li>
@@ -295,17 +295,17 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">PRECIOUS METALS</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/silver-price" className="hover:text-yellow-500">
+                  <a href="/silver-price" className="text-white hover:text-orange-600">
                     Silver Price
                   </a>
                 </li>
                 <li>
-                  <a href="/platinum-price" className="hover:text-yellow-500">
+                  <a href="/platinum-price" className="text-white hover:text-orange-600">
                     Platinum Price
                   </a>
                 </li>
                 <li>
-                  <a href="/palladium-price" className="hover:text-yellow-500">
+                  <a href="/palladium-price" className="text-white hover:text-orange-600">
                     Palladium Price
                   </a>
                 </li>
@@ -314,29 +314,44 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">BASE METALS</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/copper-price" className="hover:text-yellow-500">
+                  <a href="/copper-price" className="text-white hover:text-orange-600">
                     Copper Price
                   </a>
                 </li>
                 <li>
-                  <a href="/aluminum-price" className="hover:text-yellow-500">
+                  <a href="/aluminum-price" className="text-white hover:text-orange-600">
                     Aluminum Price
                   </a>
                 </li>
               </ul>
             </div>
 
-            {/* Column 4: CRYPTOCURRENCY + BUY GOLD */}
+            {/* Column 4: STOCKS + CRYPTOCURRENCY */}
             <div>
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD STOCKS</h4>
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">STOCKS</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/gold-etfs" className="hover:text-yellow-500">
+                  <a href="/gold-stocks" className="text-white hover:text-orange-600">
+                    Gold Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/silver-stocks" className="text-white hover:text-orange-600">
+                    Silver Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/oil-energy-stocks" className="text-white hover:text-orange-600">
+                    Oil & Energy Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-etfs" className="text-white hover:text-orange-600">
                     Gold ETFs
                   </a>
                 </li>
                 <li>
-                  <a href="/silver-etfs" className="hover:text-yellow-500">
+                  <a href="/silver-etfs" className="text-white hover:text-orange-600">
                     Silver ETFs
                   </a>
                 </li>
@@ -345,12 +360,12 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">CRYPTOCURRENCY</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/bitcoin-price" className="hover:text-yellow-500">
+                  <a href="/bitcoin-price" className="text-white hover:text-orange-600">
                     Bitcoin Price
                   </a>
                 </li>
                 <li>
-                  <a href="/ethereum-price" className="hover:text-yellow-500">
+                  <a href="/ethereum-price" className="text-white hover:text-orange-600">
                     Ethereum Price
                   </a>
                 </li>
@@ -359,12 +374,12 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY PRICES</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/oil-price" className="hover:text-yellow-500">
+                  <a href="/oil-price" className="text-white hover:text-orange-600">
                     Crude Oil Price
                   </a>
                 </li>
                 <li>
-                  <a href="/natural-gas-price" className="hover:text-yellow-500">
+                  <a href="/natural-gas-price" className="text-white hover:text-orange-600">
                     Natural Gas Price
                   </a>
                 </li>
@@ -376,7 +391,7 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">CONTACT</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/contact" className="hover:text-yellow-500">
+                  <a href="/contact" className="text-white hover:text-orange-600">
                     Contact Us
                   </a>
                 </li>
@@ -385,7 +400,7 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">MOBILE APPS</h4>
               <ul className="space-y-2 text-xs mb-6">
                 <li>
-                  <a href="/gold-price-live-app" className="hover:text-yellow-500">
+                  <a href="/gold-price-live-app" className="text-white hover:text-orange-600">
                     📱 Gold Price Live App
                   </a>
                 </li>
@@ -394,7 +409,7 @@ const Footer = () => {
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">ADVERTISING</h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <a href="/advertise" className="hover:text-yellow-500">
+                  <a href="/advertise" className="text-white hover:text-orange-600">
                     Gold Price Live Advertising
                   </a>
                 </li>
@@ -405,23 +420,23 @@ const Footer = () => {
           <div className="mt-12 pt-8 border-t border-white text-center text-xs text-white">
             <p>© 2026 Gold Price Live. Gold, Silver and Precious Metals Prices.</p>
             <p>
-              <a href="/terms-of-service" className="hover:text-yellow-500">
+              <a href="/terms-of-service" className="text-white hover:text-orange-600">
                 Terms of Service
               </a>{' '}
               &nbsp;
-              <a href="/disclaimer" className="hover:text-yellow-500">
+              <a href="/disclaimer" className="text-white hover:text-orange-600">
                 Disclaimer
               </a>{' '}
               &nbsp;
-              <a href="/risk-warning" className="hover:text-yellow-500">
+              <a href="/risk-warning" className="text-white hover:text-orange-600">
                 Risk Warning
               </a>{' '}
               &nbsp;
-              <a href="/privacy" className="hover:text-yellow-500">
+              <a href="/privacy" className="text-white hover:text-orange-600">
                 Privacy
               </a>{' '}
               &nbsp;
-              <a href="/roadmap" className="hover:text-yellow-500">
+              <a href="/roadmap" className="text-white hover:text-orange-600">
                 Roadmap
               </a>
             </p>
