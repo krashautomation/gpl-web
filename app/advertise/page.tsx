@@ -18,7 +18,7 @@ import Image from 'next/image';
 export default function AdvertiseGoldPriceLive() {
   return (
     <MainLayout breadcrumbs={[{ label: 'Advertise' }]}>
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-start mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Advertise</h1>
       </div>
 

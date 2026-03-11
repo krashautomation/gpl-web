@@ -81,7 +81,7 @@ export default function ChartsPage() {
         ]}
       />
       <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
+        <div className="text-left mb-12">
           <h1 className="text-4xl md:text-5xl font-bold  mb-4">Gold Price Charts</h1>
           <p className="text-lg max-w-2xl mx-auto">
             Interactive charts showing gold price trends, historical data, and live market movements

@@ -220,7 +220,7 @@ export default function Roadmap() {
 
   return (
     <MainLayout breadcrumbs={[{ label: 'Roadmap' }]}>
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-start mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Roadmap</h1>
       </div>
 

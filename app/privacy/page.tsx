@@ -18,7 +18,7 @@ import Image from 'next/image';
 export default function AboutGoldPriceLive() {
   return (
     <MainLayout breadcrumbs={[{ label: 'Privacy Policy' }]}>
-      <div className="flex items-center justify-center mb-6">
+      <div className="flex items-center justify-start mb-6">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Privacy Policy </h1>
       </div>
 

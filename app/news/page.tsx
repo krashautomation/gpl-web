@@ -95,15 +95,15 @@ export default async function NewsPage({ searchParams }: NewsPageProps) {
         ]}
       />
       <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
+        <div className="text-left mb-12">
           <h1 className="text-4xl md:text-5xl font-bold  mb-4">Gold Price News</h1>
-          <p className="text-black text-lg max-w-2xl mx-auto">
+          <p className="text-black text-lg max-w-2xl">
             Stay informed with the latest gold price news, market analysis, investment guides, and
             expert insights.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-start gap-2 mb-12">
           {categories.map(category => {
             const isActive = category === activeCategory;
             const href =

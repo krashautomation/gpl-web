@@ -64,7 +64,7 @@ function renderComponent(
   switch (componentType) {
     case 'hero':
       return (
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-start mb-6">
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
         </div>
       );
@@ -320,7 +320,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
         )}
 
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-start mb-6">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
           </div>
 
@@ -390,7 +390,7 @@ export function DynamicPageClient({ page }: DynamicPageClientProps) {
         )}
 
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-start mb-6">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
           </div>
 
