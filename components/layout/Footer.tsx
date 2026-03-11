@@ -253,6 +253,11 @@ const Footer = () => {
                     About Us
                   </a>
                 </li>
+                <li>
+                  <a href="/about-dave-halmai" className="hover:text-yellow-500">
+                    About Dave Halmai
+                  </a>
+                </li>
               </ul>
 
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE CHARTS</h4>
