@@ -23,10 +23,11 @@ All phases completed successfully:
 | Phase 5: Migration         | ✅ Complete | 2026-03-08 |
 | Phase 6: Dashboard         | ✅ Complete | 2026-03-08 |
 | Phase 7: Easy Static Pages | ✅ Complete | 2026-03-11 |
+| Phase 8: Roadmap           | ✅ Complete | 2026-03-11 |
 
 ### Summary
 
-- **19 pages** migrated to dynamic route (11 commodity/crypto + 8 static)
+- **20 pages** migrated to dynamic route (11 commodity/crypto + 9 static)
 - **6 new components** extracted
 - **Database** with 13 SEO fields per page
 - **Backups** preserved in `app/backup-static-pages/`
@@ -40,6 +41,7 @@ All phases completed successfully:
 
 | Date       | Change                                                                                                                                    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-03-11 | Migrated roadmap page to database (checklist converted to text_block HTML)                                                                |
 | 2026-03-11 | Migrated 8 static pages to database (privacy, terms-of-service, disclaimer, risk-warning, about, contact, advertise, gold-price-live-app) |
 | 2026-03-11 | Added hero + text_block components for migrated pages                                                                                     |
 | 2026-03-11 | Created scripts/migrate-static-pages.ts for migrations                                                                                    |
@@ -65,7 +67,6 @@ All phases completed successfully:
 | /silver-etfs        | Not migrated | Hard - ETF chart API (SLV) not supported                        |
 | /news               | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
 | /charts             | Not migrated | Medium - Links cards, lower priority                            |
-| /roadmap            | Not migrated | Medium - Checklist loses interactivity                          |
 | /gold-price-history | Not migrated | Medium - Uses chart + performance                               |
 
 ### Follow-up Tasks
