@@ -146,16 +146,36 @@ const pages = [
     has_articles: false,
   },
   {
-    slug: 'roadmap',
-    title: 'Roadmap',
-    description: 'Gold Price Live Development Roadmap - Features and updates.',
-    page_type: 'static',
+    slug: 'gold-etfs',
+    title: 'Gold ETFs',
+    description:
+      'Track popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust, and more.',
+    page_type: 'commodity',
+    symbol: 'GLD',
     is_active: true,
     is_locked: true,
     display_order: 0,
     robots: 'index,follow',
-    meta_title: 'Roadmap | Gold Price Live',
-    meta_description: 'Gold Price Live development roadmap - features, updates, and progress.',
+    meta_title: 'Gold ETFs | SPDR Gold Shares GLD Price & Chart',
+    meta_description:
+      'Track popular Gold ETFs including SPDR Gold Shares (GLD), iShares Gold Trust, and more with live charts and prices.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'silver-etfs',
+    title: 'Silver ETFs',
+    description: 'Track popular Silver ETFs including iShares Silver Trust (SLV), and more.',
+    page_type: 'commodity',
+    symbol: 'SLV',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Silver ETFs | iShares Silver Trust SLV Price & Chart',
+    meta_description:
+      'Track popular Silver ETFs including iShares Silver Trust (SLV), and more with live charts and prices.',
     has_calculator: false,
     has_ads: false,
     has_articles: false,
@@ -369,6 +389,78 @@ const textContents: Record<string, string> = {
 <p class="text-base mb-3">Reach savvy investors interested in gold and precious metals investing. Advertise on Gold Price Live.</p>
 <p class="text-base mb-3">Contact: westrock@protonmail.com</p>
 <p class="text-base mb-3">We respond within 24 hours. Packages available.</p>`,
+
+  'gold-etfs': `<p class="text-xl font-semibold mb-4">Popular Gold ETFs</p>
+<div class="overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr class="border-b border-neutral-700">
+        <th class="text-left py-2 text-sm font-semibold">Name</th>
+        <th class="text-right py-2 text-sm font-semibold">Symbol</th>
+        <th class="text-right py-2 text-sm font-semibold">Country</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm">
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">SPDR Gold Shares</td>
+        <td class="text-right">GLD</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">iShares Gold Trust</td>
+        <td class="text-right">IAU</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">SPDR Gold MiniShares Trust</td>
+        <td class="text-right">GLDM</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr>
+        <td class="py-3">abrdn Physical Gold Shares ETF</td>
+        <td class="text-right">SGOL</td>
+        <td class="text-right">US</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-xs text-neutral-500 text-center mt-4">Prices updated every 5 minutes</p>
+</div>`,
+
+  'silver-etfs': `<p class="text-xl font-semibold mb-4">Popular Silver ETFs</p>
+<div class="overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr class="border-b border-neutral-700">
+        <th class="text-left py-2 text-sm font-semibold">Name</th>
+        <th class="text-right py-2 text-sm font-semibold">Symbol</th>
+        <th class="text-right py-2 text-sm font-semibold">Country</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm">
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">iShares Silver Trust</td>
+        <td class="text-right">SLV</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">abrdn Physical Silver Shares ETF</td>
+        <td class="text-right">SIVR</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr class="border-b border-neutral-800">
+        <td class="py-3">Global X Silver Miners ETF</td>
+        <td class="text-right">SIL</td>
+        <td class="text-right">US</td>
+      </tr>
+      <tr>
+        <td class="py-3">Amplify Junior Silver Miners ETF</td>
+        <td class="text-right">SILJ</td>
+        <td class="text-right">US</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-xs text-neutral-500 text-center mt-4">Prices updated every 5 minutes</p>
+</div>`,
 };
 
 async function migratePages() {
@@ -398,6 +490,21 @@ async function migratePages() {
       console.error(`  Error creating hero:`, heroError.message);
     }
 
+    // Create chart component for ETF pages
+    const etfPagesWithChart = ['gold-etfs', 'silver-etfs'];
+    if (etfPagesWithChart.includes(pageData.slug)) {
+      const { error: chartError } = await supabase.from('page_components').insert({
+        page_id: page.id,
+        component_type: 'chart',
+        config: {},
+        position: 1,
+      });
+
+      if (chartError) {
+        console.error(`  Error creating chart:`, chartError.message);
+      }
+    }
+
     // Create text_block component
     const { error: textError } = await supabase.from('page_components').insert({
       page_id: page.id,
@@ -405,7 +512,7 @@ async function migratePages() {
       config: {
         content: textContents[pageData.slug] || '',
       },
-      position: 1,
+      position: etfPagesWithChart.includes(pageData.slug) ? 2 : 1,
     });
 
     if (textError) {

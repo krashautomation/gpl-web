@@ -24,10 +24,11 @@ All phases completed successfully:
 | Phase 6: Dashboard         | ✅ Complete | 2026-03-08 |
 | Phase 7: Easy Static Pages | ✅ Complete | 2026-03-11 |
 | Phase 8: Roadmap           | ✅ Complete | 2026-03-11 |
+| Phase 9: ETF Pages         | ✅ Complete | 2026-03-11 |
 
 ### Summary
 
-- **20 pages** migrated to dynamic route (11 commodity/crypto + 9 static)
+- **22 pages** migrated to dynamic route (11 commodity/crypto + 11 static)
 - **6 new components** extracted
 - **Database** with 13 SEO fields per page
 - **Backups** preserved in `app/backup-static-pages/`
@@ -41,6 +42,7 @@ All phases completed successfully:
 
 | Date       | Change                                                                                                                                    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-03-11 | Migrated gold-etfs and silver-etfs to database (chart + text_block components)                                                            |
 | 2026-03-11 | Migrated roadmap page to database (checklist converted to text_block HTML)                                                                |
 | 2026-03-11 | Migrated 8 static pages to database (privacy, terms-of-service, disclaimer, risk-warning, about, contact, advertise, gold-price-live-app) |
 | 2026-03-11 | Added hero + text_block components for migrated pages                                                                                     |
@@ -63,8 +65,6 @@ All phases completed successfully:
 
 | Page                | Status       | Reason                                                          |
 | ------------------- | ------------ | --------------------------------------------------------------- |
-| /gold-etfs          | Not migrated | Hard - ETF chart API (GLD) not supported                        |
-| /silver-etfs        | Not migrated | Hard - ETF chart API (SLV) not supported                        |
 | /news               | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
 | /charts             | Not migrated | Medium - Links cards, lower priority                            |
 | /gold-price-history | Not migrated | Medium - Uses chart + performance                               |
