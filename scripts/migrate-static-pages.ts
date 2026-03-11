@@ -1,0 +1,281 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.production' });
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.error('Error: Missing Supabase environment variables.');
+  console.log(
+    'Please ensure NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set in .env.production'
+  );
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+const pages = [
+  {
+    slug: 'privacy',
+    title: 'Privacy Policy',
+    description:
+      'Gold Price Live Privacy Policy - How we collect, use, and protect your information.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Privacy Policy | Gold Price Live',
+    meta_description:
+      'Learn how Gold Price Live collects, uses, and protects your personal information.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'terms-of-service',
+    title: 'Terms of Service',
+    description: 'Gold Price Live Terms of Service - Terms and conditions for using our service.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Terms of Service | Gold Price Live',
+    meta_description: 'Terms and conditions for using Gold Price Live service.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'disclaimer',
+    title: 'Disclaimer',
+    description: 'Gold Price Live Disclaimer - Important information about our service.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Disclaimer | Gold Price Live',
+    meta_description: 'Important disclaimer about the information provided on Gold Price Live.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'risk-warning',
+    title: 'Risk Warning',
+    description:
+      'Gold Price Live Risk Warning - Understand the risks of investing in precious metals.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Risk Warning | Gold Price Live',
+    meta_description: 'Important risk warnings for investing in gold, silver, and precious metals.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'about',
+    title: 'About Us',
+    description: 'Learn about Gold Price Live and our mission to empower everyday investors.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'About Us | Gold Price Live',
+    meta_description:
+      'Learn about Gold Price Live and our mission to provide accurate precious metals prices.',
+    has_calculator: false,
+    has_ads: true,
+    has_articles: false,
+  },
+  {
+    slug: 'contact',
+    title: 'Contact Us',
+    description: 'Contact Gold Price Live - Get in touch with us for inquiries.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Contact Us | Gold Price Live',
+    meta_description:
+      'Contact Gold Price Live for advertising, business inquiries, or general questions.',
+    has_calculator: false,
+    has_ads: true,
+    has_articles: false,
+  },
+  {
+    slug: 'advertise',
+    title: 'Advertise',
+    description:
+      'Advertise on Gold Price Live - Reach savvy investors interested in precious metals.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Advertise | Gold Price Live',
+    meta_description:
+      'Advertise on Gold Price Live to reach investors interested in gold and precious metals.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+  {
+    slug: 'gold-price-live-app',
+    title: 'Gold Price Live App',
+    description: 'Download the Gold Price Live app for real-time precious metals tracking.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Gold Price Live App | Real-Time Precious Metals Tracker',
+    meta_description:
+      'Download the Gold Price Live app for Android - real-time gold and silver prices.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
+];
+
+const textContents: Record<string, string> = {
+  privacy: `<p class="text-base mb-3">Last updated: February 12, 2026</p>
+<p class="text-base mb-3">Gold Price Live ("we," "us," or "our") operates the gold price live website and any associated mobile application (collectively, the "Service"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our app.</p>
+<p class="text-base mb-3">This Service provides live and historical gold (and related precious metals) price data, charts, and related financial information for informational purposes only. It is not investment advice, and we do not provide financial services.</p>
+<p class="text-base mb-3"><strong>Information We Collect</strong></p>
+<p class="text-base mb-3">We collect minimal personal information. In most cases, you can use the Service without providing any personal data. We may collect:</p>
+<p class="text-base mb-3">- Device and usage information (e.g., IP address, browser type, device type, operating system, pages visited, time spent, and referring URLs) automatically via cookies, analytics tools, or server logs.</p>
+<p class="text-base mb-3">- If you contact us, subscribe to alerts, or create an account (if available), we may collect your email address, name, or other contact details you voluntarily provide.</p>
+<p class="text-base mb-3">We do not collect sensitive financial information, payment details, or precise geolocation unless explicitly provided and necessary for a feature.</p>
+<p class="text-base mb-3"><strong>How We Use Your Information</strong></p>
+<p class="text-base mb-3">We use the collected information to:</p>
+<p class="text-base mb-3">- Operate, maintain, and improve the Service (e.g., display live prices, generate charts).</p>
+<p class="text-base mb-3">- Analyze usage trends and enhance user experience.</p>
+<p class="text-base mb-3">- Respond to inquiries or provide support.</p>
+<p class="text-base mb-3">- Comply with legal obligations.</p>
+<p class="text-base mb-3">We do not sell your personal information to third parties.</p>`,
+
+  'terms-of-service': `<p class="text-base mb-3">Last updated: February 12, 2026</p>
+<p class="text-base mb-3">These Terms of Service ("Terms") govern your access to and use of the Gold Price Live website and any related mobile application (collectively, the "Service"). By accessing or using the Service, you agree to these Terms. If you do not agree, do not use the Service.</p>
+<p class="text-base mb-3">The Service provides live and historical gold (and related precious metals) prices, charts, and information for personal, non-commercial use only. It is not investment, financial, tax, or legal advice. All content is provided "as is" for informational purposes.</p>
+<p class="text-base mb-3"><strong>1. Eligibility</strong></p>
+<p class="text-base mb-3">You must be at least 18 years old (or the age of majority in your jurisdiction) to use the Service. The Service is not directed to children under 13.</p>
+<p class="text-base mb-3"><strong>2. Use Restrictions</strong></p>
+<p class="text-base mb-3">You may not:</p>
+<p class="text-base mb-3">- Copy, reproduce, modify, distribute, or create derivative works of the Service or its content without permission.</p>
+<p class="text-base mb-3">- Use the Service for any commercial purpose or to compete with it.</p>
+<p class="text-base mb-3">- Use automated tools (bots, scrapers, etc.) to access or extract data without express permission.</p>
+<p class="text-base mb-3">- Interfere with the Service, violate laws, or infringe third-party rights.</p>
+<p class="text-base mb-3"><strong>3. Intellectual Property</strong></p>
+<p class="text-base mb-3">All content, design, logos, and trademarks on the Service are owned by us or our licensors. You are granted a limited, non-exclusive, non-transferable license to view and use the Service for personal, non-commercial purposes only.</p>
+<p class="text-base mb-3"><strong>4. No Investment Advice</strong></p>
+<p class="text-base mb-3">Gold and precious metals prices are volatile. The Service does not provide investment, trading, or financial advice. Do not make financial decisions based solely on information from the Service. Consult a qualified professional before investing.</p>`,
+
+  disclaimer: `<p class="text-base mb-3">Disclaimer for Gold Price Live</p>
+<p class="text-base mb-3">Gold Price Live provides live and historical gold prices, charts, and related information sourced from third-party providers believed to be reliable. However, we do not guarantee the accuracy, completeness, timeliness, or reliability of any data displayed on the site.</p>
+<p class="text-base mb-3">All content is provided for informational and educational purposes only and should not be considered financial, investment, tax, or legal advice. The information on this site does not take into account your personal financial situation, investment objectives, or risk tolerance.</p>
+<p class="text-base mb-3">Precious metals prices are highly volatile and subject to rapid change. Past performance is not indicative of future results. Visitors are solely responsible for their own investment decisions and should conduct independent research and consult with a qualified financial advisor before making any purchases, sales, or investments.</p>`,
+
+  'risk-warning': `<p class="text-base mb-3">Investing in gold, silver, or any precious metals involves significant risk and is not suitable for everyone. Prices can be highly volatile and may fluctuate dramatically due to economic, geopolitical, market, supply/demand, currency, interest rate, and other factors beyond our control.</p>
+<p class="text-base mb-3">Gold Price Live provides price data, charts, and information sourced from third parties believed to be reliable, but we make no representations or warranties about the accuracy or completeness of this information.</p>
+<p class="text-base mb-3">You should not rely on this information for investment decisions. Consult a qualified financial advisor before investing in precious metals or any financial instruments.</p>
+<p class="text-base mb-3">Past performance does not guarantee future results. Your capital is at risk.</p>`,
+
+  about: `<p class="text-base mb-3">At Gold Price Live, our mission is to empower everyday investors with accurate real-time gold prices, in-depth market analysis, and proven strategies.</p>
+<p class="text-base mb-3">My investing journey evolved through cycles of innovation, volatility, and timeless value.</p>
+<p class="text-base mb-3">It began in tech: backing startups in AI, cloud, and smartphones.</p>
+<p class="text-base mb-3">Thrilling gains came from disruption, but bubbles burst, teaching me to value fundamentals over hype and avoid emotional bets.</p>
+<p class="text-base mb-3">Crypto followed in the mid-2010s—Bitcoin as digital gold, altcoins, DeFi booms.</p>`,
+
+  contact: `<p class="text-base mb-3">I started Gold Price Live as a vibe coding project to help me share what I have learned about investing, finance and precious metals.</p>
+<p class="text-base mb-3">Today I believe real wealth grows through genuine connection, bold idea-sharing, and creative partnerships—let's talk gold, markets, or your next big move.</p>
+<p class="text-base mb-3">If you want to see more of my writings signup below. Otherwise, keep reading for my contact information.</p>
+<p class="text-base mb-3"><strong>For Advertising and Business Inquiries</strong></p>
+<p class="text-base mb-3">Reach savvy investors interested in gold and precious metals investing. Advertise on Gold Price Live.</p>
+<p class="text-base mb-3">Contact: westrock@protonmail.com</p>`,
+
+  advertise: `<p class="text-base mb-3">Advertise on Gold Price Live to reach a targeted audience of precious metals investors.</p>
+<p class="text-base mb-3">Our visitors are actively researching gold, silver, and commodity investments. They are engaged, informed investors looking for real-time data and market analysis.</p>
+<p class="text-base mb-3"><strong>Why Advertise With Us?</strong></p>
+<p class="text-base mb-3">- Targeted audience of precious metals investors</p>
+<p class="text-base mb-3">- Real-time price data attracts serious investors</p>
+<p class="text-base mb-3">- Competitive advertising rates</p>
+<p class="text-base mb-3">- Various ad formats available</p>
+<p class="text-base mb-3"><strong>Contact</strong></p>
+<p class="text-base mb-3">For advertising inquiries, contact: westrock@protonmail.com</p>
+<p class="text-base mb-3">We respond within 24 hours. Packages available.</p>`,
+
+  'gold-price-live-app': `<p class="text-2xl md:text-3xl font-bold mb-3 tracking-tight">Gold Price Live App</p>
+<p class="text-lg md:text-xl font-medium mb-6 text-center max-w-md">Real-Time Precious Metals & Market Tracker</p>
+<p class="text-base leading-relaxed text-center max-w-lg mb-8">Stay ahead of the market with live gold prices, silver prices, and major market indexes — updated in real time on your Android device.</p>
+<p class="text-sm font-medium mb-4">Current features:</p>
+<ul class="text-sm list-disc list-inside mb-6 space-y-1.5">
+  <li>Live spot prices for Gold (XAU/USD) and Silver (XAG/USD)</li>
+  <li>Real-time major market indexes</li>
+  <li>Clean, fast, mobile-optimized interface</li>
+  <li>Available now on Android</li>
+</ul>
+<p class="text-base font-semibold mb-3">More powerful features coming soon:</p>
+<p class="text-sm text-center mb-8 max-w-md">Portfolio tracking • Price alerts • Interactive charts • Historical data • And much more…</p>
+<p class="text-xs text-center mt-6">Download Gold Price Live now and never miss a move in the precious metals market!</p>`,
+};
+
+async function migratePages() {
+  console.log('Starting migration...\n');
+
+  for (const pageData of pages) {
+    console.log(`Creating page: ${pageData.slug}`);
+
+    const { data: page, error } = await supabase.from('pages').insert(pageData).select().single();
+
+    if (error) {
+      console.error(`Error creating ${pageData.slug}:`, error.message);
+      continue;
+    }
+
+    console.log(`  Page created with ID: ${page.id}`);
+
+    // Create hero component
+    const { error: heroError } = await supabase.from('page_components').insert({
+      page_id: page.id,
+      component_type: 'hero',
+      config: {},
+      position: 0,
+    });
+
+    if (heroError) {
+      console.error(`  Error creating hero:`, heroError.message);
+    }
+
+    // Create text_block component
+    const { error: textError } = await supabase.from('page_components').insert({
+      page_id: page.id,
+      component_type: 'text_block',
+      config: {
+        content: textContents[pageData.slug] || '',
+      },
+      position: 1,
+    });
+
+    if (textError) {
+      console.error(`  Error creating text_block:`, textError.message);
+    } else {
+      console.log(`  Components created successfully`);
+    }
+
+    console.log('');
+  }
+
+  console.log('Migration complete!');
+}
+
+migratePages().catch(console.error);

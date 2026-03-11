@@ -39,6 +39,19 @@ Guidelines for AI agents operating in this repository.
 - After any correction: note the pattern to avoid repeating the same mistake
 - Review lessons at session start for relevant project context
 
+### Security
+
+- **NEVER expose API keys, secrets, or credentials in code** - Always use environment variables
+- **NEVER read or examine .env, .env.local, .env.production, or any /env folder** - These contain secrets
+- If you need to use secrets, use `process.env.VARIABLE_NAME` without hardcoding fallback values
+- If a script requires secrets, ask the user to run it themselves or provide the values securely
+
+### Database Migrations
+
+- Migration scripts should always use environment variables for credentials
+- User will run migration scripts manually - do not execute them
+- Create migration scripts in `scripts/` directory with clear instructions
+
 ---
 
 ## Build Commands
