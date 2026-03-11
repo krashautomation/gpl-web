@@ -14,21 +14,22 @@ Build a database-driven page management system for the Gold Price Live website t
 
 All phases completed successfully:
 
-| Phase                      | Status      | Date       |
-| -------------------------- | ----------- | ---------- |
-| Phase 1: Foundation        | ✅ Complete | 2026-03-08 |
-| Phase 2: Components        | ✅ Complete | 2026-03-08 |
-| Phase 3: Dynamic Route     | ✅ Complete | 2026-03-08 |
-| Phase 4: Integration       | ✅ Complete | 2026-03-08 |
-| Phase 5: Migration         | ✅ Complete | 2026-03-08 |
-| Phase 6: Dashboard         | ✅ Complete | 2026-03-08 |
-| Phase 7: Easy Static Pages | ✅ Complete | 2026-03-11 |
-| Phase 8: Roadmap           | ✅ Complete | 2026-03-11 |
-| Phase 9: ETF Pages         | ✅ Complete | 2026-03-11 |
+| Phase                        | Status      | Date       |
+| ---------------------------- | ----------- | ---------- |
+| Phase 1: Foundation          | ✅ Complete | 2026-03-08 |
+| Phase 2: Components          | ✅ Complete | 2026-03-08 |
+| Phase 3: Dynamic Route       | ✅ Complete | 2026-03-08 |
+| Phase 4: Integration         | ✅ Complete | 2026-03-08 |
+| Phase 5: Migration           | ✅ Complete | 2026-03-08 |
+| Phase 6: Dashboard           | ✅ Complete | 2026-03-08 |
+| Phase 7: Easy Static Pages   | ✅ Complete | 2026-03-11 |
+| Phase 8: Roadmap             | ✅ Complete | 2026-03-11 |
+| Phase 9: ETF Pages           | ✅ Complete | 2026-03-11 |
+| Phase 10: Gold Price History | ✅ Complete | 2026-03-11 |
 
 ### Summary
 
-- **22 pages** migrated to dynamic route (11 commodity/crypto + 11 static)
+- **23 pages** migrated to dynamic route (11 commodity/crypto + 12 static)
 - **6 new components** extracted
 - **Database** with 13 SEO fields per page
 - **Backups** preserved in `app/backup-static-pages/`
@@ -42,6 +43,7 @@ All phases completed successfully:
 
 | Date       | Change                                                                                                                                    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-03-11 | Migrated gold-price-history to database (performance component + static image in text_block)                                              |
 | 2026-03-11 | Migrated gold-etfs and silver-etfs to database (chart + text_block components)                                                            |
 | 2026-03-11 | Migrated roadmap page to database (checklist converted to text_block HTML)                                                                |
 | 2026-03-11 | Migrated 8 static pages to database (privacy, terms-of-service, disclaimer, risk-warning, about, contact, advertise, gold-price-live-app) |
@@ -63,11 +65,10 @@ All phases completed successfully:
 
 ### Remaining Static Pages (NOT Migrated)
 
-| Page                | Status       | Reason                                                          |
-| ------------------- | ------------ | --------------------------------------------------------------- |
-| /news               | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
-| /charts             | Not migrated | Medium - Links cards, lower priority                            |
-| /gold-price-history | Not migrated | Medium - Uses chart + performance                               |
+| Page    | Status       | Reason                                                          |
+| ------- | ------------ | --------------------------------------------------------------- |
+| /news   | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
+| /charts | Not migrated | Medium - Links cards, lower priority                            |
 
 ### Follow-up Tasks
 

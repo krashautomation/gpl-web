@@ -180,6 +180,24 @@ const pages = [
     has_ads: false,
     has_articles: false,
   },
+  {
+    slug: 'gold-price-history',
+    title: 'Gold Price History',
+    description:
+      'Explore 100 years of gold price history with historical charts and performance data.',
+    page_type: 'commodity',
+    symbol: 'GC=F',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Gold Price History | 100 Year Chart',
+    meta_description:
+      'Explore 100 years of gold price history with historical charts and performance data.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
 ];
 
 const textContents: Record<string, string> = {
@@ -461,6 +479,11 @@ const textContents: Record<string, string> = {
   </table>
   <p class="text-xs text-neutral-500 text-center mt-4">Prices updated every 5 minutes</p>
 </div>`,
+
+  'gold-price-history': `<div class="mb-6">
+  <img src="/images/gold-price-historical-chart.png" alt="Gold Prices - 100 Year Historical Chart" class="shadow-lg w-full h-auto" />
+  <p class="text-xs text-neutral-500 text-center mt-4">Gold Prices - 100 Year Historical Chart (macrotrends.net)</p>
+</div>`,
 };
 
 async function migratePages() {
@@ -505,14 +528,31 @@ async function migratePages() {
       }
     }
 
+    // Create performance component for gold-price-history
+    const pagesWithPerformance = ['gold-price-history'];
+    if (pagesWithPerformance.includes(pageData.slug)) {
+      const { error: perfError } = await supabase.from('page_components').insert({
+        page_id: page.id,
+        component_type: 'performance',
+        config: {},
+        position: 1,
+      });
+
+      if (perfError) {
+        console.error(`  Error creating performance:`, perfError.message);
+      }
+    }
+
     // Create text_block component
+    const hasSpecialComponents =
+      etfPagesWithChart.includes(pageData.slug) || pagesWithPerformance.includes(pageData.slug);
     const { error: textError } = await supabase.from('page_components').insert({
       page_id: page.id,
       component_type: 'text_block',
       config: {
         content: textContents[pageData.slug] || '',
       },
-      position: etfPagesWithChart.includes(pageData.slug) ? 2 : 1,
+      position: hasSpecialComponents ? 2 : 1,
     });
 
     if (textError) {

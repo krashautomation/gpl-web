@@ -81,6 +81,8 @@ Migrate existing pages as-is using text_block with static HTML table.
 **Pros:** Quick, no code changes
 **Cons:** Manual updates required
 
+> **Note:** For static images (like charts), use HTML `<img>` tag inside text_block. Loses Next.js Image optimizations but works for static assets. Can be enhanced later with proper image component.
+
 ### Option 2: Database-driven Table Component
 
 Create reusable table component that:
