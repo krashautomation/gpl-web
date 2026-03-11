@@ -198,6 +198,23 @@ const pages = [
     has_ads: false,
     has_articles: false,
   },
+  {
+    slug: 'charts',
+    title: 'Gold Price Charts',
+    description:
+      'View interactive gold price charts with historical data. Track gold price trends over time with daily, weekly, monthly, and yearly charts.',
+    page_type: 'static',
+    is_active: true,
+    is_locked: true,
+    display_order: 0,
+    robots: 'index,follow',
+    meta_title: 'Gold Price Charts | Live Charts & Historical Data',
+    meta_description:
+      'View interactive gold price charts with historical data. Track gold price trends over time with daily, weekly, monthly, and yearly charts.',
+    has_calculator: false,
+    has_ads: false,
+    has_articles: false,
+  },
 ];
 
 const textContents: Record<string, string> = {
@@ -484,12 +501,52 @@ const textContents: Record<string, string> = {
   <img src="/images/gold-price-historical-chart.png" alt="Gold Prices - 100 Year Historical Chart" class="shadow-lg w-full h-auto" />
   <p class="text-xs text-neutral-500 text-center mt-4">Gold Prices - 100 Year Historical Chart (macrotrends.net)</p>
 </div>`,
+
+  charts: `<div class="grid grid-cols-1 gap-6 mb-12">
+  <a href="/gold-price-history" class="block p-6 border border-neutral-800 rounded-lg hover:border-yellow-500 transition-colors">
+    <h3 class="text-xl font-semibold mb-2">Historical Gold Prices</h3>
+    <p class="text-neutral-400 mb-4">Long-term gold price trends and analysis</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">20 Years</span>
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">10 Years</span>
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">5 Years</span>
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">1 Year</span>
+    </div>
+  </a>
+  <a href="/gold-silver-ratio" class="block p-6 border border-neutral-800 rounded-lg hover:border-yellow-500 transition-colors">
+    <h3 class="text-xl font-semibold mb-2">Gold Silver Ratio</h3>
+    <p class="text-neutral-400 mb-4">Compare gold and silver price movements</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">1Y</span>
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">5Y</span>
+      <span class="text-xs px-2 py-1 bg-neutral-800 text-neutral-400 rounded">20Y</span>
+    </div>
+  </a>
+</div>
+
+<h2 class="text-2xl font-bold mb-4">Understanding Gold Charts</h2>
+<p class="mb-4">
+  Our charts display real-time data from global markets. Use different timeframes to analyze short-term volatility or long-term trends. The charts update automatically to reflect the latest market prices.
+</p>
+<p><a href="/news/understanding-gold-price-charts" class="text-yellow-500 hover:underline">Learn how to read gold price charts →</a></p>`,
 };
 
 async function migratePages() {
   console.log('Starting migration...\n');
 
   for (const pageData of pages) {
+    // Check if page already exists
+    const { data: existingPage } = await supabase
+      .from('pages')
+      .select('id')
+      .eq('slug', pageData.slug)
+      .single();
+
+    if (existingPage) {
+      console.log(`Skipping ${pageData.slug}: already exists`);
+      continue;
+    }
+
     console.log(`Creating page: ${pageData.slug}`);
 
     const { data: page, error } = await supabase.from('pages').insert(pageData).select().single();
