@@ -104,6 +104,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         ]}
       />
       <div className="container mx-auto px-4 py-12">
+        <BannerAd
+          affiliateName="Money Metals Exchange"
+          adName="Money Metals Exchange Top"
+          href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
+          src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
+          className="mb-6"
+        />
+
         <Link
           href="/news"
           className="inline-flex items-center gap-2 text-black hover:text-black mb-8 transition-colors"
