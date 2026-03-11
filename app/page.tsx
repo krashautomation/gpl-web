@@ -241,6 +241,13 @@ export default function Home() {
 
   return (
     <MainLayout>
+      <BannerAd
+        affiliateName="Money Metals Exchange"
+        adName="Money Metals Exchange Home Top"
+        href="https://www.awin1.com/cread.php?s=3928251&v=88985&q=519076&r=2775708"
+        src="https://www.awin1.com/cshow.php?s=3928251&v=88985&q=519076&r=2775708"
+        className="mb-6"
+      />
       <OrganizationStructuredData
         name="Gold Price Live"
         url="https://goldpricelive.co"
