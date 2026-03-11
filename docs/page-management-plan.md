@@ -14,18 +14,19 @@ Build a database-driven page management system for the Gold Price Live website t
 
 All phases completed successfully:
 
-| Phase                  | Status      | Date       |
-| ---------------------- | ----------- | ---------- |
-| Phase 1: Foundation    | ✅ Complete | 2026-03-08 |
-| Phase 2: Components    | ✅ Complete | 2026-03-08 |
-| Phase 3: Dynamic Route | ✅ Complete | 2026-03-08 |
-| Phase 4: Integration   | ✅ Complete | 2026-03-08 |
-| Phase 5: Migration     | ✅ Complete | 2026-03-08 |
-| Phase 6: Dashboard     | ✅ Complete | 2026-03-08 |
+| Phase                      | Status      | Date       |
+| -------------------------- | ----------- | ---------- |
+| Phase 1: Foundation        | ✅ Complete | 2026-03-08 |
+| Phase 2: Components        | ✅ Complete | 2026-03-08 |
+| Phase 3: Dynamic Route     | ✅ Complete | 2026-03-08 |
+| Phase 4: Integration       | ✅ Complete | 2026-03-08 |
+| Phase 5: Migration         | ✅ Complete | 2026-03-08 |
+| Phase 6: Dashboard         | ✅ Complete | 2026-03-08 |
+| Phase 7: Easy Static Pages | ✅ Complete | 2026-03-11 |
 
 ### Summary
 
-- **11 pages** migrated to dynamic route
+- **19 pages** migrated to dynamic route (11 commodity/crypto + 8 static)
 - **6 new components** extracted
 - **Database** with 13 SEO fields per page
 - **Backups** preserved in `app/backup-static-pages/`
@@ -37,18 +38,42 @@ All phases completed successfully:
 
 ### Recent Updates (March 2026)
 
-| Date       | Change                                                |
-| ---------- | ----------------------------------------------------- |
-| 2026-03-10 | text_block HTML support with DOMPurify sanitization   |
-| 2026-03-10 | Added component config editor to dashboard UI         |
-| 2026-03-08 | Single column layout across all pages                 |
-| 2026-03-08 | Container widths: 1200px header/footer, 896px content |
-| 2026-03-08 | Article grids reduced to 2 columns                    |
-| 2026-03-08 | Feature flags implemented in dynamic route            |
-| 2026-03-08 | Smart defaults by page type                           |
-| 2026-03-08 | GoldCalculator component extracted                    |
-| 2026-03-08 | Dashboard form reordered (Data Source first)          |
-| 2026-03-08 | Schema defaults: has_ads, has_articles = true         |
+| Date       | Change                                                                                                                                    |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-03-11 | Migrated 8 static pages to database (privacy, terms-of-service, disclaimer, risk-warning, about, contact, advertise, gold-price-live-app) |
+| 2026-03-11 | Added hero + text_block components for migrated pages                                                                                     |
+| 2026-03-11 | Created scripts/migrate-static-pages.ts for migrations                                                                                    |
+| 2026-03-11 | Updated AGENTS.md with security and migration guidelines                                                                                  |
+| 2026-03-10 | text_block HTML support with DOMPurify sanitization                                                                                       |
+| 2026-03-10 | Added component config editor to dashboard UI                                                                                             |
+| 2026-03-08 | Single column layout across all pages                                                                                                     |
+| 2026-03-08 | Container widths: 1200px header/footer, 896px content                                                                                     |
+| 2026-03-08 | Article grids reduced to 2 columns                                                                                                        |
+| 2026-03-08 | Feature flags implemented in dynamic route                                                                                                |
+| 2026-03-08 | Smart defaults by page type                                                                                                               |
+| 2026-03-08 | GoldCalculator component extracted                                                                                                        |
+| 2026-03-08 | Dashboard form reordered (Data Source first)                                                                                              |
+| 2026-03-08 | Schema defaults: has_ads, has_articles = true                                                                                             |
+
+---
+
+### Remaining Static Pages (NOT Migrated)
+
+| Page                | Status       | Reason                                                          |
+| ------------------- | ------------ | --------------------------------------------------------------- |
+| /gold-etfs          | Not migrated | Hard - ETF chart API (GLD) not supported                        |
+| /silver-etfs        | Not migrated | Hard - ETF chart API (SLV) not supported                        |
+| /news               | Not migrated | Hard - Category filtering via searchParams not supported by CMS |
+| /charts             | Not migrated | Medium - Links cards, lower priority                            |
+| /roadmap            | Not migrated | Medium - Checklist loses interactivity                          |
+| /gold-price-history | Not migrated | Medium - Uses chart + performance                               |
+
+### Follow-up Tasks
+
+| #   | Task                   | Status  | Description                                                                   |
+| --- | ---------------------- | ------- | ----------------------------------------------------------------------------- |
+| 2   | Enhance with images    | Pending | Add image components via dashboard for: about, contact, gold-price-live-app   |
+| 3   | Full content migration | Pending | Extract full content including images - for pages that need complete fidelity |
 
 ---
 
