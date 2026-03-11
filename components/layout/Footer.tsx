@@ -272,6 +272,16 @@ const Footer = () => {
                     Gold Silver Ratio
                   </a>
                 </li>
+                <li>
+                  <a href="/gold-price-today" className="hover:text-yellow-500">
+                    Gold Price Today
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-price" className="hover:text-yellow-500">
+                    Gold Price
+                  </a>
+                </li>
               </ul>
             </div>
 

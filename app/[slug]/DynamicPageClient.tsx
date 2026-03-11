@@ -9,6 +9,7 @@ import { ContactSidebar } from '@/components/ContactSidebar';
 import { ContentCard } from '@/components/ContentCard';
 import { BannerAd } from '@/components/BannerAd';
 import { GoldCalculator } from '@/components/GoldCalculator';
+import { BioCard } from '@/components/BioCard';
 import RecentArticlesSection from '@/app/components/RecentArticlesSection';
 import { getPageComponents, type Page, type PageComponent } from '@/lib/pages';
 
@@ -42,6 +43,7 @@ const COMPONENT_REGISTRY: Record<string, React.ComponentType<any>> = {
   hero: () => null,
   text_block: ContentCard,
   contact: ContactSidebar,
+  bio_card: BioCard,
 };
 
 function renderComponent(
@@ -132,7 +134,8 @@ function renderComponent(
         <ContentCard>
           {sanitizedContent ? (
             <div
-              className="prose prose-lg max-w-none prose-headings:text-black prose-p:text-black prose-a:text-black prose-a:underline hover:prose-a:no-underline prose-ul:text-black prose-ol:text-black prose-li:text-black prose-strong:text-black prose-img:rounded-lg"
+              style={{ '--tw-prose-links': '#2563eb' } as React.CSSProperties}
+              className="cms-content prose prose-lg max-w-none prose-headings:text-black prose-p:text-black prose-ul:text-black prose-ol:text-black prose-li:text-black prose-strong:text-black prose-img:rounded-lg"
               dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             />
           ) : (
@@ -143,6 +146,27 @@ function renderComponent(
 
     case 'contact':
       return <ContactSidebar />;
+
+    case 'bio_card':
+      const bioConfig = config as {
+        author?: string;
+        authorImage?: string;
+        date?: string;
+        readingTime?: number;
+        imageSize?: number;
+        className?: string;
+      } | null;
+      const pageDate = page.updated_at || page.created_at;
+      return (
+        <BioCard
+          author={bioConfig?.author}
+          authorImage={bioConfig?.authorImage}
+          date={pageDate}
+          readingTime={bioConfig?.readingTime ?? 5}
+          imageSize={bioConfig?.imageSize}
+          className={bioConfig?.className}
+        />
+      );
 
     default:
       return null;

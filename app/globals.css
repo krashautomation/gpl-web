@@ -80,3 +80,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .cms-content a {
+    color: #2563eb !important;
+    text-decoration: underline !important;
+  }
+  .cms-content a:hover {
+    color: #f97316 !important;
+    text-decoration: none !important;
+  }
+}

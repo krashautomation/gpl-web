@@ -171,7 +171,9 @@ export default function EditPagePage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (locked) {
+    const isUnlocking = locked && form.is_locked === false;
+
+    if (locked && !isUnlocking) {
       alert('This page is locked and cannot be edited.');
       return;
     }
@@ -263,6 +265,10 @@ export default function EditPagePage() {
 
   function handleChange(field: keyof CreatePageInput, value: unknown) {
     const newForm = { ...form, [field]: value };
+
+    if (field === 'is_locked') {
+      setLocked(value as boolean);
+    }
 
     if (field === 'page_type' && !locked) {
       const defaults = pageTypeDefaults[value as string] || {};
@@ -620,7 +626,6 @@ export default function EditPagePage() {
                     id="is_locked"
                     checked={form.is_locked}
                     onCheckedChange={checked => handleChange('is_locked', checked)}
-                    disabled={locked}
                   />
                   <Label htmlFor="is_locked">Locked</Label>
                 </div>
@@ -861,6 +866,7 @@ export default function EditPagePage() {
                           <SelectItem value="ads">Banner Ad</SelectItem>
                           <SelectItem value="text_block">Text Block</SelectItem>
                           <SelectItem value="contact">Contact Sidebar</SelectItem>
+                          <SelectItem value="bio_card">Bio Card</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

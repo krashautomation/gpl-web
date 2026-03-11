@@ -143,7 +143,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </header>
 
           <div
-            className="prose prose-invert prose-lg max-w-none mb-12
+            style={{ '--tw-prose-links': '#2563eb' } as React.CSSProperties}
+            className="cms-content prose prose-lg max-w-none mb-12
               prose-headings:text-black 
               prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4
               prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3
@@ -151,7 +152,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               prose-ul:text-black prose-ul:mb-4
               prose-li:mb-2
               prose-strong:text-black
-              prose-a:text-black prose-a:no-underline hover:prose-a:underline
               prose-table:border-neutral-700
               prose-th:bg-neutral-800 prose-th:text-white prose-th:p-3
               prose-td:border-neutral-700 prose-td:p-3 prose-td:text-black"
