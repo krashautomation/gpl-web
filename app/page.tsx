@@ -312,7 +312,7 @@ export default function Home() {
         ]}
       />
       <div className="flex items-center justify-start mb-6">
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Gold Price Live</h1>
+        <h1 className="page-title font-bold tracking-tight">Gold Price Live</h1>
       </div>
 
       <div className="grid grid-cols-1 gap-6 mb-8">

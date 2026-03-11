@@ -78,6 +78,26 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold uppercase;
+    color: #002f6c;
+  }
+  h1 {
+    font-weight: 866;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
   }
 }
 
@@ -89,5 +109,11 @@
   .cms-content a:hover {
     color: #f97316 !important;
     text-decoration: none !important;
+  }
+  .page-title {
+    color: #002f6c;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 866;
   }
 }

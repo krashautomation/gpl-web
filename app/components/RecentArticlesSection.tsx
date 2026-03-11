@@ -50,7 +50,7 @@ export default function RecentArticlesSection() {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold ">Latest News</h2>
+        <h2 className="text-2xl font-bold">Latest News</h2>
         <Link href="/news" className="text-sm  hover:underline flex items-center gap-1">
           View all <ArrowRight size={16} />
         </Link>

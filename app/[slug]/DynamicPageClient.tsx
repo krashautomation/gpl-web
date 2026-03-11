@@ -153,7 +153,7 @@ function renderComponent(
     case 'hero':
       return (
         <div className="flex items-center justify-start mb-6">
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
+          <h1 className="page-title font-bold tracking-tight">{page.title}</h1>
         </div>
       );
 
@@ -418,7 +418,9 @@ export function DynamicPageClient({ page, breadcrumbs }: DynamicPageClientProps)
 
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-start mb-6">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
+            <h1 className="page-title text-3xl font-bold tracking-tight md:text-4xl">
+              {page.title}
+            </h1>
           </div>
 
           {showEarliestDate && earliestDate && (
@@ -488,7 +490,9 @@ export function DynamicPageClient({ page, breadcrumbs }: DynamicPageClientProps)
 
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-start mb-6">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{page.title}</h1>
+            <h1 className="page-title text-3xl font-bold tracking-tight md:text-4xl">
+              {page.title}
+            </h1>
           </div>
 
           <div className="grid grid-cols-1 gap-6 mb-8">

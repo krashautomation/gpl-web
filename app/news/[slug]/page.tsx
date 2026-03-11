@@ -125,7 +125,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             )}
             <Badge className="bg-yellow-500 text-black mb-4">{article.category}</Badge>
-            <h1 className="text-3xl md:text-5xl font-bold text-black mb-6">{article.title}</h1>
+            <h1 className="page-title font-bold text-black mb-6">{article.title}</h1>
             <div className="flex flex-wrap items-center gap-6 text-sm text-black">
               <span className="flex items-center gap-2">
                 <User size={16} />

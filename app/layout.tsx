@@ -1,11 +1,15 @@
 import './globals.css';
 import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Nunito_Sans } from 'next/font/google';
 import { getOgImage } from '@/lib/og-utils';
 import { Analytics } from '@vercel/analytics/next';
 
-const inter = Inter({ subsets: ['latin'] });
+const nunitoSans = Nunito_Sans({
+  weight: ['400', '900'],
+  subsets: ['latin'],
+  variable: '--font-nunito',
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -57,13 +61,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={nunitoSans.variable}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://substackcdn.com" />
       </head>
-      <body className={`${inter.className} bg-background text-foreground`}>
+      <body className="font-sans bg-background text-foreground" style={{ fontWeight: 400 }}>
         {children}
         <Analytics />
       </body>
