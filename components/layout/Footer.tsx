@@ -346,6 +346,16 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
+                  <a href="/copper-stocks" className="text-white hover:text-orange-600">
+                    Copper Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/copper-etfs" className="text-white hover:text-orange-600">
+                    Copper ETFs
+                  </a>
+                </li>
+                <li>
                   <a href="/oil-energy-stocks" className="text-white hover:text-orange-600">
                     Oil & Energy Stocks
                   </a>

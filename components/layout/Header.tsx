@@ -63,6 +63,8 @@ const navItems: NavItem[] = [
       { label: 'Platinum Price', href: '/platinum-price' },
       { label: 'Palladium Price', href: '/palladium-price' },
       { label: 'Copper Price', href: '/copper-price' },
+      { label: 'Copper Stocks', href: '/copper-stocks', description: 'Copper Mining Stocks' },
+      { label: 'Copper ETFs', href: '/copper-etfs', description: 'Copper ETFs' },
       { label: 'Aluminum Price', href: '/aluminum-price' },
       { label: 'Tungsten Stocks', href: '/tungsten-stocks', description: 'Tungsten Mining Stocks' },
     ],
