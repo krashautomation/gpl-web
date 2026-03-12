@@ -9,28 +9,28 @@ const supabase = createClient(
 
 const stocks = [
   {
-    slug: 'freeport-mcmoran',
+    slug: 'stock/FCX',
     name: 'Freeport-McMoRan',
     symbol: 'FCX',
     description:
       'Freeport-McMoRan Inc. (FCX) is a leading international mining company with operations in North America, South America and Indonesia.',
   },
   {
-    slug: 'southern-copper',
+    slug: 'stock/SCCO',
     name: 'Southern Copper',
     symbol: 'SCCO',
     description:
       'Southern Copper Corporation (SCCO) is one of the largest integrated copper producers in the world, with mining operations in Peru and Mexico.',
   },
   {
-    slug: 'teck-resources',
+    slug: 'stock/TECK',
     name: 'Teck Resources',
     symbol: 'TECK',
     description:
       'Teck Resources Limited (TECK) is a diversified mining, metallurgical and energy company headquartered in Canada.',
   },
   {
-    slug: 'hudbay-minerals',
+    slug: 'stock/HBM',
     name: 'Hudbay Minerals',
     symbol: 'HBM',
     description:
@@ -40,27 +40,27 @@ const stocks = [
 
 const etfs = [
   {
-    slug: 'global-x-copper-miners-etf',
+    slug: 'stock/COPX',
     name: 'Global X Copper Miners ETF',
     symbol: 'COPX',
     description:
       'The Global X Copper Miners ETF (COPX) provides exposure to copper mining companies worldwide.',
   },
   {
-    slug: 'united-states-copper-index-fund',
+    slug: 'stock/CPER',
     name: 'United States Copper Index Fund',
     symbol: 'CPER',
     description: 'The United States Copper Index Fund (CPER) tracks the SummerHaven Copper Index.',
   },
   {
-    slug: 'ishares-copper-metals-mining-etf',
+    slug: 'stock/ICOP',
     name: 'iShares Copper and Metals Mining ETF',
     symbol: 'ICOP',
     description:
       'The iShares Copper and Metals Mining ETF (ICOP) provides exposure to copper and metals mining companies.',
   },
   {
-    slug: 'sprott-copper-miners-etf',
+    slug: 'stock/COPP',
     name: 'Sprott Copper Miners ETF',
     symbol: 'COPP',
     description:
@@ -69,31 +69,29 @@ const etfs = [
 ];
 
 async function createStockPage(
-  stock: (typeof stocks)[0],
+  stock: { slug: string; name: string; symbol: string; description: string },
   category: string,
   parentTitle: string,
   parentHref: string
 ) {
-  const existingSlug = stock.slug;
-
   const { data: existing } = await supabase
     .from('pages')
     .select('id')
-    .eq('slug', existingSlug)
+    .eq('slug', stock.slug)
     .single();
 
   if (existing) {
-    console.log(`  Stock page /${existingSlug} already exists`);
+    console.log(`  Stock page /${stock.slug} already exists`);
     return;
   }
 
   const title = `${stock.name} Stock Price`;
-  const description = `Track ${stock.name} (${stock.symbol}) stock price, charts, and performance data.`;
+  const descriptionText = `Track ${stock.name} (${stock.symbol}) stock price, charts, and performance data.`;
 
   const { error } = await supabase.from('pages').insert({
-    slug: existingSlug,
+    slug: stock.slug,
     title: title,
-    description: description,
+    description: descriptionText,
     page_type: 'stock',
     symbol: stock.symbol,
     category: category,
@@ -102,22 +100,18 @@ async function createStockPage(
     display_order: 0,
     robots: 'index,follow',
     meta_title: `${stock.symbol} Stock Price | ${stock.name} | Gold Price Live`,
-    meta_description: description,
+    meta_description: descriptionText,
     has_calculator: false,
     has_ads: true,
     has_articles: false,
   });
 
   if (error) {
-    console.error(`Error creating ${existingSlug}:`, error.message);
+    console.error(`Error creating ${stock.slug}:`, error.message);
     return;
   }
 
-  const { data: page } = await supabase
-    .from('pages')
-    .select('id')
-    .eq('slug', existingSlug)
-    .single();
+  const { data: page } = await supabase.from('pages').select('id').eq('slug', stock.slug).single();
 
   if (!page) return;
 
@@ -148,7 +142,7 @@ async function createStockPage(
     },
   ]);
 
-  console.log(`Created: /${existingSlug}`);
+  console.log(`Created: /${stock.slug}`);
 }
 
 async function createCategoryPage(

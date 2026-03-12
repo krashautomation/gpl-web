@@ -76,6 +76,18 @@ const STOCK_CATEGORIES: Record<string, { name: string; href: string }> = {
   BKR: { name: 'Oil & Energy Stocks', href: '/oil-energy-stocks' },
   DVN: { name: 'Oil & Energy Stocks', href: '/oil-energy-stocks' },
   PXD: { name: 'Oil & Energy Stocks', href: '/oil-energy-stocks' },
+
+  // Copper Stocks
+  FCX: { name: 'Copper Stocks', href: '/copper-stocks' },
+  SCCO: { name: 'Copper Stocks', href: '/copper-stocks' },
+  TECK: { name: 'Copper Stocks', href: '/copper-stocks' },
+  HBM: { name: 'Copper Stocks', href: '/copper-stocks' },
+
+  // Copper ETFs
+  COPX: { name: 'Copper ETFs', href: '/copper-etfs' },
+  CPER: { name: 'Copper ETFs', href: '/copper-etfs' },
+  ICOP: { name: 'Copper ETFs', href: '/copper-etfs' },
+  COPP: { name: 'Copper ETFs', href: '/copper-etfs' },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
