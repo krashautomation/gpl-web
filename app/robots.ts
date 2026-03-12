@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/admin/'],
+      disallow: ['/api/', '/admin/', '/favicon.ico'],
     },
     sitemap: 'https://goldpricelive.co/sitemap.xml',
     host: 'https://goldpricelive.co',
