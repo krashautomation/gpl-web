@@ -8,6 +8,22 @@ interface Props {
 }
 
 const STOCK_CATEGORIES: Record<string, { name: string; href: string }> = {
+  // Gold ETFs
+  GLD: { name: 'Gold ETFs', href: '/gold-etfs' },
+  IAU: { name: 'Gold ETFs', href: '/gold-etfs' },
+  GLDM: { name: 'Gold ETFs', href: '/gold-etfs' },
+  SGOL: { name: 'Gold ETFs', href: '/gold-etfs' },
+
+  // Silver ETFs
+  SLV: { name: 'Silver ETFs', href: '/silver-etfs' },
+  SIVR: { name: 'Silver ETFs', href: '/silver-etfs' },
+  SIL: { name: 'Silver ETFs', href: '/silver-etfs' },
+  SILJ: { name: 'Silver ETFs', href: '/silver-etfs' },
+
+  // Tungsten Stocks
+  ALM: { name: 'Tungsten Stocks', href: '/tungsten-stocks' },
+  'AII.TO': { name: 'Tungsten Stocks', href: '/tungsten-stocks' },
+
   // Gold Mining Stocks (US + Canada)
   NEM: { name: 'Gold Stocks', href: '/gold-stocks' },
   GOLD: { name: 'Gold Stocks', href: '/gold-stocks' },

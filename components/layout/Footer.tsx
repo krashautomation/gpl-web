@@ -341,6 +341,11 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
+                  <a href="/tungsten-stocks" className="text-white hover:text-orange-600">
+                    Tungsten Stocks
+                  </a>
+                </li>
+                <li>
                   <a href="/oil-energy-stocks" className="text-white hover:text-orange-600">
                     Oil & Energy Stocks
                   </a>

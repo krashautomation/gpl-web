@@ -15,6 +15,7 @@ export async function GET(request: Request) {
     .eq('category', category)
     .eq('page_type', 'stock')
     .eq('is_active', true)
+    .neq('slug', category)
     .order('title');
 
   if (error) {

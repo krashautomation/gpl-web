@@ -52,6 +52,7 @@ const navItems: NavItem[] = [
       { label: 'Silver ETFs', href: '/silver-etfs', description: 'Silver ETFs' },
       { label: 'Gold Stocks', href: '/gold-stocks', description: 'Gold Mining Stocks' },
       { label: 'Silver Stocks', href: '/silver-stocks', description: 'Silver Mining Stocks' },
+      { label: 'Tungsten Stocks', href: '/tungsten-stocks', description: 'Tungsten Mining Stocks' },
     ],
   },
   {
@@ -63,6 +64,7 @@ const navItems: NavItem[] = [
       { label: 'Palladium Price', href: '/palladium-price' },
       { label: 'Copper Price', href: '/copper-price' },
       { label: 'Aluminum Price', href: '/aluminum-price' },
+      { label: 'Tungsten Stocks', href: '/tungsten-stocks', description: 'Tungsten Mining Stocks' },
     ],
   },
   {
