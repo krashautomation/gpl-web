@@ -74,15 +74,12 @@ function StockTable({ category }: { category: string | null }) {
         </thead>
         <tbody className="text-sm">
           {stocks.map((stock, index) => (
-            <tr
-              key={stock.id}
-              className="border-b border-neutral-800 hover:bg-neutral-900 transition-colors"
-            >
+            <tr key={stock.id} className="border-b border-neutral-800">
               <td className="py-3 px-4">
                 <Link href={`/${stock.slug}`}>{getCompanyName(stock.title)}</Link>
               </td>
-              <td className="text-right py-3 px-4 text-neutral-400">{stock.symbol}</td>
-              <td className="text-right py-3 px-4 text-neutral-400">
+              <td className="text-right py-3 px-4">{stock.symbol}</td>
+              <td className="text-right py-3 px-4">
                 {stock.symbol?.endsWith('.TO') ? 'Canada' : 'US'}
               </td>
             </tr>
