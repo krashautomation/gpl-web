@@ -19,6 +19,7 @@ export interface Article {
   og_title: string;
   og_description: string;
   draft: boolean;
+  ai_tokens_used: number;
   created_at: string;
   updated_at: string;
 }

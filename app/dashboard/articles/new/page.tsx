@@ -47,6 +47,7 @@ export default function NewArticlePage() {
     og_title: '',
     og_description: '',
     draft: true,
+    ai_tokens_used: 0,
   });
 
   useEffect(() => {
@@ -109,6 +110,7 @@ export default function NewArticlePage() {
     content: string;
     seo_description: string;
     seo_keywords: string;
+    ai_tokens_used?: number;
   }) {
     setForm(prev => ({
       ...prev,
@@ -119,6 +121,7 @@ export default function NewArticlePage() {
       seo_title: imported.title,
       seo_description: imported.seo_description,
       seo_keywords: imported.seo_keywords,
+      ai_tokens_used: imported.ai_tokens_used || 0,
     }));
   }
 

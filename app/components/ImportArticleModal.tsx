@@ -20,6 +20,7 @@ interface ImportedArticle {
   content: string;
   seo_description: string;
   seo_keywords: string;
+  ai_tokens_used?: number;
 }
 
 interface ImportArticleModalProps {
@@ -50,7 +51,10 @@ export function ImportArticleModal({ onImport }: ImportArticleModalProps) {
         throw new Error(data.error || 'Unknown error');
       }
 
-      onImport(data.article);
+      onImport({
+        ...data.article,
+        ai_tokens_used: data.tokens,
+      });
       setOpen(false);
       setRawText('');
     } catch (err) {
