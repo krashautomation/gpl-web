@@ -82,6 +82,9 @@ export default function DashboardPage() {
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Tokens
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 Date
               </th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
@@ -123,6 +126,9 @@ export default function DashboardPage() {
                     {article.draft ? <EyeOff size={12} /> : <Eye size={12} />}
                     {article.draft ? 'Draft' : 'Published'}
                   </span>
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  {article.ai_tokens_used > 0 ? article.ai_tokens_used.toLocaleString() : '-'}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
                   {new Date(article.published_at).toLocaleDateString()}
