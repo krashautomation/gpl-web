@@ -80,8 +80,17 @@
     @apply bg-background text-foreground;
     font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
   }
-  h1,
-  h2,
+  h1 {
+    @apply font-bold uppercase;
+    color: #002f6c;
+  }
+  h1 {
+    font-weight: 866;
+  }
+  h2 {
+    @apply font-bold;
+    color: #002f6c;
+  }
   h3,
   h4,
   h5,
@@ -89,26 +98,19 @@
     @apply font-bold uppercase;
     color: #002f6c;
   }
-  h1 {
-    font-weight: 866;
-  }
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: 700;
-  }
 }
 
 @layer utilities {
-  .cms-content a {
+  .cms-content.prose a {
     color: #2563eb !important;
     text-decoration: underline !important;
   }
-  .cms-content a:hover {
+  .cms-content.prose a:hover {
     color: #f97316 !important;
     text-decoration: none !important;
+  }
+  .cms-content h2 {
+    text-transform: none !important;
   }
   .page-title {
     color: #002f6c;
