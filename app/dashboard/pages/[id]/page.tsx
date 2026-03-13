@@ -116,6 +116,14 @@ export default function EditPagePage() {
   const [editingComponent, setEditingComponent] = useState<PageComponent | null>(null);
   const [editingConfig, setEditingConfig] = useState('');
   const [savingConfig, setSavingConfig] = useState(false);
+  const [imageForm, setImageForm] = useState({
+    src: '',
+    alt: '',
+    caption: '',
+    className: 'rounded-lg',
+  });
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const imageFileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!isNew) {
@@ -260,6 +268,37 @@ export default function EditPagePage() {
       setForm({ ...form, og_image: data.publicUrl });
     } finally {
       setUploadingOgImage(false);
+    }
+  }
+
+  async function handleImageUpload() {
+    imageFileInputRef.current?.click();
+  }
+
+  async function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    try {
+      const fileName = `page-images/${Date.now()}-${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .upload(fileName, file);
+
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        alert('Failed to upload image');
+        return;
+      }
+
+      const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(fileName);
+      setImageForm({ ...imageForm, src: data.publicUrl });
+    } finally {
+      setUploadingImage(false);
+      if (imageFileInputRef.current) {
+        imageFileInputRef.current.value = '';
+      }
     }
   }
 
@@ -800,6 +839,22 @@ export default function EditPagePage() {
                             const config = comp.config as { content?: string } | null;
                             if (comp.component_type === 'text_block' && config?.content) {
                               setEditingConfig(config.content);
+                            } else if (comp.component_type === 'image') {
+                              const imgConfig = comp.config as {
+                                src?: string;
+                                alt?: string;
+                                caption?: string;
+                                className?: string;
+                              } | null;
+                              setImageForm({
+                                src: imgConfig?.src || '',
+                                alt: imgConfig?.alt || '',
+                                caption: imgConfig?.caption || '',
+                                className: imgConfig?.className || 'rounded-lg',
+                              });
+                              setEditingConfig(
+                                comp.config ? JSON.stringify(comp.config, null, 2) : '{}'
+                              );
                             } else {
                               setEditingConfig(
                                 comp.config ? JSON.stringify(comp.config, null, 2) : '{}'
@@ -865,6 +920,7 @@ export default function EditPagePage() {
                           <SelectItem value="articles">Articles Section</SelectItem>
                           <SelectItem value="ads">Banner Ad</SelectItem>
                           <SelectItem value="text_block">Text Block</SelectItem>
+                          <SelectItem value="image">Image</SelectItem>
                           <SelectItem value="contact">Contact Sidebar</SelectItem>
                           <SelectItem value="bio_card">Bio Card</SelectItem>
                         </SelectContent>
@@ -884,42 +940,125 @@ export default function EditPagePage() {
           <DialogHeader>
             <DialogTitle>Edit {editingComponent?.component_type} Configuration</DialogTitle>
           </DialogHeader>
-          <div className="py-4">
-            <Label htmlFor="config">
-              {editingComponent?.component_type === 'text_block'
-                ? 'HTML Content'
-                : 'JSON Configuration'}
-            </Label>
-            <Textarea
-              id="config"
-              value={editingConfig}
-              onChange={e => setEditingConfig(e.target.value)}
-              rows={12}
-              className="font-mono text-sm"
-              placeholder={
-                editingComponent?.component_type === 'text_block'
-                  ? '<h2>Your Heading</h2><p>Your paragraph text here.</p>'
-                  : '{"key": "value"}'
-              }
-            />
-            <p className="text-sm text-gray-500 mt-2">
-              {editingComponent?.component_type === 'text_block' ? (
-                <>
-                  Paste your HTML content directly. For example:{' '}
-                  <code className="bg-gray-100 px-1 rounded">
-                    &lt;h2&gt;Title&lt;/h2&gt;&lt;p&gt;Paragraph&lt;/p&gt;
-                  </code>
-                </>
-              ) : (
-                <>
-                  Edit the JSON configuration for this component. For text_block, use:{' '}
-                  <code className="bg-gray-100 px-1 rounded">
-                    {'{ "content": "Your text here" }'}
-                  </code>
-                </>
-              )}
-            </p>
-          </div>
+
+          {editingComponent?.component_type === 'image' ? (
+            <div className="py-4 space-y-4">
+              <div>
+                <Label>Image</Label>
+                <div className="mt-2 space-y-2">
+                  {imageForm.src && (
+                    <div className="relative w-full max-w-md">
+                      <img
+                        src={imageForm.src}
+                        alt="Preview"
+                        className="w-full h-auto rounded-lg border"
+                      />
+                    </div>
+                  )}
+                  <div className="flex gap-2">
+                    <input
+                      ref={imageFileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageFileChange}
+                      className="hidden"
+                    />
+                    <Button
+                      type="button"
+                      onClick={handleImageUpload}
+                      disabled={uploadingImage}
+                      variant="outline"
+                    >
+                      {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                    </Button>
+                    {imageForm.src && (
+                      <Button
+                        type="button"
+                        onClick={() => setImageForm({ ...imageForm, src: '' })}
+                        variant="outline"
+                      >
+                        Remove
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="imageSrc">Image URL</Label>
+                <Input
+                  id="imageSrc"
+                  value={imageForm.src}
+                  onChange={e => setImageForm({ ...imageForm, src: e.target.value })}
+                  placeholder="https://..."
+                />
+              </div>
+              <div>
+                <Label htmlFor="imageAlt">Alt Text</Label>
+                <Input
+                  id="imageAlt"
+                  value={imageForm.alt}
+                  onChange={e => setImageForm({ ...imageForm, alt: e.target.value })}
+                  placeholder="Description of image"
+                />
+              </div>
+              <div>
+                <Label htmlFor="imageCaption">Caption (optional)</Label>
+                <Input
+                  id="imageCaption"
+                  value={imageForm.caption}
+                  onChange={e => setImageForm({ ...imageForm, caption: e.target.value })}
+                  placeholder="Optional caption below image"
+                />
+              </div>
+              <div>
+                <Label htmlFor="imageClass">CSS Class</Label>
+                <Input
+                  id="imageClass"
+                  value={imageForm.className}
+                  onChange={e => setImageForm({ ...imageForm, className: e.target.value })}
+                  placeholder="rounded-lg"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="py-4">
+              <Label htmlFor="config">
+                {editingComponent?.component_type === 'text_block'
+                  ? 'HTML Content'
+                  : 'JSON Configuration'}
+              </Label>
+              <Textarea
+                id="config"
+                value={editingConfig}
+                onChange={e => setEditingConfig(e.target.value)}
+                rows={12}
+                className="font-mono text-sm"
+                placeholder={
+                  editingComponent?.component_type === 'text_block'
+                    ? '<h2>Your Heading</h2><p>Your paragraph text here.</p>'
+                    : '{"key": "value"}'
+                }
+              />
+              <p className="text-sm text-gray-500 mt-2">
+                {editingComponent?.component_type === 'text_block' ? (
+                  <>
+                    Paste your HTML content directly. For example:{' '}
+                    <code className="bg-gray-100 px-1 rounded">
+                      &lt;h2&gt;Title&lt;/h2&gt;&lt;p&gt;Paragraph&lt;/p&gt;
+                    </code>
+                  </>
+                ) : (
+                  <>
+                    Edit the JSON configuration for this component. For text_block, use:{' '}
+                    <code className="bg-gray-100 px-1 rounded">
+                      {'{ "content": "Your text here" }'}
+                    </code>
+                  </>
+                )}
+              </p>
+            </div>
+          )}
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditingComponent(null)}>
               Cancel
@@ -929,10 +1068,19 @@ export default function EditPagePage() {
                 if (!editingComponent) return;
                 try {
                   let config: Record<string, unknown>;
-                  try {
-                    config = JSON.parse(editingConfig);
-                  } catch {
-                    config = { content: editingConfig };
+                  if (editingComponent.component_type === 'image') {
+                    config = {
+                      src: imageForm.src,
+                      alt: imageForm.alt,
+                      caption: imageForm.caption,
+                      className: imageForm.className,
+                    };
+                  } else {
+                    try {
+                      config = JSON.parse(editingConfig);
+                    } catch {
+                      config = { content: editingConfig };
+                    }
                   }
                   await updatePageComponent(editingComponent.id, { config });
                   const pageData = await getPageById(id);

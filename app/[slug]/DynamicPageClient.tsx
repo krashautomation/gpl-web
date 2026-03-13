@@ -10,6 +10,7 @@ import { ContentCard } from '@/components/ContentCard';
 import { BannerAd } from '@/components/BannerAd';
 import { GoldCalculator } from '@/components/GoldCalculator';
 import { BioCard } from '@/components/BioCard';
+import { ImageBlock, type ImageBlockConfig } from '@/components/ImageBlock';
 import RecentArticlesSection from '@/app/components/RecentArticlesSection';
 import { getPageComponents, type Page, type PageComponent } from '@/lib/pages';
 import Link from 'next/link';
@@ -128,6 +129,7 @@ const COMPONENT_REGISTRY: Record<string, React.ComponentType<any>> = {
   ads: BannerAd,
   hero: () => null,
   text_block: ContentCard,
+  image: ImageBlock,
   contact: ContactSidebar,
   bio_card: BioCard,
   stock_table: StockTable,
@@ -230,6 +232,10 @@ function renderComponent(
           )}
         </ContentCard>
       );
+
+    case 'image':
+      const imageConfig = config as ImageBlockConfig | null;
+      return <ImageBlock config={imageConfig || null} />;
 
     case 'contact':
       return <ContactSidebar />;
