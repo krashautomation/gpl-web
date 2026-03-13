@@ -8,8 +8,6 @@ export interface ImageBlockConfig {
   alt: string;
   caption?: string;
   className?: string;
-  width?: number;
-  height?: number;
 }
 
 interface ImageBlockProps {
@@ -21,17 +19,18 @@ export function ImageBlock({ config }: ImageBlockProps) {
     return null;
   }
 
-  const { src, alt, caption, className, width = 800, height = 450 } = config;
+  const { src, alt, caption, className } = config;
 
   return (
     <figure className={cn('my-6', className)}>
-      <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
+      <div className="relative w-full bg-gray-100 rounded-lg overflow-hidden">
         <Image
           src={src}
           alt={alt || ''}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          width={1200}
+          height={800}
+          className="w-full h-auto rounded-lg"
+          unoptimized
         />
       </div>
       {caption && (
