@@ -88,6 +88,130 @@ const STOCK_CATEGORIES: Record<string, { name: string; href: string }> = {
   CPER: { name: 'Copper ETFs', href: '/copper-etfs' },
   ICOP: { name: 'Copper ETFs', href: '/copper-etfs' },
   COPP: { name: 'Copper ETFs', href: '/copper-etfs' },
+
+  // Platinum ETFs
+  PPLT: { name: 'Platinum ETFs', href: '/platinum-etfs' },
+  PLTM: { name: 'Platinum ETFs', href: '/platinum-etfs' },
+
+  // Palladium ETFs
+  PALL: { name: 'Palladium ETFs', href: '/palladium-etfs' },
+
+  // Precious Metals ETFs
+  GLTR: { name: 'Precious Metals ETFs', href: '/precious-metals-etfs' },
+  GOGO: { name: 'Precious Metals ETFs', href: '/precious-metals-etfs' },
+
+  // Nickel Stocks
+  VALE: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+  CNC: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+  NIC: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+  TN: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+  NICU: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+  FPX: { name: 'Nickel Stocks', href: '/nickel-stocks' },
+
+  // Nickel ETFs
+  NKEL: { name: 'Nickel ETFs', href: '/nickel-etfs' },
+
+  // Zinc Stocks
+  Z: { name: 'Zinc Stocks', href: '/zinc-stocks' },
+  NILI: { name: 'Zinc Stocks', href: '/zinc-stocks' },
+
+  // Aluminum Stocks
+  AA: { name: 'Aluminum Stocks', href: '/aluminum-stocks' },
+  CENX: { name: 'Aluminum Stocks', href: '/aluminum-stocks' },
+  KALU: { name: 'Aluminum Stocks', href: '/aluminum-stocks' },
+
+  // Iron & Steel Stocks
+  NUE: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+  STLD: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+  X: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+  CIA: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+  LIF: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+  CLF: { name: 'Iron & Steel Stocks', href: '/iron-steel-stocks' },
+
+  // Steel ETFs
+  SLX: { name: 'Steel ETFs', href: '/steel-etfs' },
+
+  // Lithium Stocks
+  ALB: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  ALTM: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  PLL: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  LAC: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  LAAC: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  SGML: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  SLI: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  PMET: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  FL: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+  WR1: { name: 'Lithium Stocks', href: '/lithium-stocks' },
+
+  // Lithium ETFs
+  LIT: { name: 'Lithium ETFs', href: '/lithium-etfs' },
+  LITP: { name: 'Lithium ETFs', href: '/lithium-etfs' },
+
+  // Uranium Stocks
+  CCJ: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  NXE: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  DNN: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  UUUU: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  EU: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  UEC: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  FCU: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  PDN: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  SYH: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  ISO: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+  CUR: { name: 'Uranium Stocks', href: '/uranium-stocks' },
+
+  // Uranium ETFs
+  URNM: { name: 'Uranium ETFs', href: '/uranium-etfs' },
+  URA: { name: 'Uranium ETFs', href: '/uranium-etfs' },
+  URNJ: { name: 'Uranium ETFs', href: '/uranium-etfs' },
+  'U.UN': { name: 'Uranium ETFs', href: '/uranium-etfs' },
+
+  // Rare Earth Stocks
+  MP: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  VML: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  API: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  DEFN: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  MKA: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  SMY: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  TMET: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  SCY: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+  NB: { name: 'Rare Earth Stocks', href: '/rare-earth-stocks' },
+
+  // Rare Earth ETFs
+  REMX: { name: 'Rare Earth ETFs', href: '/rare-earth-etfs' },
+
+  // Antimony Stocks
+  UAMY: { name: 'Antimony Stocks', href: '/antimony-stocks' },
+  PPTA: { name: 'Antimony Stocks', href: '/antimony-stocks' },
+
+  // Cobalt Stocks
+  ELBM: { name: 'Cobalt Stocks', href: '/cobalt-stocks' },
+
+  // Vanadium Stocks
+  LGO: { name: 'Vanadium Stocks', href: '/vanadium-stocks' },
+
+  // Titanium Stocks
+  TROX: { name: 'Titanium Stocks', href: '/titanium-stocks' },
+
+  // Silicon Stocks
+  GSM: { name: 'Silicon Stocks', href: '/silicon-stocks' },
+
+  // Beryllium Stocks
+  MTRN: { name: 'Beryllium Stocks', href: '/beryllium-stocks' },
+
+  // Critical Minerals Stocks
+  AFM: { name: 'Critical Minerals Stocks', href: '/critical-minerals-stocks' },
+  NMG: { name: 'Critical Minerals Stocks', href: '/critical-minerals-stocks' },
+  WWR: { name: 'Critical Minerals Stocks', href: '/critical-minerals-stocks' },
+  FSLR: { name: 'Critical Minerals Stocks', href: '/critical-minerals-stocks' },
+  GMO: { name: 'Critical Minerals Stocks', href: '/critical-minerals-stocks' },
+
+  // Critical Minerals ETFs
+  SETM: { name: 'Critical Minerals ETFs', href: '/critical-minerals-etfs' },
+  PICK: { name: 'Critical Minerals ETFs', href: '/critical-minerals-etfs' },
+  XME: { name: 'Critical Minerals ETFs', href: '/critical-minerals-etfs' },
+  DBB: { name: 'Critical Minerals ETFs', href: '/critical-minerals-etfs' },
+  METL: { name: 'Critical Minerals ETFs', href: '/critical-minerals-etfs' },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

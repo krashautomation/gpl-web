@@ -212,10 +212,35 @@ const Footer = () => {
       <footer className="bg-[#001e5a] border-t border-[#001e5a]/30  mt-8 py-12 text-white">
         <div className="container mx-auto px-4 max-w-[1200px]">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {/* Column 1: WORLD GOLD PRICES */}
+            {/* Column 1: GOLD PRICE */}
             <div>
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">WORLD GOLD PRICES</h4>
-              <ul className="space-y-2 text-xs">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE</h4>
+              <ul className="space-y-2 text-xs mb-4">
+                <li>
+                  <a href="/gold-price" className="text-white hover:text-orange-600">
+                    Gold Price
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-price-today" className="text-white hover:text-orange-600">
+                    Gold Price Today
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-price-history" className="text-white hover:text-orange-600">
+                    Gold Price History
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-silver-ratio" className="text-white hover:text-orange-600">
+                    Gold Silver Ratio
+                  </a>
+                </li>
+                <li>
+                  <a href="/charts" className="text-white hover:text-orange-600">
+                    Gold Price Charts
+                  </a>
+                </li>
                 <li>
                   <a href="/#foreign-currency" className="text-white hover:text-orange-600">
                     <span className="fi fi-eu"></span> Gold Price EUR
@@ -237,12 +262,9 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
 
-            {/* Column 2: GOLD PRICE NEWS + CHARTS */}
-            <div>
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE NEWS</h4>
-              <ul className="space-y-2 text-xs mb-6">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD NEWS</h4>
+              <ul className="space-y-2 text-xs">
                 <li>
                   <a href="/news" className="text-white hover:text-orange-600">
                     Gold Price News
@@ -259,41 +281,12 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">GOLD PRICE CHARTS</h4>
-              <ul className="space-y-2 text-xs">
-                <li>
-                  <a href="/charts" className="text-white hover:text-orange-600">
-                    Gold Price Charts
-                  </a>
-                </li>
-                <li>
-                  <a href="/gold-price-history" className="text-white hover:text-orange-600">
-                    Gold Price History
-                  </a>
-                </li>
-                <li>
-                  <a href="/gold-silver-ratio" className="text-white hover:text-orange-600">
-                    Gold Silver Ratio
-                  </a>
-                </li>
-                <li>
-                  <a href="/gold-price-today" className="text-white hover:text-orange-600">
-                    Gold Price Today
-                  </a>
-                </li>
-                <li>
-                  <a href="/gold-price" className="text-white hover:text-orange-600">
-                    Gold Price
-                  </a>
-                </li>
-              </ul>
             </div>
 
-            {/* Column 3: PRECIOUS METALS + PRICE OF GOLD */}
+            {/* Column 2: PRECIOUS METALS */}
             <div>
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">PRECIOUS METALS</h4>
-              <ul className="space-y-2 text-xs mb-6">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">PRECIOUS METALS PRICES</h4>
+              <ul className="space-y-2 text-xs mb-4">
                 <li>
                   <a href="/silver-price" className="text-white hover:text-orange-600">
                     Silver Price
@@ -311,28 +304,16 @@ const Footer = () => {
                 </li>
               </ul>
 
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">BASE METALS</h4>
-              <ul className="space-y-2 text-xs mb-6">
-                <li>
-                  <a href="/copper-price" className="text-white hover:text-orange-600">
-                    Copper Price
-                  </a>
-                </li>
-                <li>
-                  <a href="/aluminum-price" className="text-white hover:text-orange-600">
-                    Aluminum Price
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4: STOCKS + CRYPTOCURRENCY */}
-            <div>
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">STOCKS</h4>
-              <ul className="space-y-2 text-xs mb-6">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">PRECIOUS METALS STOCKS</h4>
+              <ul className="space-y-2 text-xs mb-4">
                 <li>
                   <a href="/gold-stocks" className="text-white hover:text-orange-600">
                     Gold Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/gold-etfs" className="text-white hover:text-orange-600">
+                    Gold ETFs
                   </a>
                 </li>
                 <li>
@@ -341,8 +322,55 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/tungsten-stocks" className="text-white hover:text-orange-600">
-                    Tungsten Stocks
+                  <a href="/silver-etfs" className="text-white hover:text-orange-600">
+                    Silver ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/platinum-stocks" className="text-white hover:text-orange-600">
+                    Platinum Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/platinum-etfs" className="text-white hover:text-orange-600">
+                    Platinum ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/palladium-stocks" className="text-white hover:text-orange-600">
+                    Palladium Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/palladium-etfs" className="text-white hover:text-orange-600">
+                    Palladium ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/pgm-stocks" className="text-white hover:text-orange-600">
+                    PGM Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/precious-metals-etfs" className="text-white hover:text-orange-600">
+                    Precious Metals ETFs
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: BASE METALS + BATTERY & CRITICAL */}
+            <div>
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">BASE METALS</h4>
+              <ul className="space-y-2 text-xs mb-4">
+                <li>
+                  <a href="/copper-price" className="text-white hover:text-orange-600">
+                    Copper Price
+                  </a>
+                </li>
+                <li>
+                  <a href="/aluminum-price" className="text-white hover:text-orange-600">
+                    Aluminum Price
                   </a>
                 </li>
                 <li>
@@ -356,38 +384,130 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/oil-energy-stocks" className="text-white hover:text-orange-600">
-                    Oil & Energy Stocks
+                  <a href="/nickel-stocks" className="text-white hover:text-orange-600">
+                    Nickel Stocks
                   </a>
                 </li>
                 <li>
-                  <a href="/gold-etfs" className="text-white hover:text-orange-600">
-                    Gold ETFs
+                  <a href="/nickel-etfs" className="text-white hover:text-orange-600">
+                    Nickel ETFs
                   </a>
                 </li>
                 <li>
-                  <a href="/silver-etfs" className="text-white hover:text-orange-600">
-                    Silver ETFs
+                  <a href="/zinc-stocks" className="text-white hover:text-orange-600">
+                    Zinc Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/aluminum-stocks" className="text-white hover:text-orange-600">
+                    Aluminum Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/iron-steel-stocks" className="text-white hover:text-orange-600">
+                    Iron & Steel Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/steel-etfs" className="text-white hover:text-orange-600">
+                    Steel ETFs
                   </a>
                 </li>
               </ul>
 
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">CRYPTOCURRENCY</h4>
-              <ul className="space-y-2 text-xs mb-6">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">BATTERY & CRITICAL</h4>
+              <ul className="space-y-2 text-xs mb-4">
                 <li>
-                  <a href="/bitcoin-price" className="text-white hover:text-orange-600">
-                    Bitcoin Price
+                  <a href="/lithium-stocks" className="text-white hover:text-orange-600">
+                    Lithium Stocks
                   </a>
                 </li>
                 <li>
-                  <a href="/ethereum-price" className="text-white hover:text-orange-600">
-                    Ethereum Price
+                  <a href="/lithium-etfs" className="text-white hover:text-orange-600">
+                    Lithium ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/uranium-stocks" className="text-white hover:text-orange-600">
+                    Uranium Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/uranium-etfs" className="text-white hover:text-orange-600">
+                    Uranium ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/rare-earth-stocks" className="text-white hover:text-orange-600">
+                    Rare Earth Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/rare-earth-etfs" className="text-white hover:text-orange-600">
+                    Rare Earth ETFs
+                  </a>
+                </li>
+                <li>
+                  <a href="/critical-minerals-stocks" className="text-white hover:text-orange-600">
+                    Critical Minerals Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/critical-minerals-etfs" className="text-white hover:text-orange-600">
+                    Critical Minerals ETFs
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: SPECIALTY METALS + ENERGY */}
+            <div>
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">SPECIALTY METALS</h4>
+              <ul className="space-y-2 text-xs mb-4">
+                <li>
+                  <a href="/tungsten-stocks" className="text-white hover:text-orange-600">
+                    Tungsten Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/antimony-stocks" className="text-white hover:text-orange-600">
+                    Antimony Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/cobalt-stocks" className="text-white hover:text-orange-600">
+                    Cobalt Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/vanadium-stocks" className="text-white hover:text-orange-600">
+                    Vanadium Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/titanium-stocks" className="text-white hover:text-orange-600">
+                    Titanium Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/silicon-stocks" className="text-white hover:text-orange-600">
+                    Silicon Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/beryllium-stocks" className="text-white hover:text-orange-600">
+                    Beryllium Stocks
+                  </a>
+                </li>
+                <li>
+                  <a href="/niobium-stocks" className="text-white hover:text-orange-600">
+                    Niobium Stocks
                   </a>
                 </li>
               </ul>
 
-              <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY PRICES</h4>
-              <ul className="space-y-2 text-xs mb-6">
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">ENERGY</h4>
+              <ul className="space-y-2 text-xs mb-4">
                 <li>
                   <a href="/oil-price" className="text-white hover:text-orange-600">
                     Crude Oil Price
@@ -396,6 +516,25 @@ const Footer = () => {
                 <li>
                   <a href="/natural-gas-price" className="text-white hover:text-orange-600">
                     Natural Gas Price
+                  </a>
+                </li>
+                <li>
+                  <a href="/oil-energy-stocks" className="text-white hover:text-orange-600">
+                    Oil & Energy Stocks
+                  </a>
+                </li>
+              </ul>
+
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">CRYPTOCURRENCY</h4>
+              <ul className="space-y-2 text-xs">
+                <li>
+                  <a href="/bitcoin-price" className="text-white hover:text-orange-600">
+                    Bitcoin Price
+                  </a>
+                </li>
+                <li>
+                  <a href="/ethereum-price" className="text-white hover:text-orange-600">
+                    Ethereum Price
                   </a>
                 </li>
               </ul>

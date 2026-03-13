@@ -24,49 +24,88 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   {
-    label: 'Home',
-    href: '/',
-  },
-  {
-    label: 'Gold Price',
-    href: '/gold-price',
+    label: 'Precious Metals',
+    href: '/gold-stocks',
     children: [
+      { label: 'Gold Price', href: '/gold-price', description: 'Live Gold Price USD' },
       {
         label: 'Gold Price FX',
         href: '/#foreign-currency',
         description: 'Gold Price in EUR, AUD, CAD, GBP',
       },
-
+      { label: 'Gold Stocks', href: '/gold-stocks', description: 'Gold Mining Stocks' },
+      { label: 'Gold ETFs', href: '/gold-etfs', description: 'Gold ETFs' },
       {
         label: 'Gold Price Live App',
         href: '/gold-price-live-app',
         description: 'Gold Price Live Mobile App',
       },
-    ],
-  },
-  {
-    label: 'Gold Stocks',
-    href: '/gold-stocks',
-    children: [
-      { label: 'Gold ETFs', href: '/gold-etfs', description: 'Gold ETFs' },
-      { label: 'Silver ETFs', href: '/silver-etfs', description: 'Silver ETFs' },
-      { label: 'Gold Stocks', href: '/gold-stocks', description: 'Gold Mining Stocks' },
       { label: 'Silver Stocks', href: '/silver-stocks', description: 'Silver Mining Stocks' },
-      { label: 'Tungsten Stocks', href: '/tungsten-stocks', description: 'Tungsten Mining Stocks' },
+      { label: 'Silver ETFs', href: '/silver-etfs', description: 'Silver ETFs' },
+      { label: 'Platinum Stocks', href: '/platinum-stocks', description: 'Platinum Mining Stocks' },
+      { label: 'Platinum ETFs', href: '/platinum-etfs', description: 'Platinum ETFs' },
+      {
+        label: 'Palladium Stocks',
+        href: '/palladium-stocks',
+        description: 'Palladium Mining Stocks',
+      },
+      { label: 'Palladium ETFs', href: '/palladium-etfs', description: 'Palladium ETFs' },
+      { label: 'PGM Stocks', href: '/pgm-stocks', description: 'Platinum Group Metals' },
+      {
+        label: 'Precious Metals ETFs',
+        href: '/precious-metals-etfs',
+        description: 'Multi-PGM ETFs',
+      },
     ],
   },
   {
-    label: 'Metals',
-    href: '/#metals',
+    label: 'Base Metals',
+    href: '/copper-stocks',
     children: [
-      { label: 'Silver Price', href: '/silver-price' },
-      { label: 'Platinum Price', href: '/platinum-price' },
-      { label: 'Palladium Price', href: '/palladium-price' },
-      { label: 'Copper Price', href: '/copper-price' },
       { label: 'Copper Stocks', href: '/copper-stocks', description: 'Copper Mining Stocks' },
       { label: 'Copper ETFs', href: '/copper-etfs', description: 'Copper ETFs' },
-      { label: 'Aluminum Price', href: '/aluminum-price' },
+      { label: 'Nickel Stocks', href: '/nickel-stocks', description: 'Nickel Mining Stocks' },
+      { label: 'Nickel ETFs', href: '/nickel-etfs', description: 'Nickel ETFs' },
+      { label: 'Zinc Stocks', href: '/zinc-stocks', description: 'Zinc Mining Stocks' },
+      { label: 'Aluminum Stocks', href: '/aluminum-stocks', description: 'Aluminum Stocks' },
+      { label: 'Iron & Steel Stocks', href: '/iron-steel-stocks', description: 'Steel Producers' },
+      { label: 'Steel ETFs', href: '/steel-etfs', description: 'Steel ETFs' },
+    ],
+  },
+  {
+    label: 'Battery & Critical',
+    href: '/lithium-stocks',
+    children: [
+      { label: 'Lithium Stocks', href: '/lithium-stocks', description: 'Lithium Mining Stocks' },
+      { label: 'Lithium ETFs', href: '/lithium-etfs', description: 'Lithium ETFs' },
+      { label: 'Uranium Stocks', href: '/uranium-stocks', description: 'Uranium Mining Stocks' },
+      { label: 'Uranium ETFs', href: '/uranium-etfs', description: 'Uranium ETFs' },
+      { label: 'Rare Earth Stocks', href: '/rare-earth-stocks', description: 'Rare Earth Mining' },
+      { label: 'Rare Earth ETFs', href: '/rare-earth-etfs', description: 'Rare Earth ETFs' },
+      {
+        label: 'Critical Minerals Stocks',
+        href: '/critical-minerals-stocks',
+        description: 'Critical Metals',
+      },
+      {
+        label: 'Critical Minerals ETFs',
+        href: '/critical-minerals-etfs',
+        description: 'Critical Metals ETFs',
+      },
+    ],
+  },
+  {
+    label: 'Specialty Metals',
+    href: '/tungsten-stocks',
+    children: [
       { label: 'Tungsten Stocks', href: '/tungsten-stocks', description: 'Tungsten Mining Stocks' },
+      { label: 'Antimony Stocks', href: '/antimony-stocks', description: 'Antimony Mining Stocks' },
+      { label: 'Cobalt Stocks', href: '/cobalt-stocks', description: 'Cobalt Stocks' },
+      { label: 'Vanadium Stocks', href: '/vanadium-stocks', description: 'Vanadium Stocks' },
+      { label: 'Titanium Stocks', href: '/titanium-stocks', description: 'Titanium Stocks' },
+      { label: 'Silicon Stocks', href: '/silicon-stocks', description: 'Silicon Stocks' },
+      { label: 'Beryllium Stocks', href: '/beryllium-stocks', description: 'Beryllium Stocks' },
+      { label: 'Niobium Stocks', href: '/niobium-stocks', description: 'Niobium Stocks' },
     ],
   },
   {
@@ -80,19 +119,12 @@ const navItems: NavItem[] = [
   },
 
   {
-    label: 'Crypto',
-    href: '/#crypto',
-    children: [
-      { label: 'Bitcoin Price', href: '/bitcoin-price' },
-      { label: 'Ethereum Price', href: '/ethereum-price' },
-    ],
-  },
-
-  {
     label: 'News',
     href: '/#news',
     children: [
       { label: 'Gold News', href: '/news' },
+      { label: 'Bitcoin Price', href: '/bitcoin-price', description: 'Bitcoin Price' },
+      { label: 'Ethereum Price', href: '/ethereum-price', description: 'Ethereum Price' },
       { label: 'About Us', href: '/about' },
       { label: 'Contact Us', href: '/contact' },
       { label: 'Gold Price Live App', href: '/gold-price-live-app' },
