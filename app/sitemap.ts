@@ -7,8 +7,14 @@ export const dynamic = 'force-dynamic';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://goldpricelive.co';
 
+  const [articles, dbPages] = await Promise.all([getArticles(), getAllPages()]);
+
+  const latestArticleDate = articles[0]?.published_at
+    ? new Date(articles[0].published_at)
+    : new Date('2026-01-01');
+
   const mainPages: { url: string; priority: number; lastModified?: Date }[] = [
-    { url: baseUrl, priority: 1.0 },
+    { url: baseUrl, priority: 1.0, lastModified: latestArticleDate },
     { url: `${baseUrl}/gold-price`, priority: 0.9 },
     { url: `${baseUrl}/silver-price`, priority: 0.9 },
     { url: `${baseUrl}/platinum-price`, priority: 0.8 },
@@ -22,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/gold-price-history`, priority: 0.7 },
     { url: `${baseUrl}/gold-silver-ratio`, priority: 0.7 },
     { url: `${baseUrl}/charts`, priority: 0.8 },
-    { url: `${baseUrl}/news`, priority: 0.8 },
+    { url: `${baseUrl}/news`, priority: 0.8, lastModified: latestArticleDate },
     { url: `${baseUrl}/about`, priority: 0.6 },
     { url: `${baseUrl}/contact`, priority: 0.6 },
     { url: `${baseUrl}/advertise`, priority: 0.5 },
@@ -36,8 +42,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/privacy`, priority: 0.4 },
   ];
 
-  const [articles, dbPages] = await Promise.all([getArticles(), getAllPages()]);
-
   const dbPageMap = new Map(dbPages.map(p => [`${baseUrl}/${p.slug}`, p]));
 
   const seen = new Set<string>();
@@ -47,7 +51,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const dbMatch = dbPageMap.get(page.url);
     return {
       url: page.url,
-      lastModified: dbMatch ? new Date(dbMatch.updated_at) : new Date('2026-01-01'),
+      lastModified:
+        page.lastModified ?? (dbMatch ? new Date(dbMatch.updated_at) : new Date('2026-01-01')),
       changeFrequency: 'daily' as const,
       priority: page.priority,
     };
