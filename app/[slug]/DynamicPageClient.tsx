@@ -63,7 +63,7 @@ function StockTable({ category }: { category: string | null }) {
   const getCompanyName = (title: string) => title.replace(' Stock Price', '');
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto stock-table-links">
       <table className="w-full">
         <thead>
           <tr className="border-b border-neutral-700">
@@ -76,7 +76,9 @@ function StockTable({ category }: { category: string | null }) {
           {stocks.map((stock, index) => (
             <tr key={stock.id} className="border-b border-neutral-800">
               <td className="py-3 px-4">
-                <Link href={`/${stock.slug}`}>{getCompanyName(stock.title)}</Link>
+                <Link href={`/${stock.slug}`} className="stock-link">
+                  {getCompanyName(stock.title)}
+                </Link>
               </td>
               <td className="text-right py-3 px-4">{stock.symbol}</td>
               <td className="text-right py-3 px-4">

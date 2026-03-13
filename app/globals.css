@@ -101,11 +101,15 @@
 }
 
 @layer utilities {
-  .cms-content.prose a {
+  .cms-content a,
+  .stock-table-links a,
+  .stock-link {
     color: #2563eb !important;
     text-decoration: underline !important;
   }
-  .cms-content.prose a:hover {
+  .cms-content a:hover,
+  .stock-table-links a:hover,
+  .stock-link:hover {
     color: #f97316 !important;
     text-decoration: none !important;
   }
