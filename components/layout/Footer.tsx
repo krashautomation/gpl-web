@@ -415,6 +415,18 @@ const Footer = () => {
                 </li>
               </ul>
 
+              <h4 className="text-yellow-500 font-bold mb-4 text-sm">ALL METALS</h4>
+              <ul className="space-y-2 text-xs mb-4">
+                <li>
+                  <a
+                    href="/list-of-metals-with-mining-stocks-and-etfs"
+                    className="text-white hover:text-orange-600"
+                  >
+                    List of Metals
+                  </a>
+                </li>
+              </ul>
+
               <h4 className="text-yellow-500 font-bold mb-4 text-sm">BATTERY & CRITICAL</h4>
               <ul className="space-y-2 text-xs mb-4">
                 <li>
