@@ -5,12 +5,9 @@ import { getAllPages } from '@/lib/pages';
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const generatedAt = new Date().toISOString();
-  console.log('[Sitemap] Generated at:', generatedAt);
-
   const baseUrl = 'https://goldpricelive.co';
 
-  const mainPages = [
+  const mainPages: { url: string; priority: number; lastModified?: Date }[] = [
     { url: baseUrl, priority: 1.0 },
     { url: `${baseUrl}/gold-price`, priority: 0.9 },
     { url: `${baseUrl}/silver-price`, priority: 0.9 },
@@ -39,27 +36,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/privacy`, priority: 0.4 },
   ];
 
-  const pages = mainPages.map(page => ({
-    ...page,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-  }));
+  const [articles, dbPages] = await Promise.all([getArticles(), getAllPages()]);
 
-  const articles = await getArticles();
-  const articlePages = articles.map(article => ({
+  const dbPageMap = new Map(dbPages.map(p => [`${baseUrl}/${p.slug}`, p]));
+
+  const seen = new Set<string>();
+
+  const staticEntries = mainPages.map(page => {
+    seen.add(page.url);
+    const dbMatch = dbPageMap.get(page.url);
+    return {
+      url: page.url,
+      lastModified: dbMatch ? new Date(dbMatch.updated_at) : new Date('2026-01-01'),
+      changeFrequency: 'daily' as const,
+      priority: page.priority,
+    };
+  });
+
+  const dynamicEntries = dbPages
+    .filter(p => !seen.has(`${baseUrl}/${p.slug}`))
+    .map(p => ({
+      url: `${baseUrl}/${p.slug}`,
+      lastModified: new Date(p.updated_at),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
+    }));
+
+  const articleEntries = articles.map(article => ({
     url: `${baseUrl}/news/${article.slug}`,
     lastModified: new Date(article.published_at),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 
-  const dbPages = await getAllPages();
-  const dynamicPages = dbPages.map(page => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: new Date(page.updated_at),
-    changeFrequency: 'daily' as const,
-    priority: 0.8,
-  }));
-
-  return [...pages, ...articlePages, ...dynamicPages];
+  return [...staticEntries, ...dynamicEntries, ...articleEntries];
 }
