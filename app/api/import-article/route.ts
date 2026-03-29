@@ -82,7 +82,7 @@ async function runWithOpenAI(rawArticle: string): Promise<{ content: string; tok
 
   const response = await client.chat.completions.create({
     model: 'gpt-4o',
-    max_tokens: 8000,
+    max_tokens: 6000,
     messages: [{ role: 'user', content: PROMPT(rawArticle) }],
   });
 
