@@ -1,0 +1,92 @@
+[
+  {
+    "id": "76c35964-dc66-4e20-8fc7-6c1f10bc2bc7",
+    "name": "1772909227431-og-oil-150-hormuz.png",
+    "is_used": true,
+    "created_at": "2026-03-07T18:47:11.628639+00:00"
+  },
+  {
+    "id": "7f00174e-f875-4dac-8eda-730cac181b81",
+    "name": "1772910798911-og-oil-gold-2026.png",
+    "is_used": true,
+    "created_at": "2026-03-07T19:13:23.311002+00:00"
+  },
+  {
+    "id": "94c4651e-a8fd-4616-a2ea-fc67ac83a60c",
+    "name": "1772916097366-og-tungsten-2026.png",
+    "is_used": true,
+    "created_at": "2026-03-07T20:41:40.163863+00:00"
+  },
+  {
+    "id": "1e66c3e8-e69b-4102-b0ec-e33980749d38",
+    "name": "1773348093064-og-gold-iranian-oil.png",
+    "is_used": true,
+    "created_at": "2026-03-12T20:41:36.221625+00:00"
+  },
+  {
+    "id": "706e9311-6224-4b7a-bfd5-326ac78e2b0e",
+    "name": "1773348521732-og-tungsten-mining-prices.png",
+    "is_used": true,
+    "created_at": "2026-03-12T20:48:45.755782+00:00"
+  },
+  {
+    "id": "ba90221c-04a4-42f9-ae2e-c738645cbc1b",
+    "name": "1773349051946-og-gold-prices-trading.png",
+    "is_used": true,
+    "created_at": "2026-03-12T20:57:35.871239+00:00"
+  },
+  {
+    "id": "4fc4655b-8ac6-4f11-8497-7a97d980c713",
+    "name": "1773349525752-og-platinum-prices-2026-jewelry.png",
+    "is_used": true,
+    "created_at": "2026-03-12T21:05:28.192828+00:00"
+  },
+  {
+    "id": "b5e1588f-f45f-4edb-85a7-2274add11919",
+    "name": "1773352047068-og-copper-prices-demand-2026.png",
+    "is_used": true,
+    "created_at": "2026-03-12T21:47:31.447154+00:00"
+  },
+  {
+    "id": "1c2c3e2c-c0f6-4beb-927d-747b89193cdb",
+    "name": "1773860820841-og-gold-price-inflation-fears.png",
+    "is_used": true,
+    "created_at": "2026-03-18T19:07:06.474699+00:00"
+  },
+  {
+    "id": "a384ff01-3a52-4afa-98a2-0e0dfd137bd3",
+    "name": "1773861367045-og-oil-price-110-dollars.png",
+    "is_used": true,
+    "created_at": "2026-03-18T19:16:10.820583+00:00"
+  },
+  {
+    "id": "ca224c5d-7cc9-4d37-b020-533c466fe1dc",
+    "name": "1773892456694-og-oil-price-200-dollars.png",
+    "is_used": true,
+    "created_at": "2026-03-19T03:54:19.345646+00:00"
+  },
+  {
+    "id": "70ebc4c8-bd7b-465c-81fe-0e55b7333462",
+    "name": "1774197691804-og-helium-shortage.png",
+    "is_used": true,
+    "created_at": "2026-03-22T16:41:34.368823+00:00"
+  },
+  {
+    "id": "864e5804-f6a1-469c-97d1-a9897a141711",
+    "name": "1774198823778-og-gasoline-oil-prices.png",
+    "is_used": true,
+    "created_at": "2026-03-22T17:00:26.167442+00:00"
+  },
+  {
+    "id": "a9cdd262-b5eb-4066-a867-509ba8c2a67f",
+    "name": "1774199385318-og-tengsten-prices-rise.png",
+    "is_used": true,
+    "created_at": "2026-03-22T17:09:48.432181+00:00"
+  },
+  {
+    "id": "db493ec7-af88-472c-a7ab-5661c68aa664",
+    "name": "1774199717115-og-gold-silver-price.png",
+    "is_used": false,
+    "created_at": "2026-03-22T17:15:19.244583+00:00"
+  }
+]
